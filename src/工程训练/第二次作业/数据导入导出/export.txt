@@ -1,0 +1,16 @@
+create table sys_role(
+id VARCHAR,
+role_name VARCHAR,
+role_code VARCHAR,
+description VARCHAR,
+create_by VARCHAR,
+create_time DATETIME,
+update_by VARCHAR,
+update_time DATETIME
+);
+
+insert into sys_role value('1169504891467464705','第三方登录角色','third_role','第三方登录角色','admin','2019-09-05 14:57:49.0','admin','2019-09-05 14:57:56.0');
+insert into sys_role value('1228271617437720577','疫情采集角色','yq_caiji','','admin','2020-02-14 18:55:48.0','',null);
+insert into sys_role value('e51758fa916c881624b046d26bd09230','人力资源角色','hr','','admin','2019-01-21 18:07:24.0','admin','2020-03-22 18:29:24.0');
+insert into sys_role value('ee8626f80f7c2619917b6236f3a7f02b','临时角色','test','这是新建的临时角色123','','2018-12-20 10:59:04.0','admin','2020-01-05 22:59:29.0');
+insert into sys_role value('f6817f48af4fb3af11b9e8bf182f618b','管理员','admin','管理员','','2018-12-21 18:03:39.0','admin','2019-12-09 11:52:01.0');
