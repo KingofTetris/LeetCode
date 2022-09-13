@@ -7,8 +7,6 @@ import org.junit.Test;
  * @Date 2022/7/7 15:32
  * 请实现一个函数，把字符串 s 中的每个空格替换成"%20"。
  *
- *  
- *
  * 示例 1：
  *
  * 输入：s = "We are happy."

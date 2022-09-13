@@ -14,7 +14,7 @@ public class MatcherTest {
     @Test
     public void test() {
         Pattern p = Pattern.compile("(\\w||\\-||\\+)+%(\\d+)"); // \w 包括下划线在内的单个字符，[A-Z a-z 0-9 _] \d 数字
-        Matcher m = p.matcher("ab%12-cd%34");
+        Matcher m = p.matcher("ab%12-+cd%34");
         //Matcher.matches()、Matcher.lookingAt()、Matcher.find()
         //Matcher 类提供了三个匹配操作方法，三个方法均返回 boolean 类型，当匹配到时返回 true，没匹配到则返回 false 。
         //matches() 对整个字符串进行匹配，只有整个字符串都匹配了才返回true 。

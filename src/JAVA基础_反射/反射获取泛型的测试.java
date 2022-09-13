@@ -39,6 +39,8 @@ public class 反射获取泛型的测试 {
      * 动态代理就是不指定代理类到底是谁
      * 等到运行时根据被代理类的需要来创建代理类
      * 这就是这个测试的实际应用
+     *
+     * Person实现了List和Comparable接口
      */
     @Test
     public void test1(){
