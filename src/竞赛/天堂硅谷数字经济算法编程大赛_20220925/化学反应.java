@@ -22,11 +22,11 @@ public class 化学反应 {
         }
 
         while (integers.size() > 1){
-            Collections.sort(integers);
+            Collections.sort(integers);//只要列表大于1就排序
             int temp = integers.get(integers.size() - 1) - integers.get(integers.size() - 2);
+            integers.pollLast();//把最大的两个数排除
             integers.pollLast();
-            integers.pollLast();
-            integers.add(temp);
+            integers.add(temp);//加入相减的结果
         }
 
         return integers.get(0);

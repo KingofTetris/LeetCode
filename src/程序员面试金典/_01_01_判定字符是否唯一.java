@@ -55,7 +55,7 @@ public class _01_01_判定字符是否唯一 {
             int temp = 1;
             temp = temp << (move_bit);//左移1的位置到i
             if ((mark & temp) != 0) return false;//如果不为0，那么就是i位置上的字母出现过了
-            else mark = mark | temp; //把这一位标记为1
+            else mark = mark | temp; //把mark的这一位标记为1
         }
         return true;//遍历完都没有重复
     }
