@@ -3,4 +3,10 @@
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
+<!--<<<<<<< HEAD--> <!--//自己打上的注释-->
+=======
+  <component name="ProjectType">
+    <option name="id" value="jpab" />
+  </component>
+>>>>>>> 63124c2405f2109aae579c21d0ad03120a837a10
 </project>

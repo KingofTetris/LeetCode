@@ -110,4 +110,40 @@ public class 相似度为K的字符串_2022_09_21 {
     链接：https://leetcode.cn/problems/k-similar-strings/solution/xiang-si-du-wei-k-de-zi-fu-chuan-by-leet-8z10/
     来源：力扣（LeetCode）
     著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。*/
+
+
+    /**
+     * DFS，剪枝，递归
+     */
+    int result = Integer.MAX_VALUE;
+    public int kSimilarity2(String s1, String s2) {
+        return execute(s1.toCharArray(), s2.toCharArray(), 0, 0);
+    }
+
+    public int execute(char[] sc1, char[] sc2, int start, int current) {
+        //我们要拿result 记录当前最小值 当current已经大于这个数字的时候就没必要继续下去了
+        //这就是剪枝。
+        if (current >= result) return result; //当发现继续走下去这一步已经大于某条路的result时，就不必再走了
+        if (start == sc1.length - 1) return result = Math.min(current, result); //当遍历到结束的时候 比较两者大小
+        for (int i = start; i < sc1.length; i++) {
+            if (sc1[i] != sc2[i]) {
+                for (int j = i + 1; j < sc2.length; j++) {
+                    if (sc2[j] == sc1[i] && sc2[j] != sc1[j]) { //当str2的第j个位置和str1的i位置相同，但又刚好和str1的j不同时，我们才交换
+                        //否则 如果只是钱一个条件成立，后面不成立，那么你交换了以后，后面还是要交换回来。没有必要。
+                        swap(sc2, i, j); // 交换
+                        execute(sc1, sc2, i + 1, current + 1);//交换后，递归。每次i往后移动一个位置
+                        swap(sc2, i, j); // 最后要记得回溯
+                    }
+                }
+                return result;
+            }
+        }
+        return result = Math.min(current, result);
+    }
+
+    public void swap(char[] sc, int i, int j){
+        char temp = sc[i];
+        sc[i] = sc[j];
+        sc[j] = temp;
+    }
 }
