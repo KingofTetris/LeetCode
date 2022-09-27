@@ -43,7 +43,7 @@ import java.util.regex.Pattern;
  * 链接：https://leetcode.cn/problems/fraction-addition-and-subtraction
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
-public class 分数加减运算_2922_07_27 {
+public class 分数加减运算_2022_07_27 {
 
     @Test
     public void test(){
