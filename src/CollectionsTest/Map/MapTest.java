@@ -18,17 +18,18 @@ import java.util.Properties;
  *  所以只能说是collection，这样key-value就凑成了一个entry（项目），也是用set来存储entry
  *
  *  因此又涉及到HashSet的比较，所以Map中存储对象也要重写hashCode()和equals()方法。
- *      /---{@link java.util.HashMap}:现在的主要实现类，线程不安全，可以存储null
+ *      /---{@link java.util.HashMap}:现在的主要实现类，线程不安全，key-value都可以存储null
  *          /---{@link java.util.LinkedHashMap}:保证遍历map数据时，按照输入顺序输出，
  *          原因和LinkedHashSet一样， 是在底层添加了两个引用，频繁遍历可以用LinkedHashMap
- *      /---{@link java.util.Hashtable}:作为古老的实现类，线程安全，不能存null
+ *
+ *      /---{@link java.util.Hashtable}:作为古老的实现类，线程安全，key-value均不能存null
  *          /---{@link java.util.Properties}:常用来处理配置文件，key-value都是string
  *      /---{@link java.util.TreeMap}:类似TreeSet。和TreeSet基本类似，不过按Key排序（自然排序和定制排序）。
  *
  *
- *      HashMap的底层：数组+链表 jdk7
- *                    数组+链表+红黑树 jdk8
- *
+ *      HashMap的底层：数组+链表 jdk7 1.7底层结构是一个存储 Entry<K,V>[] table的数组
+ *                    数组+链表+红黑树 jdk8 1.8则是 Node<K,V>[] table。 存储的结构从Entry变成了Node 就是为了变化到红黑树
+ *                    而且 static class Node<K,V> implements Map.Entry<K,V>  是实现关系
  *      底层实现原理，以jdk7为例:
  *      HashMap map = new HashMap();
  *      在实例化后，底层创建去了一个长度16的Entry[] table;

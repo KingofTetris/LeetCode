@@ -38,7 +38,6 @@ public class 剑指Offer49_丑数 {
          */
         int[] factors = {2, 3, 5};//质因子
         Set<Long> seen = new HashSet<>();//存Long型防止溢出
-
         PriorityQueue<Long> heap = new PriorityQueue<>();
 
         //先存入1
@@ -87,5 +86,44 @@ public class 剑指Offer49_丑数 {
         HashSet<Integer> set = new HashSet<>();
         System.out.println(set.add(1));
         System.out.println(set.add(1));
+    }
+
+
+    /**
+     * 判断是否是丑数
+     * @param n
+     * @return
+     */
+    public boolean isUgly(int n) {
+
+        //上面这种递归的写法好理解一点
+        //因为每次至少是除以2 和下面的一样都不会超过O(logN)
+        //但是递归栈的空间复杂度会多一点也是 O(logN)
+        //第二种则是O(1)
+        if(n<1)
+            return false;
+        if(n==1)
+            return true;
+        for(int ele:new int[]{2,3,5})
+        {
+            if(n%ele==0) //如果余数为0 就递归去求 n/ele 是不是丑数
+                return isUgly(n/ele);
+        }
+        return false;
+        /*if (n <= 0) {
+            return false;
+        }
+        int[] factors = {2, 3, 5};
+        for (int factor : factors) {
+            while (n % factor == 0) {
+                n /= factor;
+            }
+        }
+        return n == 1; //除到最后如果不是1 就不是丑数*/
+
+        /*作者：LeetCode-Solution
+        链接：https://leetcode.cn/problems/ugly-number/solution/chou-shu-by-leetcode-solution-fazd/
+        来源：力扣（LeetCode）
+        著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。*/
     }
 }
