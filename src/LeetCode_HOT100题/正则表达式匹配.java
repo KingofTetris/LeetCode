@@ -1,22 +1,14 @@
 package LeetCode_HOT100题;
 
-<<<<<<< HEAD
 /**
  * @Author KingofTetris
  * @Date 2022/9/30 10:44
  */
 public class 正则表达式匹配 {
 
-    public boolean isMatch(String s, String p) {
+    public boolean isMatch2(String s, String p) {
         return s.matches(p);
-=======
-import java.util.LinkedList;
-
-/**
- * @author by KingOfTetris
- * @date 2022/9/29
- */
-public class 正则表达式匹配 {
+    }
 
     /**
      * dp[i][j]表示s到第i个字符，p到第j个字符能否匹配
@@ -70,6 +62,5 @@ public class 正则表达式匹配 {
         }
 
         return dp[n][m];
->>>>>>> origin/master
     }
 }
