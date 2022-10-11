@@ -62,6 +62,8 @@ public class CreateTree {
         return root;
     }
 
+
+    //层序遍历还原二叉树
     public static TreeNode createTree(Integer []nums){
         TreeNode root=null;
         TreeNode point;
@@ -90,25 +92,20 @@ public class CreateTree {
         return root;
     }
 
-    /**
-     * 有点垃圾这个方法，用show代替。
-     */
-    /*public static void printTree(TreeNode treeNode,String str){
-        if(null==treeNode){
-            return;
-        }else{
-            //一个*表示一层 str默认传空字符串 ""
-            System.out.println(str+treeNode.val);
-            printTree(treeNode.left,str+"*");
-            printTree(treeNode.right,str+"*");
-        }
-    }*/
-
-
+    //获得树深
     public static int getTreeDepth(TreeNode root) {
         return root == null ? 0 : (1 + Math.max(getTreeDepth(root.left), getTreeDepth(root.right)));
     }
 
+
+    /**
+     * 绘二叉树
+     * @param currNode
+     * @param rowIndex
+     * @param columnIndex
+     * @param res
+     * @param treeDepth
+     */
     private static void writeArray(TreeNode currNode, int rowIndex, int columnIndex, String[][] res, int treeDepth) {
         // 保证输入的树不为空
         if (currNode == null) return;

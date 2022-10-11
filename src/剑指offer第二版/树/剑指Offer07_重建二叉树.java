@@ -4,6 +4,8 @@ import LeetCode数据结构入门.day5.树.CreateTree;
 import LeetCode数据结构入门.day5.树.TreeNode;
 import org.junit.Test;
 
+import java.util.LinkedList;
+
 /**
  * @Author KingofTetris
  * @Date 2022/7/11 15:12
@@ -29,6 +31,33 @@ import org.junit.Test;
 public class 剑指Offer07_重建二叉树 {
     @Test
     public void test(){
+
+        LinkedList<Integer> list = new LinkedList<>();
+        list.add(1);
+        list.remove(0);
+        list.size();
+        list.contains(2);
+        list.get(1);
+        list.isEmpty();
+
+        //队列
+        list.offer(1);
+        list.poll();
+
+        //双端队列
+        //两边出入队
+        list.offerFirst(1);
+        list.offerLast(2);
+        list.pollLast();
+        list.pollFirst();
+        //两边取元素
+        list.peekFirst();
+        list.peekLast();
+        //栈
+        list.push(1);
+        list.pop();
+        list.peek();//栈顶
+
        /* int[] preOder = {3,9,5,6,20,15,7};
         int[] inOrder = {5,9,6,3,15,20,7};
         int[] postOrder = {5,6,9,15,7,20,3};
