@@ -21,29 +21,34 @@ public class 二叉树的前中后序遍历_递归实现 {
     @Test
     public void test(){
         Random rand = new Random();
-        Integer[] nodes = new Integer[20];
+        Integer[] nodes = new Integer[5];
         for (int i = 0; i < nodes.length; i++) {
             nodes[i] = rand.nextInt(100); //[0,99)
         }
         TreeNode root = CreateTree.createTree(nodes);
         CreateTree.show(root);
+
+
+        System.out.print("前序遍历：");
         List<Integer> preorder = preorderTraversal(root);
         for(Integer i:preorder){
             if(i != null)
             System.out.print(i+"\t");
         }
-
         System.out.println();
+
         //清空list
         list.clear();
+        System.out.print("中序遍历：");
         List<Integer> inorder = inorderTraversal(root);
         for(Integer i:inorder){
             if(i != null)
             System.out.print(i+"\t");
         }
-
         System.out.println();
+
         list.clear();
+        System.out.print("后序遍历：");
         List<Integer> postorder = postorderTraversal(root);
         for(Integer i:postorder){
             if(i != null)

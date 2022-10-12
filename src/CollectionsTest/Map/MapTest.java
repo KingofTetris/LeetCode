@@ -66,9 +66,7 @@ import java.util.Properties;
  *      此位置的链表就转换成红黑树存储。目的是为了提高查找效率
  *      要注意如果红黑树的结点个数小于 8 了，那会再次转化会链表
  *
- *
- *
- *      LinkedHashMap的不同在于重写了newNode方法。使用两个Entry<K,V>before和after来记录前后顺序
+ *      LinkedHashMap的不同在于重写了newNode方法。使用两个Entry<K,V>before和after来记录前后顺序。所以才叫Linked
  *
  *      看完HashMap 再看HashSet 实际上 HashSet就是把集合里的值放在key的位置，value是个PRESENT，
  *      这个PRESENT没啥实际意义，只是防止你为空。不过它是单例的所有KEY的value都是指向它，不用重复在堆里占用空间

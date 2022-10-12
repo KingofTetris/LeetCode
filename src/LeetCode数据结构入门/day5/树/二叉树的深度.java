@@ -2,6 +2,9 @@ package LeetCode数据结构入门.day5.树;
 
 import org.junit.Test;
 
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * @author KingofTetris
  * @File 二叉树的深度
@@ -39,4 +42,30 @@ public class 二叉树的深度 {
             return Math.max(leftDepth,rightDepth) + 1;
         }
     }
+
+    /**
+     * 迭代就要用到层序遍历了。每下一层就+1;
+     * @param root
+     * @return
+     */
+    public int maxDepth2(TreeNode root) {
+        if(root == null) return 0;
+        List<TreeNode> queue = new LinkedList<TreeNode>() {{ add(root); }} , tmp;//匿名内部类直接添加root的话，后面的TreeNode不能省略
+        int res = 0;
+        while(!queue.isEmpty()) {
+            tmp = new LinkedList<>();
+            for(TreeNode node : queue) {
+                if(node.left != null) tmp.add(node.left);
+                if(node.right != null) tmp.add(node.right);
+            }
+            queue = tmp;//每次要把一层情况，所以才弄tmp这个临时变量
+            res++;
+        }
+        return res;
+    }
+
+//    作者：jyd
+//    链接：https://leetcode.cn/problems/er-cha-shu-de-shen-du-lcof/solution/mian-shi-ti-55-i-er-cha-shu-de-shen-du-xian-xu-bia/
+//    来源：力扣（LeetCode）
+//    著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
 }

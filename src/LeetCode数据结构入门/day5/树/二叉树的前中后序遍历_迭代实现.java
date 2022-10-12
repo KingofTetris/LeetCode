@@ -18,7 +18,7 @@ public class 二叉树的前中后序遍历_迭代实现 {
     @Test
     public void test(){
         Random rand = new Random();
-        Integer[] nodes = new Integer[20];
+        Integer[] nodes = new Integer[5];
         for (int i = 0; i < nodes.length; i++) {
             nodes[i] = rand.nextInt(100); //[0,99)
         }
