@@ -43,60 +43,9 @@ public class 无重叠区间 {
 
     @Test
     public void test(){
-        int[][] intervals = {{1,4},{2,8},{2,9},{2,10}};
+        int[][] intervals = {{1,4},{4,8}};
         System.out.println(eraseOverlapIntervals(intervals));
     }
-
-
-/*    //改变了原来的数组，不是好方法。实际上似乎也是错的
-    public int eraseOverlapIntervals(int[][] intervals) {
-
-        //一个肯定不可能重合
-        if (intervals.length == 1)
-            return 0;
-        //先给区间先按左端点排个序,再按右端点排序
-        Arrays.sort(intervals, new Comparator<int[]>() {
-            public int compare(int[] interval1, int[] interval2) {
-                if(interval1[0] != interval2[0])
-                    return interval1[0] - interval2[0];
-                else
-                    return interval1[1] - interval2[1];
-            }
-        });
-
-        int res = 0;
-
-        //从第二行开始
-        for (int i = 1; i < intervals.length; i++) {
-
-            //左端点相等一定重合
-            //谁R大 赋给谁
-            if (intervals[i-1][0] == intervals[i][0]){
-                res++;
-                intervals[i][1] = Math.max(intervals[i-1][0],intervals[i][0]);
-            }
-            //如果左端点不相等，比较上一个区间的右端点和现在的左端点
-            //如果现在的左端点小于上一个区间的右端点
-            //那也肯定重复
-            else if(intervals[i][0] < intervals[i-1][1]){
-                    res++;
-
-                    //如果现在的右端点大于等于上一个区间的右端点
-                    //就把当前区间直接覆盖掉？
-                    if (intervals[i][1] >= intervals[i-1][1]){
-                        intervals[i][0] = intervals[i-1][0];
-                        intervals[i][1] = intervals[i-1][1];
-                    }
-
-                    //如果现在的右端点小于上个区间的右端点，什么也不做。
-                    else //intervals[i][1] < intervals[i-1][1]
-                    {
-
-                    }
-            }
-        }
-        return res;
-    }*/
 
 /*    贪心算法：按照每个区间结尾从小到大进行升序排序，优先选择结尾最短的区间，
     在它的后面才可能连接更多的区间（若两个区间有重叠部分，则应该优先保留结尾小的）。*/
@@ -116,30 +65,35 @@ public class 无重叠区间 {
 
     对于第一个区间 [1,2]：intervals[0][0]=1；intervals[0][1]=2。*/
 
+
+    /**
+     * Arrays.sort 时间复杂度O(nlogn)  栈空间O(logn)
+     * @param intervals
+     * @return
+     */
     public int eraseOverlapIntervals(int[][] intervals) {
 
         int n = intervals.length;
         if (n == 0) return 0;
 
-        Arrays.sort(intervals, new Comparator<int[]>() {
-
+      /*  Arrays.sort(intervals, new Comparator<int[]>() {
             @Override
             public int compare(int[] o1, int[] o2) {
-
-                return o1[1] - o2[1]; // 按照每个区间的右端点进行升序排序
+                return o1[1] - o2[1];
             }
-        });
+        });*/
+
+        //用lamda表达式直接代替上面的匿名内部类
+        //按照o[1]也就是左端点升序排序，如果前面加个负号就是降序排序 o -> -o[1]
+        Arrays.sort(intervals,Comparator.comparingInt(o -> o[1]));
 
         int count = 0; // 用来记录重叠区间的个数
-        int rightEnd = intervals[0][1];
-        for (int i=1;i<n;i++) {
+        int rightEnd = intervals[0][1]; //记录上一个区间的右端点
+        for (int i = 1;i < n;i++) {
 
-            if (intervals[i][0] >= rightEnd) {
-
-                rightEnd = intervals[i][1];
-
-            } else {
-
+            if (intervals[i][0] >= rightEnd) { //如果下个区间的左端点大于等于上个区间的右端点，说明这两个区间是不重叠的
+                rightEnd = intervals[i][1];//合并取下新的右端点，重复这个过程。
+            } else { //如果下个区间的左端点小于上个区间的右端点，那必然是重叠的，count++;
                 count++;
             }
         }
