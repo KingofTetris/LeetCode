@@ -26,6 +26,7 @@ import org.junit.Test;
 
 
     //其实和算法课上的筷子问题一样，找到那根没人匹配的筷子。
+    //拓展：求一个1-n数组中单独的两个数字。
 public class 只出现一次的数字 {
 
     @Test
