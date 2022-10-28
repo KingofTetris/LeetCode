@@ -84,7 +84,7 @@ public class 无重叠区间 {
         });*/
 
         //用lamda表达式直接代替上面的匿名内部类
-        //按照o[1]也就是左端点升序排序，如果前面加个负号就是降序排序 o -> -o[1]
+        //按照o[1]也就是右端点升序排序，如果前面加个负号就是降序排序 o -> -o[1]
         Arrays.sort(intervals,Comparator.comparingInt(o -> o[1]));
 
         int count = 0; // 用来记录重叠区间的个数
