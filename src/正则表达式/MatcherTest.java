@@ -13,13 +13,25 @@ import java.util.regex.Pattern;
 public class MatcherTest {
     @Test
     public void test() {
+
+        //下面的正则表达式的意思是
+        //字符或者+-号重复0次1次或者多次，然后跟上% 和 数字重复0-无限次
         Pattern p = Pattern.compile("(\\w||\\-||\\+)+%(\\d+)"); // \w 包括下划线在内的单个字符，[A-Z a-z 0-9 _] \d 数字
+        //所以ab%12-+cd%34按照这个规则就可以分为
+        //ab%12 和 -+cd%34 两组
         Matcher m = p.matcher("ab%12-+cd%34");
         //Matcher.matches()、Matcher.lookingAt()、Matcher.find()
         //Matcher 类提供了三个匹配操作方法，三个方法均返回 boolean 类型，当匹配到时返回 true，没匹配到则返回 false 。
         //matches() 对整个字符串进行匹配，只有整个字符串都匹配了才返回true 。
-        //lookingAt() 对前面的字符串进行匹配,只有匹配到的字符串在最前面才返回true。
-        //find()对字符串进行匹配，匹配到的字符串可以在任何位置。
+        //lookingAt() 从头开始找，只有字符串的前缀匹配才返回true
+        //find() 对字符串进行匹配，匹配到的字符串可以在任何位置。
+        /**
+         * 所以下面的输出是 F T T
+         */
+        System.out.println(m.matches());
+        System.out.println(m.lookingAt());
+        System.out.println(m.find());
+//        System.out.println(m.groupCount());
         while (m.find()) {
             /**
              * 当使用matches()，lookingAt()，find()执行匹配操作后，就可以利用下面三个方法得到更详细的信息：

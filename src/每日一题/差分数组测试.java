@@ -11,10 +11,13 @@ import java.util.Scanner;
  */
 public class 差分数组测试 {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
+//        Scanner sc = new Scanner(System.in);
+//        int n = sc.nextInt();
         long start = System.currentTimeMillis();
-        int[] chafen = chafen((int) 10e6);
+        int[] chafen = chafen(10);
+        for (int i = 0; i < chafen.length; i++) {
+            System.out.println(chafen[i]);
+        }
         long end = System.currentTimeMillis();
         System.out.println("耗时" + (end - start) / 1000 + "s");
     }
