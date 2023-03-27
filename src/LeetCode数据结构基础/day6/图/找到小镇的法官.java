@@ -66,21 +66,17 @@ public class 找到小镇的法官 {
 
         HashMap<Integer,Integer> map = new HashMap<>();
         for (int i = 0; i < trust.length; i++) {
-            if (!map.containsKey(trust[i][1])){
-                map.put(trust[i][1],1);
-            }
-            else{
-                map.put(trust[i][1],map.get(trust[i][1]) + 1);
-            }
+                map.put(trust[i][1],map.getOrDefault(trust[i][1],0) + 1);
         }
 
         int isJudge = -1;
-        for(Map.Entry entry:map.entrySet()){
-            if (((int) entry.getValue()) == n-1)
+        for(Map.Entry<Integer,Integer> entry:map.entrySet()){
+            if (entry.getValue() == n-1)
                 //并且要key不在trust[i][0]中出现
-                isJudge = (int)entry.getKey();
+                isJudge = entry.getKey();
         }
 
+        //最后排除相信其他人的情况
         for (int i = 0; i < trust.length; i++) {
             if (isJudge == trust[i][0])
                 return -1;
@@ -96,7 +92,10 @@ public class 找到小镇的法官 {
         // 遍历trust数组计算每个人的信任值
         for(int[] t : trust){
             //出现在t[0]中必然不是法官
+            //因为法官不信其他人
             trustValues[t[0]]--;
+
+            //如果有一个人被其他所有人相信，那就是法官
             trustValues[t[1]]++;
         }
         // 遍历这n个人的信任值，如果存在 n - 1，则返回这个人的编号
