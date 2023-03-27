@@ -10,6 +10,7 @@ import java.util.Set;
  * @Author KingofTetris
  * @Date 2022/9/5 10:21
  * 我们把只包含质因子 2、3 和 5 的数称作丑数（Ugly Number）。求按从小到大的顺序的第 n 个丑数。
+ * 换个说法就是能被2,3,5里面任意一个数整除的数字
  * 就是所有因子中的质因子除1外，只能是2，3，5中的1-3个。不能是其他质因子。
  * 示例:
  * 输入: n = 10
@@ -18,6 +19,9 @@ import java.util.Set;
  * 说明:  
  * 1 是丑数。
  * n 不超过1690。
+ *
+ * 另外和第1201题丑数III比较，丑数的定义都不同了
+ * 1201题的丑数指的只要因子包含a,b,c就是丑数。那么做法自然也不同了。
  * 来源：力扣（LeetCode）
  * 链接：https://leetcode.cn/problems/chou-shu-lcof
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
@@ -39,11 +43,9 @@ public class 剑指Offer49_丑数 {
         int[] factors = {2, 3, 5};//质因子
         Set<Long> seen = new HashSet<>();//存Long型防止溢出
         PriorityQueue<Long> heap = new PriorityQueue<>();
-
         //先存入1
         seen.add(1L);
         heap.offer(1L);
-
         int ugly = 0;//初始化是为了避免 n <= 0 从而出现异常
         for (int i = 0; i < n; i++) {
             long curr = heap.poll();//每次取出堆顶
@@ -81,12 +83,38 @@ public class 剑指Offer49_丑数 {
         return dp[n];//返回dp[n - 1]即可
     }
 
+
+    /**
+     * 简单递推关系，从1开始乘以a,b,c 并且用计数器num1,num2,num3来统计次数
+     * 每次选最小的那个，乘以依次num1/2/3就++
+     * 直到第n次即可。
+     * 为什么解答错误？？
+     * 下面的方法是错误的，下面的方法忽略了丑数的性质，
+     * 丑数指的是只包含2，3，5作为质因子的数，丑数一定是前面的丑数的基础上x2,x3,x5得到的
+     * 而不是num1,num2,num3去乘2，3，5得到的。
+     * 例如2*7=14，用下面的算法也会被包含进入丑数，但是14的质因子显然多了个7。不符合定义
+     */
+  /*  public int nthUglyNumber(int n, int a, int b, int c) {
+        int num1 = 1,num2= 1,num3 = 1;
+        int uglyNumber = 1;
+        for (int i = 1; i <= n; i++) {
+             uglyNumber = Math.min(Math.min(num1 * a,num2 * b),num3 * c);
+            if (uglyNumber == (num1 * a)) num1++;
+            if (uglyNumber == (num2 * b)) num2++;
+            if (uglyNumber == (num3 * c)) num3++;
+        }
+        //第n次以后的uglyNumber就是结果
+        return uglyNumber;
+    }*/
+
         @Test
     public void test(){
-        HashSet<Integer> set = new HashSet<>();
-        System.out.println(set.add(1));
-        System.out.println(set.add(1));
-    }
+//        HashSet<Integer> set = new HashSet<>();
+//        System.out.println(set.add(1));
+//        System.out.println(set.add(1));
+        剑指Offer49_丑数 s = new 剑指Offer49_丑数();
+            System.out.println();
+        }
 
 
     /**
@@ -106,7 +134,7 @@ public class 剑指Offer49_丑数 {
             return true;
         for(int ele:new int[]{2,3,5})
         {
-            if(n%ele==0) //如果余数为0 就递归去求 n/ele 是不是丑数
+            if(n%ele==0) //如果(n%ele)==0 就递归去求 (n/ele) 是不是丑数
                 return isUgly(n/ele);
         }
         return false;
