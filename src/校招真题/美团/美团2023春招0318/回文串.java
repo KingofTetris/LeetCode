@@ -78,13 +78,11 @@ public class 回文串 {
                groups.add(l);
                groups.add(r);
             }
-            else {
-                l++;
-                r--;
-            }
+            //不管相不相等，指针都是要动的
+            l++;
+            r--;
         }
 
-        //改完以后查看changeNum改了几次
         if (groups.size() == 0){ //如果本来就是回文串
             l = 0;
             r = chars.length - 1;
