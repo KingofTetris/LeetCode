@@ -14,8 +14,8 @@ public class ClassLoaderTest {
     @Test
     public void test(){
         ClassLoader classLoader = ClassLoaderTest.class.getClassLoader();
-
         System.out.println(classLoader);
+
         ClassLoader classLoaderParent = classLoader.getParent();
         System.out.println(classLoaderParent);
 

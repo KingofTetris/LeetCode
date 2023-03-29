@@ -18,6 +18,7 @@ import java.util.Properties;
  *  所以只能说是collection，这样key-value就凑成了一个entry（项目），也是用set来存储entry
  *
  *  因此又涉及到HashSet的比较，所以Map中存储对象也要重写hashCode()和equals()方法。
+ *  先比较hashCode()然后比较equals() 如果hashcode都不一致，肯定不一样，如果hashcode一样再通过equals方法比较
  *      /---{@link java.util.HashMap}:现在的主要实现类，线程不安全，key-value都可以存储null
  *          /---{@link java.util.LinkedHashMap}:保证遍历map数据时，按照输入顺序输出，
  *          原因和LinkedHashSet一样， 是在底层添加了两个引用，频繁遍历可以用LinkedHashMap

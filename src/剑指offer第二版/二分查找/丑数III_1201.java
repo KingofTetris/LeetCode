@@ -1,7 +1,5 @@
 package 剑指offer第二版.二分查找;
 
-import org.junit.Test;
-
 /**
  * @Author KingofTetris
  * @Date 2023/3/27 15:45
@@ -48,12 +46,5 @@ public class 丑数III_1201 {
 
     long lcm(long a, long b) {
         return a / gcd(a, b) * b;
-    }
-
-    @Test
-    public void test() {
-        丑数III_1201 cs = new 丑数III_1201();
-        int i = cs.nthUglyNumber(1, 2, 3, 4);
-        System.out.println(i);
     }
 }

@@ -27,7 +27,6 @@ public class Customer {
 
     //写个空参是为了反射造出对象 因为常常对象不是new出来的
     public Customer(){
-
     }
 
     public int getCid() {
