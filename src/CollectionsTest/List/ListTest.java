@@ -44,7 +44,7 @@ public class ListTest {
         //原因在于，你未必知道Collection中到底是什么类型，foreach要指定类型
         //且foreach无法跟着遍历修改collection，但迭代器可以  iterator.remove();
         Iterator iterator = list.iterator();
-        while(iterator.hasNext()){
+        while(iterator.hasNext()){ //其实iterator的迭代效果就相当于foreach遍历时使用Object作为遍历的对象
             System.out.println(iterator.next());
         }
 

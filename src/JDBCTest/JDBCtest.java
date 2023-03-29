@@ -38,7 +38,6 @@ public class JDBCtest {
                 String password1 = resultSet.getString("password");
                 //注入对象
                 User user = new User(username1,password1);
-
                 System.out.println(user);
             }
         } catch (Exception e) {
