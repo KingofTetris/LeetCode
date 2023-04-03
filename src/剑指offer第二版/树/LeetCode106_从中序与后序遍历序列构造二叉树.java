@@ -7,7 +7,7 @@ import org.junit.Test;
  * @Author KingofTetris
  * @Date 2022/7/11 17:05
  */
-public class LeetCode107_从中序与后序遍历序列构造二叉树 {
+public class LeetCode106_从中序与后序遍历序列构造二叉树 {
     @Test
     public void test(){
 
@@ -15,7 +15,7 @@ public class LeetCode107_从中序与后序遍历序列构造二叉树 {
 
     public TreeNode buildTree(int[] inorder, int[] postorder) {
         剑指Offer07_重建二叉树 binaryTree = new 剑指Offer07_重建二叉树();
-        return binaryTree.buildTreeUsePostAndIn(inorder, postorder, 0, inorder.length - 1, 0, postorder.length - 1);
+        return binaryTree.buildTreeUsePostAndIn(postorder, inorder, 0, postorder.length - 1, 0, inorder.length - 1);
     }
 
 }

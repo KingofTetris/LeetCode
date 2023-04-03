@@ -22,7 +22,7 @@ import java.util.Arrays;
         1 <= preorder.length <= 3000
         inorder.length == preorder.length
         -3000 <= preorder[i], inorder[i] <= 3000
-        preorder 和 inorder 均无重复元素
+        preorder 和 inorder 均无重复元素，若包含重复元素就无法保证唯一了，包含重复可以在项目里面查 ”带重复节点的前序中序二叉树“
         inorder 均出现在 preorder
         preorder 保证为二叉树的前序遍历序列
         inorder 保证为二叉树的中序遍历序列*/
@@ -33,20 +33,20 @@ public class 根据前中序遍历还原二叉树 {
         //每次取出根节点
         TreeNode root = new TreeNode(preorder[0]);
         for (int i = 0; i < inorder.length; i++) {
-            if (inorder[i] == root.val){
-                //将前序数组分成左右两半，再将中序数组分成左右两半
-                //之后递归的处理前序数组的左边部分和中序数组的左边部分
-                //递归处理前序数组右边部分和中序数组右边部分
+            if (inorder[i] == root.val){ //找到中序遍历里面 根在哪里，然后分左右子树
 
-
-                //前序数组的 左子树部分+根节点 是 1,2,4,5，
-                // 中序数组的 左子树部分+根节点 是 4,2,5,1。这两者的数组长度是一样的
-                //从1开始，是因为已经取出了preorder[0]
-                // i+1结束 是因为左闭右开
+                //pre的左子树就是 [1,1 + i] i就是左子树的节点个数
                 int[] pre_left = Arrays.copyOfRange(preorder,1,i+1);
+                //pre的右子树就是 [i + 1 + 1,preorder.length - 1]
                 int[] pre_right = Arrays.copyOfRange(preorder,i+1,preorder.length);
+
+                //中序左子树就是 [0,i - 1]
                 int[] in_left = Arrays.copyOfRange(inorder,0,i+1);
+
+                //右子树就是 [i + 1,inorder.length - 1]
                 int[] in_right = Arrays.copyOfRange(inorder,i+1,inorder.length);
+
+
                 root.left = buildTree(pre_left,in_left);
                 root.right = buildTree(pre_right,in_right);
                 break;
