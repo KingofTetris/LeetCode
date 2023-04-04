@@ -1,5 +1,6 @@
 package 校招真题.腾讯.腾讯校园招聘技术类编程题;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -64,40 +65,56 @@ import java.util.Scanner;
  * 2
  * 1
  */
+
+/**
+ * 插播一点Scanner类的基础知识
+ * 1.next()方法以及形如nextXxx()的方法会忽略有效字符前的[空格]和[回车]，
+ * 以空格和换行作为结束符，读取到有效字符后的空格和换行前结束，
+ * 这就决定了【它们不能读取带空格的字符串】。
+ * next()的返回值类型是String，nextXxx()的返回值是相应的基本数据类型。
+ * 2.nextLine()方法只识别Enter键 ”\r" 作为结束，
+ * 也就是说它获取回车键前的所有字符，包括空格。
+ * nextLine()方法的返回值类型是String，【可以得到带空格的字符串】。
+ * @param args
+ */
+
+/**因为前面有一个nextInt() nextInt()会把"\n"留在缓冲区导致nextLine直接读取到"\n"就结束，也就读取到空字符
+ 解决方法全部换成nextLine()，然后强转成数字
+ 也就是nextXxx() 不要和 nextLine() 直接连用。
+ 一般nextXxx()后如果要接上nextLine()，那么你要先用一次nextLine()吃掉缓冲区里面的回车
+ nextInt会把"\r"留在缓冲区 nextLine()会把 "\r"也取走，而nextLine遇到"\r"就结束了。
+
+ 简单来说如果遇到输入包括字符串的，你就全部用nextLine()来读取。然后用xxx.parseXXX来强转
+ **/
 public class 队列操作 {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(System.in);
-        int T = sc.nextInt();
+        int T = Integer.parseInt(sc.nextLine());
+        sc.nextLine();
         int n = 0;
         myQueue queue = new myQueue();
         while ( n < T ){
-            int operationNum = sc.nextInt();
-            for (int i = 0; i < operationNum; i++) {
-                String deman = sc.nextLine();//这里只能用nextLine，如果用next() 一个空格就相当于一个next()
-                String[] s = deman.split(" ");
+            int operationNum = Integer.parseInt(sc.nextLine());
+            int i = 0;
+            while (i < operationNum) {
+                sc.nextLine();
+                String command = sc.nextLine();
                 //Java8及以后是支持直接往switch里面放字符串的。会自行调用equals方法
-                switch(s[0]){ //每个case后面都要加上break; 太久没写switch了
-                    case "PUSH":
-                        queue.push(Integer.valueOf(s[1]));
-                        break;
-                    case "POP":
-                        queue.pop();
-                        break;
-                    case "TOP":
-                        queue.top();
-                        break;
-                    case "SIZE":
-                        queue.size();
-                        break;
-                    case "CLEAR":
-                        queue.clear();
-                        break;
+                if (command.startsWith("PUSH"))  {
+                    String[] params = command.split(" ");
+                    queue.push(Integer.parseInt(params[1]));
                 }
+                if ("POP".equals(command))   queue.pop();
+                if ("TOP".equals(command))   queue.top();
+                if ("SIZE".equals(command))  queue.size();
+                if ("CLEAR".equals(command)) queue.clear();
+                i++;
+                System.out.println("当前i=" + i);
             }
             n++;
-            sc.close();
         }
+        sc.close();
     }
 }
 
