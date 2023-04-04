@@ -4,6 +4,7 @@ import LeetCode数据结构入门.day5.树.CreateTree;
 import LeetCode数据结构入门.day5.树.TreeNode;
 import org.junit.Test;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 
 /**
@@ -37,7 +38,9 @@ public class 剑指Offer07_重建二叉树 {
         list.remove(0);
         list.size();
         list.contains(2);
-        list.get(1);
+        if (list.size() > 2){
+            list.get(1);
+        }
         list.isEmpty();
 
         //队列
@@ -58,20 +61,26 @@ public class 剑指Offer07_重建二叉树 {
         list.pop();
         list.peek();//栈顶
 
-       /* int[] preOder = {3,9,5,6,20,15,7};
+        int[] preOder = {3,9,5,6,20,15,7};
         int[] inOrder = {5,9,6,3,15,20,7};
         int[] postOrder = {5,6,9,15,7,20,3};
         CreateTree.show(buildTreeByPreAndIn(preOder,inOrder));
-        */
+        System.out.println();
+        CreateTree.show(buildTreeByPostAndIn(postOrder,inOrder));
 
 //        int[] inOrder = {1,2,3,4,5};
 //        int[] postOrder = {1,4,5,3,2};
-        int[] inOrder = {5,9,6,3,15,20,7};
+     /*   int[] inOrder = {5,9,6,3,15,20,7};
         int[] postOrder = {5,6,9,15,7,20,3};
         TreeNode treeNode = buildTreeByInAndPost(inOrder, postOrder);
-        CreateTree.show(treeNode);
+        CreateTree.show(treeNode);*/
 
     }
+
+
+    //本来不想写这个map的，但是后面发现确实要写，不然递归起来很麻烦
+    //用来保存中序遍历数值与下标的关系
+    HashMap<Integer,Integer> inOrderMap = new HashMap<>();
 
     /**
      * 根据前序和中序重建二叉树
@@ -81,111 +90,62 @@ public class 剑指Offer07_重建二叉树 {
      * @return
      */
     public TreeNode buildTreeByPreAndIn(int[] preorder, int[] inorder) {
+
+        for (int i = 0; i < inorder.length; i++) {
+            inOrderMap.put(inorder[i],i);
+        }
+
         return buildTreeUsePreAndIn(preorder, inorder, 0, preorder.length - 1, 0, inorder.length - 1);
         //-1是因为数组下标就到len-1
     }
 
     /**
-     * 根据后序和中序重建二叉树
-     * @param inorder
+     * 根据后序和中序建立二叉树
      * @param postorder
-     * @return
-     */
-    public TreeNode buildTreeByInAndPost(int[] inorder, int[] postorder) {
-        return buildTreeUsePostAndIn(inorder, postorder, 0, inorder.length - 1, 0, postorder.length - 1);
-        //-1是因为数组下标就到len-1
-    }
-
-
-    /**
-     * preStart到preEnd是左子树的部分
-     * 而inStart到inEnd就是右子树的部分
-     * 所以需要我们去找到在前序和中序中不同的位置。
-     * 建议拿张纸写个前中序列找一下会清晰。
-     * @param preorder
      * @param inorder
-     * @param preStart
-     * @param preEnd
-     * @param inStart
-     * @param inEnd
      * @return
      */
-    public TreeNode buildTreeUsePreAndIn(int[] preorder, int[] inorder,int preStart,int preEnd,int inStart,int inEnd){
-        if (preStart > preEnd || inStart > inEnd) return null;
-
-        //先找到根节点
-        int val = preorder[preStart];
-        TreeNode root = new TreeNode(val);
-        int index = 0;//去找根节点在中序序列中的索引
-        for (int i = inStart; i <= inEnd; i++) { //注意是int i = inStart; i <= inEnd <= <= <=!!! 不然会StackOverflow
-            if (val == inorder[i]){
-                index = i;
-                break;//直接跳出
-            }
+    public TreeNode buildTreeByPostAndIn(int[] postorder, int[] inorder) {
+        for (int i = 0; i < inorder.length; i++) {
+            inOrderMap.put(inorder[i],i);
         }
-        //计算左子树的长度
-        int leftSize = index - inStart;
-
-        /**
-         * 开始递归建立左子树
-         * eg: 前序：3 9 5 6 20 15 7
-         *     中序：5 9 6 3 15 20 7
-         *     index就是中序的3所在的位置
-         *     leftSize = index - inStart
-         *     前序的左子树部分就是preStart + 1 到 preStart + leftSize的部分
-         *     中序的左子树就是 inStart到 Index - 1的部分 当然这个Index - 1和 inStart + leftSize是一样的。
-         *     然后开始递归即可
-         */
-        root.left = buildTreeUsePreAndIn(preorder,inorder,
-                preStart + 1,preStart + leftSize,  //左子树preoder从preStart+1开始
-                inStart, index - 1);
+        return buildTreeUsePostAndIn(postorder, inorder, 0, postorder.length - 1, 0, inorder.length - 1);
+    }
 
 
-        /**
-         * 开始递归建立右子树
-         * eg: 前序：3 9 5 6 20 15 7
-         *     中序：5 9 6 3 15 20 7
-         *     index就是中序的3所在的位置
-         *     leftSize = index - inStart
-         *     同理对右子树
-         *     前序的右子树部分就是preStart+leftSize+1 到 preEnd的部分
-         *     中序的右子树就是 index+1到inEnd的部分。
-         */
-        root.right = buildTreeUsePreAndIn(preorder,inorder,
-                preStart + leftSize + 1,preEnd,//右子树preoder从preStart+leftSize+1开始
-                index + 1 , inEnd); //右子树从inorder从index + 1开始
+    private TreeNode buildTreeUsePreAndIn(int[] preorder, int[] inorder, int l1, int r1, int l2, int r2) {
+        //递归结束的条件，当左右子树都是空的时候就可以停止了
+        if (l1 > r1 && l2 > r2){  //其实这里 &&和或者都一样，因为是同一棵树。
+            return null; //返回空节点给叶子
+        }
+        int rootVal = preorder[l1];
+        TreeNode root = new TreeNode(rootVal);
+        int index = inOrderMap.get(rootVal);
+        //l1,r1. l2,r2 自己找张纸写一下顺序。
+        root.left = buildTreeUsePreAndIn(preorder,inorder,l1 + 1,l1 + (index - l2),l2,index-1);
+        root.right = buildTreeUsePreAndIn(preorder,inorder,l1 + (index - l2)  + 1,r1,index + 1,r2);
+
         return root;
     }
 
-    public TreeNode buildTreeUsePostAndIn(int[] inorder, int[] postorder,int inStart,int inEnd,int postStart,int postEnd){
-       if (postStart > postEnd || inStart > inEnd) return null;
-       int val = postorder[postEnd]; //后序的最后一个数是根节点
-       TreeNode root = new TreeNode(val);
-        int index = 0; //找到根在中序的下标
-        for (int i = inStart; i <= inEnd; i++) {
-            if (val == inorder[i]){
-                index = i;
-                break;
-            }
+    public TreeNode buildTreeUsePostAndIn(int[] postorder, int[] inorder, int l1, int r1, int l2, int r2) {
+
+        if (l1 > r1 && l2 > r2){
+            return null;
         }
-        int leftSize = index - inStart;
+        //取根节点
+        int rootVal = postorder[r1]; //注意这里有区别，后序是从尾巴取根节点
+        TreeNode root = new TreeNode(rootVal);
 
+        int index = inOrderMap.get(rootVal);
 
-        //TODO 为什么postStart要加进去，postStart不是一直都是0吗？
-        /**
-         * 中后序的左子树部分 为什么postEnd是postStart + leftSize - 1
-         * postStart并不一直都是0，因为到right的部分，posStart会变成postStart + leftSize。
-         */
-        root.left = buildTreeUsePostAndIn(inorder,postorder,
-                inStart,index - 1,
-                postStart ,postStart + leftSize - 1);
-        /**
-         * 中后序的右子树部分 为什么postStart是postStart+leftSize
-         */
-        root.right = buildTreeUsePostAndIn(inorder,postorder,
-                index + 1,inEnd,
-                postStart + leftSize,postEnd - 1);
+        //根据左子树的后中 递归建立左子树
+        //因为树根在后面！
+        //l1 + index - l2 - 1，注意这里要多减去1!!
+        root.left = buildTreeUsePostAndIn(postorder,inorder,l1,l1 + index - l2 - 1,l2,index - 1);
+        //根据右子树的后中 递归建立右子树
+        root.right = buildTreeUsePostAndIn(postorder,inorder,l1 + index - l2,r1 - 1,index + 1,r2);
+
         return root;
     }
-
 }

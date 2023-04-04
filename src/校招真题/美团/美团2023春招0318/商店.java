@@ -1,5 +1,10 @@
 package 校招真题.美团.美团2023春招0318;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Scanner;
+
 /**
  * @Author KingofTetris
  * @Date 2023/3/29 17:34
@@ -19,7 +24,7 @@ package 校招真题.美团.美团2023春招0318;
  *
  * 第一行三个整数，以空格分开，分别表示N,X,Y。
  *
- * 接下来N行，每行两个整数，以空格分开，表示一个的原价和折扣价。
+ * 接下来N行，每行两个整数，以空格分开，表示一个商品的原价和折扣价。
  *
  * 1≤N≤100, 1≤X≤5000, 1≤Y≤50，每个商品原价和折扣价均介于[1,50]之间。
  *
@@ -42,4 +47,70 @@ package 校招真题.美团.美团2023春招0318;
  * 2 5
  */
 public class 商店 {
+
+    public static void main(String[] args) {
+        int[] res = store();
+        System.out.print(res[0] + " " + res[1]);
+    }
+
+
+    /**
+     * 贪心没办法过全部的用例 只能过9%
+     * @return
+     */
+    //static方法只能用外部类
+    private static int[] store() {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt(),x = sc.nextInt(),y = sc.nextInt();
+        ArrayList<item> items = new ArrayList<>(); //能不用数组就别用数字，不然没法用集合类排序
+        for (int i = 0; i < n; i++) {
+            item it = new item(sc.nextInt(),sc.nextInt());
+            items.add(it);
+        }
+        sc.close();
+
+        //贪心买，把券用完再去买本价,
+        //先按照折后价升序，如果折后价相同，用原价升序
+        //另外每件商品只能买一次
+        // ::是java8的lamda表达式，简化了 item -> item.getDp() 这个匿名函数
+        //后面的Comparator只是比较器，相当于给出用什么规则升序还是降序排列
+        //具体怎么排还是按照Collections.sort来
+        Collections.sort(items, Comparator.comparing(item::getDp).thenComparing(item::getOp));
+
+        int max = 0,total = 0;
+        for(int i = 0;i < items.size();i++){
+            while (y != 0 && x >= items.get(i).dp){
+                 y--;//用掉一张优惠券
+                 x = x - items.get(i).dp;
+                 max++;
+                 total = total + items.get(i).dp;
+                 i++;//买完就要买下一个
+            }
+            //如果y == 0了，只能原价买
+            while (x >= items.get(i).op){
+                x = x - items.get(i).op;
+                max++;
+                total = total + items.get(i).op;
+                i++;
+            }
+        }
+        return new int[]{max,total};
+    }
+}
+
+class item{
+    int op,dp;
+
+    item(int op,int dp){
+        this.op = op;
+        this.dp = dp;
+    }
+
+    public int getOp() {
+        return op;
+    }
+
+    public int getDp() {
+        return dp;
+    }
 }
