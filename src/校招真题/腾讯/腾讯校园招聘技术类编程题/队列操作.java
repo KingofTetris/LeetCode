@@ -2,6 +2,8 @@ package 校招真题.腾讯.腾讯校园招聘技术类编程题;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Scanner;
 
 /**
@@ -87,18 +89,15 @@ import java.util.Scanner;
  简单来说如果遇到输入包括字符串的，你就全部用nextLine()来读取。然后用xxx.parseXXX来强转
  **/
 public class 队列操作 {
-
     public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(System.in);
         int T = Integer.parseInt(sc.nextLine());
-        sc.nextLine();
         int n = 0;
         myQueue queue = new myQueue();
         while ( n < T ){
             int operationNum = Integer.parseInt(sc.nextLine());
             int i = 0;
             while (i < operationNum) {
-                sc.nextLine();
                 String command = sc.nextLine();
                 //Java8及以后是支持直接往switch里面放字符串的。会自行调用equals方法
                 if (command.startsWith("PUSH"))  {
@@ -120,25 +119,24 @@ public class 队列操作 {
 
 class myQueue{
     //直接拿0当队头
-    ArrayList<Integer> myQueue;
+    Queue<Integer> myQueue;
     myQueue(){
-        myQueue = new ArrayList<>();
+        myQueue = new LinkedList<>();
     }
 
     void push(int x){
-        myQueue.add(x);
+        myQueue.offer(x);
     }
 
     void pop(){
-        if (myQueue.size() == 0) System.out.println(-1);//如果没有元素能出队
-        else myQueue.remove(0); //删除队头
+        if (myQueue.isEmpty()) System.out.println(-1);//如果没有元素能出队
+        else myQueue.poll(); //删除队头
     }
 
     void top(){
         if (myQueue.size() == 0) System.out.println(-1);
         else {
-            int head = myQueue.get(0);
-            System.out.println(head);
+            System.out.println(myQueue.peek());
         }
     }
 
@@ -146,9 +144,5 @@ class myQueue{
         System.out.println(myQueue.size());
     }
 
-    void clear(){
-        while (myQueue.size() != 0){
-            myQueue.remove(0);
-        }
-    }
+    void clear(){myQueue.clear();}
 }
