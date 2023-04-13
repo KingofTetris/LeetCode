@@ -25,24 +25,25 @@ public class 进制转换 {
         System.out.println(x);
     }
 
-    //当然正常是要你自己写个转化函数，比如下面这个
+    //当然正常是要你自己写个转化函数
+    //简单模拟
     public static int convertNum(String str)
     {
         String[] c={"A","B","C","D","E","F"};
         HashMap<String,Integer> hashmap= new HashMap<>();
         for(int i=0; i<=9;i++)
         {
-            hashmap.put(i+"",i);//+"" 变成字符串
+            hashmap.put(i+"",i);//+"" 变成字符串 0-9
         }
         for(int j=10;j<=15;j++)
         {
-            hashmap.put(c[j-10],j);
+            hashmap.put(c[j-10],j); // A - F 对应 10-15
         }
 
         String[] st=new String[str.length()];
         for(int i=0;i<=str.length()-1;i++)
         {
-            st[i]=str.substring(i,i+1);
+            st[i]=str.substring(i,i+1); //取下字符串里面的单个字符
         }
 
         int num=0;
@@ -50,7 +51,7 @@ public class 进制转换 {
         //这里需要注意，如果输入是类似"1A"没有标识的16进制数，i的值从0开始
         //如果是"0x1A"这样有标识符的16进制，则在计算时，需要截掉0x这两位标识，i从2开始
         {
-            num += hashmap.get(st[i]) * Math.pow(16,st.length-1-i);
+            num += hashmap.get(st[i]) * Math.pow(16,st.length-1-i); //数值乘以进制
         }
         return num;
     }

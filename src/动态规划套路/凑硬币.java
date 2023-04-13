@@ -22,12 +22,12 @@ public class 凑硬币 {
 
 
     /** 简单的暴力递归，会超时*/
-  /*  public int coinChange(int[] coins, int amount) {
+    public int coinChange1(int[] coins, int amount) {
         if (amount == 0) return 0;
         if (amount < 0 ) return -1;
         int res = Integer.MAX_VALUE;
         for(int coin:coins){
-            int subpromble = coinChange(coins,amount - coin);
+            int subpromble = coinChange1(coins,amount - coin);
             if (subpromble == -1) continue;//无解就跳过
             // 因为这个continue跳过可能导致 res = Math.min(res,subpromble + 1); 不会执行
             //所有要判断一下res 还是不是MAX_VALUE
@@ -35,12 +35,12 @@ public class 凑硬币 {
             res = Math.min(res,subpromble + 1);
         }
         return res == Integer.MAX_VALUE ? -1 : res;
-    }*/
+    }
 
 
 
     //同样可以优化一下重复计算的过程
-    /*public int coinChange(int[] coins, int amount) {
+    public int coinChange2(int[] coins, int amount) {
         memo = new int[amount + 1];
         Arrays.fill(memo,-666);
         return dp(coins,amount);
@@ -63,7 +63,7 @@ public class 凑硬币 {
 
         memo[amount] = (res == Integer.MAX_VALUE)?-1:res;
         return memo[amount];
-    }*/
+    }
 
 
     //最终化成迭代优化版

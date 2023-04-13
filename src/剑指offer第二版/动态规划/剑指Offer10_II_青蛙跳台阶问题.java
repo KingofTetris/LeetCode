@@ -42,7 +42,7 @@ import org.junit.Test;
  * 所以f(n) =f(n-1)+f(n-2) 就是这个DP的状态转移方程
  */
 public class 剑指Offer10_II_青蛙跳台阶问题 {
-    final int MOD = 1000000007; //1000000007 是最小的十位质数。模1000000007，可以保证值永远在int的范围内。
+    final int MOD = (int) (1e9 + 7); //1000000007 是最小的十位质数。模1000000007，可以保证值永远在int的范围内。
     int[] memo = new int[101];
 
     @Test
@@ -80,7 +80,7 @@ public class 剑指Offer10_II_青蛙跳台阶问题 {
         int res = 0;
         for (int i = 2; i <= n; i++) {
             res = (memo[i - 1] + memo[i - 2]) % MOD; //直接去取memo里的数 memo[i]相加也可能溢出，所以也要取余
-            if (memo[i] == 0) memo[i] = res % MOD; //存入memo
+            memo[i] = res % MOD; //把res存入memo
         }
         return res;
     }

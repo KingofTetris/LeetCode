@@ -66,6 +66,8 @@ public class 朋友圈 {
     //求最大连通分量
     public static int pyq(LinkedHashSet<edge> edges){
         // 1. 构建邻接表
+        //邻接表一般是不用map的，直接用下标对应节点序号
+        //直接用List<Integer> 存储邻居信息
         Map<Integer, List<Integer>> adjList = new HashMap<>();
         for (edge e : edges) {
             adjList.putIfAbsent(e.node1, new ArrayList<>());
