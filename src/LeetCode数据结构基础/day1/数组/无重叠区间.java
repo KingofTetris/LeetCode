@@ -39,15 +39,22 @@ import java.util.Comparator;
 
         解释: 你不需要移除任何区间，因为它们已经是无重叠的了。*/
 
+
+/**
+ * 这里的右端点是开的。
+ * 那么[1,2] [2,3]就是不重叠的
+ */
 public class 无重叠区间 {
 
     @Test
     public void test(){
-        int[][] intervals = {{1,4},{4,8}};
+//        int[][] intervals = {{1,4},{4,8}};
+        int[][] intervals = {{1,2}, {2,3}, {3,4}, {1,3}};
         System.out.println(eraseOverlapIntervals(intervals));
     }
 
-/*    贪心算法：按照每个区间结尾从小到大进行升序排序，优先选择结尾最短的区间，
+/*    贪心算法：
+    按照每个区间结尾从小到大进行升序排序，优先选择结尾最短的区间，
     在它的后面才可能连接更多的区间（若两个区间有重叠部分，则应该优先保留结尾小的）。*/
 
    /* 初始化：记录排序后第一个区间的右边界大小（此时的右边界一定是最小的，该区间后面能够连接的区间更多），
@@ -67,6 +74,7 @@ public class 无重叠区间 {
 
 
     /**
+     * 其实找到最长的不重叠区间，然后其他就是重叠区间，返回这些重叠区间的数量就是结果
      * Arrays.sort 时间复杂度O(nlogn)  栈空间O(logn)
      * @param intervals
      * @return
@@ -75,22 +83,15 @@ public class 无重叠区间 {
 
         int n = intervals.length;
         if (n == 0) return 0;
-
-      /*  Arrays.sort(intervals, new Comparator<int[]>() {
-            @Override
-            public int compare(int[] o1, int[] o2) {
-                return o1[1] - o2[1];
-            }
-        });*/
-
-        //用lamda表达式直接代替上面的匿名内部类
-        //按照o[1]也就是右端点升序排序，如果前面加个负号就是降序排序 o -> -o[1]
+        //先按照右端点升序
+        /**
+         * 整题的难点就是这个按照右端点排序的写法
+         * Arrays.sort(intervals,comparator.comparingInt(o -> o[1])
+         */
         Arrays.sort(intervals,Comparator.comparingInt(o -> o[1]));
-
         int count = 0; // 用来记录重叠区间的个数
-        int rightEnd = intervals[0][1]; //记录上一个区间的右端点
+        int rightEnd = intervals[0][1]; //记录上一个区间的右端点,初始是最小的右端点，才能保证找到最长的非重叠区间
         for (int i = 1;i < n;i++) {
-
             if (intervals[i][0] >= rightEnd) { //如果下个区间的左端点大于等于上个区间的右端点，说明这两个区间是不重叠的
                 rightEnd = intervals[i][1];//合并取下新的右端点，重复这个过程。
             } else { //如果下个区间的左端点小于上个区间的右端点，那必然是重叠的，count++;

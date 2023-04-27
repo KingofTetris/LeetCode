@@ -92,7 +92,7 @@ public class 融合试剂 {
             for (int j = 1; j < i; j++) {
                 //如果j或者i-j凑不出来就直接跳过
                 if (dp[j] == 0 || dp[i - j] == 0) continue;
-                dp[i] = Math.max(dp[i], dp[j] + dp[i - j] + (j == i - j ? x : 0));//每次选最大的。所以前面个max
+                dp[i] = Math.max(dp[i], dp[j] + dp[i - j] + (j == i - j ? x : 0));//每次选最大的。所以前面加个Math.max
             }
         }
         return dp[c];

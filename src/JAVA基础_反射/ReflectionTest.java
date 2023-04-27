@@ -91,10 +91,6 @@ public class ReflectionTest {
      * 相当于有public的大门可以走，你非得翻private的窗户。
      * 有了反射以后，private public更多的是一种标识作用。最好用public的 private就不要用了
      *
-     *
-     *
-     *
-     *
      * 关于java.lang.Class的理解
      * 1.类的加载过程
      * java命令对生成的.class文件解释运行，

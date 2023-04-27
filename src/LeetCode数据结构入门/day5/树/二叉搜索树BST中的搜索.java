@@ -23,6 +23,8 @@ public class 二叉搜索树BST中的搜索 {
         TreeNode children = searchBST(tree,9);
         CreateTree.show(children);
     }
+
+    //递归
     public TreeNode searchBST(TreeNode root, int val) {
         if(root == null)
             return null;
@@ -31,5 +33,15 @@ public class 二叉搜索树BST中的搜索 {
         TreeNode root_left = searchBST(root.left,val);
         TreeNode root_right = searchBST(root.right,val);
         return root_left==null?root_right:root_left;
+    }
+
+    //非递归
+    public TreeNode searchBST2(TreeNode root,int val){
+        while (root != null){
+            if (root.val == val ) return root;
+            else if (val > root.val) root = root.right;
+            else if (val < root.val) root = root.left;
+        }
+        return null;
     }
 }

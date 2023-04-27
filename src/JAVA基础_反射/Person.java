@@ -1,6 +1,6 @@
 package JAVA基础_反射;
 
-import com.atguigu.java.MyAnnotation;
+import 一些面试常考的Java基础.atguigu.java.MyAnnotation;
 
 import java.util.*;
 
