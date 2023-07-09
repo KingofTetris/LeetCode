@@ -12,6 +12,11 @@ public class Customer {
     private String name;
 
 
+    /**
+     * 自动生成的equals和hashCode方法
+     * @param o
+     * @return
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

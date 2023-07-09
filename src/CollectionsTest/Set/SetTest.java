@@ -36,8 +36,6 @@ import java.util.Set;
  *             如果一样，再比较A所属类的equals()方法，与其他元素对比。
  *              如果equals方法返回true,那A就是重复项，添加失败
  *              如果false，成功---情况3
- *
- *
  *      对于添加成功情况2和3，元素A与已经存在的元素以链表方式存储（拉链法）
  *      JDK7上，JDK8下，七上八下
  *
@@ -55,7 +53,7 @@ public class SetTest {
 
     @Test
     public void test1() {
-        Set set = new HashSet();
+        Set<Object> set = new HashSet<>();
         set.add(123);
         set.add(2123);
         set.add(33123);
@@ -81,7 +79,7 @@ public class SetTest {
         //就保证了输出顺序和输入顺序一致。而且对于频繁的遍历操作，速度就快很多。
         //也就是LinkedHashSet的遍历效率比HashSet高很多
         //但坏处就是牺牲了两个空间
-        Set set = new LinkedHashSet();
+        Set<Object> set = new LinkedHashSet<>();
         set.add(123);
         set.add(2123);
         set.add(33123);
@@ -97,5 +95,22 @@ public class SetTest {
     }
 
 
+    @Test
+    public void test3(){
+        CollectionsTest.Set.Person p1 = new CollectionsTest.Set.Person();
+        p1.setAge(11);
+        p1.setSex("男");
+        p1.setPet(new Pet("狗"));
 
+        CollectionsTest.Set.Person p2 = new CollectionsTest.Set.Person();
+        p2.setAge(11);
+        p2.setSex("男");
+        p2.setPet(new Pet("狗"));
+
+        Set<CollectionsTest.Set.Person> set = new HashSet<>();
+        set.add(p1);
+        set.add(p2);
+
+        System.out.println(set);
+    }
 }

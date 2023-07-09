@@ -50,7 +50,7 @@ public class testReflection {
         //现在有了水果通过榨汁机去榨汁
         Juicer juicer = new Juicer();
         juicer.run(fruit);
-//        //当然有了Clazz你还可以去使用对应类的所有属性和方法
+//        //当然有了Clazz你还可以去使用对应类的所有属性和方法 因为测试里水果只有一个方法，所以就不用了。
 //        Field field = clazz.getDeclaredField("name");
 //        field.setAccessible(true);
 //        field.set(fruit,"苹果");

@@ -5,8 +5,6 @@ package 剑指offer第二版.字符串;
  * @Date 2022/9/13 16:23
  * 字符串的左旋转操作是把字符串前面的若干个字符转移到字符串的尾部。请定义一个函数实现字符串左旋转操作的功能。比如，输入字符串"abcdefg"和数字2，该函数将返回左旋转两位得到的结果"cdefgab"。
  *
- *  
- *
  * 示例 1：
  *
  * 输入: s = "abcdefg", k = 2
@@ -32,12 +30,9 @@ public class 剑指Offer58_II_左旋转字符串 {
          * 这是数据结构书里的解法。
          * 但是JAVA不支持基本数据类型交换。
          * 不如直接切片拼接
-         *
          * 下面是基本思路。
          * 左右先左转
-         *
          * 整体再左转
-         *
          * 就相当于整体左移了n位
          */
         String left = s.substring(0, n);
@@ -84,7 +79,7 @@ public class 剑指Offer58_II_左旋转字符串 {
         if (start >= end) {
             return;
         }
-        while (start < end) {
+        while (start < end) { //核心就是一直交换。
             char tmp = ch[start];
             ch[start] = ch[end];
             ch[end] = tmp;

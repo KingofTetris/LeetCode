@@ -59,15 +59,15 @@ public class 杨辉三角 {
         for (int i = 0; i < numRows; i++) {
             List<Integer> row = new ArrayList<>();
 
-
             //下面这个for循环就是整个代码的核心
             for (int j = 0; j <= i; j++) {
-
                 //开头结尾都是1
                 if(j == 0 || j == i){
                     row.add(1);
                 }
                 else{
+                    //第n行的第i个数就是上一行的两肩之和
+                    //也就是C(n,i) = C(n-1,i-1) + C(n-1,i)
                     row.add(ret.get(i-1).get(j-1) + ret.get(i-1).get(j));
                 }
             }

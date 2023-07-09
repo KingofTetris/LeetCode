@@ -31,7 +31,7 @@ public class MatcherTest {
         System.out.println(m.matches());
         System.out.println(m.lookingAt());
         System.out.println(m.find());
-//        System.out.println(m.groupCount());
+        System.out.println(m.groupCount());
         while (m.find()) {
             /**
              * 当使用matches()，lookingAt()，find()执行匹配操作后，就可以利用下面三个方法得到更详细的信息：
@@ -48,6 +48,7 @@ public class MatcherTest {
             System.out.println("group():" + m.group());// group():ab%12
 //            m.reset();//不输入input则将索引指针重新指向0，这里就无限循环了。。
         }
+        System.out.println("============================================================");
         m.reset("ef%56-gh%78");//重置字符串
         while (m.find()) {
             System.out.println("开始索引：" + m.start());

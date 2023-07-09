@@ -31,7 +31,7 @@ public class ReflectionTest {
 
         Class personClass = Person.class;
 
-        //获得public 的构造方法
+        //获得public的,并且带参数String和int的构造方法
         Constructor cons = personClass.getConstructor(String.class, int.class);
 
         /**获得private 一定要用getDeclaredConstructor declared声明的方法都是获取
@@ -51,6 +51,7 @@ public class ReflectionTest {
          * 1.就是为了反射创建运行类的准备的
          * 2.便于子类继承此运行时类时，默认调用super()时，保证父类有此构造器   因为你创建了有参的 就不会去自动调用空参了
          */
+        //因为获得的是带参数构造，所以你实例化的时候也要把实参加上去。
         Object john = cons.newInstance("John", 18);
         Object hepa = cons1.newInstance("Hepa");
 
@@ -59,6 +60,9 @@ public class ReflectionTest {
 
         //调用属性
         //获得私有属性name
+
+        //Fields获得所有属性
+//        Field[] declaredFields = personClass.getDeclaredFields();
         Field name = personClass.getDeclaredField("name");
         name.setAccessible(true);
         name.set(john,"pahe");
@@ -74,6 +78,7 @@ public class ReflectionTest {
 
         method.invoke(john);
 
+        //调用方法同样是invoke(对象，参数列表)
         Object nation = method1.invoke(john, "中国");
 
         System.out.println(nation);

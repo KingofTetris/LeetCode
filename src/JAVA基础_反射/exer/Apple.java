@@ -10,4 +10,5 @@ public class Apple implements Fruit{
     public void squeeze() {
         System.out.println("榨一杯苹果汁");
     }
+
 }

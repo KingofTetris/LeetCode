@@ -45,14 +45,15 @@ public class 构造数组 {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
         int len = n * (n+1) / 2;
-        //构造循环就完了[n...1],[n...2],[n...3],...,[n]
+        //构造循环就完了，从尾向前倒过来，就能保证相邻的不同[n...1],[n...2],[n...3],...,[n]
         //外层 n(n+1)/2个数 从1加到n(n+1)/2
         //内层就是每个循环 从n减到0
         ArrayList<Integer> list = new ArrayList<>();
-        for (int i = 0; i < len; i++) {
-            for (int j = n; j > i; j--) {
+        for (int i = 0; i < len; i++) { //添加len个元素
+            for (int j = n; j > i; j--) { //每轮添加[n,...,i]
                 list.add(j);
             }
+//          每轮i+1
         }
         for (Integer number : list) {
             System.out.print(number + " ");

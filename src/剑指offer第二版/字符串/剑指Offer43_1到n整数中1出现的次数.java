@@ -23,10 +23,14 @@ import org.junit.Test;
 public class 剑指Offer43_1到n整数中1出现的次数 {
     @Test
     public void test() {
-        System.out.println(countDigitOne(1231232134));
+        System.out.println(countDigitOne2(1231232134));
     }
 
     /**
+     *
+     * 暴力法，把数字转化成字符串
+     * 比较每个字符是不是'1'
+     * 如果是'1',sum++
      * 824883294就TLE了。O(MN) M为数字长度
      *
      * @param n
@@ -48,7 +52,19 @@ public class 剑指Offer43_1到n整数中1出现的次数 {
 
     /**
      * https://www.bilibili.com/video/BV19U4y1C7pt?spm_id_from=333.337.search-card.all.click&vd_source=299caa32bd4dc5f5ad17129611289250
+     * 强行固定个十百....位(cur)上为1的时候，去计算会出现多少次1
+     * 然后cur的前后部分记录成high和low
+     * bit 从 1开始，每次/bit%10 就能取到n的个十百....位
+     * 一直循环到bit*10 > n
+     * cur = n / bit % 10
+     * high = n / bit / 10
+     * low = n % bit
+     * 然后分成3种情况
+     * cur > 1    count = (high + 1) * bit
+     * cur = 1    count = (high * bit) + (low + 1)
+     * cur = 0    count = high * bit
      *
+     * O(lgN) 快了都不知道多少
      * @param n
      * @return
      */

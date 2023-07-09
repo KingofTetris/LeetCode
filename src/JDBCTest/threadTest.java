@@ -19,7 +19,6 @@ public class threadTest {
         t1.start();
         t2.start();
         t3.start();*/
-
         Object obj = new Object();
 
         Thread t1 = new Thread1(obj);
@@ -28,8 +27,9 @@ public class threadTest {
         t1.setName("线程1");
         t2.setName("线程2");
 
-        t1.start();
+        //如果你没用设置join 那么start的顺序就有所谓了。
         t2.start();
+        t1.start();
     }
 
 }
@@ -94,7 +94,6 @@ class Myprint{
     int count=0;//记录打印的轮数（也是初始数字1的前一个数字）；
     char c=64;//初始字母‘A’的前一个位置；
     boolean flag=true;//用来判断该睡打印的布尔值，每个线程打印完反转，让另一个线打印；
-
     //打印数字的方法
     public  synchronized void printNum()  {
         if (flag==false){
@@ -139,22 +138,19 @@ class Thread1 extends Thread
         // 加锁
         synchronized (obj)
         {
-            // 打印1-52
+            // 打印1-26
             for (int i = 1; i <= 26; i++)
             {
                 System.out.print(i);
-//                if (i % 2 == 0)     //模2等于零。
-//                {
-                obj.notifyAll();//唤醒进程
+                obj.notifyAll();//唤醒其他所有处于waiting的进程
                 try
                 {
-                    obj.wait(); //字面意思
+                    obj.wait(); //释放锁
                 }
                 catch (InterruptedException e)
                 {
                     e.printStackTrace();
                 }
-                //}
             }
         }
     }
@@ -170,7 +166,7 @@ class Thread2 extends Thread {
 
     public void run()
     {
-        synchronized (obj)
+        synchronized (obj) //加锁
         {
             // 打印A-Z
             for (int i = 0; i <26;i++)
@@ -180,7 +176,7 @@ class Thread2 extends Thread {
                 obj.notifyAll();
                 try
                 {
-                    obj.wait();
+                    obj.wait();//释放所
                 }
                 catch (InterruptedException e)
                 {

@@ -1,6 +1,5 @@
 package 每日一题;
 
-import javafx.util.Pair;
 import org.junit.Test;
 
 import java.util.ArrayDeque;
@@ -42,7 +41,7 @@ public class 相似度为K的字符串_2022_09_21 {
     public void test(){
         String s1 = "abccaacceecdeea";
         String s2 = "bcaacceeccdeaae";
-        int i = kSimilarity(s1, s2);
+        int i = kSimilarity2(s1, s2);
         System.out.println(i);
     }
 
@@ -61,57 +60,10 @@ public class 相似度为K的字符串_2022_09_21 {
      *  我们可以枚举所有可能的交换方案，在搜索时进行减枝从而提高搜索效率，最终找到最小的交换次数。
      *
      */
-    public int kSimilarity(String s1, String s2) {
-        int n = s1.length();
-        Queue<Pair<String, Integer>> queue = new ArrayDeque<Pair<String, Integer>>();
-        Set<String> visit = new HashSet<String>();
-        queue.offer(new Pair<String, Integer>(s1, 0));
-        visit.add(s1);
-        int step = 0;
-        while (!queue.isEmpty()) {
-            int sz = queue.size();
-            for (int i = 0; i < sz; i++) {
-                Pair<String, Integer> pair = queue.poll();
-                String cur = pair.getKey();
-                int pos = pair.getValue();
-                if (cur.equals(s2)) {
-                    return step;
-                }
-                while (pos < n && cur.charAt(pos) == s2.charAt(pos)) {
-                    pos++;
-                }
-                for (int j = pos + 1; j < n; j++) {
-                    if (s2.charAt(j) == cur.charAt(j)) {
-                        continue;
-                    }
-                    if (s2.charAt(pos) == cur.charAt(j)) {
-                        String next = swap(cur, pos, j);
-                        if (!visit.contains(next)) {
-                            visit.add(next);
-                            queue.offer(new Pair<String, Integer>(next, pos + 1));
-                        }
-                    }
-                }
-            }
-            step++;
-        }
-        return step;
-    }
-
-    public String swap(String cur, int i, int j) {
-        char[] arr = cur.toCharArray();
-        char c = arr[i];
-        arr[i] = arr[j];
-        arr[j] = c;
-        return new String(arr);
-    }
-
  /*   作者：LeetCode-Solution
     链接：https://leetcode.cn/problems/k-similar-strings/solution/xiang-si-du-wei-k-de-zi-fu-chuan-by-leet-8z10/
     来源：力扣（LeetCode）
     著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。*/
-
-
     /**
      * DFS，剪枝，递归
      */
