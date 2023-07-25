@@ -8,10 +8,8 @@ import org.junit.Test;
  * @Time 2021/9/26  23:16
  */
 
-/*53. 最大子序和
+/*53. 最大连续子序和
         给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。
-
-
 
         示例 1：
 
@@ -54,9 +52,8 @@ public class 最大子序列和 {
         int pre_sum = 0;
         int maxSum = nums[0];
         for(int x : nums){
-            //pre_sum是为了舍弃掉不要的最大和
+            //pre_sum记录前缀最大和，如果preSum+x 小于 x 那么就抛弃preSum，从x开始
             pre_sum = Math.max(pre_sum + x,x);
-
             //maxSum是为了记录上一个最大和
             maxSum = Math.max(maxSum,pre_sum);
         }
