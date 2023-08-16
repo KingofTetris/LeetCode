@@ -18,6 +18,7 @@ package Lambda表达式使用;
  */
 public class LambdaDemo {
 
+    //静态内部类
     static class staticIloveLambda{
         public void love(int a) {
             System.out.println("i love lambda \t" + a);
@@ -30,6 +31,7 @@ public class LambdaDemo {
         //于是我们想用静态内部类，局部内部类来完成这个事情。
         staticIloveLambda lambda2 = new staticIloveLambda();
         lambda2.love(522);
+        //局部内部类
         class classIloveLambda{
             public void love(int a) {
                 System.out.println("i love lambda \t" + a);
@@ -55,6 +57,9 @@ public class LambdaDemo {
         //还可以简化，因为参数只有一个a,方法体只用一行，干脆()和{}都可以去掉
         IloveLambda lambda6 = a->System.out.println("i love lambda \t" + a);
         lambda6.love(526);
+        //多个参数就不能省略了。
+        IloveLambdaTwo lambdaTwo = (a,b)-> System.out.println("i love lambda \t" + (a+b));
+        lambdaTwo.love(50,50);
     }
 }
 
@@ -64,6 +69,11 @@ public class LambdaDemo {
 @FunctionalInterface
 interface IloveLambda{
     void love(int a);
+}
+
+@FunctionalInterface
+interface IloveLambdaTwo{
+    void love(int a,int b);
 }
 
 class LoveLambda implements IloveLambda{

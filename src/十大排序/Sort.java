@@ -15,7 +15,6 @@ package 十大排序;
  */
 public abstract class Sort<T extends Comparable<T>>{
     public abstract void sort(T[] nums);//抽象方法 子类继承后重写
-
     //protected方法 子类能直接使用
     protected boolean less(T v, T w) {
         //如果v比w小

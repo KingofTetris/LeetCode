@@ -6,7 +6,6 @@ package 十大排序;
  */
 public abstract class MergeSort<T extends Comparable<T>> extends Sort<T> {
     protected T[] aux; //辅助数组
-
     /**
      * 归并排序算法思想：分治+归并
      *

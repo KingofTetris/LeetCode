@@ -2,6 +2,7 @@ package JAVA基础_反射;
 
 import org.junit.Test;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -83,6 +84,11 @@ public class ReflectionTest {
 
         System.out.println(nation);
 
+        //接口，父类，注解
+        Class[] interfaces = personClass.getInterfaces();
+        Annotation[] declaredAnnotations = personClass.getDeclaredAnnotations();
+        Class superclass = personClass.getSuperclass();
+        personClass.getDeclaredField("name").getModifiers();
     }
 
 
@@ -115,20 +121,15 @@ public class ReflectionTest {
     public void test3() throws Exception {
         //法一 调用运行时类的属性 .class
         Class<Person> personClass = Person.class;
-
         //法二 用实例的getClass方法
         Person p1 = new Person();
         Class<? extends Person> p1Class = p1.getClass();
-
         //法三 调用Class的静态方法，forName(String classpath) 这种常用
         Class<?> forName = Class.forName("JAVA基础_反射.Person");
-
         System.out.println(forName == p1Class);
         System.out.println(personClass == p1Class);
         System.out.println(personClass == forName);
         //所以三种方法都是指向同一个地址
-
-
         //法四 类加载器，ClassLoader 了解即可
         ClassLoader classLoader = ReflectionTest.class.getClassLoader();
         classLoader.loadClass("JAVA基础_反射.Person");
