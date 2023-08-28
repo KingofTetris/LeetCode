@@ -23,8 +23,8 @@ public class 合并K个升序链表 {
      * @return
      */
     public ListNode mergeKLists(ListNode[] lists) {
-
         //按照List的头节点的值的大小进行升序
+//        PriorityQueue<ListNode> pq = new PriorityQueue<>();
         PriorityQueue<ListNode> pq = new PriorityQueue<>(Comparator.comparingInt(o -> o.val));
         //链表入队
         for (ListNode node : lists) {
@@ -32,13 +32,10 @@ public class 合并K个升序链表 {
                 pq.offer(node);
             }
         }
-
         //新建一个虚拟头节点，head.next指向链表的开头
         ListNode head = new ListNode();
-
         //尾节点，这个节点是一直会动的。最后会变成尾巴所以叫tail
         ListNode tail = head;
-
 
         //当pq不为空
         while(!pq.isEmpty()) {
@@ -48,7 +45,7 @@ public class 合并K个升序链表 {
             tail.next = cur;
             tail = tail.next;//tail后移
             //如果cur.next不为空就继续添加进优先队列
-            //每次添加进优先队列都会把最小的整理到队头
+            //每次添加进优先队列都会把链头最小的整理到队头
             //这样你每次poll出来都能保证最小。
             if (cur.next != null) {
                 pq.offer(cur.next);

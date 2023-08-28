@@ -18,11 +18,11 @@ public class 盛最多水的容器 {
         int max = 0;
         for (int i = 0; i < height.length; i++) {
             for (int j = i + 1; j < height.length; j++) {
-                int area = Math.min(height[i],height[j]) * (j - i);//算面积
+                //取短板，算面积
+                int area = Math.min(height[i],height[j]) * (j - i);
                 max = Math.max(area,max);
             }
         }
-
         return max;
     }
 
@@ -30,8 +30,8 @@ public class 盛最多水的容器 {
     /**
      * 双指针
      * 而且是首尾指针
-     *
      * 哪条边比较短，就移动哪条边
+     * 因为移动短的才有可能让面积增大
      * @param height
      * @return
      */
@@ -44,7 +44,6 @@ public class 盛最多水的容器 {
             if (height[left] < height[right] ) left++;
             else right--;
         }
-
         return max;
     }
 }

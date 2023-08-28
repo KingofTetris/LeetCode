@@ -12,10 +12,9 @@ import java.util.List;
  */
 public class 电话号码的字母组合 {
 
-
     @Test
     public void test(){
-        String digits = "23";
+        String digits = "2343";
         List<String> strings = letterCombinations(digits);
         for (String string : strings) {
             System.out.println(string);
@@ -36,8 +35,6 @@ public class 电话号码的字母组合 {
         map.put('8',new char[]{'t','u','v'});
         map.put('9',new char[]{'w','x','y','z'});
 
-
-
         /**
          * 先把初始符号加进去
          */
@@ -45,8 +42,6 @@ public class 电话号码的字母组合 {
         for (int j = 0; j < chars1.length; j++) {
             lists.add(String.valueOf(chars1[j]));
         }
-
-
         int count = 0;
         /**
          * 然后从1开始继续添加

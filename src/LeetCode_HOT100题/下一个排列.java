@@ -41,18 +41,15 @@ public class 下一个排列 {
         // 从后往前，找到前一位比当前位置小的(i-1 < i)
         int len = nums.length;
         for (int i = len - 1; i > 0; i--) {
-
             // 人话： (nums[4] = 5) < (nums[5] = 7)
             if (nums[i] > nums[i - 1]) {
-
                 // 将 [i] -> [length] 排序,这里是 7 6 4
+                // 这个排序的意义就是为了让后半部分保持升序。这样下面交互一次就行了。
                 Arrays.sort(nums, i, len);
                 // 排序完成之后的结果
                 // 1 2 3 8 5     4 6 7
-
                 //只遍历 4 6 7
                 for (int j = i; j < len; j++) {
-
                     // 从左往右，在 4 6 7 中找到第一个 > nums[4] = 5
                     // 注意是 nums[i - 1] 是 i-1 ，不是 j !!!
                     if (nums[j] > nums[i - 1]) {

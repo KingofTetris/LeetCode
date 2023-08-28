@@ -13,8 +13,6 @@ public class 搜索旋转排序数组 {
         int[] nums = {4,5,6,7,0,1,2};
         int search = search(nums, 0);
         System.out.println(search);
-
-
         /**
          * 因为这涉及到Java 运算符优先级的问题
          *
@@ -47,6 +45,8 @@ public class 搜索旋转排序数组 {
          * 版权声明：本文为CSDN博主「小母鸡...」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
          * 原文链接：https://blog.csdn.net/weixin_58569983/article/details/125900188
          */
+
+        ////为什么 low + (high - low) >> 1 不对？？
 //        int a =  4 + (6 - 4) >> 1; //3???
 //        int a =  (6 - 4) >> 1;
 //        int b = 4;
@@ -62,75 +62,52 @@ public class 搜索旋转排序数组 {
      * @return
      */
 
-    //0 - k-1  k - n-1 都是有序的
-    //问题是这个k是未知的
 
-    //那么只能找到不变的量
-    //在这个nums里面，你一刀切下去，分开的两边可能是刚好有序的
-    //但一定有一部分是有序的。我们就按照这个规律一直切分下去
+    // 因为是有序数组发生了左移
+    // 那么一定存在一个分界线把数组分成有序的两段。
     public int search(int[] nums, int target) {
         int n = nums.length;
         if (n == 0 ) return -1;
         if (n == 1) return target == nums[0] ? 0 : -1;
 
+
+        //先看作是原来的有序数组
         int low = 0, high = n - 1;
+
+        //还是经典的二分。
         while (low <= high){
-            int mid = low + ( ( high - low) >> 1); //为什么 low + (high - low) >> 1 不对？？
+            int mid = (low + high) / 2;
             if (nums[mid] == target){
                 return mid;
             }
 
             //如果nums[0] 小于 nums[mid]
-            //[low,mid - 1] 就是有序序列
+            //那么 [0,mid]是一组 [mid + 1,n-1]是另外一组
             if (nums[0] <= nums[mid]){ //等号的原因在于mid可以等于0
-                //继续判断target是不是在[low,mid - 1]之间
+                //继续判断target是不是在[low,mid]之间
                 if (nums[0] <= target && target < nums[mid]){
-                    //如果是，那么我们继续细化范围
+                    //如果在。我们在这个范围里面找
                     high = mid - 1;
                 }
-                else{ //不是就把low 改为mid+1
+                else{ //如果不在，我们去另外一组里面找。
                     low = mid + 1;
                 }
             }
 
-            //如果nums[0] 大于 nums[mid]
-            //那么[mid + 1,high]就是有序序列
-            //注意一定要是else，不是两个if。
-            //两个if可能会判断两次。
+            //另外一组
             else{
                 //继续判断target在不在这个范围里面
                 if (nums[mid] < target && target <= nums[n - 1]){
                     //如果在，那么
                     low = mid + 1;
                 }
-                else { //不在
+                else { //不在,去另外一组里面找
                     high = mid -1;
                 }
             }
         }
 
-        //没找到
-        return -1;
-    }
-
-    //问题就在于找这个nums
-    //但是k是不知道的，你没法准确找出nums
-
-    public int binarySearch(int[] nums,int target){
-        int low = 0,high = nums.length - 1;
-        while(low < high){
-            int mid = low + (high - low ) >> 1;
-            if (nums[mid] == target){
-                return mid;
-            }
-            else if (nums[mid] > target){
-                high = mid - 1;
-            }
-            else if (nums[mid] < target){
-                low = mid + 1;
-            }
-        }
-        //没找到
+        //如果low > high，那么说明target根本不在数组中。
         return -1;
     }
 }

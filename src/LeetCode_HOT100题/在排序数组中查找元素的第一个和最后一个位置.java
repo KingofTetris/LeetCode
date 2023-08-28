@@ -1,58 +1,60 @@
 package LeetCode_HOT100题;
 
+import java.util.Arrays;
+import java.util.Random;
+import java.util.Scanner;
+
 /**
  * @author by KingOfTetris
  * @date 2022/10/17
  */
 public class 在排序数组中查找元素的第一个和最后一个位置 {
 
-
-    /**
-     * 二分查找优化速度到O(logn)
-     *
-     * 对于升序序列某元素的开始和结束
-     * 我们可以看成找开始位置和下一个比它大的元素的开始位置。就不用去找结束位置
-     * 这样某元素的结束位置就是下一个元素的开始位置-1；
-     *
-     *
-     * @param nums
-     * @param target
-     * @return
-     */
-    public int[] searchRange(int[] nums, int target) {
-
-        int leftIndex = binarySearch(nums,target,true);
-        int rightIndex = binarySearch(nums,target,false) - 1;
-        if (leftIndex <= rightIndex && rightIndex < nums.length
-                && nums[leftIndex] ==target && nums[rightIndex] == target){
-            return new int[]{leftIndex,rightIndex};
+    public static void main(String[] args) {
+//        Scanner sc = new Scanner(System.in);
+        Random random = new Random();
+        int n = random.nextInt(10, 20);
+        int[] nums = new int[n];
+        for (int i = 0; i < n; i++) {
+            nums[i] = random.nextInt(1, 100);
         }
-        return new int[]{-1,-1};
+        Arrays.sort(nums);
+        for (int num : nums) {
+            System.out.print(num + "\t");
+        }
+        System.out.println();
+        int[] ints = searchRange(nums, 8);
+        for (int anInt : ints) {
+            System.out.print(anInt + "\t");
+        }
     }
 
-    /**
-     * 二分查找的特性就是会去找元素的第一个位置。
-     * 所以我们不必不去找最后的位置
-     * 而是去找下一个比target大的元素的开始位置 rightIndex
-     * lower为true找第一个大于等于 target 的位置 也就是leftIndex;
-     * lower为false 就去找第一个大于target的位置 rightIndex
-     * @param nums
-     * @param target
-     * @param lower
-     * @return
-     */
-    public int binarySearch(int[] nums,int target,boolean lower){
-        int left = 0,right = nums.length - 1,ans = nums.length;
+    //先找>=target的第一个
+    //再找>target的第一个
+    public static int[] searchRange(int[] nums, int target) {
+        int l = search(nums, target);
+        int r = search(nums, target + 1);
+        //如果l根本就不等于target或者l==n
+        //说明数组中根本不存在target.
+        if (l == nums.length || nums[l] != target)
+            return new int[]{-1, -1};
 
-        while (left <= right){
-            int mid = (left + right) / 2;
-            if (nums[mid] > target || (lower && nums[mid] >= target)){
-                right = mid - 1;
-                ans = mid;
-            }
-            else left = mid + 1;
+        return new int[]{l, r - 1};
+    }
+
+    //找>=target的第一个
+    public static int search(int[] nums, int target) {
+        int l = 0, r = nums.length;
+        while (l < r) {
+            int mid = (r + l) / 2;
+
+            //如果mid >= target 缩小right 去找最左边的target
+            if (nums[mid] >= target)
+                r = mid;
+            //如果 mid < target 那么放大l 去找更大的mid
+            else
+                l = mid + 1;
         }
-
-        return ans;
+        return l;
     }
 }

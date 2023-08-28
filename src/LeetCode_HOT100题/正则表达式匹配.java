@@ -9,7 +9,6 @@ public class 正则表达式匹配 {
     public boolean isMatch2(String s, String p) {
         return s.matches(p);
     }
-
     /**
      * dp[i][j]表示s到第i个字符，p到第j个字符能否匹配
      * @param s
@@ -34,8 +33,6 @@ public class 正则表达式匹配 {
                 dp[0][j] = false;//其他情况都是false。其实这句话没必要写，因为初始就全是false
             }
         }
-
-
         //开始计算dp
         for (int i = 1; i <= n; i++) {
             for (int j = 1; j <= m; j++) {
@@ -45,7 +42,6 @@ public class 正则表达式匹配 {
                         dp[i][j] = dp[i-1][j-1];
                     }
                 }
-
                 //如果j为*号，那么再次分类讨论
                 else{
                     //1. j-1个字符不匹配
@@ -60,7 +56,6 @@ public class 正则表达式匹配 {
                 }
             }
         }
-
         return dp[n][m];
     }
 }
