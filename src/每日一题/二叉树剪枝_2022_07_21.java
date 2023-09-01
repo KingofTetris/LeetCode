@@ -1,7 +1,7 @@
 package 每日一题;
 
 
-import LeetCode数据结构入门.day5.树.CreateTree;
+import LeetCode数据结构入门.day5.树.TreeUtils;
 import LeetCode数据结构入门.day5.树.TreeNode;
 import org.junit.Test;
 
@@ -49,8 +49,8 @@ public class 二叉树剪枝_2022_07_21 {
     @Test
     public void test(){
         Integer[] integers = {1,0,1,0,0,0,1};
-        TreeNode tree = CreateTree.createTree(integers);
-        CreateTree.show(pruneTree(tree));
+        TreeNode tree = TreeUtils.createTree(integers);
+        TreeUtils.show(pruneTree(tree));
     }
     /**
      * 删除不包含1的所有子树

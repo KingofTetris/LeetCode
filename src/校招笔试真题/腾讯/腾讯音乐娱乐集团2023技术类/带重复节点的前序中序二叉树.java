@@ -1,6 +1,6 @@
 package 校招笔试真题.腾讯.腾讯音乐娱乐集团2023技术类;
 
-import LeetCode数据结构入门.day5.树.CreateTree;
+import LeetCode数据结构入门.day5.树.TreeUtils;
 import LeetCode数据结构入门.day5.树.TreeNode;
 
 import java.util.ArrayList;
@@ -29,7 +29,7 @@ public class 带重复节点的前序中序二叉树 {
         ArrayList<TreeNode> binaryTrees = s.getBinaryTrees(preOrder, inOrder);
 
         for (TreeNode binaryTree : binaryTrees) {
-            CreateTree.show(binaryTree);
+            TreeUtils.show(binaryTree);
             System.out.println();
         }
     }

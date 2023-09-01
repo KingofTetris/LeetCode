@@ -41,8 +41,6 @@ import java.util.HashMap;
         只会存在一个有效答案
         进阶：你可以想出一个时间复杂度小于 O(n2) 的算法吗？*/
 public class 两数之和 {
-
-
     @Test
     public void test(){
         int[] numbers = {2,7,11,15,22,311};
@@ -63,7 +61,7 @@ public class 两数之和 {
                 //注意返回的是get(key)就是对应的另一个加数的下标 和 i + 1 两个下标
                 return new int[]{map.get(target - nums[i]),i + 1};
             }
-            //处理这个bug的方法就是先判断后KV化 可以避开上面的 1 1bug
+            //处理这个bug的方法就是先判断,再Put 可以避开上面的 1 1bug
             map.put(nums[i],i + 1);
         }
         return new int[0]; //没有就返回空数组

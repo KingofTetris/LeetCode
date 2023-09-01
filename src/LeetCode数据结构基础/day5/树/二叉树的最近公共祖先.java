@@ -1,6 +1,6 @@
 package LeetCode数据结构基础.day5.树;
 
-import LeetCode数据结构入门.day5.树.CreateTree;
+import LeetCode数据结构入门.day5.树.TreeUtils;
 import LeetCode数据结构入门.day5.树.TreeNode;
 import org.junit.Test;
 
@@ -39,8 +39,8 @@ public class 二叉树的最近公共祖先 {
     @Test
     public void test(){
         Integer[] nums = {3,5,1,6,2,0,8,null,null,7,4};
-        TreeNode root = CreateTree.constructTree(nums);
-        CreateTree.show(root);
+        TreeNode root = TreeUtils.constructTree(nums);
+        TreeUtils.show(root);
         TreeNode p = root.left.right.left;//7
 //        TreeNode q = root.right.left;//0
         TreeNode q = root.left;//5

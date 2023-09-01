@@ -70,12 +70,10 @@ public class 环形链表 {
         fast = head;
         slow = head;
         while (slow != fast) {
-
             //碰到结尾了，那肯定没环
             if (fast == null || fast.next == null) {
                 return false;
             }
-
             fast = fast.next.next;
             slow = slow.next;
         }

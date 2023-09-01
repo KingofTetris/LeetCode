@@ -1,6 +1,6 @@
 package 剑指offer第二版.树;
 
-import LeetCode数据结构入门.day5.树.CreateTree;
+import LeetCode数据结构入门.day5.树.TreeUtils;
 import LeetCode数据结构入门.day5.树.TreeNode;
 import org.junit.Test;
 
@@ -32,7 +32,7 @@ public class 剑指Offer34_二叉树中和为某一值的路径 {
     @Test
     public void test(){
         Integer[] nums = new Integer[]{5,4,8,11,null,13,4,7,2,null,null,5,1};
-        TreeNode tree = CreateTree.createTree(nums);
+        TreeNode tree = TreeUtils.createTree(nums);
         List<List<Integer>> lists = pathSum(tree, 22);
         for (List<Integer> path : lists) {
             for (Integer node : path) {

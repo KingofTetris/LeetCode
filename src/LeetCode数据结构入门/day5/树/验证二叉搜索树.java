@@ -26,7 +26,7 @@ public class 验证二叉搜索树 {
     TreeNode pre = null;
     @Test
     public void test(){
-        CreateTree ct = new CreateTree();
+        TreeUtils ct = new TreeUtils();
         TreeNode tree = ct.createTree(new Integer[]{4,2,7,1,3,5,8});
         System.out.println(isValidBST(tree));
     }

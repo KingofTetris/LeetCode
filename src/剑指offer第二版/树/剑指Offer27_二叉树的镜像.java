@@ -1,6 +1,6 @@
 package 剑指offer第二版.树;
 
-import LeetCode数据结构入门.day5.树.CreateTree;
+import LeetCode数据结构入门.day5.树.TreeUtils;
 import LeetCode数据结构入门.day5.树.TreeNode;
 import org.junit.Test;
 
@@ -40,9 +40,9 @@ public class 剑指Offer27_二叉树的镜像 {
     @Test
     public void test(){
         Integer[] nodes = new Integer[]{4,2,7,1,3,6,9};
-        TreeNode root = CreateTree.createTree(nodes);
+        TreeNode root = TreeUtils.createTree(nodes);
         TreeNode mirrorTree = mirrorTree(root);
-        CreateTree.show(mirrorTree);
+        TreeUtils.show(mirrorTree);
     }
     public TreeNode mirrorTree(TreeNode root) {
         if (root == null) return null;//终极条件 root为空

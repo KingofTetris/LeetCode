@@ -8,7 +8,7 @@ import org.junit.Test;
  * @Time 2021/9/28  13:11
  */
 
-/*121. 买卖股票的最佳时机
+/*121. 买卖股票的最佳时机I 只能选一天买，选一天卖。
         给定一个数组 prices ，它的第 i 个元素 prices[i] 表示一支给定股票第 i 天的价格。
 
         你只能选择 某一天 买入这只股票，并选择在 未来的某一个不同的日子 卖出该股票。设计一个算法来计算你所能获取的最大利润。
@@ -39,7 +39,7 @@ public class 买卖股票的最佳时机 {
 
     @Test
     public void test(){
-        int[] prices = {7,6,1,4,2};
+        int[] prices = {7,2,3,4,5};
         System.out.println(maxProfit(prices));
     }
 
@@ -54,23 +54,23 @@ public class 买卖股票的最佳时机 {
         return maxProfit;
     }*/
 
+    //emmm...你在干嘛。一天买一天卖，你直接O(n) 选出min 和 max相减不就完了呗。。
+
     //其实我只关心最大值
     //在最低价时买入
     public int maxProfit(int[] prices) {
-        int minprice = Integer.MAX_VALUE;
-        int maxprofit = 0;
+        int minPrice = Integer.MAX_VALUE;
+        int maxProfit = 0;
         for (int i = 0; i < prices.length; i++) {
-
-            //每次都在最低价的适合买
-            //只要赚钱就卖掉，记录下maxprofit 每次卖掉都比较
-            //留下最大的profit即可
-            if(prices[i] < minprice){
-                minprice = prices[i];
+            //只要价格比min还小就买入。
+            if(prices[i] < minPrice){
+                minPrice = prices[i];
             }
-            else if (prices[i] - minprice > maxprofit)
-                maxprofit = prices[i] - minprice;
+            //只要赚钱就卖掉，要注意的是，这个卖相当于只卖了最高的一次。
+            else if (prices[i] - minPrice > maxProfit)
+                maxProfit = prices[i] - minPrice;
         }
-        return maxprofit;
+        return maxProfit;
     }
 
 }

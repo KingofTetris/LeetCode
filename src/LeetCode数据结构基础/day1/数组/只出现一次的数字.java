@@ -35,52 +35,6 @@ public class 只出现一次的数字 {
         System.out.println(singleNumber(a));
     }
 
-    //使用额外空间可以用HashMap 记录 key-value 但时空消耗都很多。完全没有必要;
-    //额外空间O(n) 时间复杂度要遍历数组还要判单MAP里有没有 也是O(n)
-   /* public int singleNumber(int[] nums) {
-        HashMap<Integer,Integer> map = new HashMap<>();
-        for (int i = 0; i < nums.length; i++) {
-            if (!map.containsKey(nums[i])){
-                map.put(nums[i],1);
-            }
-            else{
-                 map.put(nums[i],map.get(nums[i]) + 1);
-             }
-        }
-        for(Map.Entry<Integer,Integer> item : map.entrySet()){
-            if (item.getValue() == 1)
-                return item.getKey();
-        }
-        //没有的话返回MAX_VALUE
-        return Integer.MAX_VALUE;
-    }*/
-
-    //不要额外空间最简单想到的就是暴力法，标记数为flag
-    //遍历数组里面的所有数，找不到就返回flag。时间为O(n^2)
-    /*public int singleNumber(int[] nums) {
-        for (int i = 0; i < nums.length; i++) {
-            int flag = nums[i];
-            int count = 0;
-            for (int j = 0; j <nums.length; j++) {
-                //用count记录一下相等出现的次数，自己和自己一定是1，大于1就是重复出现
-                //如果找到一个数和它一样就直接跳出这次循环，找下一个数
-                if(nums[j] == flag)
-                {
-                    count++;
-                    if (count > 1) //大于1直接下一轮
-                        break;
-                }
-                //如果遍历到最后一个数count还是1，那就是它。
-                if (j == nums.length - 1){
-                    if (count==1)
-                        return flag;
-                }
-            }
-        }
-        //没有就返回最大值
-        return Integer.MAX_VALUE;
-    }*/
-
     //异或就是找茬，不同就是1，相同就是0
     //异或的特殊性质： 自己和自己异或为0，0和任何数异或都是他本身
     //异或运算又满足结合律，交换律。所以中间相同的数一异或全是0，最后只留下一个单独的数single

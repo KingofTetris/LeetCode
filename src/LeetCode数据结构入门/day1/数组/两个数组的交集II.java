@@ -95,7 +95,7 @@ public class 两个数组的交集II {
         return Arrays.copyOfRange(intersection,0,index);
     }*/
 
-    //法二：排序+双指针
+    //法二：排序+双指针 O(nlogn)
     public int[] intersect(int[] nums1, int[] nums2) {
         Arrays.sort(nums1);
         Arrays.sort(nums2);
@@ -105,10 +105,9 @@ public class 两个数组的交集II {
         int p1 = 0;
         int p2 = 0;
         int index = 0;
-
 //        这里用且 因为短的走完，必然不可能再有交集了，没必要继续走了
         while(p1 < n && p2 < m){
-            //因为已经从小打大排序，谁小了 谁后移
+            //因为已经从小到大排序，谁小了 谁后移
             if(nums1[p1] < nums2[p2]){
                 p1++;
             }
@@ -123,6 +122,7 @@ public class 两个数组的交集II {
                 index++;
             }
         }
+        //最后返回intersection的0到index部分即可。
         return Arrays.copyOfRange(intersection,0,index);
     }
 }

@@ -18,27 +18,24 @@ import org.junit.Test;
 public class 二叉搜索树中的插入操作 {
 
     @Test
-    public void test(){
-        CreateTree ct = new CreateTree();
-        Integer[] num = {4,2,7,1,3};
-
-        TreeNode tree = ct.createTree(num);
-
-        TreeNode new_node = insertIntoBST(tree,5);
-        CreateTree.show(new_node);
+    public void test() {
+//        CreateTree ct = new CreateTree();
+        Integer[] num = {4, 2, 7, 1, 3};
+        TreeNode tree = TreeUtils.createTree(num);
+        TreeNode new_node = insertIntoBST(tree, 5);
+        TreeUtils.show(new_node);
     }
+
     public TreeNode insertIntoBST(TreeNode root, int val) {
         //如果是空树 直接新建一个就行了。
-        if(root==null){
+        if (root == null) {
             return new TreeNode(val);
         }
-
-       if(val < root.val){
-           root.left = insertIntoBST(root.left,val);
-       }
-       else {
-           root.right = insertIntoBST(root.right,val);
-       }
+        if (val < root.val) {
+            root.left = insertIntoBST(root.left, val);
+        } else {
+            root.right = insertIntoBST(root.right, val);
+        }
         return root;
     }
 

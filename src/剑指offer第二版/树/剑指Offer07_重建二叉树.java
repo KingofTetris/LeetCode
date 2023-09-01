@@ -1,6 +1,6 @@
 package 剑指offer第二版.树;
 
-import LeetCode数据结构入门.day5.树.CreateTree;
+import LeetCode数据结构入门.day5.树.TreeUtils;
 import LeetCode数据结构入门.day5.树.TreeNode;
 import org.junit.Test;
 
@@ -64,9 +64,9 @@ public class 剑指Offer07_重建二叉树 {
         int[] preOder = {3,9,5,6,20,15,7};
         int[] inOrder = {5,9,6,3,15,20,7};
         int[] postOrder = {5,6,9,15,7,20,3};
-        CreateTree.show(buildTreeByPreAndIn(preOder,inOrder));
+        TreeUtils.show(buildTreeByPreAndIn(preOder,inOrder));
         System.out.println();
-        CreateTree.show(buildTreeByPostAndIn(postOrder,inOrder));
+        TreeUtils.show(buildTreeByPostAndIn(postOrder,inOrder));
 
 //        int[] inOrder = {1,2,3,4,5};
 //        int[] postOrder = {1,4,5,3,2};

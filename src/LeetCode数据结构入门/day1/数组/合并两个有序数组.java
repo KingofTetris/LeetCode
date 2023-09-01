@@ -52,13 +52,14 @@ public class 合并两个有序数组 {
 
     @Test
     public void test(){
-        int[] nums1 = {1,3,5,8,0,0,0,0};
+        int[] nums1 = {0,0,0,0,1,3,5,8};
         int[] nums2 = {2,4,6,8};
-        int n = nums2.length;
+      /*  int n = nums2.length;
         int m = nums1.length - n;
-        merge(nums1,m,nums2,n);
-        for (int i = 0; i < nums1.length; i++) {
-            System.out.print(nums1[i] + "\t");
+        merge(nums1,m,nums2,n);*/
+        int[] merge = merge(nums1, nums2);
+        for (int i = 0; i < merge.length; i++) {
+            System.out.print(merge[i] + "\t");
         }
     }
 
@@ -110,6 +111,50 @@ public class 合并两个有序数组 {
         for (int i = 0; i < m+n; i++) {
             nums1[i] = sorted[i];
         }
+    }
+
+
+    //迭代合并两个有序数组.O(m+n) 如果是递归的话还需要额外的递归栈
+    public int[] merge(int[] nums1,int[] nums2){
+        int n1 = nums1.length;
+        int n2 = nums2.length;
+        int[] res = new int[n1 + n2];
+        //选择短的开始
+        if (n1 < n2)
+            merge(nums2,nums1);
+        int i = 0;
+        int j = 0;
+        int index = 0;
+        while (i < n1 && j < n2){
+            if (nums1[i] < nums2[j]){
+                res[index++] = nums1[i];
+                i++;
+            }
+            else if (nums1[i] > nums2[j]){
+                res[index++] = nums2[j];
+                j++;
+            }
+            else {
+                res[index++] = nums1[i];
+                i++;
+            }
+            if (i >= n1 || j >= n2){
+                break;
+            }
+        }
+
+        if(i == n1){
+            for (int k = j; k < n2; k++) {
+                res[index++] = nums2[k];
+            }
+        }
+        if (j == n2){
+            for (int k = i; k < n1; k++) {
+                res[index++] = nums1[k];
+            }
+        }
+
+        return res;
     }
 
 }

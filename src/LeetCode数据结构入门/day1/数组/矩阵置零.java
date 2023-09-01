@@ -55,10 +55,9 @@ public class 矩阵置零 {
                 }
             }
         }
-
-
-
         //开始置零
+
+        //行置零
         for (int i = 0; i < n; i++) {
             if(hang[i] == 1){
                 for (int j = 0; j < m; j++) {
@@ -66,11 +65,11 @@ public class 矩阵置零 {
                 }
             }
         }
-
-        for (int j = 0; j < m; j++) {
-            if(lie[j] == 1){
-                for (int i = 0; i < n; i++) {
-                    matrix[i][j] = 0;
+        //列置零
+        for (int i = 0; i < m; i++) {
+            if(lie[i] == 1){
+                for (int j = 0; j < n; j++) {
+                    matrix[j][i] = 0;
                 }
             }
         }

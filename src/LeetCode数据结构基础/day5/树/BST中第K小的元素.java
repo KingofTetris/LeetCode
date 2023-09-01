@@ -7,7 +7,7 @@ package LeetCode数据结构基础.day5.树;
  */
 
 
-import LeetCode数据结构入门.day5.树.CreateTree;
+import LeetCode数据结构入门.day5.树.TreeUtils;
 import LeetCode数据结构入门.day5.树.TreeNode;
 import org.junit.Test;
 
@@ -34,9 +34,9 @@ public class BST中第K小的元素 {
     @Test
     public void test(){
         Integer[] nums = {5,3,6,2,4,null,null,1};
-        TreeNode node = CreateTree.constructTree(nums);
+        TreeNode node = TreeUtils.constructTree(nums);
 
-        CreateTree.show(node);
+        TreeUtils.show(node);
 
         System.out.println(kthSmallest(node,3));
 

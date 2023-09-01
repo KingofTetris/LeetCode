@@ -36,7 +36,6 @@ public class 对称二叉树 {
     //左孩子的左孩子<-->右孩子的右孩子
     //左孩子的右孩子<-->右孩子的左孩子
         public boolean isSymmetric(TreeNode root) {
-
             //空节点或只有一个节点
             if(root==null || (root.left==null && root.right==null)) {
                 return true;

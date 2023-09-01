@@ -6,7 +6,7 @@ package LeetCode数据结构基础.day5.树;
  * @Time 2021/10/26  14:57
  */
 
-import LeetCode数据结构入门.day5.树.CreateTree;
+import LeetCode数据结构入门.day5.树.TreeUtils;
 import LeetCode数据结构入门.day5.树.TreeNode;
 import org.junit.Test;
 
@@ -25,11 +25,11 @@ public class BST的删除与重建 {
     public void test(){
 //        Integer[] nums = {5,3,6,2,4,null,7};
         Integer[] nums = {5,3,6,2,null,null,7};
-        TreeNode root = CreateTree.constructTree(nums);
-        CreateTree.show(root);
+        TreeNode root = TreeUtils.constructTree(nums);
+        TreeUtils.show(root);
 
         deleteNode(root,3);
-        CreateTree.show(root);
+        TreeUtils.show(root);
     }
     //这种方法不用考虑左旋右旋，但是改变了树高
     //所有 有左右孩子的都是这种处理，先找到删除减点右子树的最左节点，然后把待删除节点的左子树赋给最左节点的左孩子
@@ -52,5 +52,5 @@ public class BST的删除与重建 {
         }
         return root;
     }
-    
+
 }

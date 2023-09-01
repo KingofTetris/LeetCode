@@ -37,7 +37,6 @@ public class 二叉树的深度 {
         else{
             int leftDepth = maxDepth(root.left);
             int rightDepth = maxDepth(root.right);
-
             //这个+1是必不可少的 不然一直返回0;
             return Math.max(leftDepth,rightDepth) + 1;
         }
@@ -50,7 +49,7 @@ public class 二叉树的深度 {
      */
     public int maxDepth2(TreeNode root) {
         if(root == null) return 0;
-        List<TreeNode> queue = new LinkedList<TreeNode>() {{ add(root); }} , tmp;//匿名内部类直接添加root的话，后面的TreeNode不能省略
+        List<TreeNode> queue = new LinkedList<>() {{ add(root); }} , tmp;//匿名内部类直接添加root的话，后面的TreeNode不能省略
         int res = 0;
         while(!queue.isEmpty()) {
             tmp = new LinkedList<>();
@@ -58,7 +57,7 @@ public class 二叉树的深度 {
                 if(node.left != null) tmp.add(node.left);
                 if(node.right != null) tmp.add(node.right);
             }
-            queue = tmp;//每次要把一层情况，所以才弄tmp这个临时变量
+            queue = tmp;//每次要把上一层情空，所以才弄tmp这个临时变量
             res++;
         }
         return res;

@@ -2,6 +2,8 @@ package LeetCode数据结构入门.day1.数组;
 
 import org.junit.Test;
 
+import java.util.Arrays;
+
 /**
  * @author KingofTetris
  * @File 重塑矩阵
@@ -9,7 +11,8 @@ import org.junit.Test;
  */
 
 /*566. 重塑矩阵
-        在 MATLAB 中，有一个非常有用的函数 reshape ，它可以将一个 m x n 矩阵重塑为另一个大小不同（r x c）的新矩阵，但保留其原始数据。
+        在 MATLAB 中，有一个非常有用的函数 reshape ，它可以将一个 m x n 矩阵重塑为另一个大小不同
+        （r x c）的新矩阵，但保留其原始数据。
 
         给你一个由二维数组 mat 表示的 m x n 矩阵，以及两个正整数 r 和 c ，分别表示想要的重构的矩阵的行数和列数。
 
@@ -48,13 +51,12 @@ public class 重塑矩阵 {
         n = mat.length;
         m = mat[0].length;
         if(r * c != n * m)
-            return mat;
+            return mat; //如果根本reshape不了，直接返回mat
         int[][] newMatrix = new int[r][c];
-
         int newRow = 0,newColumn = 0;
         //按行遍历原数组 进行填充
         //新数组的下标最大行是r-1 最大列是c-1
-        //横着往每列里面填数 当newColumn = c- 1时 就可以换下一行了 记得重置newColumn为0
+        //横着往每列里面填数 当newColumn = c - 1时 就可以换下一行了 记得重置newColumn为0
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
                 newMatrix[newRow][newColumn]  = mat[i][j];

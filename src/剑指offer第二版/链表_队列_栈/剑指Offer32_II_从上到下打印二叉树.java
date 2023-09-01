@@ -1,6 +1,6 @@
 package 剑指offer第二版.链表_队列_栈;
 
-import LeetCode数据结构入门.day5.树.CreateTree;
+import LeetCode数据结构入门.day5.树.TreeUtils;
 import LeetCode数据结构入门.day5.树.TreeNode;
 import org.junit.Test;
 
@@ -45,7 +45,7 @@ public class 剑指Offer32_II_从上到下打印二叉树 {
     @Test
     public void test(){
         Integer[] nodes = new Integer[]{3,9,20,null,null,15,7};
-        TreeNode tree = CreateTree.createTree(nodes);
+        TreeNode tree = TreeUtils.createTree(nodes);
         List<List<Integer>> lists = levelOrder(tree);
         for (List<Integer> list : lists) {
             for (Integer integer : list) {

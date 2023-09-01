@@ -12,32 +12,27 @@ import java.util.*;
 
 /*给定一个二叉搜索树 root 和一个目标结果 k，
         如果 BST 中存在两个元素且它们的和等于给定的目标结果，则返回 true。*/
-
 /*    二叉树的节点个数的范围是  [1, 10^4].
             -10^4 <= Node.val <= 10^4
             root 为二叉搜索树
             -10^5 <= k <= 10^5  */
 public class 两数之和IV_输入BST {
-
-
     @Test
     public void test(){
-        CreateTree ct = new CreateTree();
-        TreeNode tree = ct.createTree(new Integer[]{4,2,7,1,3,5,8});
+//        CreateTree ct = new CreateTree();
+        TreeNode tree = TreeUtils.createTree(new Integer[]{4,2,7,1,3,5,8});
         System.out.println(findTarget(tree, 14));
-
     }
 
 
-    //先序遍历 不用层序那么多代码
+    //set+先序遍历 不用层序那么多代码
     //但时间复杂度和空间复杂度并没有说就更好。
     Set<Integer> set = new HashSet<>();
     public boolean findTarget3(TreeNode root,int k){
        if (root == null) return false;
-
        if (set.contains(k - root.val)) return true;
        set.add(root.val);
-
+       //先序遍历根左右
        return findTarget3(root.left,k) || findTarget3(root.right,k);
     }
 

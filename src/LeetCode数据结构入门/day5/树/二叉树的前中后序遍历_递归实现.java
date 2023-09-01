@@ -25,8 +25,8 @@ public class 二叉树的前中后序遍历_递归实现 {
         for (int i = 0; i < nodes.length; i++) {
             nodes[i] = rand.nextInt(100); //[0,99)
         }
-        TreeNode root = CreateTree.createTree(nodes);
-        CreateTree.show(root);
+        TreeNode root = TreeUtils.createTree(nodes);
+        TreeUtils.show(root);
 
 
         System.out.print("前序遍历：");

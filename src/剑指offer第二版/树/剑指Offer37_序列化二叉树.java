@@ -1,6 +1,6 @@
 package 剑指offer第二版.树;
 
-import LeetCode数据结构入门.day5.树.CreateTree;
+import LeetCode数据结构入门.day5.树.TreeUtils;
 import LeetCode数据结构入门.day5.树.TreeNode;
 import org.junit.Test;
 
@@ -30,7 +30,7 @@ public class 剑指Offer37_序列化二叉树 {
     @Test
     public void test(){
         Integer[] integers = new Integer[]{1,2,3,null,null,4,5};
-        TreeNode tree = CreateTree.createTree(integers);
+        TreeNode tree = TreeUtils.createTree(integers);
         serialize(tree);
     }
     // Encodes a tree to a single string.

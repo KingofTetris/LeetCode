@@ -27,7 +27,7 @@ import java.util.Map;
         示例 2：
 
         输入：ransomNote = "aa", magazine = "ab"
-        输出：false
+        输出：false //因为magazine只有一个a,ransom有2个a
         示例 3：
 
         输入：ransomNote = "aa", magazine = "aab"
@@ -39,53 +39,50 @@ import java.util.Map;
         你可以假设两个字符串均只含有小写字母。*/
 
 public class 赎金信 {
-
-
     @Test
-    public void test(){
+    public void test() {
         String ransom = "aaeaadGM--";
         String magazine = "aaeeacsaGdM--a";
-
-        boolean flag = canConstruct(ransom,magazine);
+        boolean flag = canConstruct2(ransom, magazine);
         System.out.println(flag);
-
     }
-
-    //其实只要对比一下出现的次数就行了
-    //这种缺点就是只能比较小写字母
-//    public boolean canConstruct(String ransomNote, String magazine) {
-//        int[] nums1 = new int[26];
-//        int[] nums2 = new int[26];
-//        for (int i = 0; i < ransomNote.length(); i++) {
-//            nums1[ransomNote.charAt(i) - 'a']++;
-//        }
-//        for (int i = 0; i < magazine.length() ; i++) {
-//            nums2[magazine.charAt(i) - 'a']++;
-//        }
-//
-//        for (int i = 0; i < nums1.length; i++) {
-//            if(nums1[i] > nums2[i])
-//                return false;
-//        }
-//        return true;
-//    }
+    //其实就是在比较s1是不是s2的一个子序列而已呗。
+    //那就记录一个Map.s2+,s1- 如果出现负数，那么就不行。
+    public boolean canConstruct2(String ransomNote, String magazine) {
+        if (ransomNote.length() > magazine.length() ) return false;
+        HashMap<Character,Integer> map = new HashMap<>();
+        int n = 0;
+        for (char c : magazine.toCharArray()) {
+            map.put(c,map.getOrDefault(c,0) + 1);
+            if (n < ransomNote.length()){
+                char temp = ransomNote.charAt(n);
+                map.put(temp,map.getOrDefault(temp,0) - 1);//ransom - 1
+                n++;
+            }
+        }
+        //最后判断map是否包含负数的value就行了
+        for (Integer value : map.values()) {
+            if (value < 0) return false;
+        }
+        return true;
+    }
 
     //用两个map来映射，最后对比一下 这种就什么都能比
     public boolean canConstruct(String ransomNote, String magazine) {
-        HashMap<Character,Integer> map_ransom = new HashMap<>();
-        HashMap<Character,Integer> map_magazine = new HashMap<>();
+        HashMap<Character, Integer> map_ransom = new HashMap<>();
+        HashMap<Character, Integer> map_magazine = new HashMap<>();
         char[] toCharArray1 = ransomNote.toCharArray();
         char[] toCharArray2 = magazine.toCharArray();
 
         for (int i = 0; i < ransomNote.length(); i++) {
-            map_ransom.put(toCharArray1[i],map_ransom.getOrDefault(toCharArray1[i],0) + 1);
+            map_ransom.put(toCharArray1[i], map_ransom.getOrDefault(toCharArray1[i], 0) + 1);
         }
         for (int i = 0; i < magazine.length(); i++) {
-            map_magazine.put(toCharArray2[i],map_magazine.getOrDefault(toCharArray2[i],0) + 1);
+            map_magazine.put(toCharArray2[i], map_magazine.getOrDefault(toCharArray2[i], 0) + 1);
         }
 
 
-        return compareMap(map_ransom,map_magazine);
+        return compareMap(map_ransom, map_magazine);
         //现在要做的就是比较两个map里面相同的key的value值
         //只要map_magazine >= map_ransom就行
 
@@ -101,14 +98,14 @@ public class 赎金信 {
 
     }
 
-    public boolean compareMap(HashMap<Character,Integer> m1, HashMap<Character,Integer> m2){
-        for(Map.Entry<Character,Integer> map:m1.entrySet()){
-            int value1 = map.getValue();
-
+    public boolean compareMap(HashMap<Character, Integer> m1, HashMap<Character, Integer> m2) {
+        //比较
+        for (Map.Entry<Character, Integer> entry : m1.entrySet()) {
+            int value1 = entry.getValue();
             //要注意m2里面没用m1的元素的话 会报空指针异常要处理一下
-            int value2 = m2.get(map.getKey())==null?0:m2.get(map.getKey());
+            int value2 = m2.get(entry.getKey()) == null ? 0 : m2.get(entry.getKey());
             //只要有一个小于就返回false
-            if(value2<value1)
+            if (value2 < value1)
                 return false;
         }
         //全都大就返回true

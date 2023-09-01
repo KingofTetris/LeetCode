@@ -16,29 +16,29 @@ import org.junit.Test;
 public class 二叉搜索树BST中的搜索 {
 
     @Test
-    public void test(){
-        CreateTree ct = new CreateTree();
-        Integer[] num = new Integer[]{4,2,7,1,3,5,8};
-        TreeNode tree = ct.createTree(num);
-        TreeNode children = searchBST(tree,9);
-        CreateTree.show(children);
+    public void test() {
+//        CreateTree ct = new CreateTree();
+        Integer[] num = new Integer[]{4, 2, 7, 1, 3, 5, 8};
+        TreeNode tree = TreeUtils.createTree(num);
+        TreeNode children = searchBST(tree, 2);
+        TreeUtils.show(children);
     }
 
     //递归
     public TreeNode searchBST(TreeNode root, int val) {
-        if(root == null)
+        if (root == null)
             return null;
         if (root.val == val)
             return root;
-        TreeNode root_left = searchBST(root.left,val);
-        TreeNode root_right = searchBST(root.right,val);
-        return root_left==null?root_right:root_left;
+        TreeNode root_left = searchBST(root.left, val);
+        TreeNode root_right = searchBST(root.right, val);
+        return root_left == null ? root_right : root_left;
     }
 
     //非递归
-    public TreeNode searchBST2(TreeNode root,int val){
-        while (root != null){
-            if (root.val == val ) return root;
+    public TreeNode searchBST2(TreeNode root, int val) {
+        while (root != null) {
+            if (root.val == val) return root;
             else if (val > root.val) root = root.right;
             else if (val < root.val) root = root.left;
         }

@@ -9,7 +9,6 @@ import java.util.List;
  * @date 2022/9/6
  */
 public class QuickSort<T extends Comparable<T>> extends Sort<T> {
-
     /**
      * 快速排序是原地排序，不需要辅助数组，但是递归调用需要辅助栈。
      *

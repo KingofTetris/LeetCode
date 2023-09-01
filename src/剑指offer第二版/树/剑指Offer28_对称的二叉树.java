@@ -1,6 +1,6 @@
 package 剑指offer第二版.树;
 
-import LeetCode数据结构入门.day5.树.CreateTree;
+import LeetCode数据结构入门.day5.树.TreeUtils;
 import LeetCode数据结构入门.day5.树.TreeNode;
 import org.junit.Test;
 
@@ -49,7 +49,7 @@ public class 剑指Offer28_对称的二叉树 {
     @Test
     public void test(){
         Integer[] nodes = new Integer[]{1,2,2,null,3,3};
-        TreeNode tree = CreateTree.createTree(nodes);
+        TreeNode tree = TreeUtils.createTree(nodes);
         System.out.println(isSymmetric2(tree));
     }
 
