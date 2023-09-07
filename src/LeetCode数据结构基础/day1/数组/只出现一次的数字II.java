@@ -12,17 +12,6 @@ public class 只出现一次的数字II {
     }
 
     private int singleNumberII(int[] nums) {
-        //三次的话，a ^ a ^ a = a 你就不能单纯去 异或了
-        //下面这个方法是状态机，但是我看不懂。
-     /*   int one = 0, two = 0;
-        for (int num : nums) {
-            int newOne = (~num & one & ~two) | (num & ~one & two);
-            int newTwo = two ^ num & ~one;
-            one = newOne;
-            two = newTwo;
-        }
-        return two;//因为01代表出现一次，所以返回two*/
-
         //介绍一个通用的方法，遍历统计
         int[] counts = new int[32];//32的原因是int类型占32个字节。
         //那么我们用这个32长度的int数组就可以统计所有字符出现的次数。
@@ -56,7 +45,6 @@ public class 只出现一次的数字II {
             res += counts[i] * Math.pow(base,pow);
             pow++;//每次pow要加1
         }
-
         return res;
     }
 

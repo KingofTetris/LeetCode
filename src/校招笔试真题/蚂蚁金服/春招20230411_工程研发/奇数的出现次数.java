@@ -16,7 +16,6 @@ public class 奇数的出现次数 {
         int n = sc.nextInt();
         int[] nums = new int[n];
 
-
         //存放奇数的出现次数
         HashMap<Integer,Integer> map = new HashMap<>();
         for (int i = 0; i < n; i++) {

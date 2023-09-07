@@ -9,91 +9,43 @@ import java.util.Arrays;
  * @File 凑硬币
  * @Time 2021/10/18  19:58
  */
+
+//这题其实就是Leetcode 零钱兑换 II
+    //好像是什么完全背包问题。所以什么是完全背包？？
 public class 凑硬币 {
 
-    int[] memo;
     @Test
     public void test(){
-        int[] coins = {1,5,2};
-        int amount = 21;
-        System.out.println(coinChange(coins, amount));
+        int[] coins = {1,2,5};
+        int amount = 20;
+        int change = change(amount, coins);
+        System.out.println(change);
     }
 
+    //
+    public int change(int amount, int[] coins) {
+        return ways(coins, 0, amount);
+    }
 
-
-    /** 简单的暴力递归，会超时*/
-    public int coinChange1(int[] coins, int amount) {
-        if (amount == 0) return 0;
-        if (amount < 0 ) return -1;
-        int res = Integer.MAX_VALUE;
-        for(int coin:coins){
-            int subpromble = coinChange1(coins,amount - coin);
-            if (subpromble == -1) continue;//无解就跳过
-            // 因为这个continue跳过可能导致 res = Math.min(res,subpromble + 1); 不会执行
-            //所有要判断一下res 还是不是MAX_VALUE
-            //每次取最少的 记得加一，因为每次会减去一个coin。
-            res = Math.min(res,subpromble + 1);
+    private int ways(int[] coins, int i, int amount) {
+        if (amount < 0) {
+            //amount小于0，表示上一步选择后超出了总金额，该组合不符合
+            return 0;
         }
-        return res == Integer.MAX_VALUE ? -1 : res;
-    }
-
-
-
-    //同样可以优化一下重复计算的过程
-    public int coinChange2(int[] coins, int amount) {
-        memo = new int[amount + 1];
-        Arrays.fill(memo,-666);
-        return dp(coins,amount);
-    }
-
-    public int dp(int[] coins,int amount){
-
-        if (amount == 0) return 0;
-        if (amount < 0) return -1;
-
-        if (memo[amount] != -666)
-            return memo[amount];
-
-        int res = Integer.MAX_VALUE;
-        for(int coin:coins){
-            int subpromble = dp(coins,amount - coin);
-            if (subpromble == -1) continue;
-            res = Math.min(subpromble + 1,res);
+        if (i == coins.length) {
+            //硬币都选完了，总金额刚好为0，则当前组合符合要求，否则不符合
+            return amount == 0 ? 1 : 0;
         }
-
-        memo[amount] = (res == Integer.MAX_VALUE)?-1:res;
-        return memo[amount];
+        //不选择当前面额硬币，i指向下一面额硬币，总金额数不变
+        int p1 = ways(coins, i + 1, amount);
+        //选择当前面额硬币，下一步还可以继续选择，i不变，总金额-当前面额
+        int p2 = ways(coins, i, amount - coins[i]);
+        //两种情况和
+        return p1 + p2;
     }
 
-
-    //最终化成迭代优化版
-    int coinChange(int[] coins, int amount) {
-        int[] dp = new int[amount + 1];
-        // 数组大小为 amount + 1，初始值也为 amount + 1
-
-       /** PS：为啥 dp 数组初始化为 amount + 1 呢，
-        因为凑成 amount 金额的硬币数最多只可能等于 amount（全用 1 元面值的硬币），
-        所以初始化为 amount + 1 就相当于初始化为正无穷，便于后续取最小值。
-        为啥不直接初始化为 int 型的最大值 Integer.MAX_VALUE 呢？因为后面有 dp[i - coin] + 1，
-        这就会导致整型溢出。*/
-        Arrays.fill(dp, amount + 1);
-
-        // base case
-        dp[0] = 0;
-        // 外层 for 循环在遍历所有状态的所有取值
-        for (int i = 0; i < dp.length; i++) {
-            // 内层 for 循环在求所有选择的最小值
-            for (int coin : coins) {
-                // 子问题无解，跳过
-                if (i - coin < 0) {
-                    continue;
-                }
-                dp[i] = Math.min(dp[i], 1 + dp[i - coin]);
-            }
-        }
-
-        //把计算结果放入备忘录
-        return (dp[amount] == amount + 1) ? -1 : dp[amount];
-    }
-
+    /*作者：liao47
+    链接：https://leetcode.cn/problems/coin-change-ii/solutions/2238588/dong-tai-gui-hua-shi-zen-yao-tui-dao-guo-ejid/
+    来源：力扣（LeetCode）
+    著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。*/
 }

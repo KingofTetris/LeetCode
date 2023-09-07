@@ -4,11 +4,8 @@ package 剑指offer第二版.动态规划;
  * @Author KingofTetris
  * @Date 2022/7/13 19:33
  * 一只青蛙一次可以跳上1级台阶，也可以跳上2级台阶。求该青蛙跳上一个 n 级的台阶总共有多少种跳法。
- *
  * 答案需要取模 1e9+7（1000000007），如计算初始结果为：1000000008，请返回 1。
- *
  * 示例 1：
- *
  * 输入：n = 2
  * 输出：2
  * 示例 2：
@@ -43,8 +40,6 @@ import org.junit.Test;
  */
 public class 剑指Offer10_II_青蛙跳台阶问题 {
     final int MOD = (int) (1e9 + 7); //1000000007 是最小的十位质数。模1000000007，可以保证值永远在int的范围内。
-    int[] memo = new int[101];
-
     @Test
     public void test(){
         System.out.println(numWays(44));
@@ -59,7 +54,8 @@ public class 剑指Offer10_II_青蛙跳台阶问题 {
         if (n < 2){
             return 1;
         }
-        int p = 0,q = 1,r=1; //初始的滚动数组 q 和 r是跳0阶和1阶的跳法数量 p是用来给第三个数垫位置的，q,r初始是f(0)和f(1)
+        int p = 0,q = 1,r=1; //初始的滚动数组 q 和 r是跳0阶和1阶的跳法数量
+        // p是用来给第三个数垫位置的，q,r初始是f(0)和f(1)
         for (int i = 2; i <= n; i++) {
             p = q;
             q = r;
@@ -71,6 +67,7 @@ public class 剑指Offer10_II_青蛙跳台阶问题 {
     /**
      * 带备忘录的，普通的动态规划
      */
+    int[] memo = new int[101];
     public int numWays2(int n) {
         if (n < 2){
             return 1;

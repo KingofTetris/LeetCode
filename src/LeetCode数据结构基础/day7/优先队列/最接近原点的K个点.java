@@ -47,7 +47,7 @@ public class 最接近原点的K个点 {
 
     @Test
     public void test(){
-        int[][] points = {{-2,-2},{3,1}};
+        int[][] points = {{-2,-2},{3,1},{3,3},{0,1},{0,4}};
         int[][] kClosest = kClosest(points, 2);
         for(int[] i:kClosest){
             for(int ii : i){
@@ -60,18 +60,11 @@ public class 最接近原点的K个点 {
     //一维数组 T 是int 基本数据类型当然不能降序Sort，要转化成Integer
     //二维数组 T是int[] 数组！是引用数据类型。不用转化了
     public int[][] kClosest(int[][] points, int k) {
-        Arrays.sort(points, new Comparator<int[]>() {
-            @Override
-            public int compare(int[] o1, int[] o2) {
-                return (
-                        (o1[0] * o1[0] + o1[1] * o1[1])
-                        - (o2[0] * o2[0] + o2[1] * o2[1])
-                );
-            }
-        });
-
+        //按照a^2+b^2从小到大排序，然后返回前k个数即可。
+        //要注意比较的元素是数组或者集合中存放的东西。
+        //二维数组中存放的就是一维数组。也就是这个o
+        Arrays.sort(points, Comparator.comparingInt(o -> (o[0] * o[0] + o[1] * o[1])));
         //copyOfRange(array,from,to)  左闭右开
-
 //        这个方法在一些处理数组的编程题里很好用，效率和clone基本一致，
 //        都是native method，比利用循环复制数组效率要高得多。
         //实际上底层用到了native方法 System.arraycopy

@@ -2,6 +2,11 @@ package LeetCode数据结构基础.day2.字符串;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 /**
  * @author KingofTetris
  * @File 最长回文子串
@@ -27,24 +32,24 @@ import org.junit.Test;
         s 仅由数字和英文字母（大写和/或小写）组成   */
 public class 最长回文子串 {
     @Test
-    public void test(){
-//        String s = "dbmbadabdad";
-        String s = "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000";
-        System.out.println(longestPalindrome(s));
+    public void test() {
+        String s = "dbmbadabdad";
+        String res = longestPalindrome2(s);
+        System.out.println(res);
+        System.out.println(res.length());
     }
 
     //暴力法，找到所有子串判断是否是回文串，取出最长的那个子串
     //String.substring(int begin,int end) 左闭右开
     //结果超时O(n^3)
     public String longestPalindrome(String s) {
-
         int maxLen = 0;
         String res = "";
         for (int i = 0; i < s.length(); i++) {
             //所以这里用 <=
             for (int j = i + 1; j <= s.length(); j++) {
-                String sub = s.substring(i,j);
-                if (isPalindromic(sub) && sub.length() > maxLen){
+                String sub = s.substring(i, j);
+                if (isPalindromic(sub) && sub.length() > maxLen) {
                     maxLen = sub.length();
                     res = sub;
                 }
@@ -65,59 +70,48 @@ public class 最长回文子串 {
     }
 
 
-    //动态规划
-   /* public String longestPalindrome(String s) {
-        int len = s.length();
-        // 特判
-        if (len < 2){
-            return s;
+    /**
+     * 本题的AC做法是通过DP求最长回文子串。
+     * 本题的DP其实是中心扩散法的延申，我们先讲中心扩散
+     * @param
+     * @return
+     */
+    static int range[] = new int[2];
+
+    public static String longestPalindrome2(String str) {
+        if (str == null) return null;
+        int n = str.length();
+        if (n == 1 || n == 0) return str;
+        //中心扩散法
+        //回文串中心要么是i,要么是i和i-1
+        char[] ss = str.toCharArray();//不要用charAt(i)，实验发现比你直接从数组取要慢。
+        for (int i = 0; i < n; i++) {
+            helper(ss, n, i, i);
+            helper(ss, n, i - 1, i);
         }
+        return str.substring(range[0],range[1]);
+    }
 
-        int maxLen = 1;
-        int begin  = 0;
-
-        // 1. 状态定义
-        // dp[i][j] 表示s[i...j] 是否是回文串
-
-
-        // 2. 初始化
-        boolean[][] dp = new boolean[len][len];
-
-        //初始化设置s[i.....j]都是回文串
-        for (int i = 0; i < len; i++) {
-            dp[i][i] = true;
-        }
-
-        char[] chars = s.toCharArray();
-        // 3. 状态转移
-        // 注意：先填左下角
-        // 填表规则：先一列一列的填写，再一行一行的填，保证左下方的单元格先进行计算
-        // 一列一列填写就是[0,1] [0,2],[0,3].........[0,n-1]
-        for (int j = 1;j < len;j++){
-            for (int i = 0; i < j; i++) {
-                // 头尾字符不相等，不是回文串
-                if (chars[i] != chars[j]){
-                    dp[i][j] = false;
-                }else {
-                    // 相等的情况下
-                    // 考虑头尾去掉以后没有字符剩余，或者剩下一个字符的时候，肯定是回文串
-                    if (j - i < 3){
-                        dp[i][j] = true;
-                    }else {
-                        // 状态转移
-                        dp[i][j] = dp[i + 1][j - 1];
-                    }
-                }
-
-                // 只要dp[i][j] == true 成立，表示s[i...j] 是否是回文串
-                // 此时更新记录回文长度和起始位置
-                if (dp[i][j] && j - i + 1 > maxLen){
-                    maxLen = j - i + 1;
-                    begin = i;
-                }
+    public static void helper(char[] ss, int n, int start, int end) {
+        while (start >= 0 && end <= n- 1){
+            if (ss[start] == ss[end]){
+                start--;
+                end++;
+            }else {
+                break; //如果不回文直接break;
             }
         }
-        // 4. 返回值
-        return s.substring(begin,begin + maxLen);
-    }*/
+        //更新最大子串
+        //start+1 才是回文串的起始,因为返回的是substring.就没必要end-1了。
+        if (end - (start + 1) > range[1] - range[0]){
+            range[0] = start + 1;
+            range[1] = end;
+        }
+    }
+
+    //还有一种奇思妙想，把字符串反过来和原来的字符串比较，是否对称。
+    //这样的解法对于LeetCode最后一个测试用例无法通过。
+    public static String longestPalindrome3(String s) {
+        return "";
+    }
 }

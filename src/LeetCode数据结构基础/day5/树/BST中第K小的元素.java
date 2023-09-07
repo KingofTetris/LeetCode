@@ -35,11 +35,8 @@ public class BST中第K小的元素 {
     public void test(){
         Integer[] nums = {5,3,6,2,4,null,null,1};
         TreeNode node = TreeUtils.constructTree(nums);
-
         TreeUtils.show(node);
-
         System.out.println(kthSmallest(node,3));
-
     }
 
     //BST的中序遍历实际上是个升序数组，找第K小就直接变成了找数组中的第K个元素

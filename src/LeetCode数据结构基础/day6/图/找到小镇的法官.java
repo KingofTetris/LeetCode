@@ -55,8 +55,6 @@ public class 找到小镇的法官 {
         int[][] trust = {};
         System.out.println(findJudge(n, trust));
     }
-
-
     //如果有法官，则法官的编号一定出现n-1次，并且法官不相信任何人
     public int findJudge(int n, int[][] trust) {
 

@@ -44,26 +44,20 @@ public class 两字符串相加 {
     public String addStrings(String num1, String num2) {
         //add是进位，i,j是个位
         int i = num1.length() - 1,j = num2.length() - 1,add = 0;
-
         StringBuffer ans = new StringBuffer();
-
         //只要有一个还没截完就继续
         //或者优化一下，如果两个字符串长度相差过大，这样的循环会显得没意义。
         while(i >= 0 || j >= 0 || add != 0){
             int x = i >= 0 ? num1.charAt(i) - '0' : 0;
             int y = j >= 0 ? num2.charAt(j) - '0' : 0;
             int result  = x + y + add;
-
-
             //StringBuffer的append方法可以直接append数字
-            //直接append进去，最好翻转过来就是正的了。
+            //直接append进去，最后翻转过来就是正的了。
             ans.append(result%10);
             add = result / 10;
             i--;
             j--;
         }
-
-
         //StringBuffer.reverse 会把字符串倒过来
         ans.reverse();
         return ans.toString();

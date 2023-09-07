@@ -1,5 +1,7 @@
 package 剑指offer第二版.动态规划;
 
+import 算法设计与分析.测试.Main;
+
 /**
  * @Author KingofTetris
  * @Date 2022/8/31 14:00
@@ -19,13 +21,16 @@ package 剑指offer第二版.动态规划;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class 剑指Offer42_连续子数组的最大和 {
-
+    public static void main(String[] args) {
+        int[] nums = {-2,1,-3,4,-1,2,1,-5,4};
+        System.out.println(maxSubArray3(nums));
+    }
     /**
      * 暴力法1  O(n^3)
      * @param nums
      * @return
      */
-    public int maxSubArray1(int[] nums) {
+    public static int maxSubArray1(int[] nums) {
         int max = Integer.MIN_VALUE;
         for(int i = 0;i < nums.length;i++){
             for(int j = i;j < nums.length;j++){
@@ -45,7 +50,7 @@ public class 剑指Offer42_连续子数组的最大和 {
      * @param nums
      * @return
      */
-    public int maxSubArray2(int[] nums) {
+    public static int maxSubArray2(int[] nums) {
             int max = Integer.MIN_VALUE;
             for(int i = 0;i < nums.length;i++){
                 int sum = 0; //每轮重置为0
@@ -70,7 +75,7 @@ public class 剑指Offer42_连续子数组的最大和 {
      * @param nums
      * @return
      */
-    public int maxSubArray3(int[] nums) {
+    public static int maxSubArray3(int[] nums) {
         int[] dp = new int[nums.length];
         dp[0] = nums[0];
         int res = nums[0];

@@ -10,22 +10,22 @@ public class 斐波那契数列 {
     @Test
     public void test(){
         long now = System.currentTimeMillis();
-        System.out.println(fib(20));
+        System.out.println(fib(40));
         long end = System.currentTimeMillis();
         System.out.println("暴力递归耗时:" + (end-now)+"ms");
 
         long now2 = System.currentTimeMillis();
-        System.out.println(fib2(20));
+        System.out.println(fib2(40));
         long end2 = System.currentTimeMillis();
         System.out.println("优化递归耗时:" + (end2-now2)+"ms");
 
         long now3 = System.currentTimeMillis();
-        System.out.println(fib3(20));
+        System.out.println(fib3(40));
         long end3 = System.currentTimeMillis();
         System.out.println("自底向上迭代耗时:" + (end3-now3)+"ms");
 
         long now4 = System.currentTimeMillis();
-        System.out.println(fib4(20));
+        System.out.println(fib4(40));
         long end4 = System.currentTimeMillis();
         System.out.println("自底向上迭代优化空间耗时:" + (end4-now4)+"ms");
     }
@@ -52,7 +52,6 @@ public class 斐波那契数列 {
     public int helper(int[] memo,int n){
         if (n == 0 || n==1)
             return n;
-
         //开始递归前 先在备忘录里面查一下 如果算过了，就不算了。 相当于是剪枝
         if (memo[n] != 0)
             return memo[n];
@@ -63,7 +62,6 @@ public class 斐波那契数列 {
 
     /**自底向上计算 写成迭代*/
     public int fib3(int N){
-
         //这里判断N==0 return 0 而不是直接return dp[N]
         // 是因为数组如果是new int[1] 那dp[1]会越界，所有特殊处理直接返回0了
         if (N == 0) return 0;

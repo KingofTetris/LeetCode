@@ -15,7 +15,7 @@ package LeetCode数据结构基础.day1.数组;
 public class 只出现一次的数字III {
 
     public static void main(String[] args) {
-        int[] nums = {1,2,1,3,2,5};
+        int[] nums = {1,2,1,3,2,5,3,5,8,9,9,100};
         int[] ints = singleNumberIII(nums);
         for (int anInt : ints) {
             System.out.println(anInt);
@@ -36,13 +36,13 @@ public class 只出现一次的数字III {
         for (int num : nums) {
             x = x ^ num;
         }
-        int diff = x & -x;//得到最低位
+        int diff = x & -x;//得到最低位的1
         int AorB = 0;
         for (int num : nums) {
             if ((num & diff) != 0){ //如果num在这一位上是1,要特别小心这个条件！！
                 //是!=0 不是==1！！！
                 //比如    7（二进制表示为 111） 3（二进制表示为 011）
-                // 7 & 3 == 3 (!=0也!=1，随意你写成==1的话就出问题了。)
+                // 7 & 3 == 3 (!=0也!=1，所以你写成==1的话就出问题了。)
                 AorB ^= num;//求出这个为1的a或者b
             }
         }
