@@ -13,10 +13,8 @@ public class DijkstraAlgorithm {
     private static int[] distance;
 
     private static int n; // number of vertices
-
     public static void main(String[] args) {
         n = 5; // example number of vertices
-
         graph = new int[][]{
                 {0, 10, 3, 20, MAX_VALUE},
                 {MAX_VALUE, 0, MAX_VALUE, 5, MAX_VALUE},
@@ -24,14 +22,11 @@ public class DijkstraAlgorithm {
                 {MAX_VALUE, MAX_VALUE, MAX_VALUE, 0, 11},
                 {MAX_VALUE, MAX_VALUE, MAX_VALUE, MAX_VALUE, 0}
         };
-
         visited = new boolean[n];
         distance = new int[n];
         Arrays.fill(distance, MAX_VALUE);
         distance[0] = 0; // set distance to starting vertex to 0
-
         dijkstra(0);
-
         System.out.println(Arrays.toString(distance));
     }
 

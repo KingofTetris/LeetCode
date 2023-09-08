@@ -1,7 +1,6 @@
 package 校招笔试真题.美团.美团2023春招0408;
 
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * @author by KingOfTetris
@@ -27,8 +26,8 @@ import java.util.Scanner;
  */
 
 //TODO 过了 5/12 其余的TTL
-public class 划分彩色树 {
-    static ArrayList<Integer>[] adj;
+public class RGB树 {
+   /* static ArrayList<Integer>[] adj;
     static char[] colors;
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
@@ -105,5 +104,76 @@ public class 划分彩色树 {
         } else {
             return 2;
         }
+    }*/
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt(); //树上节点个数,1~n
+        List<Integer>[] edges = new List[n+1]; //邻接矩阵
+        for (int i = 1; i <= n; i++) {
+            edges[i] = new ArrayList<>();
+        }
+        //第二行n-1个整数p2,p3,p4,,,pn, 其中pi表示节点i和节点pi之间有一条边
+        for (int i = 2; i <= n; i++) {
+            int p = sc.nextInt();
+            edges[p].add(i);
+            edges[i].add(p);
+        }
+        //第三行一个长度为n的字符串,第i个字符表示第i个节点的初识颜色
+        char[] colors = new char[n+1];
+        sc.nextLine();
+        String s = sc.nextLine();
+        for (int i = 0; i < n; i++) {
+            colors[i+1] = s.charAt(i);
+        }
+        int[][] dp = new int[n+1][3];
+        //dp[i][0]表示以i为根节点的子树的红色数量,dp[i][1]绿色,dp[i][2]蓝色
+        boolean[] visited = new boolean[n+1];
+        dfs(edges,colors,dp,1,visited);
+        Arrays.fill(visited,false);
+        System.out.println(dfs2(edges,dp,1,visited));
     }
+    static void dfs(List<Integer>[] edges,char[] colors, int[][] dp,int node,boolean[] visited){
+        visited[node]=true;
+        if(colors[node]=='R'){
+            dp[node][0]++;
+        }else if(colors[node]=='G'){
+            dp[node][1]++;
+        }else{
+            dp[node][2]++;
+        }
+        for (int next : edges[node]) {
+            if (visited[next]) continue;
+            dfs(edges,colors,dp,next,visited);
+            for (int i = 0; i < 3; i++) {//累加子树的RGB颜色
+                dp[node][i]+=dp[next][i];
+            }
+        }
+    }
+    //统计多少种砍法
+    static int dfs2(List<Integer>[] edges,int[][] dp,int node,boolean[] visited){
+        int res = 0;
+        visited[node]= true;
+        if(node!=1 && check(dp[node],dp[1])){
+            res = 1;
+        }
+        for (int next : edges[node]){
+            if(visited[next]) continue;
+            res += dfs2(edges,dp,next,visited);
+        }
+        return res;
+    }
+
+    //核心:因为我们从节点1开始dfs,所以无论给的边是什么样子,都可以认为是以1为根节点,故dp[1]就代表了整棵树的颜色数量
+//无论减哪条边,本质拆分的两部分是以某节点为根节点的子树(假设为left),和以1为根节点的整棵树减去这个子树剩下的部分(假设right)
+    static boolean check(int[] cur, int[] root) {
+        for (int i = 0; i < 3; i++) {
+            //cur[i]==0表示left某颜色丢失,cur[i]==root[i]即root[i]-cur[i]==0即right部分某颜色丢失
+            if (cur[i] == 0 || cur[i] == root[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 }

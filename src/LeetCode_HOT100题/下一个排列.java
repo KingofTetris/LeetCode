@@ -6,8 +6,10 @@ import java.util.Arrays;
  * @Author KingofTetris
  * @Date 2022/10/12 18:58
  */
-public class 下一个排列 {
 
+
+//我TM淦啊 我燥！这个就是c++的std:next_permutation
+public class 下一个排列 {
     /**
      * 比如 原始数组是 123
      * 那么下一个排列最小的就是 132
@@ -17,7 +19,6 @@ public class 下一个排列 {
      * 找到下一个最小的排列输出
      * @param nums
      */
-
     /**
      * 要比nums大，而且要大得最少，增幅最小
      * 那么需要尽可能靠右的低位换到前面，从后向前找
@@ -25,7 +26,6 @@ public class 下一个排列 {
      * 交换后形成123564
      * 我们还需要把后半部份改成升序也就是64换成46
      * 变成123546
-     *
      * 123546也就是123465的下一个排列
      * @param nums
      */

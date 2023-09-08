@@ -39,13 +39,13 @@ public class 区域联通 {
             q.add(new edge(start, end, value));
         }
         //并查集初始化，每个节点的parent初始化为自己
+        //用并查集就不需要使用邻接矩阵了。
         int[] parent = new int[n + 1];
         for (int i = 0; i <= n; i++) parent[i] = i;
 
         int result = 0, count = 0;
-        while (q.size() > 0) {
+        while (!q.isEmpty()) {
             edge temp = q.poll(); //每次选权值最大的边
-//            System.out.println(temp.value);
             int fstart = getparent(parent, temp.start),
                 fend = getparent(parent, temp.end);
             //避免成环，如果形成环就下一条。

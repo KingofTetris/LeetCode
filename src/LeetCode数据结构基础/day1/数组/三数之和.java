@@ -52,15 +52,12 @@ public class 三数之和 {
 
     @Test
     public void test(){
-        int[] nums = {-1,0,1,2,-1,-4};
-//        int[] nums = {-1,0};
-        List<List<Integer>> list = new LinkedList<>();
+//        int[] nums = {-1,0,1,2,-1,-4};
+        int[] nums = {-2, -1, -1, -1, 3, 3, 3};
+        List<List<Integer>> list;
         list = threeSum(nums);
-        for(List<Integer> group:list){
-//            for(Integer item:group){
-//                System.out.println(item);
-//            }
-            System.out.println(group);
+        for (List<Integer> temp : list) {
+            System.out.println(temp);
         }
     }
 
@@ -72,38 +69,30 @@ public class 三数之和 {
 //    确定第一个元素时，如果发现它与它前面的值一样，那么跳过本轮。如 [-1, -1, 0, 1],
 //    在第一轮后，已经选出了 {-1, 0, 1}, 现在 i = 1，nums[i] == nums[i - 1],
 //    为了避免重复，直接 continue。
-
     //接下来利用双指针，left 指向 i + 1, right 指向 nums.length - 1
     // 逐个进行判断，并注意去重。
     public List<List<Integer>> threeSum(int[] nums) {// 总时间复杂度：O(n^2)
         List<List<Integer>> ans = new ArrayList<>();
         //小于3个数直接返回列表就行了
         if (nums.length <= 2) return ans;
-
         Arrays.sort(nums); // O(nlogn)
-
         for (int i = 0; i < nums.length - 2; i++) { // O(n^2)
             if (nums[i] > 0) break; // 第一个数大于 0，后面的数都比它大，肯定不成立了
             if (i > 0 && nums[i] == nums[i - 1]) continue; // 去掉重复情况
-
             //相加为0 就是找它的相反数
             int target = -nums[i];
-
             //left为当前固定nums[i]的下一个数的下标，right为末尾下标
             int left = i + 1, right = nums.length - 1;
-
 //            终止条件left >= right
             while (left < right) {
                 if (nums[left] + nums[right] == target) {
                     //ArrayList<>(List) 构造方法
                     //Arrays.asList(n1,n2,n3....)把这些数直接当成列表
                     ans.add(new ArrayList<>(Arrays.asList(nums[i], nums[left], nums[right])));
-
                     //现在是找到了三数之和等于=0的情况
                     //那么必然要增加 left，减小 right，找下一组,但是不能重复，比如: [-2, -1, -1, -1, 3, 3, 3],
                     // nums[i] = -2, left = 1, right = 6, [-2, -1, 3] 的答案加入后，需要排除重复的 -1 和 3
                     left++; right--; // 首先无论如何先要进行加减操作
-
                     //左边相等lef++ 右边相等right-- 去重
                     while (left < right && nums[left] == nums[left - 1]) left++;
                     while (left < right && nums[right] == nums[right + 1]) right--;
@@ -121,45 +110,3 @@ public class 三数之和 {
         return ans;
     }
 }
-
-
-    /*//错误的暴力法+双指针
-    //错误的方法
-    public List<List<Integer>> threeSum(int[] nums) {
-
-
-        List<List<Integer>> list = new LinkedList<>();
-        List<Integer> group = new LinkedList<>();
-        int len = nums.length;
-        if (len < 3){
-            return list;
-        }
-//        Arrays.sort(nums);
-
-        //指针指向当前值的后两位
-        int p1,p2;
-        for (int i = 0; i < len - 2; i++) {
-            p1 = i + 1;
-            p2 = i + 2;
-            //当p2小于len
-            while (p2 < len){
-
-                //计算这三个数的和
-                int sum = nums[i] + nums[p1] + nums[p2];
-
-                //为0就添加进list
-                if (sum == 0){
-                    group.add(nums[i]);
-                    group.add(nums[p1]);
-                    group.add(nums[p2]);
-                    list.add(group);
-                }
-
-                //不管sum等于多少p1,p2都后移一位 nums[i]不变
-                p1++;
-                p2++;
-            }
-        }
-        return list;
-    }
-}*/

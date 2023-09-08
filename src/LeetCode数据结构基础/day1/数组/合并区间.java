@@ -35,13 +35,16 @@ import java.util.List;
         0 <= starti <= endi <= 10^4
         */
 public class 合并区间 {
-
     @Test
-    public void test(){
-        int[][] intervals = {{3,4},{1,2},{0,8},{-2,4},{9,10}};
+    public void test() {
+        int[][] intervals = {{3, 4}, {1, 2}, {0, 8}, {-2, 4}, {9, 10}};
         //排序后 {{-2,4},{0,8},{1,2},{3,4},{9,10}}
+        //只要前一个区间的右端点大于下一个区间的左端点，一定重叠。
+        //然后取两者的min(l1,l2) max(r1,r2) 合并为新的区间。
+        //当遇到下一个不重叠区间的时候，把cur = 这个不重叠的区间 重复这个过程
+        //直到遍历完区间即可，为什么下面要写递归？
         int[][] res = merge(intervals);
-        for(int[] item:res){
+        for (int[] item : res) {
             for (int i = 0; i < item.length; i++) {
                 System.out.print(item[i] + "\t");
             }
@@ -55,48 +58,34 @@ public class 合并区间 {
     //其实就是这个意思 看着是3*3的矩阵 实际上是一个数组嵌套3个小数组
     //所以它下面才比较的是int[] 而不是int值
     public int[][] merge(int[][] intervals) {
-            if (intervals.length == 0) {
-                return new int[0][2];
-            }
-
-            //策略模式传入Comparator比较器，根据Compare方法 自定义排序
-            Arrays.sort(intervals, new Comparator<int[]>() {
-                public int compare(int[] interval1, int[] interval2) {
-                    //左端点从小到大排序
-                    return interval1[0] - interval2[0];
-                }
-            });
-
-//            也可以写成lambda表达式，代替匿名函数
-//            Arrays.sort(intervals,(int[] i1,int[] i2) -> i1[0] - i2[0]);
-
-            List<int[]> merged = new ArrayList<int[]>();
-
-            //intervals.length是行数，其实就有多少个区间
-            for (int i = 0; i < intervals.length; ++i) {
-                //每个区间的左右端点
-                int L = intervals[i][0], R = intervals[i][1];
-
-                //列表和数组同样都是从0计数
-                //merged.get(merged.size() - 1)[1]其实就是前一个区间的右端点
-
-                //merged.size == 0当然要加入一个区间才能对比
-                //当merged中的区间右端点小于当前区间的左端点时，那肯定不重合
-                //直接把当前区间加入merged中
-
-                //因为按左端点排过序
-                //这个时候就比较谁的R大，就把大的R赋给merged.get(merged.size() - 1)[1]
-                //重复这个过程到结束就行。
-                if (merged.size() == 0 || merged.get(merged.size() - 1)[1] < L) {
-                    merged.add(new int[]{L, R});
-                } else {
-                    merged.get(merged.size() - 1)[1] = Math.max(merged.get(merged.size() - 1)[1], R);
-                }
-            }
-
-            //最后要把list转化成int[][]
-            //方法是merged.toArray(new int[merged.size()][])
-            //指定个行数就行。
-            return merged.toArray(new int[merged.size()][]);
+        if (intervals.length == 0) {
+            return new int[0][2];
         }
+        //策略模式传入Comparator比较器，根据Compare方法 自定义排序
+        //按照左端点升序
+        Arrays.sort(intervals, Comparator.comparingInt(o -> o[0]));
+        List<int[]> merged = new ArrayList<>();
+        //intervals.length是行数，其实就有多少个区间
+        for (int i = 0; i < intervals.length; ++i) {
+            //每个区间的左右端点
+            int L = intervals[i][0], R = intervals[i][1];
+            //列表和数组同样都是从0计数
+            //merged.get(merged.size() - 1)[1]其实就是前一个区间的右端点
+            //merged.size == 0当然要加入一个区间才能对比
+            //当merged中的区间右端点小于当前区间的左端点时，那肯定不重合
+            //直接把当前区间加入merged中
+            //因为按左端点排过序
+            //这个时候就比较谁的R大，就把大的R赋给merged.get(merged.size() - 1)[1]
+            //重复这个过程到结束就行。
+            if (merged.size() == 0 || merged.get(merged.size() - 1)[1] < L) {
+                merged.add(new int[]{L, R});
+            } else {
+                merged.get(merged.size() - 1)[1] = Math.max(merged.get(merged.size() - 1)[1], R);
+            }
+        }
+        //最后要把list转化成int[][]
+        //方法是merged.toArray(new int[merged.size()][])
+        //指定个行数就行。
+        return merged.toArray(new int[merged.size()][]);
+    }
 }
