@@ -2,6 +2,8 @@ package LeetCode数据结构入门.day4.栈和队列;
 
 import org.junit.Test;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Stack;
 
 /**
@@ -23,7 +25,7 @@ public class 用栈实现队列{
 class MyQueue {
     //就像两个水杯互相倒水一样。
     //使用 a 的栈顶模拟队尾，使用 b 的栈顶模拟队头
-    Stack<Integer> a, b;
+    LinkedList<Integer> a, b;
 //    为了保证结果的正确性，
 //    我们需要在每一次操作后都将所有元素保存在其中一个栈内
 //    （否则若分散在两个栈内，进行下一步操作后一定会改变元素顺序，
@@ -42,8 +44,8 @@ class MyQueue {
 
 
         public MyQueue() {
-            a = new Stack();
-            b = new Stack();
+            a = new LinkedList<>();
+            b = new LinkedList<>();
         }
 
         public void push(int x) {
@@ -52,19 +54,14 @@ class MyQueue {
             //保证B是队列正序
             //b要是不空就先把水都倒进a里面
             while (!b.isEmpty()) {
-                a.push(b.peek());
-                b.pop();
+                a.push(b.poll());
             }
-
             //a再加入新的水
             a.push(x);
-
             //再重新倒回b里面，
             while (!a.isEmpty()) {
-                b.push(a.peek());
-                a.pop();
+                b.push(a.poll());
             }
-
             //这样下面的代码就好写多了，B就相当于正序队列。正常POP,PEEK,ISEMPTY就行了。
         }
 

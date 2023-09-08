@@ -32,7 +32,6 @@ public class 剑指Offer43_1到n整数中1出现的次数 {
      * 比较每个字符是不是'1'
      * 如果是'1',sum++
      * 824883294就TLE了。O(MN) M为数字长度
-     *
      * @param n
      * @return
      */
@@ -80,11 +79,14 @@ public class 剑指Offer43_1到n整数中1出现的次数 {
             int cur = (int) (n / bit % 10);
             int low = (int) (n % bit);
             int high = (int) (n / bit / 10);
-
+            //如果你忘了就去看上面的视频链接
+            //对每一位分类讨论 current =1?>1?=0?
             if (cur > 1){
+                //current >1 1的情况就是 (high+1)*bit
                 oneCount += (high + 1) * bit;
             }
             if (cur == 1){
+                //current = 1
                 oneCount += (high * bit) + (low + 1);
             }
             if (cur == 0){

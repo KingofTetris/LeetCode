@@ -11,11 +11,11 @@ import org.junit.Test;
 //给你一个正整数 n ，生成一个包含 1 到 n^2 所有元素，
 // 且元素按顺时针顺序螺旋排列的 n x n 正方形矩阵 matrix 。
 //    1 <= n <= 20
+    //其实还可以换种方式问，螺旋矩阵[i][j]的值是多少?
 public class 螺旋矩阵II {
-
     @Test
     public void test() {
-        int[][] ans = generateMatrix(3);
+        int[][] ans = generateMatrix(20);
         for (int i = 0; i < ans.length; i++) {
             for (int j = 0; j < ans[0].length; j++) {
                 System.out.print(ans[i][j] + "\t");

@@ -6,7 +6,7 @@ package 校招笔试真题.携程._20230907;
  */
 import java.util.*;
 
-public class 游游的排列 {
+public class 游游的排列_全排列 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();

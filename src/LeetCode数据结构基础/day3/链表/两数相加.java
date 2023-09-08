@@ -8,13 +8,14 @@ import org.junit.Test;
  * @File 两数相加
  * @Time 2021/10/19  9:39
  */
+
+
+//其实这题类似大数相加。
 /*2. 两数相加
         给你两个 非空 的链表，表示两个非负的整数。
         它们每位数字都是按照 **逆序** 的方式存储的，
         并且每个节点只能存储 一位 数字。
-
         请你将两个数相加，并以相同形式返回一个表示和的链表。
-
         你可以假设除了数字 0 之外，这两个数都不会以 0 开头。
 
         示例 1：
@@ -40,16 +41,13 @@ public class 两数相加 {
 
 
     @Test
-    public void test(){
-       int[] num1 = {2,4,3};
-       int[] num2 = {5,6,4};
-
+    public void test() {
+        int[] num1 = {2, 4, 3};
+        int[] num2 = {5, 6, 4};
         ListNode list1 = ListNode.createListNode(num1);
         ListNode list2 = ListNode.createListNode(num2);
-
-
-        ListNode res = addTwoNumbers(list1,list2);
-        while(res!=null){
+        ListNode res = addTwoNumbers(list1, list2);
+        while (res != null) {
             System.out.print(res.val + "\t");
             res = res.next;
         }
@@ -57,7 +55,6 @@ public class 两数相加 {
 
     //用0补齐链表，使得长度一致
    /* public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-
         ListNode res = new ListNode();
         int len1 = 0,len2 = 0;
         ListNode p = l1;
@@ -116,7 +113,6 @@ public class 两数相加 {
         return res.next;
     }*/
 
-
     //不用补齐，直接判断为null就当作0加上去
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         // 记录进位
@@ -127,23 +123,18 @@ public class 两数相加 {
         ListNode dummy = new ListNode(0);
         ListNode p = dummy;
         // 只要l1或者l2不为空或者还有进位就继续循环。
-        while (l1!=null || l2!=null || carry!=0)
-        {
+        while (l1 != null || l2 != null || carry != 0) {
             // 该结果位的值等于两链表对应位置的值之和再加上上一位的进位
-            sum = (l1==null? 0 :l1.val) + (l2==null?0 :l2.val) + carry;
+            sum = (l1 == null ? 0 : l1.val) + (l2 == null ? 0 : l2.val) + carry;
             // 计算该位的进位
             carry = sum / 10;
             // 该位的值等于sum与10取余
             p.next = new ListNode(sum % 10);
             p = p.next;
-
-
             //链表往后移
-            l1 = l1==null? l1 : l1.next;
-            l2 = l2==null? l2 : l2.next;
-
+            l1 = l1 == null ? l1 : l1.next;
+            l2 = l2 == null ? l2 : l2.next;
         }
-
         return dummy.next;
     }
 }

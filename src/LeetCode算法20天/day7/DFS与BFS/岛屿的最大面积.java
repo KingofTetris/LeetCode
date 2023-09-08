@@ -9,19 +9,11 @@ import org.junit.Test;
  */
 /*695. 岛屿的最大面积
         给你一个大小为 m x n 的二进制矩阵 grid 。
-
         岛屿 是由一些相邻的 1 (代表土地) 构成的组合，这里的「相邻」要求两个 1 必须在
          水平或者竖直的四个方向上 相邻。你可以假设 grid 的四个边缘都被 0（代表水）包围着。
-
         岛屿的面积是岛上值为 1 的单元格的数目。
-
         计算并返回 grid 中最大的岛屿面积。如果没有岛屿，则返回面积为 0 。
-
-
-
         示例 1：
-
-
         输入：grid=[ [0,0,1,0,0,0,0,1,0,0,0,0,0],
                     [0,0,0,0,0,0,0,1,1,1,0,0,0],
                     [0,1,1,0,1,0,0,0,0,0,0,0,0],
@@ -51,12 +43,9 @@ import org.junit.Test;
     //这个visited数组只能按题目 限制直接给出，不然没法赋值；1 <= m, n <= 50
     //不过这种方法在不改变原数组的情况下，时空效率都很低
 public class 岛屿的最大面积 {
-
-
     int[] dx = {0,0,-1,1};
     int[] dy = {1,-1,0,0};
     int[][] visited = new int[50][50];//初始化后是50 x 50的全0数组
-
     @Test
     public void test(){
         int[][] grid={{0,0,1,0,0,0,0,1,0,0,0,0,0},
@@ -73,12 +62,11 @@ public class 岛屿的最大面积 {
         int areaMax = 0;
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[0].length; j++) {
-                //既然做了visited数组
-                if(visited[i][j] == 1)
+                //既然做了visited数组,0也直接跳过
+                if(visited[i][j] == 1 || grid[i][j] == 0)
                     continue;  //跳过本次循环
-
                 //遍历到大的就更新
-                if (grid[i][j] == 1 )//0也直接跳过，进都不要进了
+                if (grid[i][j] == 1 )
                 areaMax = Math.max(areaMax,DFS(grid,i,j));
             }
         }
@@ -94,10 +82,8 @@ public class 岛屿的最大面积 {
        //是陆地先标记 areaNow = 1
         //一直初始化visited数组会溢出！一开始就要先定好
 //       visited = new int[grid.length][grid[0].length];
-
         //法一 就是下面这个数组
        visited[x][y] = 1;
-
 //        法二 改变原数组，直接把访问过的置为0
 //       grid[x][y] = 0;
         //递归里的变量即使重名也不会覆盖

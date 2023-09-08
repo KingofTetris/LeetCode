@@ -45,17 +45,13 @@ public class 两两交换链表中的节点 {
             node = node.next;
         }
     }
-
     //简单说就是两个一组来换，第一和第二  第三和第四。类推。 并不是1 2换完变2 1  再 1 3换 3 1
-
     //简单交换个值也是能过的。因为没办法检测出next到底换没换
     public ListNode swapPairs(ListNode head) {
         if (head == null)
             return null ;
-
         ListNode p1 = head;
         ListNode p2 = head.next;
-
         while(p2!=null){
             int val = p1.val;
             p1.val =  p2.val;
@@ -77,16 +73,12 @@ public class 两两交换链表中的节点 {
         //只有一个或者空节点就别瞎折腾了。
         if (head == null || head.next == null)
             return head;
-
-
         ListNode dummyHead = new ListNode(-1);
         dummyHead.next = head;
         ListNode temp = dummyHead;
-
         while (temp.next != null && temp.next.next != null){
              ListNode p1 = temp.next;
              ListNode p2 = temp.next.next;
-
              //最重要的四句话 实际上是取了三个节点来交换next
              temp.next = p2;
              p1.next = p2.next;
@@ -94,7 +86,6 @@ public class 两两交换链表中的节点 {
              //而且temp要换成p1，而不是temp.next 因为p1.next已经变了
              temp = p1;
         }
-
         //dummyHead始终是不动的，dummyHead.next一直指向实际链表的头部
         return dummyHead.next;
     }
