@@ -8,9 +8,7 @@ import java.util.Scanner;
  */
 
 /*题目：给一个0和1组成的字符串，求子串中有多少“好串”。
-
         对“好串”的定义是：所有的前缀子串中，0的数量全部严格大于1的数量
-
         计算好串的个数*/
 public class 游游的好串数量 {
     /**
@@ -21,7 +19,6 @@ public class 游游的好串数量 {
         Scanner in = new Scanner(System.in);
         String s = in.next();
         System.out.println(solution1(s));
-        System.out.println(countGoodStrings(s));
     }
     public static long solution1(String s){
         int cnt0 = 0;
@@ -31,6 +28,7 @@ public class 游游的好串数量 {
                 cnt0++;
                 sum += cnt0;
             } else {
+                //如果是1,那么cnt0--
                 cnt0--;
                 if (cnt0 > 0) {
                     sum += cnt0;
@@ -45,22 +43,4 @@ public class 游游的好串数量 {
  /*   作者：织梦呀
     链接：https://www.nowcoder.com/discuss/529398383690137600?sourceSSR=post
     来源：牛客网*/
-
-
-    //AI
-    public static long countGoodStrings(String s) {
-        long count = 0;
-        int numOfZeros = 0;
-        for (char c : s.toCharArray()) {
-            if (c == '0') {
-                numOfZeros++;
-            } else {
-                if (numOfZeros >= 1) {
-                    count++;
-                }
-                numOfZeros = 0;
-            }
-        }
-        return count;
-    }
 }

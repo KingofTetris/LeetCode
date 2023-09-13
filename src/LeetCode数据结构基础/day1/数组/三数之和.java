@@ -14,29 +14,19 @@ import java.util.List;
  */
 /*给你一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，
 使得 a + b + c = 0 ？请你找出所有和为 0 且不重复的三元组。
-
-        注意：答案中不可以包含重复的三元组。
-        示例 1：
-
-        输入：nums = [-1,0,1,2,-1,-4]
-        输出：[[-1,-1,2],[-1,0,1]]
-        示例 2：
-
-        输入：nums = []
-        输出：[]
-        示例 3：
-
-        输入：nums = [0]
-        输出：[]
-         
-
-        提示：
-
-        0 <= nums.length <= 3000
-        -105 <= nums[i] <= 105*/
-
-
-
+注意：答案中不可以包含重复的三元组。
+示例 1：
+输入：nums = [-1,0,1,2,-1,-4]
+输出：[[-1,-1,2],[-1,0,1]]
+示例 2：
+输入：nums = []
+输出：[]
+示例 3：
+输入：nums = [0]
+输出：[]
+提示：
+0 <= nums.length <= 3000
+-105 <= nums[i] <= 105*/
     /* 题目中要求找到所有「不重复」且和为 0 的三元组，
     这个「不重复」的要求使得我们无法简单地使用三重循环枚举所有的三元组。
     这是因为在最坏的情况下，数组中的元素全部为 0，即
@@ -54,8 +44,7 @@ public class 三数之和 {
     public void test(){
 //        int[] nums = {-1,0,1,2,-1,-4};
         int[] nums = {-2, -1, -1, -1, 3, 3, 3};
-        List<List<Integer>> list;
-        list = threeSum(nums);
+        List<List<Integer>> list = threeSum(nums);
         for (List<Integer> temp : list) {
             System.out.println(temp);
         }

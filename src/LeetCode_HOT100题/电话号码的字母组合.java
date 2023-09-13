@@ -14,13 +14,20 @@ public class 电话号码的字母组合 {
 
     @Test
     public void test(){
-        String digits = "2343";
-        List<String> strings = letterCombinations(digits);
+//        String digits = "2343";
+        String digits = "2233";
+//        List<String> strings = letterCombinations(digits);
+        List<String> strings = letterCombinations2(digits);
         for (String string : strings) {
             System.out.println(string);
         }
     }
 
+    /**
+     * 巧妙的遍历 每次拿出list的头部，然后删除，保证不会重复。
+     * @param digits
+     * @return
+     */
     public List<String> letterCombinations(String digits) {
         List<String> lists = new LinkedList<>();
         if (digits.equals("")) return lists;
@@ -61,7 +68,55 @@ public class 电话号码的字母组合 {
             }
             count = 0;//每轮重新归零
         }
-
         return lists;
     }
+
+    /**
+     * 无脑的回溯写法。
+     * 回溯居然TMD比上面的模拟还快。。
+     */
+    List<String> res = new LinkedList<>();
+    public List<String> letterCombinations2(String digits){
+        if (digits == null || digits.length() == 0)
+            return res;
+        //初始map
+        String[] numString = {
+                //0,1都是空字符串
+                "",
+                "",
+                "abc",
+                "def",
+                "ghi",
+                "jkl",
+                "mno",
+                "pqrs",
+                "tuv",
+                "wxyz"};
+        backTracking(digits, numString, 0);
+        return res;
+    }
+
+    //每次迭代都会产生一个字符串，大量字符串的拼接会浪费很多内存
+    //因此我们选择高效的StringBuilder
+    StringBuilder temp = new StringBuilder();
+    public void backTracking(String digits,String[] numString,int num){
+        //结果的要求是digits长度
+        if (num == digits.length()){
+            res.add(temp.toString());
+            return;
+        }
+        //数字对应的字符串
+        String str = numString[digits.charAt(num) - '0'];
+        //模板
+        //for是同层遍历，递归其实就是纵向遍历,DFS
+        for (int i = 0; i < str.length(); i++) {
+            temp.append(str.charAt(i));
+            backTracking(digits,numString,num + 1);
+            //从list的remove(list.size() - 1);
+            //改成了StringBuilder的deleteCharAt(sb.length() - 1);
+            //如果是栈那就是stack.pop()
+            temp.deleteCharAt(temp.length() - 1);
+        }
+    }
+
 }

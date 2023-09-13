@@ -21,7 +21,7 @@ public class 游游的排列_全排列 {
         while (!isOriginalPermutation){
             int[] nextPermutation = nextPermutation(nums);
             //当回到origin 停止排列
-            if (Arrays.equals(origin,nextPermutation )) {
+            if (Arrays.equals(origin,nextPermutation)) {
                 isOriginalPermutation = true;
             } else{
                 int flag = 0;
