@@ -14,10 +14,10 @@ public class 最长公共前缀 {
 		// String[] strs = { "customer", "car", null };//空串
 		// String[] strs = {};//空串
 		// String[] strs = null;//空串
-		System.out.println(replaceSpace(strs));// c
+		System.out.println(maxAllQZ(strs));// c
 	}
 
-	public static String replaceSpace(String[] strs) {
+	public static String maxAllQZ(String[] strs) {
 		// 如果检查值不合法及就返回空串
 		if (!checkStrs(strs)) {
 			return "";
@@ -28,8 +28,7 @@ public class 最长公共前缀 {
 		StringBuilder res = new StringBuilder();
 		// 给字符串数组的元素按照升序排序(包含数字的话，数字会排在前面)
 		Arrays.sort(strs);
-
-		//字符串排序以后，就只需要毕竟第一个和最后一个就行了
+		//字符串排序以后，就只需要比较第一个和最后一个就行了
 		//最少就是根本不匹配，最大就是第一个字符串
 		int m = strs[0].length();
 		int n = strs[len - 1].length();

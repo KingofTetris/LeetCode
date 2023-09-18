@@ -1,5 +1,7 @@
 package LeetCode算法20天.day7.DFS与BFS;
 
+import LeetCode数据结构入门.day5.树.TreeNode;
+
 import java.util.LinkedList;
 import java.util.Queue;
 

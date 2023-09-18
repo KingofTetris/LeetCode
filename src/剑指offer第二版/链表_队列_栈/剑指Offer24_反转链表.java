@@ -65,13 +65,10 @@ public class 剑指Offer24_反转链表 {
             head = head.next;//然后就要马上让head后移。
             // 因为我们后面会修改temp的next，这个temp其实就是head。因为他们的地址是一样的。
             //如果你不在这里原本还保留的地方后移head，那么原本的链表就会被舍弃，就变成只插入了1个!!
-
             //下面把temp插入到表头。
             temp.next = dummy.next; // temp指向dummy的next，完成头插第一步,temp.next舍弃原来的指向，转向到dummy尾巴。
             dummy.next = temp; //dummy的next指向temp，完成头插第二步 在dummy里面插入这个temp
-
             //经过上面两补就完成了temp置于表头的操作
-
         }
         return dummy.next;//返回dummy.next即可
     }

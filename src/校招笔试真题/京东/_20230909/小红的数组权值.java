@@ -8,12 +8,12 @@ import java.util.Scanner;
  * @date 2023/9/9
  */
 
-//20% MLE
+//20% MLE 不能开二维数组，要观察数学公式
 public class 小红的数组权值 {
-    static int MOD = (int) (1e9 + 7);
-
+    static final int N = 100010;
+    static final int MOD = 1000000007;
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+       /* Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
         int[] ai = new int[n];
         for (int i = 0; i < n; i++) {
@@ -46,6 +46,40 @@ public class 小红的数组权值 {
                 res += (dp[i][j]) % MOD;
             }
         }
-        System.out.println(res);
+        System.out.println(res);*/
+        /**
+         * 对于 a[1, 4]的连续子数组可以写出如下：
+         * a[1]
+         * a[1] a[2]
+         * a[1] a[2] a[3]
+         * a[1] a[2] a[3] a[4]
+         * a[2]
+         * a[2] a[3]
+         * a[2] a[3] a[4]
+         * a[3]
+         * a[3] a[4]
+         * a[4]
+         * 所以答案应该等于如下：
+         * 1 * (4a[1] + 3a[2] + 2a[3] + a[4])
+         * + 2 * (3a[2] + 2a[3] + a[4])
+         * + 3 * (2a[3] + a[4])
+         * + 4 * (a[4])
+         */
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] w = new int[N];
+        for (int i = 1; i <= n; i++) {
+            w[i] = scanner.nextInt();
+        }
+        long t = 0;
+        for (int i = 1, j = n; i <= n; i++, j--) {
+            t = (t + (long) j * w[i]) % MOD;
+        }
+        long ans = 0;
+        for (int i = 1, j = n; i <= n; i++, j--) {
+            ans = (ans + i * t) % MOD;
+            t = ((t - (long) j * w[i]) % MOD + MOD) % MOD;
+        }
+        System.out.println(ans);
     }
 }

@@ -60,13 +60,14 @@ public class 斐波那契数列 {
     }
 
 
-    /**自底向上计算 写成迭代*/
+    /**
+     * 正常DP就是这样。
+     * */
     public int fib3(int N){
         //这里判断N==0 return 0 而不是直接return dp[N]
         // 是因为数组如果是new int[1] 那dp[1]会越界，所有特殊处理直接返回0了
         if (N == 0) return 0;
         int[] dp = new int[N+1];
-        //base case
         dp[0] = 0; dp[1] = 1;
         //状态转移
         for (int i = 2;i <= N;i++){

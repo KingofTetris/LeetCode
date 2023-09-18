@@ -27,8 +27,6 @@ public class 二叉树的前中后序遍历_递归实现 {
         }
         TreeNode root = TreeUtils.createTree(nodes);
         TreeUtils.show(root);
-
-
         System.out.print("前序遍历：");
         List<Integer> preorder = preorderTraversal(root);
         for(Integer i:preorder){

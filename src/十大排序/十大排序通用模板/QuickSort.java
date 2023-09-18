@@ -40,6 +40,7 @@ public class QuickSort<T extends Comparable<T>> extends Sort<T> {
         sort(nums, j + 1, h);
     }
 
+    //我比较习惯这种写法。选low作为基准。
     private int partition(T[] nums, int l, int h) {
         int i = l, j = h + 1;
         T v = nums[l];
