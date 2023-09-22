@@ -28,6 +28,7 @@ public class 二叉搜索树中的插入操作 {
 
     public TreeNode insertIntoBST(TreeNode root, int val) {
         //如果是空树 直接新建一个就行了。
+        //或者说遍历到叶子节点了，创建一个新的节点，就可以了。
         if (root == null) {
             return new TreeNode(val);
         }

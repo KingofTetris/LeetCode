@@ -42,33 +42,4 @@ public class 小美的比赛 {
         return res;
     }
 
-/*
-    @Test
-    public void test(){
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        int[] nums = new int[n];
-
-        for (int i = 0; i < n; i++) {
-            nums[i] = sc.nextInt();
-        }
-
-        int res = 0;
-        //就是找连续的1.。
-        int len = 0;
-        for (int i = 0; i < n;) {
-            while (i < n && nums[i] == 1) {
-                len++;
-                i++;
-            }
-            res += 2 * len - 1;
-            len = 0;
-            if (i < n && nums[i] == 0) {
-                i++;
-            }
-        }
-        System.out.println(res);
-    }
-*/
-
 }

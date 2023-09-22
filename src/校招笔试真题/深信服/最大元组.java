@@ -1,5 +1,7 @@
 package 校招笔试真题.深信服;
 
+import org.junit.Test;
+
 import java.util.*;
 
 /**
@@ -55,5 +57,14 @@ public class 最大元组 {
             max = Math.max(sum,max);
         }
         System.out.println(max);
+    }
+
+
+    @Test
+    public void test(){
+        System.out.println(-12 % -5);//-2
+        System.out.println(-5 % -12);//-5
+        System.out.println(5 % -12);//5
+        System.out.println(-5 % 12);//-5
     }
 }

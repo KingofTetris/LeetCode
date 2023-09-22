@@ -2,6 +2,8 @@ package LeetCode数据结构入门.day5.树;
 
 import org.junit.Test;
 
+import java.util.LinkedList;
+
 /**
  * @author KingofTetris
  * @File 验证二叉搜索树
@@ -23,43 +25,45 @@ import org.junit.Test;
 
 public class 验证二叉搜索树 {
 
-    TreeNode pre = null;
+
     @Test
     public void test(){
-        TreeUtils ct = new TreeUtils();
-        TreeNode tree = ct.createTree(new Integer[]{4,2,7,1,3,5,8});
+        TreeNode tree = TreeUtils.createTree(new Integer[]{4,2,7,1,3,5,8});
         System.out.println(isValidBST(tree));
     }
 
     //BST<-->中序遍历是一个递增序列。
 
-
     //递归写法（还没理解为什么这样写）
+    // 递归
+    //写成判断每个节点满不满足left<root<right
+    //变成非递归了
+    //如果你只是递归获得了BST的中序遍历数组，然后通过数组来判断，那不是最好的解法
+    //没有必要再弄一个数组出来。
+
+    /**
+     * 最优解，遍历的同时判断。
+     */
+    long maxVal = Long.MIN_VALUE;
     public boolean isValidBST(TreeNode root) {
-        return dfs(root);
-    }
-
-
-    //递归实现 时空都很高效
-    public boolean dfs(TreeNode root){
-        if(root == null){
+        //空节点当然是bst
+        if (root == null) {
             return true;
         }
-        //中序遍历，如果左子树满足条件，才进行右子树的遍历
-        if(dfs(root.left)){
-            if(pre == null){
-                pre = root;
-            }else{
-                if(pre.val >= root.val){
-                    return false;
-                }
-                pre = root;
-            }
-            return dfs(root.right);
+        // 左
+        boolean left = isValidBST(root.left);
+        // 中
+        // 按照bst的顺序，后一个节点肯定比前一个节点要大
+        //否则就不是bst
+        if (root.val > maxVal){
+            maxVal = root.val;
+        }else {
+            return false;
         }
-        return false;
+        // 右
+        boolean right = isValidBST(root.right);
+        return left && right;
     }
-
 
     //迭代写法 还是左根右 属于是时间换空间。
     //通过栈的先进后出特点存放
