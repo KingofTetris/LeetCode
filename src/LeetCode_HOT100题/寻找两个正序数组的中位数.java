@@ -38,7 +38,7 @@ public class 寻找两个正序数组的中位数 {
     public void test() {
         int[] nums1 = {2, 3};
         int[] nums2 = {5, 7};
-        System.out.println(findMedianSortedArrays(nums1, nums2));
+        System.out.println(findMedianSortedArrays2(nums1, nums2));
     }
 
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {

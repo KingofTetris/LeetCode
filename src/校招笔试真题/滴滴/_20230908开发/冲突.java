@@ -44,7 +44,7 @@ public class 冲突{
                 finalRes.add(s);
             }
         }
-        Collections.sort(finalRes,Comparator.naturalOrder());
+        finalRes.sort(Comparator.naturalOrder());
         System.out.println(finalRes.size());
         for(String s : finalRes){
             System.out.println(s);

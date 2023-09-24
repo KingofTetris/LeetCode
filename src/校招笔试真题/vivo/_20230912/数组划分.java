@@ -14,18 +14,6 @@ import java.util.List;
 public class 数组划分 {
     @Test
     public void test(){
-       /* int[] nums = {1,2,2,6,3,4,5,3,3,3,9,1,1,1};
-        List<List<Integer>> partition = partition(nums,5);
-        for (List<Integer> list : partition) {
-            System.out.println(list);
-        }
-        //现在要得到partition里面的和最小值即可
-        int min = Integer.MAX_VALUE;
-        for (List<Integer> list : partition) {
-            int sum = list.stream().mapToInt(x -> x).sum();
-            min = Math.min(min,sum);
-        }
-        System.out.println(min);*/
         int[][] tasks = {
                 {1,1,5,2},
                 {3,3,2,1},

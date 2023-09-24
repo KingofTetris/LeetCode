@@ -25,9 +25,7 @@ public class 牛牛的K次操作 {
         //让nums[i]中的最低位的1变成0,可以对同一个数反复操作
         //如何才能让nums.sum最小?
         int minSum = 0;
-
         //这个GPT的思路就是把所有位数加起来，然后每次把前面的1改为0
-
         //int类型最大32位
         int[] counts = new int[32];
         for (int num : nums) {
