@@ -2,6 +2,10 @@ package 剑指offer第二版.字符串;
 
 import org.junit.Test;
 
+import java.util.LinkedList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * @Author KingofTetris
  * @Date 2022/7/21 14:32
@@ -54,9 +58,34 @@ public class 剑指Offer19_正则表达式匹配 {
 
     @Test
     public void test(){
-        String s = "aab";
-        String p = "c*a*b";
-        System.out.println(isMatch(s,p));
+        String s = "h#a";
+        String p = "h*?*a";
+        char[] chars = p.toCharArray();
+        LinkedList<Integer> remove = new LinkedList<>();
+        for (int i = 1; i < chars.length; i++) {
+            while (chars[i] == '*' && chars[i - 1] == '?'){
+                remove.add(i);
+                i++;
+            }
+            while (chars[i] == '*' && chars[i - 1] == '*'){
+                remove.add(i);
+                i++;
+            }
+        }
+        LinkedList<Character> res = new LinkedList<>();
+        for (int i = 0; i < chars.length; i++) {
+            if (!remove.contains(i)){
+                res.add(chars[i]);
+            }
+        }
+//        System.out.println("res = " + res);
+        StringBuilder sb = new StringBuilder();
+        for (Character re : res) {
+            sb.append(re);
+        }
+        Pattern pattern = Pattern.compile(sb.toString());
+        Matcher m = pattern.matcher(s);
+        System.out.println(m.matches());
     }
     /**
      * 实现.和*的正则匹配 。 .表示任意字符，*表示前一个字符可以出现0或任意多次

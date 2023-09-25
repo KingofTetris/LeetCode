@@ -50,7 +50,7 @@ public class 有效的括号 {
 
 
     @Test
-    public void test(){
+    public void test() {
         String s = "({[test]})";
         System.out.println(isValid(s));
     }
@@ -58,27 +58,34 @@ public class 有效的括号 {
     public boolean isValid(String s) {
         //首先s的长度一定是偶数
         int n = s.length();
-        if(n%2 == 1)
+        if (n % 2 == 1)
             return false;
-//        初始化栈 
+//        初始化栈
         Stack<Character> stack = new Stack<>();
         //只有左括号入栈 其他的不管什么字符都不入栈 遇到右括号找栈顶出栈
         for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);
-            if(c=='{'||c=='['||c=='(')
+            if (c == '{' || c == '[' || c == '(')
                 stack.push(c);
-            //遇到右括号找栈顶是否对应左括号，是就POP 不是return false
-            else if(c == ')'){
-                if(!stack.isEmpty()&&stack.peek()=='('){ stack.pop(); }
-                else{ return false; }
-            }
-            else if(c == '}'){
-                if(!stack.isEmpty()&&stack.peek()=='{'){ stack.pop(); }
-                else{ return false; }
-            }
-            else if(c == ']'){
-                if(!stack.isEmpty()&&stack.peek()=='['){ stack.pop(); }
-                else{ return false; }
+                //遇到右括号找栈顶是否对应左括号，是就POP 不是return false
+            else if (c == ')') {
+                if (!stack.isEmpty() && stack.peek() == '(') {
+                    stack.pop();
+                } else {
+                    return false;
+                }
+            } else if (c == '}') {
+                if (!stack.isEmpty() && stack.peek() == '{') {
+                    stack.pop();
+                } else {
+                    return false;
+                }
+            } else if (c == ']') {
+                if (!stack.isEmpty() && stack.peek() == '[') {
+                    stack.pop();
+                } else {
+                    return false;
+                }
             }
         }
         return stack.isEmpty();

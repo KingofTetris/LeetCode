@@ -1,4 +1,4 @@
-package 算法设计与分析.零一序列;
+package 算法设计与分析和助教课.零一序列;
 
 import java.util.Scanner;
 

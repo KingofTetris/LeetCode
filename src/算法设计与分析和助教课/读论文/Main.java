@@ -1,4 +1,4 @@
-package 算法设计与分析.读论文;
+package 算法设计与分析和助教课.读论文;
 
 import java.util.Scanner;
 

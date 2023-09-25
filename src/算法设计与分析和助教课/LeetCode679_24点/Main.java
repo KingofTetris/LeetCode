@@ -1,4 +1,4 @@
-package 算法设计与分析.LeetCode679_24点;
+package 算法设计与分析和助教课.LeetCode679_24点;
 
 import java.util.Scanner;
 

@@ -1,4 +1,4 @@
-package 算法设计与分析.测试;
+package 算法设计与分析和助教课.测试;
 
 import java.util.Scanner;
 public class Main{

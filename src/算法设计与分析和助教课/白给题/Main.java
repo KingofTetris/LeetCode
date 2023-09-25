@@ -1,4 +1,4 @@
-package 算法设计与分析.白给题;
+package 算法设计与分析和助教课.白给题;
 
 /**
  * @author KingofTetris

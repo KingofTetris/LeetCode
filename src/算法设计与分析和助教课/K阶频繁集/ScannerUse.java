@@ -1,4 +1,4 @@
-package 算法设计与分析.K阶频繁集;
+package 算法设计与分析和助教课.K阶频繁集;
 
 /**
  * @author KingofTetris

@@ -1,4 +1,4 @@
-package 算法设计与分析.Stack;
+package 算法设计与分析和助教课.Stack;
 
 import java.util.Scanner;
 import java.util.Stack;
