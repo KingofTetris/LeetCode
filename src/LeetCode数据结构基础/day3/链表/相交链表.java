@@ -1,6 +1,5 @@
 package LeetCode数据结构基础.day3.链表;
 
-import LeetCode数据结构入门.day3.链表.ListNode;
 import org.junit.Test;
 
 import java.util.HashSet;

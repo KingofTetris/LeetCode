@@ -6,8 +6,6 @@ package LeetCode数据结构基础.day3.链表;
  * @Time 2021/10/22  16:45
  */
 
-import LeetCode数据结构入门.day3.链表.ListNode;
-
 /**
 给你一个链表，每 k 个节点一组进行翻转，请你返回翻转后的链表。
 

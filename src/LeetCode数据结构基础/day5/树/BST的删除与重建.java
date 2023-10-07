@@ -6,8 +6,8 @@ package LeetCode数据结构基础.day5.树;
  * @Time 2021/10/26  14:57
  */
 
-import LeetCode数据结构入门.day5.树.TreeUtils;
-import LeetCode数据结构入门.day5.树.TreeNode;
+import LeetCode数据结构基础.day5.树.TreeUtils;
+import LeetCode数据结构基础.day5.树.TreeUtils;
 import org.junit.Test;
 
 /**从bst中删除指定的值，然后重建，仍然保证其为一颗bst
@@ -19,8 +19,6 @@ import org.junit.Test;
  * https://leetcode-cn.com/problems/delete-node-in-a-bst/solution/miao-dong-jiu-wan-shi-liao-by-terry2020-tc0o/
  * */
 public class BST的删除与重建 {
-
-
     @Test
     public void test(){
 //        Integer[] nums = {5,3,6,2,4,null,7};

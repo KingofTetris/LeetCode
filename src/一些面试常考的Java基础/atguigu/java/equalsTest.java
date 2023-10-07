@@ -1,7 +1,7 @@
 package 一些面试常考的Java基础.atguigu.java;
 
 import JAVA基础_反射.Person;
-import LeetCode数据结构入门.day3.链表.ListNode;
+import LeetCode数据结构基础.day3.链表.ListNode;
 import org.junit.Test;
 
 /**

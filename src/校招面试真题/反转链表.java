@@ -1,9 +1,8 @@
 package 校招面试真题;
 
-import LeetCode数据结构入门.day3.链表.ListNode;
+import LeetCode数据结构基础.day3.链表.ListNode;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author by KingOfTetris

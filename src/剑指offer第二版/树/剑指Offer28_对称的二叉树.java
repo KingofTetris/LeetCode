@@ -1,7 +1,8 @@
 package 剑指offer第二版.树;
 
-import LeetCode数据结构入门.day5.树.TreeUtils;
-import LeetCode数据结构入门.day5.树.TreeNode;
+import LeetCode数据结构基础.day5.树.TreeNode;
+import LeetCode数据结构基础.day5.树.TreeUtils;
+import LeetCode数据结构基础.day5.树.TreeUtils;
 import org.junit.Test;
 
 import java.util.LinkedList;

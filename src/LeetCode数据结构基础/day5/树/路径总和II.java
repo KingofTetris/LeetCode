@@ -1,9 +1,9 @@
 package LeetCode数据结构基础.day5.树;
 
-import LeetCode数据结构入门.day5.树.TreeNode;
+import LeetCode数据结构基础.day5.树.TreeUtils;
+import LeetCode数据结构基础.day5.树.TreeUtils;
 import org.junit.Test;
 
-import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -13,31 +13,17 @@ import java.util.List;
  * @Time 2021/10/26  13:42
  */
 
-/**输入二叉树和 target 找到所有 从根节点到叶子节点之和等于target的路径*/
+/**输入二叉树和 target 找到所有 从根节点到叶子节点之和等于target的路径
+ *
+ * 路径总和I就是判断有没有这条路径可以了。一样的做法。
+ * */
 public class 路径总和II {
 
-    List<List<Integer>> ret = new LinkedList<>();
-    Deque<Integer> path = new LinkedList<>();
-
-    //看不懂递归就自己debug看过程 递归实际上就自带回溯
     @Test
     public void test(){
-        TreeNode root = new TreeNode(3);
-        TreeNode node1 = new TreeNode(9);
-        TreeNode node2 = new TreeNode(20);
-        TreeNode node3 = new TreeNode(11);
-        TreeNode node4 = new TreeNode(18);
-        TreeNode node5 = new TreeNode(15);
-        TreeNode node6 = new TreeNode(7);
-
-        root.right = node2;
-        root.left = node1;
-        node1.left = node3;
-        node1.right = node4;
-        node2.left = node5;
-        node2.right = node6;
-        List<List<Integer>> res = pathSum(root,30);
-
+        TreeNode root = TreeUtils.createTree(new Integer[]{1, 2, 3, 4, 4, 6, 7});
+        TreeUtils.show(root);
+        List<List<Integer>> res = pathSum(root,10);
         for (List<Integer> item:res) {
             for (Integer i:item) {
                 System.out.print(i + "\t");
@@ -45,26 +31,34 @@ public class 路径总和II {
             System.out.println();
         }
     }
-    //DFS
+
+
+    List<List<Integer>> ret = new LinkedList<>();
+    LinkedList<Integer> path = new LinkedList<>();
+
+    //回溯
     public List<List<Integer>> pathSum(TreeNode root, int targetSum) {
-        dfs(root,targetSum);
+        backtracking(root,targetSum);
         return ret;
     }
 
-    public void dfs(TreeNode root, int targetSum) {
-        if (root == null) {
+    public void backtracking(TreeNode root, int targetSum) {
+        //找到叶子节点并且targetSum = 0;
+        path.add(root.val);
+        targetSum -= root.val;
+        //终止条件。
+        if (root.left == null && root.right == null && targetSum == 0) {
+            ret.add(new LinkedList<>(path));
+            return;
+        } else if (root.left == null && root.right == null && targetSum != 0){
             return;
         }
-        path.offerLast(root.val);
-        targetSum -= root.val;
-        if (root.left == null && root.right == null && targetSum == 0) {
-            ret.add(new LinkedList<Integer>(path));
-        }
-        dfs(root.left, targetSum);
-        dfs(root.right, targetSum);
-
-        //遍历到叶子节点不是目标值就把它弹出，回溯到父节点。
-        path.pollLast();
+        backtracking(root.left, targetSum);
+        //回溯重置条件。
+        path.remove(path.size() - 1);
+        backtracking(root.right, targetSum);
+        //回溯重置条件。
+        path.remove(path.size() - 1);
     }
 
 }

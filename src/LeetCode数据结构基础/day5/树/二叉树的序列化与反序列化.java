@@ -1,6 +1,6 @@
 package LeetCode数据结构基础.day5.树;
 
-import LeetCode数据结构入门.day5.树.TreeNode;
+import LeetCode数据结构基础.day5.树.TreeUtils;
 
 import java.util.LinkedList;
 

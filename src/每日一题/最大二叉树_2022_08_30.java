@@ -1,6 +1,6 @@
 package 每日一题;
 
-import LeetCode数据结构入门.day5.树.TreeNode;
+import LeetCode数据结构基础.day5.树.TreeNode;
 
 /**
  * @Author KingofTetris
@@ -52,7 +52,6 @@ public class 最大二叉树_2022_08_30 {
      * 简单模拟建立二叉树，找到区间的best 也就是根节点
      * 左子树为 construct(nums, left, best-1)
      * 右子树为 construct(nums,best+1,right)。
-     *
      * @param nums
      * @return
      */
@@ -73,7 +72,6 @@ public class 最大二叉树_2022_08_30 {
             }
         }
         TreeNode node = new TreeNode(nums[best]);//找到最大的建立根节点。
-
         //然后递归建立左右子树
         node.left = construct(nums, left, best - 1);
         node.right = construct(nums, best + 1, right);

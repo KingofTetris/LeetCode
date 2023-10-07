@@ -17,10 +17,10 @@ import java.util.Comparator;
     //TMD的为什么没想到？？！
 public class 驾校教练的选人时间 {
     public static void main(String[] args) {
-        int[][] intervals = {{5,11}, {6,9}, {8,10}, {8,13},{10,12},{10,14},{11,15},{13,16},{13,17},{17,19}};
+        int[][] intervals = {{5,11}, {6,9},
+                {8,10}, {8,13},{10,12},{10,14},{11,15},{13,16},{13,17},{17,19}};
         int n = intervals.length;
         System.out.println(n - eraseOverlapIntervals(intervals));
-
     }
     public static int eraseOverlapIntervals(int[][] intervals) {
         int n = intervals.length;

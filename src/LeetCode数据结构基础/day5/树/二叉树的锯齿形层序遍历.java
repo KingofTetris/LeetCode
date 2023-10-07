@@ -6,7 +6,7 @@ package LeetCode数据结构基础.day5.树;
  * @Time 2021/10/25  20:57
  */
 
-import LeetCode数据结构入门.day5.树.TreeNode;
+import LeetCode数据结构基础.day5.树.TreeUtils;
 import org.junit.Test;
 
 import java.util.ArrayList;

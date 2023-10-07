@@ -1,6 +1,6 @@
 package 剑指offer第二版.链表_队列_栈;
 
-import LeetCode数据结构入门.day3.链表.ListNode;
+import LeetCode数据结构基础.day3.链表.ListNode;
 import org.junit.Test;
 
 import java.util.Stack;
@@ -59,6 +59,8 @@ public class 剑指Offer06_从尾到头打印链表 {
 
     /**
      * 不借助栈 空间和时间都比较快 首选这个
+     * 真的首选这个吗？
+     * 你下面那个reverse数组，空间不就是O(n)?
      * @param head
      * @return
      */

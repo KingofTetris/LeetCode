@@ -1,6 +1,6 @@
 package 剑指offer第二版.链表_队列_栈;
 
-import LeetCode数据结构入门.day3.链表.Node;
+import LeetCode数据结构基础.day3.链表.Node;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,8 +1,7 @@
 package 程序员面试金典;
 
-import LeetCode数据结构入门.day3.链表.ListNode;
+import LeetCode数据结构基础.day3.链表.ListNode;
 
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 

@@ -6,7 +6,6 @@ package LeetCode数据结构基础.day3.链表;
  * @Time 2021/10/21  11:57
  */
 
-import LeetCode数据结构入门.day3.链表.ListNode;
 import org.junit.Test;
 
 /** 给定一个链表，两两交换其中相邻的节点，并返回交换后的链表。
