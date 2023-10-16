@@ -10,10 +10,10 @@ import java.util.*;
  */
 public class 普通二叉树的最近公共祖先 {
     public static void main(String[] args) {
-        TreeNode tree = TreeUtils.createTree(new Integer[]{3,4,null,5,null,7,9,10,null,11});
+        TreeNode tree = TreeUtils.createTree(new Integer[]{3,5,1,6,2,0,8,null,null,7,4});
         TreeUtils.show(tree);
         TreeNode p = TreeUtils.findTreeNode(tree, 4);
-        TreeNode q = TreeUtils.findTreeNode(tree, 5);
+        TreeNode q = TreeUtils.findTreeNode(tree, 0);
         TreeNode lca = LCA(tree, p, q);
         System.out.println("LCA:");
         TreeUtils.show(lca);
@@ -23,7 +23,6 @@ public class 普通二叉树的最近公共祖先 {
     public void test(){
         double x = 3.0;
         int y = 5;
-
         //double / int
         //精度高的和精度低的运算会把结果转化成结果精度高的。
         x /= --y;
@@ -76,8 +75,17 @@ public class 普通二叉树的最近公共祖先 {
         //如果没有LCA，那么返回一个空节点
         return new TreeNode();
     }
-    //root根结点，node:指定的节点，stack:存放根节点到指定节点的路径
+
+
+    /**
+     * 本题的关键在这里。
+     * @param root
+     * @param node
+     * @param stack
+     * @return
+     */
     //寻找从node -> root的路径
+    //root根结点，node:指定的节点，stack:存放根节点到指定节点的路径
     public static boolean getPath(TreeNode root, TreeNode node, LinkedList<TreeNode> stack) {
         if (root == null || node == null) return false;
         stack.push(root);
@@ -90,8 +98,7 @@ public class 普通二叉树的最近公共祖先 {
         if (flg1) return true;//找到啦
         boolean flg2 = getPath(root.right, node, stack);
         if (flg2) return true;//找到啦
-        //如果root里面根本就不存在node节点。那么
-        //因为是右节点，他之前会把左节点也push到栈中，要先把左节点给pop出去。
+        //如果没找到，就回溯把之前push进来的pop出去。
         stack.pop();
         return false;
     }

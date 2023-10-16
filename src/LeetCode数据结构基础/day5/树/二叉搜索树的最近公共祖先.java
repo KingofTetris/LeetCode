@@ -36,7 +36,6 @@ public class 二叉搜索树的最近公共祖先 {
         //如果在同一边 那么继续下一层
         if(root.val < p.val && root.val < q.val) return lowestCommonAncestor(root.right, p, q);
         if(root.val > p.val && root.val > q.val) return lowestCommonAncestor(root.left, p, q);
-
         //如果和ROOT比 一大一小 root就是P,Q的最近公共祖先LCA
         return root;
     }

@@ -2,6 +2,9 @@ package 每日一题;
 
 import java.util.LinkedList;
 
+/**
+ * 深信服测开算法题。
+ */
 class 整数反转_07 {
     public static void main(String[] args) {
         System.out.println(reverse(-2147483648));
