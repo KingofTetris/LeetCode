@@ -27,6 +27,9 @@ import java.util.LinkedList;
 链表的长度范围为 [1, 5 * 104]
 1 <= node.val <= 1000
 */
+
+
+//瑞幸咖啡笔试。
 public class 重排链表 {
 
     @Test

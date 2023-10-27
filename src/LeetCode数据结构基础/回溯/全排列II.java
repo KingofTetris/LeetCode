@@ -27,7 +27,6 @@ import java.util.List;
 
 //这题和1的区别是 数组里面出现了重复的元素。
 public class 全排列II {
-
     @Test
     public void test() {
         int[] nums = {3,3,0,3};
@@ -46,7 +45,6 @@ public class 全排列II {
 
     public List<List<Integer>> permuteUnique(int[] nums) {
         boolean[] used = new boolean[nums.length];
-        Arrays.fill(used, false);
         //去重前排序，去重前排序，去重前排序！！！说了TM一万遍了，你怎么记不住？？
         //这个排序非常关键！
         Arrays.sort(nums);
@@ -61,13 +59,13 @@ public class 全排列II {
         }
         for (int i = 0; i < nums.length; i++) {
             // used[i - 1] == true，说明同⼀树⽀nums[i - 1]使⽤过
-            // used[i - 1] == false，说明同⼀树层nums[i - 1]使⽤过
+            // used[i - 1] == false，说明同⼀树层nums[i - 1]使⽤过，
             // 如果同⼀树层nums[i - 1]使⽤过则直接跳过
-            if (i > 0 && nums[i] == nums[i - 1] && used[i - 1] == false) {
+            if (i > 0 && nums[i] == nums[i - 1] && !used[i - 1]) {
                 continue;
             }
-            //如果同⼀树⽀nums[i]没使⽤过开始处理
-            if (used[i] == false) {
+            //如果仅仅是同⼀树⽀nums[i]没使⽤过开始处理
+            if (!used[i]) {
                 used[i] = true;//标记同⼀树⽀nums[i]使⽤过，防止同一树枝重复使用
                 path.add(nums[i]);
                 backTrack(nums, used);

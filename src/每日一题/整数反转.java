@@ -47,7 +47,6 @@ class 整数反转_07 {
             //判断是否 大于 最大32位整数 实际上214748364就是 Integer.MAX_VALUE / 10
             //Integer.MAX_VALUE = 2147483647
             //Integer.MIN_VALUE = -2147483648
-
             //所以如果相等的话，就比较尾数是否大于7或者<-8。
             if (res > Integer.MAX_VALUE / 10 || (res == Integer.MAX_VALUE / 10 && tmp > 7)) {
                 return 0;

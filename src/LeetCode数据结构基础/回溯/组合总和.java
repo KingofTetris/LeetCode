@@ -32,11 +32,10 @@ public class 组合总和 {
         int[] candidates = {8,7,4,3};
         int target = 11;
         List<List<Integer>> res = s.comineNum(candidates, target);
-        for (List<Integer> re : res) {
-            System.out.println(re);
-        }
+        System.out.println(res);
     }
 
+    //不限制集合元素。并且元素可以重复使用，没有0.
     List<List<Integer>> res = new LinkedList<>();
     List<Integer> path = new LinkedList<>();
     public List<List<Integer>> comineNum(int[] candidates, int target){
@@ -46,8 +45,6 @@ public class 组合总和 {
         return res;
     }
 
-    //他可以重复使用，不需要start.
-    //但是问题出现了，没有了start，变成了排列数。
     //但是他本质还是要用组合来看待，那么
     //这个startIndex就最大作用就是去重求组和，如果你要排列，就没必要加上startIndex了
     private void backtracking(int[] candidates, int target,int sum,int startIndex) {

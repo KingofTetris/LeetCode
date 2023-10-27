@@ -9,7 +9,6 @@ import java.util.List;
  * @date 2023/9/9
  */
 public class 分割回文串 {
-
     public static void main(String[] args) {
         分割回文串 ss = new 分割回文串();
         String s = "aabasdsd";
@@ -35,13 +34,17 @@ public class 分割回文串 {
         for (int i = startIndex; i < s.length(); i++) {
             //如果是回文子串，则记录
             if (isPalindrome(s, startIndex, i)) {
+                //取下[start,i]
                 String str = s.substring(startIndex, i + 1);
                 path.add(str);
             } else {
+                //如果不是回文子串，就跳过这条分支。
+                //直接i++
                 continue;
             }
             //起始位置后移，保证不重复
             backTracking(s, i + 1);
+            //条件重置
             path.remove(path.size() - 1);
         }
     }

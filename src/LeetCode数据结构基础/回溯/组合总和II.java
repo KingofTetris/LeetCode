@@ -35,8 +35,9 @@ import java.util.List;
  * ]
  */
 
-//这题和1的差别是不能重复选，但是数组里面有重复元素。
-//这就需要一个访问数组，来去重
+//这题和1的差别是不能重复选，而且数组里面是有重复元素。
+//只是下标不同。
+//这就需要一个访问数组used，来去重
 public class 组合总和II {
 
     /**
@@ -66,9 +67,8 @@ public class 组合总和II {
     int sum = 0;
 
     public List<List<Integer>> combinationSum2(int[] candidates, int target) {
-        used = new boolean[candidates.length];
         // 加标志数组，用来辅助判断同层节点是否已经遍历
-        Arrays.fill(used, false);
+        used = new boolean[candidates.length];
         // 为了将重复的数字都放到一起，所以先进行排序
         Arrays.sort(candidates);
         backTracking(candidates, target, 0);
@@ -80,10 +80,17 @@ public class 组合总和II {
             ans.add(new ArrayList(path));
         }
         for (int i = startIndex; i < candidates.length; i++) {
+            //sum + 当前元素已经大于target 剪枝。不用再继续dfs了
             if (sum + candidates[i] > target) {
                 break;
             }
-            // 出现重复节点，同层的第一个节点已经被访问过，所以直接跳过
+            // 树层去重逻辑，本题的关键。前提是已经给数组排序了
+            // candidates[i] == candidates[i - 1]就说明前一个相同大小的元素已经DFS过一遍了
+            // 后面的相同大小元素就没有必要再DFS一次了
+            // 为了防止i - 1 < 0所以才需要i>0
+            //最后的used[i-1] == false
+            //是因为我们每次回溯以后会把used改为false
+            //所以需要前面used为false;留下树枝的结果。
             if (i > 0 && candidates[i] == candidates[i - 1] && !used[i - 1]) {
                 continue;
             }

@@ -8,14 +8,19 @@ import java.util.HashMap;
  * @author by KingOfTetris
  * @date 2023/10/14
  */
+
+
+//求字符串s中能选出多少个ccbft
+//不区分大小写，每个字符只能用一次。
 public class 多少个子串 {
 
     @Test
     public void test() {
-        String s = "ACBTMfxcc";
+        String s = "ACcbtfBTMfxcc";
         System.out.println(countSeq(s));
     }
 
+    //1
     public int countSeq(String mystr) {
         // write code here
         HashMap<Character, Integer> map = new HashMap<>();

@@ -13,10 +13,10 @@ public class 在排序数组中查找元素的第一个和最后一个位置 {
     public static void main(String[] args) {
 //        Scanner sc = new Scanner(System.in);
         Random random = new Random();
-        int n = random.nextInt(10, 20);
+        int n = random.nextInt(10, 11);
         int[] nums = new int[n];
         for (int i = 0; i < n; i++) {
-            nums[i] = random.nextInt(1, 100);
+            nums[i] = random.nextInt(1, 10);
         }
         Arrays.sort(nums);
         for (int num : nums) {
@@ -38,7 +38,6 @@ public class 在排序数组中查找元素的第一个和最后一个位置 {
         //说明数组中根本不存在target.
         if (l == nums.length || nums[l] != target)
             return new int[]{-1, -1};
-
         return new int[]{l, r - 1};
     }
 
@@ -47,7 +46,6 @@ public class 在排序数组中查找元素的第一个和最后一个位置 {
         int l = 0, r = nums.length;
         while (l < r) {
             int mid = (r + l) / 2;
-
             //如果mid >= target 缩小right 去找最左边的target
             if (nums[mid] >= target)
                 r = mid;

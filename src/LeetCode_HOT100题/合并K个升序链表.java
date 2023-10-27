@@ -1,6 +1,7 @@
 package LeetCode_HOT100题;
 
 import LeetCode数据结构基础.day3.链表.ListNode;
+import org.junit.Test;
 
 import java.util.Comparator;
 import java.util.PriorityQueue;
@@ -13,18 +14,28 @@ public class 合并K个升序链表 {
 
     //优先队列 取名叫pq的时候就是队列，如果叫heap 那就是堆(默认是小根堆)
 
+    @Test
+    public void test(){
+        ListNode l1 = ListNode.createListNode(new int[]{1,2,3});
+        ListNode l2 = ListNode.createListNode(new int[]{2,5,6});
+        ListNode l3 = ListNode.createListNode(new int[]{-2,-1,0});
+        ListNode[] lists = new ListNode[3];
+        lists[0] = l1;
+        lists[1] = l2;
+        lists[2] = l3;
+        ListNode listNode = mergeKLists(lists);
+        ListNode.printLinkedList(listNode);
+    }
+
     /**
-     * 这题的难点的话，可能就是这个数据结构你得知道
-     * 因为是比较复杂的对象，所以要指定比较的方法
-     * 所以初始化的时候给了一个比较器，Comparator
-     * 并且指定比较方法是comparingInt()。比较的是对象的val
-     * 使用JDK8 lambda表达式写法就是 Comparator.comparingInt(o -> o.val))
+     * n个升序链表合并就需要借助最小堆来完成合并。
+     * 因为你每次合并都要找最小的开头，最小堆就能完成这个任务。
      * @param lists
      * @return
      */
     public ListNode mergeKLists(ListNode[] lists) {
-        //按照List的头节点的值的大小进行升序
-//        PriorityQueue<ListNode> pq = new PriorityQueue<>();
+        //默认就是小根堆,比较节点的值。
+        //因为ListNode这个是自定义类型，你必须要指定比较方式。
         PriorityQueue<ListNode> pq = new PriorityQueue<>(Comparator.comparingInt(o -> o.val));
         //链表入队
         for (ListNode node : lists) {
@@ -32,18 +43,19 @@ public class 合并K个升序链表 {
                 pq.offer(node);
             }
         }
-        //新建一个虚拟头节点，head.next指向链表的开头
-        ListNode head = new ListNode();
-        //尾节点，这个节点是一直会动的。最后会变成尾巴所以叫tail
-        ListNode tail = head;
+        //新建一个哑节点dummyHead
+        ListNode dummyHead = new ListNode();
+        //res
+        //dummyHead.next指向链表开头。
+        ListNode res = dummyHead;
 
         //当pq不为空
         while(!pq.isEmpty()) {
             //当前链表出队
             ListNode cur = pq.poll();
-            //tail指向当前节点
-            tail.next = cur;
-            tail = tail.next;//tail后移
+            //res.next指向cur
+            res.next = cur;
+            res = res.next;//res后移
             //如果cur.next不为空就继续添加进优先队列
             //每次添加进优先队列都会把链头最小的整理到队头
             //这样你每次poll出来都能保证最小。
@@ -52,7 +64,7 @@ public class 合并K个升序链表 {
             }
         }
 
-        //最后返回head.next就是整条完整的升序链
-        return head.next;
+        //最后返回dummyHead.next就是整条完整的升序链
+        return dummyHead.next;
     }
 }

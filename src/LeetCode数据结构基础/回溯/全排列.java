@@ -13,7 +13,7 @@ public class 全排列 {
 
     @Test
     public void test(){
-        int[] nums = {1,2,3};
+        int[] nums = {1,2,3,4};
         permute(nums);
         for (List<Integer> re : res) {
             System.out.println(re);
@@ -42,9 +42,7 @@ public class 全排列 {
             res.add(new LinkedList<>(path));
             return;
         }
-
-        //这里是i=0 不是startIndex了！
-        //排列和组合的差别就在这。
+        //这里是i=0 不是startIndex了！  排列和组合的差别就在这。
         //我们用used标记我们用过了什么元素。
         for (int i = 0; i < nums.length; i++) {
             //多了个标记数组，就要对这个标记数组加上对应的操作。

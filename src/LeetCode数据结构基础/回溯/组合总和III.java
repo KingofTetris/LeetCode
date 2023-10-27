@@ -22,7 +22,6 @@ import java.util.List;
     //而且每个元素不能重复选取，也没有重复的数字。
 public class 组合总和III {
 
-
     public static void main(String[] args) {
         组合总和III zh = new 组合总和III();
         zh.combineSum(9, 3);
@@ -35,18 +34,17 @@ public class 组合总和III {
     public void combineSum(int n, int k) {
         if (n > 9 * k) return; //如果k个9都满足不了n 那么就没必要回溯了，不可能加得到。
         backtracking(n, k, 1);
-        for (List<Integer> re : res) {
-            System.out.println(re);
-        }
+        System.out.println(res);
     }
 
     private void backtracking(int n, int k, int startIndex) {
+        //终止条件
         int sum = 0;
         for (Integer i : path) {
             sum += i;
         }
         if (sum > n){
-            return; //剪枝1：如果sum已经大于n了，那就没必要继续往下DFS了。回溯s
+            return; //剪枝1：如果sum已经大于n了，那就没必要继续往下DFS了。
         }
         if (sum == n && path.size() == k) {
             //每次添加都是新的path，不然你直接加path
