@@ -37,7 +37,7 @@ public class 合并K个升序链表 {
         //默认就是小根堆,比较节点的值。
         //因为ListNode这个是自定义类型，你必须要指定比较方式。
         PriorityQueue<ListNode> pq = new PriorityQueue<>(Comparator.comparingInt(o -> o.val));
-        //链表入队
+        //链表入堆
         for (ListNode node : lists) {
             if (node != null) {
                 pq.offer(node);

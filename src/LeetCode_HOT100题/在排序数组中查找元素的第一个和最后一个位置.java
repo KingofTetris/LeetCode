@@ -29,8 +29,8 @@ public class 在排序数组中查找元素的第一个和最后一个位置 {
         }
     }
 
-    //先找>=target的第一个
-    //再找>target的第一个
+    //先找>=target的第一个 找到第一个位置
+    //再找>target的第一个  找到最后一个位置
     public static int[] searchRange(int[] nums, int target) {
         int l = search(nums, target);
         int r = search(nums, target + 1);

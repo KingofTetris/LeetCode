@@ -11,8 +11,8 @@ import java.util.*;
 public class 找到字符串中所有字母异位词 {
     @Test
     public void test(){
-        String s = "aa";
-        String p = "bb";
+        String s = "dtacabbhbh";
+        String p = "ababc";
         List<Integer> anagrams = findAnagrams(s, p);
         System.out.println(anagrams);
     }

@@ -75,7 +75,8 @@ public class 剑指Offer49_丑数 {
         int dp[] = new int[n + 1];//一般dp取为 n + 1 舍弃掉0的位置 比较容易理解
         dp[1] = 1;//第一数是1
         for (int i = 2; i <= n ; i++) {//从第二个开始
-            dp[i] = Math.min(Math.min(dp[a] * 2,dp[b] * 3),dp[c] * 5);//因为没有直接n个数取最小的API，所以先两两比较
+            dp[i] = Math.min(Math.min(dp[a] * 2,dp[b] * 3),dp[c] * 5);
+            //因为没有直接n个数取最小的API，所以先两两比较
             if (dp[i] == dp[a] * 2) a++;
             if (dp[i] == dp[b] * 3) b++;
             if (dp[i] == dp[c] * 5) c++;

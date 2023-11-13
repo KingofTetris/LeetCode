@@ -59,6 +59,10 @@ public class 剑指Offer24_反转链表 {
      * @return
      */
     public ListNode reverseList(ListNode head) {
+        /**
+         * 头插法的固定写法。背下来
+         * 前后顺序一定不能错。
+         */
         ListNode dummy = new ListNode();//Dummy节点方便操作。
         while (head != null) {
             ListNode temp = head;//每次获得新的表头。

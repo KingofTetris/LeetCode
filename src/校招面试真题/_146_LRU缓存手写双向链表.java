@@ -76,7 +76,6 @@ class DoubleList{
         size = 0;
     }
 
-
     //尾部添加节点x
     public void addLast(Node x){
         //修改x的指向
@@ -127,7 +126,7 @@ public class _146_LRU缓存手写双向链表 {
      * ok 我们开始实现get put
      */
     public int get(int key){
-        //这里有问题,为什么get出来的是新的节点而不是双向链表中的节点？？
+        //这里有问题,为什么get出来的是一个新地址的节点而不是双向链表中的节点？？
        /* Node x = map.getOrDefault(key,null);
         if (x == null){
             return -1;
@@ -156,6 +155,7 @@ public class _146_LRU缓存手写双向链表 {
             //如果不包含才能去new出来，这种链表的节点要小心new这个关键词，new的对象，虽然key一样
             //但是已经不是同一个对象了。
             Node x = new Node(key,val);
+            //建立映射
             map.put(key,x);
             //然后那么我们去判断链表的长度是否还放得下
             //如果放得下，直接插入最后
@@ -181,6 +181,6 @@ public class _146_LRU缓存手写双向链表 {
         System.out.println(lRUCache.get(2));
         lRUCache.put(1,1);
         lRUCache.put(4,1);
-        System.out.println(lRUCache.get(2));
+        System.out.println(lRUCache.get(2));//节点2已经被删掉了。
     }
 }

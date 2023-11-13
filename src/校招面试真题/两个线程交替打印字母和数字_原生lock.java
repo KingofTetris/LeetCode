@@ -12,14 +12,14 @@ public class 两个线程交替打印字母和数字_原生lock {
                 synchronized (lock) {
                     while (!printAlphabet) {
                         try {
-                            lock.wait();
+                            lock.wait();//如果标记为false，则打印数字，lock阻塞，释放lock。
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
                     }
                     System.out.print(c);
                     printAlphabet = false;
-                    lock.notify();
+                    lock.notify();//继续请求lock
                 }
             }
         }, "t1").start();
@@ -28,14 +28,14 @@ public class 两个线程交替打印字母和数字_原生lock {
                 synchronized (lock) {
                     while (printAlphabet) {
                         try {
-                            lock.wait();
+                            lock.wait();//如果标记为true，则打印字母，lock阻塞，释放lock。
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
                     }
                     System.out.print(i);
                     printAlphabet = true;
-                    lock.notify();
+                    lock.notify();//继续请求lock
                 }
             }
         }, "t2").start();

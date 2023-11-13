@@ -15,7 +15,6 @@ public class 最长连续序列 {
 
     /**
      * 给定一个未排序的整数数组 nums ，找出数字连续的最长序列（不要求序列元素在原数组中连续）的长度。
-     *
      * 请你设计并实现时间复杂度为 O(n) 的算法解决此问题。
      *
      *示例 1：
@@ -36,12 +35,13 @@ public class 最长连续序列 {
         int i = longestConsecutive(nums);
         System.out.println(i);
     }
-    //遍历nums[i]
+    //可以直接排序，然后遍历nums[i]
     //查看nums[i]+1,...,nums[i]+n是否存在于nums中，如果存在长度就是n+1
     //如果不存在，当前长度为1.每次更新最大长度即可
+    //但是题目要求O(n) 用上面的朴素思路，是O(nlogn)
 
-    //但是题目要求O(n) 用上面的朴素思路，是O(n^2) 甚至不如直接排序。
-    //这就需要动下脑经，
+
+    //这就需要动下脑经，才能达到O(n)了
     public int longestConsecutive(int[] nums) {
         // 建立一个存储所有数的哈希表，同时起到去重功能
         Set<Integer> set = new HashSet<>();
