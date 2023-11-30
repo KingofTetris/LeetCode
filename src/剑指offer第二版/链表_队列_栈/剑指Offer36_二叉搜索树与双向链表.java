@@ -1,7 +1,7 @@
 package 剑指offer第二版.链表_队列_栈;
 
 
-import LeetCode数据结构基础.DFS与BFS.Node;
+import LeetCode数据结构与算法基础.DFS与BFS.Node;
 
 /**
  * @Author KingofTetris

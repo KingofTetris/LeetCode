@@ -1,6 +1,6 @@
 package 校招面试真题;
 
-import LeetCode数据结构基础.day3.链表.ListNode;
+import LeetCode数据结构与算法基础.day3.链表.ListNode;
 
 import java.util.ArrayList;
 

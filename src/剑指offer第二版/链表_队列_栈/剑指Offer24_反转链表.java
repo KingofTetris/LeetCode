@@ -1,6 +1,6 @@
 package 剑指offer第二版.链表_队列_栈;
 
-import LeetCode数据结构基础.day3.链表.ListNode;
+import LeetCode数据结构与算法基础.day3.链表.ListNode;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -63,7 +63,7 @@ public class 剑指Offer24_反转链表 {
          * 头插法的固定写法。背下来
          * 前后顺序一定不能错。
          */
-        ListNode dummy = new ListNode();//Dummy节点方便操作。
+        ListNode dummy = new ListNode();//dummy节点方便操作。
         while (head != null) {
             ListNode temp = head;//每次获得新的表头。
             head = head.next;//然后就要马上让head后移。

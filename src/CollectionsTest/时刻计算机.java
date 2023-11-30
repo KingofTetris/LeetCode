@@ -10,7 +10,7 @@ public class 时刻计算机 {
 
     @Test
     public void test(){
-        change("09:44","14:45");
+        change("15:26","16:11");
     }
 
     public void change(String s1,String s2){

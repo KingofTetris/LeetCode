@@ -1,8 +1,7 @@
 package 校招笔试真题.腾讯.腾讯音乐娱乐集团2023技术类;
 
-import LeetCode数据结构基础.day5.树.TreeNode;
-import LeetCode数据结构基础.day5.树.TreeUtils;
-import LeetCode数据结构基础.day5.树.TreeUtils;
+import LeetCode数据结构与算法基础.day5.树.TreeNode;
+import LeetCode数据结构与算法基础.day5.树.TreeUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
