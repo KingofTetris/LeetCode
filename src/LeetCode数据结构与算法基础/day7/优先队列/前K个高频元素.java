@@ -13,7 +13,6 @@ import java.util.PriorityQueue;
 
  * 给你一个整数数组 nums 和一个整数 k ，请你返回其中出现频率前 k 高的元素。你可以按 任意顺序 返回答案。
  *
- *
  * 示例 1:
  *
  * 输入: nums = [1,1,1,2,2,3], k = 2
@@ -54,22 +53,19 @@ public class 前K个高频元素 {
         for (int i = 0; i < nums.length; i++) {
             frequency.put(nums[i], frequency.getOrDefault(nums[i],0) + 1);
         }
-
-
         //lamda表达式构造优先队列，按照value降序排列
         PriorityQueue<Map.Entry<Integer,Integer>> queue = new PriorityQueue<>(
-                (o1, o2) -> -(o1.getValue() - o2.getValue())
+                //使用Comparator定制化排序，用lambda表达式简略了匿名内部类。
+                //本来匿名内部类需要写一个compare(Object o1,Object o2)方法
+                //lambda表达式直接省略了方法名和参数类型和返回语句，单括号，直接写成下面的样子。
+                (o1, o2) -> -(o1.getValue() - o2.getValue()) //表示用参数的value，从大到小排序。
         );
-
-        //把kv放入优先队列
+        //把map集合放入优先队列中，addAll方法。就可以得到一个按照频率从大到小排序的集合了。
         queue.addAll(frequency.entrySet());
-
         int[] ans = new int[k];
-
         for (int i = 0; i < k && !queue.isEmpty(); i++) {
             ans[i] = queue.poll().getKey();
         }
-
         return ans;
     }
 }
