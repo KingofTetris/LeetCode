@@ -7,12 +7,13 @@ package 校招笔试真题.用友.用友普通批;
 
 import java.util.*;
 
-
 //// 说明：这里使用两个堆来维护最大值和最小值
 // 代码简单易懂，笔试时是一个速AC的好方法， 时间复杂度O(N*logK)，
-// 比起单调队列的O(N)的复杂度，是差了一些, 另外这道题是力扣
+// 比起单调队列的O(N)的复杂度，是差了一些, 另外这道题是力扣HOT100 原题
 public class 滑动窗口的最大值 {
     public static void main(String[] args) {
+
+        //1 3 -1 -3 5 3 6 7
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
         int k = sc.nextInt();
@@ -21,6 +22,8 @@ public class 滑动窗口的最大值 {
             arr[i] = sc.nextInt();
         }
         //最大堆
+//        PriorityQueue<Integer> 优先队列，其实就是堆，默认是最小堆，
+        //((o1,o2)->(o2-o1))就是最大堆
         PriorityQueue<Integer> maxH = new PriorityQueue<>((o1, o2) -> (o2 - o1));
         //最小堆
         PriorityQueue<Integer> minH = new PriorityQueue<>((o1, o2) -> (o1 - o2));
@@ -38,6 +41,7 @@ public class 滑动窗口的最大值 {
             res = Math.max(res, maxH.peek() - minH.peek());
         }
         System.out.println(res);
+        sc.close();
     }
 }
 

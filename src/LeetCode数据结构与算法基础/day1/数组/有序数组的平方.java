@@ -36,6 +36,8 @@ public class 有序数组的平方 {
         int[] res = new int[n];
         int head = 0,tail = n - 1;
         n--;
+
+        //从大到小放。
         while (head <= tail){
             int temp1 = nums[head] * nums[head];
             int temp2 = nums[tail] * nums[tail];

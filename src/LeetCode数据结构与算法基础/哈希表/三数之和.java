@@ -41,8 +41,8 @@ public class 三数之和 {
 
     @Test
     public void test(){
-//        int[] nums = {-1,0,1,2,-1,-4};
-        int[] nums = {-2, -1, -1, -1, 3, 3, 3};
+        int[] nums = {-1,0,1,2,-1,-4};
+//        int[] nums = {-2, -1, -1, -1, 3, 3, 3};
         List<List<Integer>> list = threeSum(nums);
         for (List<Integer> temp : list) {
             System.out.println(temp);
@@ -63,11 +63,13 @@ public class 三数之和 {
         List<List<Integer>> ans = new ArrayList<>();
         //小于3个数直接返回列表就行了
         if (nums.length <= 2) return ans;
-        Arrays.sort(nums); // O(nlogn)
+        Arrays.sort(nums); // 先排序，O(nlogn)
+
         for (int i = 0; i < nums.length - 2; i++) { // O(n^2)
             if (nums[i] > 0) break; // 第一个数大于 0，后面的数都比它大，肯定不成立了
+            //无重复的三元组，如果nums[i]和前一个一样就跳过
             if (i > 0 && nums[i] == nums[i - 1]) continue; // 去掉重复情况
-            //相加为0 就是找它的相反数
+            //以这个数的相反数为目标，相加为0 就是找它的相反数
             int target = -nums[i];
             //left为当前固定nums[i]的下一个数的下标，right为末尾下标
             int left = i + 1, right = nums.length - 1;
@@ -76,12 +78,21 @@ public class 三数之和 {
                 if (nums[left] + nums[right] == target) {
                     //ArrayList<>(List) 构造方法
                     //Arrays.asList(n1,n2,n3....)把这些数直接当成列表
-                    ans.add(new ArrayList<>(Arrays.asList(nums[i], nums[left], nums[right])));
-                    //现在是找到了三数之和等于=0的情况
-                    //那么必然要增加 left，减小 right，找下一组,但是不能重复，比如: [-2, -1, -1, -1, 3, 3, 3],
-                    // nums[i] = -2, left = 1, right = 6, [-2, -1, 3] 的答案加入后，需要排除重复的 -1 和 3
-                    left++; right--; // 首先无论如何先要进行加减操作
-                    //左边相等lef++ 右边相等right-- 去重
+//                    Arrays.asList(n1,n2,n3....)
+//                    ans.add(new ArrayList<>(Arrays.asList(nums[i], nums[left], nums[right])));
+                    //当然你直接new一个Array然后一个一个添加也是可以的
+                    ArrayList<Integer> res = new ArrayList<>();
+                    res.add(nums[i]);
+                    res.add(nums[left]);
+                    res.add(nums[right]);
+                    ans.add(res);
+                    //现在是找到了一组三数之和等于=0的情况
+                    //那么必然要增加 left，减小 right，
+                    // 找下一组,但是不能重复，比如: [-2, -1, -1, -1, 3, 3, 3],
+                    // nums[i] = -2, left = 1, right = 6,
+                    // [-2, -1, 3] 的答案加入后，需要排除重复的 -1 和 3
+                    left++; right--; // 首先去掉当前这一组。
+                    //左边相等left++ 右边相等right-- 去重
                     while (left < right && nums[left] == nums[left - 1]) left++;
                     while (left < right && nums[right] == nums[right + 1]) right--;
                 }

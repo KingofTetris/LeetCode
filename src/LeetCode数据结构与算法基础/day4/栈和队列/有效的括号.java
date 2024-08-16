@@ -48,11 +48,10 @@ import java.util.Stack;
         s 仅由括号 '()[]{}' 组成*/
 public class 有效的括号 {
 
-
-    @Test
-    public void test() {
-        String s = "({[test]})";
-        System.out.println(isValid(s));
+    public static void main(String[] args) {
+        String s =  "({[]})";
+        boolean valid2 = isValid2(s);
+        System.out.println(valid2);
     }
 
     public boolean isValid(String s) {
@@ -82,6 +81,39 @@ public class 有效的括号 {
                 }
             } else if (c == ']') {
                 if (!stack.isEmpty() && stack.peek() == '[') {
+                    stack.pop();
+                } else {
+                    return false;
+                }
+            }
+        }
+        return stack.isEmpty();
+    }
+
+    public static boolean isValid2(String s) {
+        System.out.println(s.length());
+        if(s.length() % 2 != 0) return false;
+        Stack<Character> stack = new Stack<>();
+        char[] ch = s.toCharArray();
+        for(char c : ch){
+            if(c == '{' || c == '[' || c == '(') stack.push(c);
+            else if (c == ')') {
+                //取栈顶元素不弹出用peek()
+                if (!stack.isEmpty() && stack.peek() == '(') {
+                    stack.pop();
+                } else {
+                    return false;
+                }
+            }
+            else if (c == ']') {
+                if (!stack.isEmpty() && stack.peek() == '[') {
+                    stack.pop();
+                } else {
+                    return false;
+                }
+            }
+            else if (c == '}') {
+                if (!stack.isEmpty() && stack.peek() == '{') {
                     stack.pop();
                 } else {
                     return false;

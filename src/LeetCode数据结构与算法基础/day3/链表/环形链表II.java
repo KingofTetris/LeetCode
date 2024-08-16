@@ -84,7 +84,9 @@ public class 环形链表II {
 
     /**
      * 不利用额外空间 双指针+数学推导
-     * 快慢指针，相遇后，从相遇节点和head同时出发，再相遇时的节点就是入口节点，
+     * 先确定有没有环，找到环存在的meet节点
+     * 然后再让一个temp节点从head出发，meet同时出发。
+     * temp和meet再次相遇时就是环的入口，这个方法不需要额外空间。
      * 这个结论的推到看下面的链接
      * https://programmercarl.com/0142.%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8II.html#%E6%80%9D%E8%B7%AF
      */

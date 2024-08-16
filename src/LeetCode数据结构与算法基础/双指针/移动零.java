@@ -66,7 +66,6 @@ public class 移动零 {
     //法二 交换
     //右指针不断向右移动，每次右指针指向非零数，则将左右指针对应的数交换，同时左指针右移。
     public void moveZero2(int[] nums){
-
         int n = nums.length, left = 0, right = 0;
         while (right < n) {
             if (nums[right] != 0) {

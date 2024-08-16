@@ -36,6 +36,7 @@ public class 除自身以外数组的乘积 {
 
 
     //简单的暴力法，时间复杂度O(n^2)超时。
+    //能过19/24
 /*    public int[] productExceptSelf(int[] nums) {
         int len = nums.length;
         int product[] = new int[len];
@@ -60,26 +61,26 @@ public class 除自身以外数组的乘积 {
         int post_product[] = new int[n];
         int ans[] = new int[n];
 
-
         //第一个数左侧没有数，乘积设为1,直接等于1*后缀之积
         pre_product[0] = 1;
+        //反过来最后一个数右侧没有数，直接1*前缀之积
+        post_product[n-1] = 1;
 
         //pre_product[i] 实际上就是每个数的前缀之积
         for (int i = 1; i < n; i++) {
             pre_product[i] = nums[i-1] * pre_product[i-1];
         }
 
-        //反过来最后一个数右侧没有数，直接1*前缀之积
-        post_product[n-1] = 1;
-
         //小细节i>=0,不然第一个数没被赋值到，就为0
         for (int i = n-2; i >= 0; i--) {
             post_product[i] = nums[i + 1] * post_product[i + 1];
         }
 
+        //计算完每个数的前后缀积就可以直接相乘得到答案了。
         for (int i = 0; i < n; i++) {
             ans[i] = pre_product[i] * post_product[i];
         }
+
         return ans;
     }
 }

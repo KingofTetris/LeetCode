@@ -41,9 +41,9 @@ import java.util.HashMap;
 public class 滑动窗口_无重复字符的最长子串 {
     //首先子串一定是连续的
     @Test
-    public void test(){
+    public void test() {
 //        String s = "abcabcbb";
-        String s ="";
+        String s = "";
         System.out.println(lengthOfLongestSubstring(s));
     }
 
@@ -82,23 +82,23 @@ public class 滑动窗口_无重复字符的最长子串 {
 
     //法二 滑动窗口
     public int lengthOfLongestSubstring(String s) {
-        if (s.length()==0) return 0;
+        if (s.length() == 0) return 0;
+        //map用于存储字符的位置
         HashMap<Character, Integer> map = new HashMap<>();
         int maxLen = 0;//用于记录最大不重复子串的长度
         int left = 0;//滑动窗口左指针
-        for (int i = 0; i < s.length() ; i++)
-        {
-            //String的 indexOf(char) 和charAt(i) 两个方法经常使用
-            //检测是否重复，不重复就添加put，重复了就把窗口右移
-            if(map.containsKey(s.charAt(i)))
-            {
-                //保证left指向窗口左边
-                left = Math.max(left , map.get(s.charAt(i))+1);
+        int right = 0;//右指针
+        while (right < s.length()) {
+            //移动右指针，检测是否重复
+            if (map.containsKey(s.charAt(right))) {
+                //重复则需要移动左指针，到该字符在原本字符串中出现的下一个位置
+                left = Math.max(left, map.get(s.charAt(right)) + 1);
             }
-            //不管是否更新left，都要更新 s.charAt(i) 的位置！
-            map.put(s.charAt(i) , i);
-            //i+1才是真实长度
-            maxLen = Math.max(maxLen , i + 1 -left);
+            //不管是否重复，都要更新 s.charAt(right)字符 的最新位置
+            map.put(s.charAt(right), right);
+            //计算长度
+            maxLen = Math.max(maxLen, right - left + 1);
+            right++;
         }
 
         return maxLen;

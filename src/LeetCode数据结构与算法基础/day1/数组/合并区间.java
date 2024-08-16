@@ -43,7 +43,7 @@ public class 合并区间 {
         //然后取两者的min(l1,l2) max(r1,r2) 合并为新的区间。
         //当遇到下一个不重叠区间的时候，把cur = 这个不重叠的区间 重复这个过程
         //直到遍历完区间即可，为什么下面要写递归？
-        int[][] res = merge(intervals);
+        int[][] res = merge2(intervals);
         for (int[] item : res) {
             for (int i = 0; i < item.length; i++) {
                 System.out.print(item[i] + "\t");
@@ -62,8 +62,10 @@ public class 合并区间 {
             return new int[0][2];
         }
         //策略模式传入Comparator比较器，根据Compare方法 自定义排序
-        //按照左端点升序
+        //按照左端点从小到大排序
         Arrays.sort(intervals, Comparator.comparingInt(o -> o[0]));
+        //这两句话效果是一样的。
+//        Arrays.sort(intervals, (p,q) -> (p[0] - q[0]));
         List<int[]> merged = new ArrayList<>();
         //intervals.length是行数，其实就有多少个区间
         for (int i = 0; i < intervals.length; ++i) {
@@ -88,4 +90,35 @@ public class 合并区间 {
         //指定个行数就行。
         return merged.toArray(new int[merged.size()][]);
     }
+
+
+    public int[][] merge2(int[][] intervals) {
+//        Arrays.sort(intervals,Comparator.comparingInt(o -> o[0]));
+        Arrays.sort(intervals, (p, q) -> p[0] - q[0]); // 按照左端点从小到大排序
+        List<int[]> ans = new ArrayList<>();
+        for (int[] p : intervals) {
+            int ansSize = ans.size();
+            /**
+             * p的左端点小于当前区间的右端点。
+             */
+            if (ansSize > 0 && p[0] <= ans.get(ansSize - 1)[1]) { // 可以合并
+                ans.get(ansSize - 1)[1] =
+                        Math.max(ans.get(ansSize - 1)[1], p[1]); // 更新右端点为两个区间中更大的那个即可
+            } else { // 不相交，无法合并
+                ans.add(p); // 直接添加新的合并区间
+            }
+        }
+        //最后List转化为二维数组即可。
+        // 将List<int[]>转化为二维数组
+        int[][] result = new int[ans.size()][];
+        for (int i = 0; i < ans.size(); i++) {
+            result[i] = ans.get(i);
+        }
+        return result;
+    }
+
+   /* 作者：灵茶山艾府
+    链接：https://leetcode.cn/problems/merge-intervals/solutions/2798138/jian-dan-zuo-fa-yi-ji-wei-shi-yao-yao-zh-f2b3/
+    来源：力扣（LeetCode）
+    著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。*/
 }

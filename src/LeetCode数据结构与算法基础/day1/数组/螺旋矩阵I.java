@@ -32,8 +32,10 @@ public class 螺旋矩阵I {
         int num = 0;
         //定义左右上下
         int left = 0, right = m - 1, top = 0, bottom = n - 1;
-        //如果num == n * m 就跳出。
+        //如果num == n * m 就结束了，可以跳出了。
         while (true) {
+
+            //注意每次i的开头赋值。
             for (int i = left; i <= right; i++) {
                 list.add(matrix[top][i]);
                 num++;

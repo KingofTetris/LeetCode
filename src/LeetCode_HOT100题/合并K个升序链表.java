@@ -36,8 +36,10 @@ public class 合并K个升序链表 {
     public ListNode mergeKLists(ListNode[] lists) {
         //默认就是小根堆,比较节点的值。
         //因为ListNode这个是自定义类型，你必须要指定比较方式。
+        //按照节点的大小形成小根堆
         PriorityQueue<ListNode> pq = new PriorityQueue<>(Comparator.comparingInt(o -> o.val));
-        //链表入堆
+//        PriorityQueue<ListNode> pq = new PriorityQueue<>((node1,node2) -> (node1.val - node2.val));
+        //所有链表入堆
         for (ListNode node : lists) {
             if (node != null) {
                 pq.offer(node);
@@ -51,7 +53,7 @@ public class 合并K个升序链表 {
 
         //当pq不为空
         while(!pq.isEmpty()) {
-            //当前链表出队
+            //当前链表，也就是最小的节点出队
             ListNode cur = pq.poll();
             //res.next指向cur
             res.next = cur;
@@ -60,6 +62,7 @@ public class 合并K个升序链表 {
             //每次添加进优先队列都会把链头最小的整理到队头
             //这样你每次poll出来都能保证最小。
             if (cur.next != null) {
+                //cur后移，重新入队
                 pq.offer(cur.next);
             }
         }

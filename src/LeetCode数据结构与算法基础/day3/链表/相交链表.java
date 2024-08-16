@@ -124,33 +124,23 @@ public class 相交链表 {
     //双指针 正确的人才能相交。这个算法只能对有交点的链表用，没有交点会死循环。
     //若要跳出死循环，可以给个长度变量，如果count超过了两人的长度之和还是没有找到，那就没有交点了。
     public ListNode getIntersectionNode2(ListNode headA, ListNode headB) {
-        //你的名字:你变成我，我变成你，我们才能相遇。
-        ListNode p = headA;
-        ListNode q = headB;
-        int count = 0,lenA = 0,lenB = 0;
-        while (p != null){
-            lenA++;
-            p = p.next;
+
+        //其实是道数学题
+        //如果有交点，那么A和B交替走一定会走到这个交点
+        //如果没有交点，那么A,B同时指向NULL，直接返回。
+
+        ListNode A = headA, B = headB;
+        while (A != B) {//终止条件A==B
+            //如果A不等于null 往后走，走到尾巴再去走B
+            A = A != null ? A.next : headB;
+            //如果B不等于null 往后走，走到尾巴再去走A
+            B = B != null ? B.next : headA;
         }
-        while (q != null){
-            lenB++;
-            q = q.next;
-        }
-        p = headA;
-        q = headB;
-        while (p != q) {
-            //如果走完了自己的路，就走ta的路。
-            if (p != null) p = p.next;
-            else p = headB;
-            if (q != null) q = q.next;
-            else q = headA;
-            if (count < lenA + lenB){
-                count++;
-            }else {
-                //今生无缘。
-                return null;
-            }
-        }
-        return p;
+        return A;
+
+       /* 作者：Krahets
+        链接：https://leetcode.cn/problems/intersection-of-two-linked-lists-lcci/solutions/1190240/mian-shi-ti-0207-lian-biao-xiang-jiao-sh-b8hn/
+        来源：力扣（LeetCode）
+        著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。*/
     }
 }

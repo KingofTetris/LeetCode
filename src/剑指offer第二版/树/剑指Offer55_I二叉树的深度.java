@@ -39,7 +39,8 @@ public class 剑指Offer55_I二叉树的深度 {
      */
     public int maxDepth2(TreeNode root){
         if(root == null) return 0;
-        List<TreeNode> queue = new LinkedList<>(), tmp;
+        List<TreeNode> queue = new LinkedList<>();
+        List<TreeNode> tmp;
         queue.add(root);
         int res = 0;
         while(!queue.isEmpty()) { //当queue为空时，res就到底了。

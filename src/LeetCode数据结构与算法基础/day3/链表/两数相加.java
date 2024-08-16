@@ -52,66 +52,6 @@ public class 两数相加 {
         }
     }
 
-    //用0补齐链表，使得长度一致
-   /* public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        ListNode res = new ListNode();
-        int len1 = 0,len2 = 0;
-        ListNode p = l1;
-        ListNode q = l2;
-        while(p != null || q != null){
-            if (p != null)
-            {   len1++;
-                p = p.next;
-            }
-            if (q != null){
-                len2++;
-                q = q.next;
-            }
-        }
-
-
-        //现在p,q都指在l1,l2的尾巴
-        if (len1 > len2){
-            for (int i = 1; i < len1 - len2; i++) {
-                q.next = new ListNode(0);
-                q = q.next;
-            }
-        }
-        else{
-            for (int i = 1; i < len1 - len2; i++) {
-                p.next = new ListNode(0);
-                p = p.next;
-            }
-        }
-
-
-        //重新指回头部
-        p = l1;
-        q = l2;
-        int add = 0;//记录是否有进位
-        ListNode w = res;//指向结果链表的指针
-
-        int sum = 0;//相加结果
-
-        while (p!=null&&q!=null){
-            sum = add + q.val + p.val;
-            w.next = new ListNode(sum%10);
-            add = sum / 10;
-            w = w.next;
-            q = q.next;
-            p = p.next;
-        }
-
-
-        //最后还有进位
-        if (add > 0){
-            w.next = new ListNode(add);
-        }
-
-        //因为next才是真正的值，res是空节点
-        return res.next;
-    }*/
-
     //不用补齐，直接判断为null就当作0加上去
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         // 记录进位
@@ -134,6 +74,29 @@ public class 两数相加 {
             l1 = l1 == null ? l1 : l1.next;
             l2 = l2 == null ? l2 : l2.next;
         }
+        return dummy.next;
+    }
+
+    public ListNode addTwoNumbers2(ListNode l1, ListNode l2) {
+        int carry = 0; //进位
+        ListNode dummy = new ListNode();
+        ListNode p = dummy;//哑节点
+        //两个链表不为null 或者carry不为0的时候。继续循环
+        while(l1 != null || l2 != null || carry != 0){
+            //计算两者之和
+            int sum = (l1 == null? 0 : l1.val) + (l2 == null? 0: l2.val) + carry;
+            //计算进位
+            carry = sum / 10;
+            //计算该位的值
+            p.next = new ListNode(sum % 10);
+            p = p.next;//后移
+
+            //l1,l2后移
+            l1 = (l1 == null ? null : l1.next);
+            l2 = (l2 == null ? null : l2.next);
+        }
+
+        //最后返回dummy.next
         return dummy.next;
     }
 }

@@ -52,16 +52,15 @@ public class 最长连续序列 {
         // 遍历去重后的所有数字
         for (int num : set) {
             int cur = num;
-            // 只有当num-1不存在时，才开始向后遍历num+1，num+2，num+3......
-            //因为这个if条件，虽然看起来是for+while
-            //但是由于if (!set.contains(cur - 1))判断的存在，每个元素只会被遍历一次，因此时间复杂度也为O(n)。
+            int count = 1;//至少是1，因为自己就是一个连续数字
+            //寻找这个数是不是开头，即cur - 1 存不存在，不存在就可以是连续序列的开头
             if (!set.contains(cur - 1)) {
                 while (set.contains(cur + 1)) {
                     cur++;//当前数字自增。
+                    count++;
                 }
             }
-            // [num, cur]之间是连续的，数字有cur - num + 1个
-            ans = Math.max(ans, cur - num + 1);
+            ans = Math.max(ans, count);
         }
         return ans;
 

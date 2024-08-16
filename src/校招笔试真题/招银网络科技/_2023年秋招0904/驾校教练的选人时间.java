@@ -22,6 +22,8 @@ public class 驾校教练的选人时间 {
         int n = intervals.length;
         System.out.println(n - eraseOverlapIntervals(intervals));
     }
+
+    //其实找出重叠区间，减掉这些重叠区间也是一样。
     public static int eraseOverlapIntervals(int[][] intervals) {
         int n = intervals.length;
         if (n == 0) return 0;

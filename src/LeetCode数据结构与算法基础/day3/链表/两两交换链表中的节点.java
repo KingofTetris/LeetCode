@@ -37,7 +37,7 @@ import org.junit.Test;
 public class 两两交换链表中的节点 {
     @Test
     public void test(){
-        ListNode head = ListNode.createListNode(new int[]{1,2,3,4});
+        ListNode head = ListNode.createListNode(new int[]{1,2,3,4,5,6});
         ListNode node = swapPairs1(head);
         while (node != null){
             System.out.print(node.val + "\t");
@@ -78,11 +78,11 @@ public class 两两交换链表中的节点 {
         while (temp.next != null && temp.next.next != null){
              ListNode p1 = temp.next;
              ListNode p2 = temp.next.next;
-             //最重要的四句话 实际上是取了三个节点来交换next
+             //最重要的四句话 实际上是取了利用一个临时节点temp来交换next
              temp.next = p2;
              p1.next = p2.next;
              p2.next = p1;
-             //而且temp要换成p1，而不是temp.next 因为p1.next已经变了
+             //最后temp移动到p1，重复这个过程。
              temp = p1;
         }
         //dummyHead始终是不动的，dummyHead.next一直指向实际链表的头部

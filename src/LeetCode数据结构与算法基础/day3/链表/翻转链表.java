@@ -30,16 +30,22 @@ public class 翻转链表 {
             current = next;
         }
         return prev;*/
+
+        //尾插法，需要借助一个dummyHead和临时节点temp
+        //核心就是每次往dummy后面插就完了
         ListNode dummy = new ListNode();
         ListNode temp;
-        while (head != null){
-            temp = head;
-            head = head.next;
 
+        while (head != null){
+            //temp首先指向当前要插入的节点
+            temp = head;
+            head = head.next; //head后移
+
+            //将当前节点插入dummy之后
             temp.next = dummy.next;
             dummy.next = temp;
         }
-
+        //最后返回dummy.next即可
         return dummy.next;
     }
 

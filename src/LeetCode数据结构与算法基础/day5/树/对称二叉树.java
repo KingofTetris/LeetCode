@@ -73,7 +73,7 @@ public class 对称二叉树 {
             if (r1.val == r2.val) {
                 boolean b1 = helperSymmetric(r1.left, r2.right);
                 boolean b2 = helperSymmetric(r1.right, r2.left);
-                if (!b1 || !b2) return false;
+                if (!b1 || !b2) return false;//如果两个子树有一个不一样的返回false。
             } else {
                 return false;
             }
@@ -82,6 +82,8 @@ public class 对称二叉树 {
         } else if (r1 != null && r2 == null) {
             return false;
         }
+
+        //所有情况都符合了，那么他就是一颗对称二叉树
         return true;
     }
 }

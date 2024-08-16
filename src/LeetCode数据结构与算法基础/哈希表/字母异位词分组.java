@@ -12,6 +12,8 @@ import java.util.*;
 /*给你一个字符串数组，请你将 字母异位词 组合在一起。可以按任意顺序返回结果列表。
          组成字母相同，但是顺序不同
         字母异位词 是由重新排列源单词的字母得到的一个新单词，所有源单词中的字母都恰好只用一次。
+
+        简单来说就是字母相同的放一组，无所谓字母顺序，
         示例 1:
         输入: strs = ["eat", "tea", "tan", "ate", "nat", "bat"]
         输出: [["bat"],["nat","tan"],["ate","eat","tea"]]
@@ -58,9 +60,10 @@ public class 字母异位词分组 {
         Map<String, ArrayList<String>> map = new HashMap<>();
         for (int i = 0; i < strs.length ; i++) {
             char[] chars = strs[i].toCharArray();
-            Arrays.sort(chars);
-            String key = String.valueOf(chars);
-//            String key = chars.toString();
+            Arrays.sort(chars); //给字母排序
+            String key = String.valueOf(chars);//然后作为key
+
+            //不包含这个key就put,否则直接get，然后add进去即可
             if (!map.containsKey(key)) {
                 map.put(key, new ArrayList<>());
             }
@@ -69,6 +72,11 @@ public class 字母异位词分组 {
 
         //ArrayList<>(ArrayList<String>)
         //直接用map中的values 生成List 就这样写 List<>(map.values)
+        /**
+         * 最后我们只需要map中的value
+         * 可以直接List<>(放个集合进来)
+         */
+
         return new ArrayList<>(map.values());
     }
 }

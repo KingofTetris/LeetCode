@@ -60,25 +60,33 @@ public class 环形链表 {
         p2.next = p1;
         System.out.println(hasCycle(p1));
     }
-    //经典题目用双指针，如果快指针追上慢指针就一定有环
-    public boolean hasCycle(ListNode head) {
 
-        //因为没有自环点这种设定，单结点和空链表肯定不可能有环
-        if (head == null || head.next== null)
+
+    //经典题目用双指针，如果快指针追上慢指针就一定有环
+    //请你证明快指针一定会碰到慢指针？
+    //兔子每次走2步，乌龟每次1步，兔子相对乌龟来说其实就是乌龟不动，兔子走1步，如果有环，那么兔子一定会追到乌龟。
+    public boolean hasCycle(ListNode head) {
+        //没有单环这种东西限制，存在null 那么肯定无环。
+        if (head == null || head.next == null) {
             return false;
-        ListNode fast,slow;
-        fast = head;
-        slow = head;
-        while (slow != fast) {
-            //碰到结尾了，那肯定没环
-            if (fast == null || fast.next == null) {
-                return false;
-            }
+        }
+        //快慢指针
+        ListNode slow = head;
+        ListNode fast = head;
+        //注意一下这个停止条件，如果都从head出发，那么停止条件最好写出这个
+        //fast != null 且 fast.next != null
+        while (fast != null && fast.next != null) {
             fast = fast.next.next;
             slow = slow.next;
+            if (slow == fast) {
+                return true;
+            }
         }
-        //slow == fast
-        return true;
+        return false;
 
+      /*  作者：力扣官方题解
+        链接：https://leetcode.cn/problems/linked-list-cycle/solutions/440042/huan-xing-lian-biao-by-leetcode-solution/
+        来源：力扣（LeetCode）
+        著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。*/
     }
 }

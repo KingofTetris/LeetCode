@@ -38,4 +38,27 @@ public class 合并两个有序链表 {
         pre.next = (l1 == null) ? l2 : l1;
         return prehead.next;
     }
+
+    public ListNode mergeTwoLists2(ListNode list1, ListNode list2) {
+        ListNode dummyNode = new ListNode();
+        ListNode head = new ListNode();
+        //保存head地址
+        dummyNode.next = head;
+        ListNode q = list1;
+        ListNode p = list2;
+        while(q != null && p != null){
+            if(q.val < p.val){
+                head.next = q;
+                q = q.next;
+            }
+            else{
+                head.next = p;
+                p = p.next;
+            }
+            head = head.next;
+        }
+        if(q == null) head.next = p;
+        if(p == null) head.next = q;
+        return dummyNode.next.next;
+    }
 }

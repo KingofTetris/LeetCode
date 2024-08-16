@@ -41,6 +41,7 @@ public class 两数之和 {
             System.out.println(i);
         }
     }
+
     //没有排序的数组 暴力或者哈希表法
     public int[] twoSum(int[] nums, int target) {
         HashMap<Integer,Integer> map = new HashMap<>();

@@ -22,4 +22,17 @@ public class 移除元素 {
         }
         return i; //然后返回i即可，这样做的问题就是 i以后的元素都是0。
     }
+
+    //双指针 快慢指针
+    //当快指针指到val时，
+    public static int removeElement2(int[] nums,int val){
+        int slowIndex = 0;
+        for (int fastIndex = 0; fastIndex < nums.length; fastIndex++) {
+
+            if (val != nums[fastIndex]) {
+                nums[slowIndex++] = nums[fastIndex];
+            }
+        }
+        return slowIndex;
+    }
 }

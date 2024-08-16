@@ -17,7 +17,8 @@ public class NumMatrix {
             for (int j = 1; j <= n; j++) {
                 // 计算每个矩阵 [0, 0, i, j] 的元素和
                 //eg 比如[1][1]
-                preSum[i][j] = preSum[i-1][j] + preSum[i][j-1] + matrix[i - 1][j - 1] - preSum[i-1][j-1];
+                preSum[i][j] = preSum[i-1][j] + preSum[i][j-1]
+                        + matrix[i - 1][j - 1] - preSum[i-1][j-1];
             }
         }
     }

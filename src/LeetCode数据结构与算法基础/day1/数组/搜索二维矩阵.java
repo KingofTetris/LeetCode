@@ -28,7 +28,7 @@ public class 搜索二维矩阵 {
     @Test
     public void test(){
         int[][] matrix = {{1,4,7,11,15},{2,5,8,12,19},{3,6,9,16,22}};
-        System.out.println(searchMatrix(matrix, 8));
+        System.out.println(searchMatrix(matrix, 5));
     }
     //分析利用已经行列从小到大的排序的性质
     //可以选左下角 或者 右上角的元素当作初始点
@@ -39,13 +39,20 @@ public class 搜索二维矩阵 {
 
     //这样的时间复杂度是O(n+m)
     //这里取右上角的数作为初始点
+
+    /**
+     * 这题你最好取左下，或者右上的点。
+     * 因为0，0 不管往哪走都是增大， n-1,n-1则都是减小。
+     *
+     * 左下，右上这种走法才有大小可以比较。
+     * @param matrix
+     * @param target
+     * @return
+     */
     public boolean searchMatrix(int[][] matrix, int target) {
         int row = matrix.length;
         int col = matrix[0].length;
-
         int curRow = 0, curCol = col - 1;
-
-
         //终止条件就是走出界
         //curRow > row 或者 curCol < 0
         while(curRow < row && curCol >= 0){
@@ -60,6 +67,31 @@ public class 搜索二维矩阵 {
         }
 
         //遍历完都找不到就返回false
+        return false;
+    }
+
+    /**
+     * 左下角出发
+     * @param matrix
+     * @param target
+     * @return
+     */
+    public boolean searchMatrix2(int[][] matrix, int target) {
+        int row = matrix.length;
+        int col = matrix[0].length;
+
+        int curRow = row - 1,curCol = 0;//以左下为基准去找
+        while(curRow >= 0 && curCol <= col - 1){
+            if(matrix[curRow][curCol] == target){
+                return true;
+            }
+            else if(matrix[curRow][curCol] > target){
+                curRow--; //向上变小
+            }
+            else{
+                curCol++;//向右变大
+            }
+        }
         return false;
     }
 }

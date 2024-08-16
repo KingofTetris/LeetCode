@@ -15,7 +15,7 @@ import org.junit.Test;
 public class 螺旋矩阵II {
     @Test
     public void test() {
-        int[][] ans = generateMatrix(20);
+        int[][] ans = generateMatrix(4);
         for (int i = 0; i < ans.length; i++) {
             for (int j = 0; j < ans[0].length; j++) {
                 System.out.print(ans[i][j] + "\t");
@@ -27,21 +27,23 @@ public class 螺旋矩阵II {
     //2 K神的题解。这个比较好理解
     // 链接：https://leetcode.cn/problems/spiral-matrix-ii/solutions/12594/spiral-matrix-ii-mo-ni-fa-she-ding-bian-jie-qing-x/
     public int[][] generateMatrix(int n) {
+        //和螺旋矩阵I差不多，还是上下左右先定义好。
         int l = 0, r = n - 1, t = 0, b = n - 1;
         int[][] mat = new int[n][n];
         int num = 1, tar = n * n;
         while(num <= tar){
+            //还是l->r,t->b,r->l,b->t的顺序去走。
             for(int i = l; i <= r; i++) mat[t][i] = num++; // 只要右边还没到尽头，先往右
-            //往下走 t++;
+            //去掉上面一层 t++;
             t++;
             for(int i = t; i <= b; i++) mat[i][r] = num++; // 右边到头再往下
-            //往左走 r--
+            //去掉右边一层 r--
             r--;
             for(int i = r; i >= l; i--) mat[b][i] = num++; // 下边到头再往左
-            //往上走 b--
+            //去掉下面一层 b--
             b--;
             for(int i = b; i >= t; i--) mat[i][l] = num++; // 左边到头在网上
-            //往右走 l++
+            //去掉左边一层 l++
             l++;
         }
         return mat;

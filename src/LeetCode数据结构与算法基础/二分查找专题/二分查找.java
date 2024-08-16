@@ -30,6 +30,9 @@ import org.junit.Test;
         著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。*/
 public class 二分查找 {
 
+   /* public static void main(String[] args) {
+
+    }*/
     @Test
     public void test(){
         int[] nums = {-1,2,4,5,9,12};
@@ -39,17 +42,42 @@ public class 二分查找 {
         System.out.println(BinarySearch(nums, k2));
     }
 
-
+    //左闭右闭
     public int BinarySearch(int[] nums,int key) {
         int high = nums.length - 1;
         int low = 0;
-
+        //左闭右闭的写法 条件就是while(low <= high)
         while(low <= high){
             int mid = (low + high) >> 1; //右移一位比/2效率要高
             if(nums[mid] == key) return mid;
             if (nums[mid] < key) low = mid + 1; //mid右移一位
             if(nums[mid] > key)  high = mid -1;//mid左移一位
         }
+        //找不到返回-1
+        return -1;
+    }
+
+    //左闭右开
+    public int BinarySearch2(int[] nums,int target){
+        int left = 0;
+        int right = nums.length;
+
+        while(left < right){
+            int mid = left + (right - left) / 2;
+            if (target < nums[mid])
+            {
+                right = mid;//差别3
+            }
+            else if (target > nums[mid])
+            {
+                left = mid + 1;
+            }
+            else
+            {
+                return mid;
+            }
+        }
+
         return -1;
     }
 }

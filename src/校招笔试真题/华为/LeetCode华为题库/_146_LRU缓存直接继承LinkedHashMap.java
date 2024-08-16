@@ -15,7 +15,6 @@ public class _146_LRU缓存直接继承LinkedHashMap extends LinkedHashMap<Integ
 
     public _146_LRU缓存直接继承LinkedHashMap(int capacity){
         //直接使用父类的构造方法。
-
         //第三个参数accessOrder 排序模式
         //true:按照访问顺序排序，显然这个就是LRU
         //false:按照插入顺序排序

@@ -35,7 +35,7 @@ public class 长度最小的子数组 {
         //如果sum之和一直小于target right继续动
         //如果sum之和大于等于target 那么right停下left动 [2,3,1,2]
         //也就变成了[3,1,2] 还是>=7
-        //left继续动变成 [1,2] 这个时候< 7 left继续动
+        //left继续动变成 [1,2] 这个时候< 7 right继续动
         //重复这个过程直到right再加一就大于数组长度就结束。
         int left = 0,right = 0;
         int n = nums.length;
@@ -46,7 +46,9 @@ public class 长度最小的子数组 {
            /* for (int i = left; i <= right; i++) {
                 sum += nums[i];
             }*/
+            //只要sum大于等于target了就需要更新res的值
             if (sum >= target){
+                //更新res的最小值
                 res = Math.min(res,right - left + 1);
                 //sum先减去left再左移
                 sum -= nums[left];

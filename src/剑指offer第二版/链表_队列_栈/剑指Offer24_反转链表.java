@@ -63,18 +63,20 @@ public class 剑指Offer24_反转链表 {
          * 头插法的固定写法。背下来
          * 前后顺序一定不能错。
          */
-        ListNode dummy = new ListNode();//dummy节点方便操作。
-        while (head != null) {
-            ListNode temp = head;//每次获得新的表头。
-            head = head.next;//然后就要马上让head后移。
-            // 因为我们后面会修改temp的next，这个temp其实就是head。因为他们的地址是一样的。
-            //如果你不在这里原本还保留的地方后移head，那么原本的链表就会被舍弃，就变成只插入了1个!!
-            //下面把temp插入到表头。
-            temp.next = dummy.next; // temp指向dummy的next，完成头插第一步,temp.next舍弃原来的指向，转向到dummy尾巴。
-            dummy.next = temp; //dummy的next指向temp，完成头插第二步 在dummy里面插入这个temp
-            //经过上面两补就完成了temp置于表头的操作
+        ListNode dummy = new ListNode(-1);
+
+        //终止条件head == null
+        while(head != null){
+            //一开始使用temp接住这个要插入的节点
+            ListNode temp = head;
+            //head后移
+            head = head.next;
+
+            //temp断链，指向dummy.next
+            temp.next = dummy.next;
+            dummy.next = temp;//接在dummy后面
         }
-        return dummy.next;//返回dummy.next即可
+        return dummy.next;
     }
 
     /**
