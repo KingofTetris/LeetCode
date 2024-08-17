@@ -27,7 +27,8 @@ public class 验证二叉搜索树 {
     @Test
     public void test(){
         TreeNode tree = TreeUtils.createTree(new Integer[]{4,2,7,1,3,5,8});
-        System.out.println(isValidBST(tree));
+        boolean validBST = isValidBST(tree);
+        System.out.println(validBST);
     }
 
     //BST<-->中序遍历是一个递增序列。
@@ -43,14 +44,23 @@ public class 验证二叉搜索树 {
      * 最优解，遍历的同时判断。
      */
     long maxVal = Long.MIN_VALUE;
+
+    //验证是否是BST，其实就是中序遍历看他是否是一个升序序列。
+    //不是升序就不是。
     public boolean isValidBST(TreeNode root) {
         //空节点当然是bst
         if (root == null) {
             return true;
         }
+        /**
+         * 中序遍历模板
+         * xx(left)
+         * xxxx
+         * xx(right)
+         */
         // 左
         boolean left = isValidBST(root.left);
-        // 中
+        // 根
         // 按照bst的顺序，后一个节点肯定比前一个节点要大
         //否则就不是bst
         if (root.val > maxVal){
@@ -60,6 +70,7 @@ public class 验证二叉搜索树 {
         }
         // 右
         boolean right = isValidBST(root.right);
+
         return left && right;
     }
 

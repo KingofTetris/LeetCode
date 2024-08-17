@@ -34,16 +34,13 @@ public class 成对的数量 {
     //空间换时间，用Map来存储数
     public static void main(String[] args){
         Scanner sc =  new Scanner(System.in);
-
         int N = sc.nextInt(),X = sc.nextInt();
-
         int[] nums = new int[N];
         Map<Integer,Integer> map = new HashMap<>();
         for (int i = 0; i < N; i++) {
             nums[i] =  sc.nextInt();
             map.put(nums[i],map.getOrDefault(nums[i],0) + 1);
         }
-
         int count = 0;
         //循环遍历数组
         for (int i = 0; i < N; i++) {

@@ -2,9 +2,11 @@ package LeetCode数据结构与算法基础.day3.链表;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Queue;
 
 class 随机链表的复制 {
     public Node copyRandomList(Node head) {
+
         if(head == null) return null;
         Node cur = head;
         Map<Node, Node> map = new HashMap<>();

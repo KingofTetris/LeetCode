@@ -47,6 +47,9 @@ public class 二叉树的层序遍历 {
             return list;
         Queue<TreeNode> queue = new LinkedList();
         //根节点不为空入队。
+        /**
+         * 队列用LinekdList实现就行了，入队offer，出队poll()
+         */
         queue.offer(root);
         while (!queue.isEmpty()) {
             //每次建一个新列表 最后list.add就行了 不用耗费心机去设置layer
