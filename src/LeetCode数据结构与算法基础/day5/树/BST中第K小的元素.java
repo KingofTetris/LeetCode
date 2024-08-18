@@ -10,10 +10,7 @@ package LeetCode数据结构与算法基础.day5.树;
 
 import org.junit.Test;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /** 给定一个二叉搜索树的根节点 root ，和一个整数 k ，请你设计一个算法查找其中第 k 个最小元素（从 1 开始计数）。
         示例 1：
@@ -41,19 +38,56 @@ public class BST中第K小的元素 {
     //BST的中序遍历实际上是个升序数组，找第K小就直接变成了找数组中的第K个元素
     public int kthSmallest(TreeNode root, int k) {
         inorderTraversal(root);
+        //最后返回下标k-1的元素就是第k小的元素
         return list.get(k - 1);
     }
 
     public List<Integer> inorderTraversal(TreeNode root) {
+        /**
+         * 递归三部曲
+         * 1.递归参数和返回值
+         * 2.递归终止条件
+         * 3.递归单层逻辑
+         */
         if(root == null) return null;
         inorderTraversal(root.left);
         list.add(root.val);
         inorderTraversal(root.right);
         return list;
     }
+
+
+    /**
+     * 再省一点就是用一个变量order来记录到哪了。
+     * @param root
+     * @param k
+     * @return
+     */
+    public int kthSmallest3(TreeNode root, int k) {
+        traverse(root,k);
+        return val;
+    }
+
+    int order = 0;
+    int val = -1;
+
+    public void traverse(TreeNode root,int k){
+        if(root == null) return;
+
+        traverse(root.left,k);
+
+        order++;
+        if(order == k){ //找到order == k的时候就可以return了
+            val = root.val;
+            return;
+        }
+
+        traverse(root.right,k);
+    }
+
     //用栈对上面中序遍历进行改写，即从递归改为迭代。
     public int kthSmallest2(TreeNode root, int k) {
-        Deque<TreeNode> stack = new ArrayDeque<TreeNode>();
+        Stack<TreeNode> stack = new Stack<>();
         while (root != null || !stack.isEmpty()) {
             //一直去找左孩子，BST的性质就是左边小。
             //用栈存储则越小就在越上面

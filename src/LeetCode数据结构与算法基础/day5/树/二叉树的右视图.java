@@ -2,9 +2,7 @@ package LeetCode数据结构与算法基础.day5.树;
 
 import org.junit.Test;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * @author by KingOfTetris
@@ -19,33 +17,25 @@ public class 二叉树的右视图 {
 
     //层序遍历返回每层最后的节点即可。
     public List<Integer> rightSideView(TreeNode root) {
-        List<List<TreeNode>> levels = new LinkedList<>();
+        if (root == null) {
+            return new LinkedList<>();
+        }
+        //层序遍历其实就只需要一个队列就够了，其他的都是用于接受中间结果的变量
         List<Integer> res = new LinkedList<>();
-        if (root == null) return res;
-        Queue<TreeNode> queue = new LinkedList<>();
-        queue.offer(root);
-        while (!queue.isEmpty()){
-            LinkedList<TreeNode> level = new LinkedList<>();
-            int curSize = queue.size();
-            //把当前队列中的节点都添加道队列中
-            for (int i = 0; i < curSize; i++) {
-                TreeNode temp = queue.poll();
-                level.add(temp);
-                if (temp.left != null){
-                    queue.add(temp.left);
+        Queue<TreeNode> q = new LinkedList<>();
+        q.add(root);
+        while(!q.isEmpty()){
+            int size = q.size();
+            for (int i = 0; i < size; i++) {
+                TreeNode cur = q.poll();
+                if (i == size - 1){
+                    res.add(cur.val);
                 }
-                if (temp.right != null){
-                    queue.add(temp.right);
-                }
+                //还是入这个队列，因为循环条件里面限制了每层只遍历size，然后开始下一层
+                if (cur.left != null) q.add(cur.left);
+                if (cur.right != null) q.add(cur.right);
             }
-            levels.add(level);
         }
-
-        //然后取每层最后的节点添加到res中即可
-        for (List<TreeNode> level : levels) {
-            res.add(level.get(level.size() - 1).val);
-        }
-
         return res;
     }
 }

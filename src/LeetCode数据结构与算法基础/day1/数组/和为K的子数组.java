@@ -43,9 +43,6 @@ public class 和为K的子数组 {
     //因为题目要求的就是连续子数组为K，前缀和就很好地满足这个目的。
     public int subarraySum2(int[] nums, int k) {
         //计算前缀和
-        /**
-         *
-         */
         int[] preSum = new int[nums.length + 1];
         preSum[0] = 0;
         for (int i = 0; i < nums.length; i++) {
@@ -55,6 +52,8 @@ public class 和为K的子数组 {
         int count = 0;
         for (int left = 0; left < nums.length; left++) {
             for (int right = left; right < nums.length; right++) {
+                //这个公式你不能忘
+                //preSum[r + 1] - preSum[l] 就是[l,r]的区间和
                 if (preSum[right + 1] - preSum[left] == k){
                     count++;
                 }

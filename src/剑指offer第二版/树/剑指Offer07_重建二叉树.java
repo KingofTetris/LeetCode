@@ -81,7 +81,6 @@ public class 剑指Offer07_重建二叉树 {
     //本来不想写这个map的，但是后面发现确实要写，不然递归起来很麻烦
     //用来保存中序遍历数值与下标的关系
     HashMap<Integer,Integer> inOrderMap = new HashMap<>();
-
     /**
      * 根据前序和中序重建二叉树
      * 二叉树的算法一般都是递归想起来简单 但确实很慢，而且时间复杂度和空间复杂度比较难分析
@@ -95,7 +94,8 @@ public class 剑指Offer07_重建二叉树 {
             inOrderMap.put(inorder[i],i);
         }
 
-        return buildTreeUsePreAndIn(preorder, inorder, 0, preorder.length - 1, 0, inorder.length - 1);
+        return buildTreeUsePreAndIn(preorder, inorder, 0, preorder.length - 1,
+                0, inorder.length - 1);
         //-1是因为数组下标就到len-1
     }
 
@@ -109,22 +109,28 @@ public class 剑指Offer07_重建二叉树 {
         for (int i = 0; i < inorder.length; i++) {
             inOrderMap.put(inorder[i],i);
         }
-        return buildTreeUsePostAndIn(postorder, inorder, 0, postorder.length - 1, 0, inorder.length - 1);
+        return buildTreeUsePostAndIn(postorder, inorder, 0, postorder.length - 1,
+                0, inorder.length - 1);
     }
 
 
-    private TreeNode buildTreeUsePreAndIn(int[] preorder, int[] inorder, int l1, int r1, int l2, int r2) {
+    private TreeNode buildTreeUsePreAndIn(int[] preorder, int[] inorder,
+                                          int l1, int r1, int l2, int r2) {
         //递归结束的条件，当左右子树都是空的时候就可以停止了
-        if (l1 > r1 && l2 > r2){  //其实这里 &&和或者都一样，因为是同一棵树。
+        if (l1 > r1 && l2 > r2){  //其实这里 && || 都一样，因为是同一棵树。
             return null; //返回空节点给叶子
         }
+        //找到根节点
         int rootVal = preorder[l1];
         TreeNode root = new TreeNode(rootVal);
+
+        //找到当前值的下标
         int index = inOrderMap.get(rootVal);
         //l1,r1. l2,r2 自己找张纸写一下顺序。
-        root.left = buildTreeUsePreAndIn(preorder,inorder,l1 + 1,l1 + (index - l2),l2,index-1);
-        root.right = buildTreeUsePreAndIn(preorder,inorder,l1 + (index - l2)  + 1,r1,index + 1,r2);
-
+        root.left = buildTreeUsePreAndIn(preorder,inorder,l1 + 1,l1 + (index - l2),
+                l2,index-1);
+        root.right = buildTreeUsePreAndIn(preorder,inorder,l1 + (index - l2)  + 1,
+                r1,index + 1,r2);
         return root;
     }
 

@@ -33,11 +33,11 @@ public class 路径之和 {
         if (root == null) {
             return false;
         }
+        //只要有一个true就OK了。
         if (root.left == null && root.right == null) {
             return sum == root.val;
         }
         return hasPathSum(root.left, sum - root.val)
                 || hasPathSum(root.right, sum - root.val);
-
     }
 }
