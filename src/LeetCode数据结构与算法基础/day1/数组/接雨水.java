@@ -1,11 +1,19 @@
 package LeetCode数据结构与算法基础.day1.数组;
 
+import org.junit.Test;
+
 /**
  * @author by KingOfTetris
  * @date 2024/8/14
  */
 public class 接雨水 {
 
+    @Test
+    public void test(){
+        int[] height = {0,1,0,2,1,0,1,3,2,1,2,1};
+        int trap = trap(height);
+        System.out.println(trap);
+    }
     //计算每一列能够接住的雨水
     //实际上就是 min(lHeight,rHeight) - height[i]
     // 左右两边的高度的较小值减去当前列的高度，因为宽度都是1 就没必要*1了
@@ -17,12 +25,13 @@ public class 接雨水 {
         int[] maxLeft = new int[N];
         int[] maxRight = new int[N];
 
-        //记录每根柱子左边的最大高度
+        //记录当前柱子的左边柱子的最大高度
         maxLeft[0] = height[0];
         for (int i = 1; i < N; i++) {
+            //比较当前高度，和左边max的高度
             maxLeft[i] = Math.max(height[i], maxLeft[i - 1]);
         }
-        //记录右边柱子的最大高度
+        //记录当前柱子的右边柱子的最大高度
         maxRight[N - 1] = height[N - 1];
         for (int i = N - 2; i >= 0; i--) {
             maxRight[i] = Math.max(height[i], maxRight[i + 1]);
@@ -31,7 +40,7 @@ public class 接雨水 {
         //求每列柱子的接水面积
         int sum = 0;
         for (int i = 0; i < N; i++) {
-            //左右两根柱子更小的那个 - Height[i]
+            //(左右两根柱子更小的那个 - Height[i])  * 1
             int count = Math.min(maxLeft[i], maxRight[i]) - height[i];
             //如果能接住水，如果是负数是接不了雨水的
             if (count > 0) sum += count;

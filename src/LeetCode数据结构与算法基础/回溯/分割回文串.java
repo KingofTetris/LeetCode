@@ -32,7 +32,7 @@ public class 分割回文串 {
         //如果起始位置大于s的大小，说明找到了一组分割方案
         if (startIndex >= s.length()) {
             //每次把当前满足条件的path放到结果中，不能直接add(path)，不然只有最后一个。因为path指向的永远是
-            //同一个对象
+            //同一个对象，path每次会回溯，这个地址指向的全是空列表，只能new保留他的中间状态。
             res.add(new LinkedList<>(path));
             return;
         }

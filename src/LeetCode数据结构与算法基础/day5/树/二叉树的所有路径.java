@@ -13,13 +13,14 @@ public class 二叉树的所有路径 {
 
     @Test
     public void test(){
-        TreeNode tree = TreeUtils.createTree(new Integer[]{1});
+        TreeNode tree = TreeUtils.createTree(new Integer[]{1,3,5,3,1});
         TreeUtils.show(tree);
         List<String> stringList = binaryTreePaths(tree);
         for (String s : stringList) {
             System.out.println(s);
         }
     }
+
     List<String> res = new LinkedList<>();
     public List<String> binaryTreePaths(TreeNode root) {
         if (root == null) return res;

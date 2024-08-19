@@ -24,6 +24,7 @@ public class 全排列 {
     List<Integer> path = new LinkedList<>();
     //这个used数组的作用和前面的回溯也是差不多的。
     //如果一个元素以及取过了，我们把他标记为1，避免重复多次使用。
+    //排列也需要这个used数组来区分顺序，以防重复。
     boolean[] used;
     //全排列顺序是有区别的。不能像组合那样不区分。
     public List<List<Integer>> permute(int[] nums){
@@ -44,9 +45,14 @@ public class 全排列 {
         }
         //这里是i=0 不是startIndex了！  排列和组合的差别就在这。
         //我们用used标记我们用过了什么元素。
+        /**
+         * 注意这里不是startIndex，排列每个元素都可以重复使用
+         * 只是你前面用过了后面就别再用了，所以需要个used数组
+         */
         for (int i = 0; i < nums.length; i++) {
             //多了个标记数组，就要对这个标记数组加上对应的操作。
-            if (used[i]) continue;
+            //如果前面已经用过了，就没必要再继续了。
+            if (used[i] == true) continue;
             path.add(nums[i]);
             used[i] = true;
             backtracking(nums);

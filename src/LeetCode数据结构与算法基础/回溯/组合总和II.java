@@ -63,6 +63,7 @@ public class 组合总和II {
 
     List<Integer> path = new LinkedList<>();
     List<List<Integer>> ans = new ArrayList<>();
+    //树层去重，这个used数组很重要。
     boolean[] used;
     int sum = 0;
 
@@ -76,6 +77,7 @@ public class 组合总和II {
     }
 
     private void backTracking(int[] candidates, int target, int startIndex) {
+        //终止条件
         if (sum == target) {
             ans.add(new ArrayList(path));
         }
@@ -91,7 +93,10 @@ public class 组合总和II {
             //最后的used[i-1] == false
             //是因为我们每次回溯以后会把used改为false
             //所以需要前面used为false;留下树枝的结果。
-            if (i > 0 && candidates[i] == candidates[i - 1] && !used[i - 1]) {
+            //used[i - 1] == false 才能确定树层的前一个相同元素已经使用过了。
+            //保证树层去重，树枝上是可以重复的
+            //如果used[i -1]==true 那说明是树枝的状态，树枝是可以重复的
+            if (i > 0 && candidates[i] == candidates[i - 1] && used[i - 1] == false) {
                 continue;
             }
             used[i] = true;

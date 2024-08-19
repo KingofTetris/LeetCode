@@ -10,7 +10,7 @@ import java.util.List;
  * @author by KingOfTetris
  * @date 2023/10/23
  */
-public class 递增子序列 {
+public class 非递减子序列 {
 
     @Test
     public void test(){
@@ -51,7 +51,7 @@ public class 递增子序列 {
         }
         //用set来记录当前树层是否已经取过相同大小的元素
         //树枝是不影响的，所以最后递归的时候不用还原set
-        HashSet<Integer> set = new HashSet<>();
+        HashSet<Integer> set = new HashSet<>();//每层新建一个set
         for (int i = startIndex; i < nums.length; i++) {
             //1.如果nums[i] 小于 path最后一个元素，那么就不是递增子序列
             //2.nums[i]在树层上已经取过了，就不要再重复取了。

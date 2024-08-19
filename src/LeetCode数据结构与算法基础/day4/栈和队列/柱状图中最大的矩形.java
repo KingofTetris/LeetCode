@@ -22,6 +22,8 @@ public class 柱状图中最大的矩形 {
      */
     public int largestRectangleArea(int[] heights) {
 
+
+        //这个和接雨水反过来，那么找最大，这边找最小。
         //去左右两边找最远的小于自己高度的柱子下标
         int[] minLeftIndex = new int[heights.length];
         int[] minRightIndex = new int[heights.length];

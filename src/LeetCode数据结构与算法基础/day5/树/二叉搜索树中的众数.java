@@ -8,7 +8,9 @@ import java.util.*;
  */
 public class 二叉搜索树中的众数 {
 
-
+    //普通二叉树就只能遍历完，用个map记录出现的次数
+    //然后去找众数
+    //BST就可以用pre和cur来比较。
     /**
      * 普通中序遍历完，加入数组以后查询众数，超时。
      * 因为你遍历了一次二叉树，又遍历了一次数组。
@@ -35,25 +37,36 @@ public class 二叉搜索树中的众数 {
         return res;
     }
     public void findMode1(TreeNode root) {
+
+        /**
+         * 还是一个中序遍历模板起手
+         * if(root == null) return;
+         * findMode1(left)
+         * xxx
+         * findMode1(right)
+         */
         if (root == null) {
             return;
         }
         findMode1(root.left);
+        //当前值
         int rootValue = root.val;
         // 计数
         //pre的null说明是根节点
         //当前值不等于preVal说明不是同一个值
         //重新计数
         if (pre == null || rootValue != pre.val) {
+            //重置为1
             count = 1;
         } else {
+            //同一个值次数+1
             count++;
         }
         // 更新结果以及maxCount
         //如果count已经大于maxCount了，
         //就要把结果清空重新添加值
         if (count > maxCount) {
-            resList.clear();
+            resList.clear();//清空
             resList.add(rootValue);
             maxCount = count;
         } else if (count == maxCount) {

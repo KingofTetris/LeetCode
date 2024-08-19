@@ -23,6 +23,7 @@ public class 使用最小花费爬楼梯 {
     public int minCostClimbingStairs(int[] cost) {
         //假设达到dp[i] 的位置所需要消耗的最小花费
         int n = cost.length;
+//        System.out.println(n);
         int[] dp = new int[n + 1];
         //递推公式是什么呢？
         // 就是前一步跳1步的花费 和跳两步的花费。

@@ -12,7 +12,7 @@ public class 普通二叉树的最近公共祖先 {
     public static void main(String[] args) {
         TreeNode tree = TreeUtils.createTree(new Integer[]{3,5,1,6,2,0,8,null,null,7,4});
         TreeUtils.show(tree);
-        TreeNode p = TreeUtils.findTreeNode(tree, 4);
+        TreeNode p = TreeUtils.findTreeNode(tree, 8);
         TreeNode q = TreeUtils.findTreeNode(tree, 0);
         TreeNode lca = LCA(tree, p, q);
         System.out.println("LCA:");

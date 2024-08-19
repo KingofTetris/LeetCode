@@ -30,7 +30,6 @@ public class 组合总和III {
     List<List<Integer>> res = new LinkedList<>();
     List<Integer> path = new LinkedList<>();
 
-
     public void combineSum(int n, int k) {
         if (n > 9 * k) return; //如果k个9都满足不了n 那么就没必要回溯了，不可能加得到。
         backtracking(n, k, 1);
@@ -38,7 +37,7 @@ public class 组合总和III {
     }
 
     private void backtracking(int n, int k, int startIndex) {
-        //终止条件
+        //终止条件 sum == n && path.size() == k
         int sum = 0;
         for (Integer i : path) {
             sum += i;

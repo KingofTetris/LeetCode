@@ -28,6 +28,7 @@ public class 子集 {
 
     //求子集是不用剪枝的，因为你必须遍历完整棵树才知道结果。
     private void backTracking(int[] nums, int startIndex) {
+        //只要有path就添加到res中。
         res.add(new ArrayList<>(path));//把当前path添加到结果中。
         //终止条件,其实这道题可以不加
         if (startIndex >= nums.length){

@@ -9,7 +9,7 @@ import java.util.List;
  * @author by KingOfTetris
  * @date 2023/10/23
  */
-public class IP复原 {
+public class 复原IP地址 {
 
     @Test
     public void test() {
@@ -33,7 +33,11 @@ public class IP复原 {
     public List<String> restoreIpAddresses(String s) {
         if (s.length() > 12) return res;//大于12 那么就不可能有合法的ip地址
         //用StringBuilder来完成字符串的拼接，节省空间。
+        //因为我们知道直接用+号拼接字符串，相当于要多创建2个对象
+        //+号 底层其实就是用StringBuilder拼接的，然后再用String.toString方法返回就多了两个对象浪费空间和效率
         StringBuilder sb = new StringBuilder(s);
+        //这题的难道应该是 回溯函数的参数应该怎么设置，pointNum，这个分割点如果已经有3个了，就说明分成四段了。
+        //就要去判断是否合法
         backTracking(sb, 0, 0);
         return res;
     }

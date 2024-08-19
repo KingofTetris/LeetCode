@@ -25,7 +25,7 @@ public class N皇后 {
 
     @Test
     public void test() {
-        List<List<String>> lists = solveNQueens(8);
+        List<List<String>> lists = solveNQueens(4);
         int i = 1;
         for (List<String> l : lists) {
             System.out.println("第" + i + "种方案:如下");
