@@ -3,6 +3,8 @@ package LeetCode数据结构与算法基础.day1.数组;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author KingofTetris
@@ -41,6 +43,32 @@ public class 两个数组的交集II {
         for (int i = 0; i < test.length; i++) {
             System.out.print(test[i] + "\t");
         }
+    }
+
+    @Test
+    public void test2(){
+        //java 集合的交并补
+        int[] num1 = {4,9,5,4,4}; // 4 4 4 5 9
+        int[] num2 = {9,4,9,8,4,6}; // 4 4 6 8 9 9
+        Set<Integer> set1 = new HashSet<>();
+        Set<Integer> set2 = new HashSet<>();
+        for (int i : num1) {
+            set1.add(i);
+        }
+        for (int i : num2) {
+            set2.add(i);
+        }
+        /**
+         * 定义两个Integer类型的非空集合set1和set2，
+         * 则在使用JDK中的方法，可以实现集合的交集、并集和差集，方法如下：
+         *
+         * 交集 set1.retainAll(set2)；
+         * 并集 set1.addAll(set2)；
+         * 差集 or 补集 set1.removeAll(set2)。
+         *       温馨提示，它们都是把结果集记录在set1中，使用的时候需要留意。
+         */
+         set1.retainAll(set2);
+         System.out.println(set1);
     }
     //法一 哈希表(无序有序都能用)
     //由于同一个数字在两个数组中都可能出现多次，因此需要用哈希表存储每个数字出现的次数。

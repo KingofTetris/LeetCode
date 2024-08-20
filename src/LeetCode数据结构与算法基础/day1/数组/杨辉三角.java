@@ -51,7 +51,6 @@ public class 杨辉三角 {
     public List<List<Integer>> generate(int numRows) {
         //ArrayList实现了List接口
         List<List<Integer>> ret = new ArrayList<>();
-
         //外层是行数0 --- numRows-1
         //内层是每行的元素的序号 0 --- i+1-1 = i
         for (int i = 0; i < numRows; i++) {
