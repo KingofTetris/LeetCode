@@ -1,4 +1,4 @@
-package LeetCode数据结构与算法基础.动态递归.完全背包;
+package LeetCode数据结构与算法基础.动态递归;
 
 /**
  * @author by KingOfTetris
