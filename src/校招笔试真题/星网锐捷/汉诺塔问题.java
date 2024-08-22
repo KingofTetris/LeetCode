@@ -9,7 +9,10 @@ import java.util.Arrays;
  */
 public class 汉诺塔问题 {
     public static void main(String[] args) {
-
+        int n = 5;
+        汉诺塔问题 example = new 汉诺塔问题();
+        ArrayList<String> solution = example.getSolution(n);
+        System.out.println(solution);
     }
 
     //三根柱子,left mid right

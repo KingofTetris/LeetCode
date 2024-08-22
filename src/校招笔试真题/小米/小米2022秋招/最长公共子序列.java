@@ -16,6 +16,8 @@ import java.util.Scanner;
  *
  * 子序列不要求是连续子串，但是要保证相对顺序
  * 输出 6 就是123456
+ *
+ * 这种送分题你都不会做，当初不刷代码随想录。蠢啊！
  */
 public class 最长公共子序列 {
     public static void main(String[] args) {
