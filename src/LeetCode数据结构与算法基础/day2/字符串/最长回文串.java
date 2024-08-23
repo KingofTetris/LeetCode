@@ -33,6 +33,8 @@ import java.util.Map;
         我们可以构造的最长的回文串是"dccaccd", 它的长度是 7。*/
 public class 最长回文串 {
 
+    //注意这题和直接去字符串中找回文串不一样，他是要去构造。
+    //那就统计各个字符的数量，偶数都加上，奇数只加最大的那个就可以了。
     @Test
     public void test() {
         String s = "civilwartestingwhetherthatnaptionoranynarti" +
@@ -78,21 +80,28 @@ public class 最长回文串 {
             //累计一下字符串中各个字符出现的次数
             map.put(arr[i], map.getOrDefault(arr[i], 0) + 1);
         }
-        //count记录奇数次出现的情况
-        int count = 0;
-        int len = 0;
+        //记录奇数次出现的情况
+        int oddCount = 0;
+        //结果
+        int result = 0;
+        /**
+         * 遍历map
+         */
         for (Map.Entry<Character, Integer> item : map.entrySet()) {
-            //如果count是奇数，那么我们就不全部都取，只取他的偶数部分
-            if (item.getValue() % 2 != 0) {
-                count++; //count就是记录奇数出现的次数，最后len要-count
+            //所有字符都可以选，只是如果我奇数，我们要给他减1,再加上去
+            int val = item.getValue();
+            if (val % 2 != 0) {
+                //奇数-1
+                result += (val - 1);
+                oddCount++;
+            } else {
+                result += val;
             }
-            len = len + item.getValue();
         }
-        //如果没有奇数个的字符，那直接返回len
-        //有的话，就减去count个，
-        //最后+1是因为对于最长的那个奇数符号，我们全部都取，
-        // 让他多出来的那一个符号作为对称轴。仍然能保证回文。
-        return count == 0 ? len : len - count + 1;
+
+        //注意最大的那个奇数字符 我们需要全部取 当中心，最后+1
+        //判断有没有奇数次
+        return oddCount == 0 ? result : result + 1;
 
     }
 }

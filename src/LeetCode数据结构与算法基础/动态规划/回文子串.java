@@ -1,5 +1,7 @@
 package LeetCode数据结构与算法基础.动态规划;
 
+import org.junit.Test;
+
 /**
  * @author by KingOfTetris
  * @date 2024/8/22
@@ -7,8 +9,15 @@ package LeetCode数据结构与算法基础.动态规划;
 public class 回文子串 {
 
 
+    @Test
+    public void test(){
+        String s = "abccccdd";
+        //badab
+        int countSubstrings = countSubstrings(s);
+        System.out.println(countSubstrings);
+    }
     /**
-     * dp
+     * 求出字符串s中有多少个回文串
      * @param s
      * @return
      */
@@ -30,24 +39,33 @@ public class 回文子串 {
          * 那么aba的区间就是 i+1 与 j-1区间，这个区间是不是回文就看dp[i + 1][j - 1]是否为true。
          * }
          */
-        int result = 0;
+        int count = 0; //回文串数量
+        int maxLen = 0; //最长回文串大小
 
         /**
          * 注意遍历顺序 从下到上，从左往右
          */
         for (int i = len - 1; i >= 0; i--) {
             for (int j = i; j < len; j++) {
+
                 if (chars[i] == chars[j]) {
                     if (j - i <= 1) { // 情况一 和 情况二
-                        result++;
-                        dp[i][j] = true;
-                    } else if (dp[i + 1][j - 1]) { //情况三
-                        result++;
+                        count++;
                         dp[i][j] = true;
                     }
+                    //j - i > 1 就需要判断[i+1,j-1]是不是回文串
+                    //如果是就+1
+                    else if (dp[i + 1][j - 1]) { //情况三
+                        count++;
+                        dp[i][j] = true;
+                    }
+                    //求最长长度
+                    maxLen = Math.max(j - i + 1,maxLen);
                 }
             }
         }
-        return result;
+        System.out.println("回文串数量是" + count);
+        System.out.println("其中最长的回文串长度是" + maxLen);
+        return count;
     }
 }

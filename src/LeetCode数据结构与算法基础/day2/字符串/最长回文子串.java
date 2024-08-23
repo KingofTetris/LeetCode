@@ -29,10 +29,68 @@ public class 最长回文子串 {
     @Test
     public void test() {
         String s = "dbmbadabdad";
-        String res = longestPalindrome2(s);
+        String res = longestPalindrome4(s);
         System.out.println(res);
         System.out.println(res.length());
     }
+
+    /**
+     * DP
+     *
+     * @param s
+     * @return
+     */
+    public String longestPalindrome4(String s) {
+        char[] chars = s.toCharArray();
+        int len = chars.length;
+        //dp[i][j] 表示 [i,j] 这个子串是否是回文子串，是为true
+        boolean[][] dp = new boolean[len][len];
+        //递推公式
+        /**
+         * 要推出dp[i][j]的值
+         * 就需要比较 s[i] s[j]
+         * if(s[i] == s[j]){
+         *  情况一：下标i 与 j相同，同一个字符例如a，当然是回文子串
+         * 情况二：下标i 与 j相差为1，例如aa，也是回文子串
+         *  上面两种统一为 (j - i) <= 1
+         * 情况三：下标：i 与 j相差大于1的时候，例如cabac，
+         * 此时s[i]与s[j]已经相同了，我们看i到j区间是不是回文子串就看aba是不是回文就可以了，
+         * 那么aba的区间就是 i+1 与 j-1区间，这个区间是不是回文就看dp[i + 1][j - 1]是否为true。
+         * }
+         */
+        int maxLen = 0; //最长回文串大小
+        int L = 0, R = 0;
+        /**
+         * 注意遍历顺序 从下到上，从左往右
+         */
+        for (int i = len - 1; i >= 0; i--) {
+            for (int j = i; j < len; j++) {
+                if (chars[i] == chars[j]) {
+                    if (j - i <= 1) { // 情况一 和 情况二
+                        dp[i][j] = true;
+                        //记录最长回文串的L,R
+                        if (j - i + 1 > maxLen) {
+                            maxLen = j - i + 1;
+                            L = i;
+                            R = j;
+                        }
+                    }
+                    //j - i > 1 就需要判断[i+1,j-1]是不是回文串
+                    //如果是就+1
+                    else if (dp[i + 1][j - 1]) { //情况三
+                        dp[i][j] = true;
+                        if (j - i + 1 > maxLen) {
+                            maxLen = j - i + 1;
+                            L = i;
+                            R = j;
+                        }
+                    }
+                }
+            }
+        }
+        return s.substring(L, R + 1);
+    }
+
 
     //暴力法，找到所有子串判断是否是回文串，取出最长的那个子串
     //String.substring(int begin,int end) 左闭右开
@@ -68,6 +126,7 @@ public class 最长回文子串 {
     /**
      * 本题的AC做法是通过DP求最长回文子串。
      * 本题的DP其实是中心扩散法的延申，我们先讲中心扩散
+     *
      * @param
      * @return
      */
@@ -84,21 +143,21 @@ public class 最长回文子串 {
             helper(ss, n, i, i);
             helper(ss, n, i - 1, i);
         }
-        return str.substring(range[0],range[1]);
+        return str.substring(range[0], range[1]);
     }
 
     public static void helper(char[] ss, int n, int start, int end) {
-        while (start >= 0 && end <= n- 1){
-            if (ss[start] == ss[end]){
+        while (start >= 0 && end <= n - 1) {
+            if (ss[start] == ss[end]) {
                 start--;
                 end++;
-            }else {
+            } else {
                 break; //如果不回文直接break;
             }
         }
         //更新最大子串
         //start+1 才是回文串的起始,因为返回的是substring.就没必要end-1了。
-        if (end - (start + 1) > range[1] - range[0]){
+        if (end - (start + 1) > range[1] - range[0]) {
             range[0] = start + 1;
             range[1] = end;
         }
