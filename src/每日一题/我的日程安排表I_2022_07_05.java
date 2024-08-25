@@ -62,36 +62,6 @@ public class 我的日程安排表I_2022_07_05 {
         System.out.println(myCalendar.book(20, 30));
     }
 
-/*    class MyCalendar {
-        int[] day;
-        public MyCalendar() {
-            day = new int[99999]; //淦，一下午白做。因为对内存有限制，0 <= start < end <= 10^9 不可能拿一个数组把所以数放进去。
-            //超出内存限制
-            for (int i = 0; i < day.length; i++) {
-                day[i] = i;
-            }
-        }
-
-        public boolean book(int start, int end) {
-            for (int i = start;i < end;i++){ //左闭右开
-                if (day[i] == i){
-                    day[i] = -1;//如果相减等于0，就用-1占用掉这一天 你要先确保这个行程一定会生效才真的让day[i]=0
-                }
-                else if (day[i] == -1){ //如果等于 -1 那这天已经被占用。
-                    if (i == start){
-                        //如果i是第一个区间的第一个数 就没必要改回j了。直接return false
-                        return false;
-                    }
-                    //如果不是头一天，才需要从-1换回来。
-                    for (int j = start;j < i;j++){ //发现20为21了，那么要把前面的13-19的数给他还回来。而不是用-1占着不放。
-                        day[j] = j; //但问题就是如果是0
-                    }
-                    return false; //最后再return false
-                }
-            }
-            return true;//如果遍历完都OK，那就可以返回true
-        }
-    }*/
 class MyCalendar {
     TreeMap<Integer,Integer> map; //直接拿TreeMap判断两个相邻的区间有没有交集即可。
     public MyCalendar() {

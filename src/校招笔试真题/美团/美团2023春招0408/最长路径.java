@@ -40,7 +40,7 @@ public class 最长路径 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int N = sc.nextInt();
-        edges = new ArrayList[N+1];//从1开始 所以N+1 注意这个时候只是定义了长度为N+1的邻接表，这个数组里的元素全都是null
+        edges = new ArrayList[N + 1];//从1开始 所以N+1 注意这个时候只是定义了长度为N+1的邻接表，这个数组里的元素全都是null
 
         //所以下面才要进一步初始化
         for (int i = 1; i <= N; i++) {
@@ -60,9 +60,9 @@ public class 最长路径 {
         int to = sc.nextInt();
 
         //以u, v为根在两个子树里找距离最远的点。
-        int p1 = dfs(from,to);
-        int p2 = dfs(to,from);
-        int ans = p1+p2+1;
+        int p1 = dfs(from, to);
+        int p2 = dfs(to, from);
+        int ans = p1 + p2 + 1;
 
         System.out.println(ans);
     }
@@ -72,7 +72,7 @@ public class 最长路径 {
         int ans = -1;//因为算的是边，最深节点再往下是没有边的。设置为-1，返回ans+1就是0
         for (Integer neighbor : neighbors) { //递归结束的条件就是neighbor == [] dfs到最远
             if (neighbor != to) //从from出发，寻找和to不同方向的最远距离
-            ans = Math.max(ans,dfs(neighbor,from));
+                ans = Math.max(ans, dfs(neighbor, from));
         }
         return ans + 1;
     }

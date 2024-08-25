@@ -49,14 +49,15 @@ public class 矩形面积II_2022_09_16 {
      * 现在难度加大，我们来看看
      * 多个矩形如何求覆盖面积
      * 离散化 + 扫描线 + 使用简单数组实时维护
-     * 链接：https://leetcode.cn/problems/rectangle-area-ii/solution/ju-xing-mian-ji-ii-by-leetcode-solution-ulqz/
+     * 链接：
+     * https://leetcode.cn/problems/rectangle-area-ii/solution/ju-xing-mian-ji-ii-by-leetcode-solution-ulqz/
      * @param rectangles
      * @return
      */
     public int rectangleArea(int[][] rectangles) {
-        final int MOD = 1000000007;
+        final int MOD = (int) (1e9 + 7);
         int n = rectangles.length;
-        Set<Integer> set = new HashSet<Integer>();
+        Set<Integer> set = new HashSet<>();
         for (int[] rect : rectangles) {
             // 下边界
             set.add(rect[1]);

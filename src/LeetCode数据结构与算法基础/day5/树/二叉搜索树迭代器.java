@@ -9,7 +9,7 @@ import java.util.LinkedList;
  * @Time 2021/10/27  10:23
  */
 
-//满足迭代器输出顺序和中序遍历顺序一直就可以了。
+//满足迭代器输出顺序和中序遍历顺序一次就可以了。
 public class 二叉搜索树迭代器 {
 
     public Deque<TreeNode> stack = new LinkedList<>();

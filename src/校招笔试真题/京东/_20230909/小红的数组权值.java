@@ -10,8 +10,9 @@ import java.util.Scanner;
 
 //20% MLE 不能开二维数组，要观察数学公式
 public class 小红的数组权值 {
-    static final int N = 100010;
-    static final int MOD = 1000000007;
+    static final int N = (int) (1e5 + 10);
+    static final int MOD = (int) (1e9 + 7);
+//    float bb = 1.0f;//单精度要在后面加上f
     public static void main(String[] args) {
        /* Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
