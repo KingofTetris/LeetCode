@@ -15,6 +15,8 @@ public class QuickSort {
         quickSort(nums,0,nums.length - 1);
         System.out.println(Arrays.toString(nums));
     }
+
+    //每次快速排序找到一个元素的最终位置
     public void quickSort(int[] nums,int low,int high){
         if (low >= high) return;
         int position = partition(nums,low,high);
@@ -23,6 +25,7 @@ public class QuickSort {
     }
 
     private int partition(int[] nums, int low, int high) {
+        //取谁都无所谓，一般取开头
         int pivot = nums[low];
         while (low < high){
             //找到第一个比pivot小的
