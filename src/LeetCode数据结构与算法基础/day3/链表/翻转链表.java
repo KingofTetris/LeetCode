@@ -19,23 +19,11 @@ public class 翻转链表 {
         ListNode.printLinkedList(res);
     }
 //    可以借助栈，数组来重建队列都有较大的空间消耗
-//    这里用prev来记录前节点
     public ListNode reverseList(ListNode head) {
-       /* ListNode prev = null;
-        ListNode current = head;
-        while(current != null){
-            ListNode next = current.next;
-            current.next = prev;
-            prev = current;
-            current = next;
-        }
-        return prev;*/
-
         //尾插法，需要借助一个dummyHead和临时节点temp
         //核心就是每次往dummy后面插就完了
         ListNode dummy = new ListNode();
         ListNode temp;
-
         while (head != null){
             //temp首先指向当前要插入的节点
             temp = head;

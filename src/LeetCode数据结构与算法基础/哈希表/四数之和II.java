@@ -35,12 +35,13 @@ import java.util.HashMap;
  */
 public class 四数之和II {
 
-
     //    static List<List<Integer>> res = new LinkedList<>();
 //    static List<Integer> path = new LinkedList<>();
     //不重复的四元组，其实有点像回溯啊。但是回溯看起来又有点麻烦。
     //因为这个是四个数组，并不是一个数组，除非你把他们四个拼成一颗n叉树。
-    //太麻烦。正确的做法是哈希表
+    //太麻烦。
+    //
+    // 正确的做法是哈希表
     //而且本题不要求相同的内容去重，只要下标不同就行了
     // 只是问你有多少种满足的方案数目，并不要求你求出具体的方案。
     public static void main(String[] args) {
@@ -48,8 +49,8 @@ public class 四数之和II {
         int[] b = {-2, -1};
         int[] c = {-1, 2};
         int[] d = {0, 2};
-        solution(a, b, c, d);
-
+        int solution = solution(a, b, c, d);
+        System.out.println(solution);
     }
 
     public static int solution(int[] a, int[] b, int[] c, int[] d) {

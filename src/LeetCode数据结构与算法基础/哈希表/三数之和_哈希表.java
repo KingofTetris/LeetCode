@@ -37,7 +37,7 @@ import java.util.List;
   又消耗了大量的空间。这个做法的时间复杂度和空间复杂度都很高
 
     */
-public class 三数之和 {
+public class 三数之和_哈希表 {
 
     @Test
     public void test(){

@@ -70,58 +70,6 @@ public class 两个数组的交集II {
          set1.retainAll(set2);
          System.out.println(set1);
     }
-    //法一 哈希表(无序有序都能用)
-    //由于同一个数字在两个数组中都可能出现多次，因此需要用哈希表存储每个数字出现的次数。
-    // 对于一个数字，其在交集中出现的次数等于该数字在两个数组中出现次数的最小值。
-    //所以先遍历小数组，再遍历大数组 小数组中每次++
-    //大数组中每次--
- /*   public int[] intersect(int[] nums1, int[] nums2) {
-        int n = nums1.length;
-        int m = nums2.length;
-
-        //默认num1的长度 小于 num2
-        //调正长度小的那个放在前面当nums1
-        if(n > m )
-            return intersect(nums2,nums1);
-
-        HashMap<Integer,Integer> map = new HashMap<>();
-        for (int num:nums1) {
-            //getOrDefault() 方法获取指定 key 对应的 value，如果找不到 key
-            // ，则返回设置的默认值。在这里一开始为0，所以用个getOrDefault
-            int count = map.getOrDefault(num,0)  + 1;
-            map.put(num,count);
-        }
-
-        //交集肯定不可能超过num1.length
-        int[] intersection = new int[nums1.length];
-        int index = 0;
-        for(int num:nums2){
-
-            //首先要明确长数组里面的数没必要进map
-            //只是查一下对应的value值而已
-            int count = map.getOrDefault(num,0);
-            //count = 0后就不动了 没必要删除
-            //上面这句话是放屁，一定要删
-            if(count > 0){
-                //都有共同的数放入交集，并减去一次
-                intersection[index++] = num;
-                count--;
-                //如果--后还>0
-                //更新count值
-                if(count > 0){
-                    map.put(num,count);
-                }
-                //如果count为0了 把这个元素给删去，保证是小数组里面的数量
-                //不删去就会变成大数组里面的数量
-                else {
-                    map.remove(num);
-                }
-            }
-        }
-
-//        Arrays.copyOfRange() 返回一个数组
-        return Arrays.copyOfRange(intersection,0,index);
-    }*/
 
     //法二：排序+双指针 O(nlogn)
     public int[] intersect(int[] nums1, int[] nums2) {

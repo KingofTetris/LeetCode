@@ -18,6 +18,8 @@ public class NumArray {
          * sum[i] = 0,i = 0;
          * sum[L,R] = sum[R] - sum[L - 1]
          *
+         * 从1开始算就是 sum[R + 1] - sum[L] R + 1才对应1，2，3，...
+         * 因为preSum[0] = 0;
          */
         preSum[0] = 0;
         for (int i = 0; i < nums.length; i++) { //从1开始一直到n

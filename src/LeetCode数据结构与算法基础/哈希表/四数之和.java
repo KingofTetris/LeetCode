@@ -49,9 +49,9 @@ public class 四数之和 {
         //暴力回溯，下面这个结果还要去重
         //这个和组合总和II一样，树层重复，虽然下标不同，但是内容一样，导致的重复。
         //所以为了解决重复，就需要来个树层访问数组
-        int nums[] = new int[]{2,2,2,2,2};
+        int[] nums = new int[]{2,-2,-2,2,2};
 //        int nums[] = new int[]{1000000000, 1000000000, 1000000000, 1000000000};
-        List<List<Integer>> lists = fourSum2(nums, -294967296);
+        List<List<Integer>> lists = fourSum2(nums, 0);
         for (List<Integer> list : lists) {
             System.out.println(list);
         }

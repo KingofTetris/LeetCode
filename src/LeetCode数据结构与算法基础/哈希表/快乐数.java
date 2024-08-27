@@ -28,7 +28,8 @@ import java.util.HashMap;
  */
 public class 快乐数 {
     public static void main(String[] args) {
-        System.out.println(isHappy(Integer.MAX_VALUE));
+//        System.out.println(isHappy(Integer.MAX_VALUE));
+        System.out.println(isHappy(32418));
     }
 
     public static boolean isHappy(int num){
@@ -43,7 +44,7 @@ public class 快乐数 {
         while (true){
             int curRes = 0;
             while (lastRes > 0){
-                int n = lastRes % 10;
+                int n = lastRes % 10; //每次取个位
                 lastRes = lastRes / 10;
                 curRes += n * n;
             }

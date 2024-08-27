@@ -46,19 +46,22 @@ public class 赎金信 {
         boolean flag = canConstruct2(ransom, magazine);
         System.out.println(flag);
     }
+
+    // 因为这个字符串可能出现大小写，其他字符，光用int[26]就不太够了。
+    // 还是用通用的map
     //其实就是在比较s1是不是s2的一个子序列而已呗。
     //那就记录一个Map.s2+,s1- 如果出现负数，那么就不行。
     public boolean canConstruct2(String ransomNote, String magazine) {
-        if (ransomNote.length() > magazine.length() ) return false;
-        HashMap<Character,Integer> map = new HashMap<>();
+        if (ransomNote.length() > magazine.length()) return false;
+        HashMap<Character, Integer> map = new HashMap<>();
         int n = 0;
         for (char c : magazine.toCharArray()) {
-            map.put(c,map.getOrDefault(c,0) + 1);
-            if (n < ransomNote.length()){
-                char temp = ransomNote.charAt(n);
-                map.put(temp,map.getOrDefault(temp,0) - 1);//ransom - 1
-                n++;
-            }
+            map.put(c, map.getOrDefault(c, 0) + 1);
+        }
+        while (n < ransomNote.length()) {
+            char temp = ransomNote.charAt(n);
+            map.put(temp, map.getOrDefault(temp, 0) - 1);//ransom - 1
+            n++;
         }
         //最后判断map是否包含负数的value就行了
         for (Integer value : map.values()) {
