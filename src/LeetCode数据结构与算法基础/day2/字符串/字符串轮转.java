@@ -1,4 +1,4 @@
-package 程序员面试金典;
+package LeetCode数据结构与算法基础.day2.字符串;
 
 import org.junit.Test;
 
@@ -27,7 +27,7 @@ import org.junit.Test;
  * 链接：https://leetcode.cn/problems/string-rotation-lcci
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
-public class _01_09_字符串轮转 {
+public class 字符串轮转 {
 
     @Test
     public void test() {

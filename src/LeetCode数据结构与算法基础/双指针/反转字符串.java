@@ -31,8 +31,8 @@ import org.junit.Test;
 public class 反转字符串 {
 
     @Test
-    public void test(){
-        char[] s  = {'h','e','l','l','o'};
+    public void test() {
+        char[] s = {'h', 'e', 'l', 'l', 'o'};
         reverseString(s);
         for (int i = 0; i < s.length; i++) {
             System.out.print(s[i] + "\t");
@@ -40,24 +40,17 @@ public class 反转字符串 {
 
     }
 
-    public void reverseString(char[] s){
+    public void reverseString(char[] s) {
         //用双指针交换就可以了，left和right互换 双指针逻辑简单点
-//        int left,right;
-//        left = 0;right = s.length - 1;
-//        while(left < right){
-//            char temp;
-//            temp = s[left];
-//            s[left] = s[right];
-//            s[right] = temp;
-//            left++;
-//            right--;
-        //单指针更简单 一个for i也可以， n-1 - i和 i 互换就行了，停止条件可以设置成 i <  n/2;
-        int n = s.length;
-        for (int i = 0; i < n/2; i++) {
+        int left,right;
+        left = 0;right = s.length - 1;
+        while(left < right){
             char temp;
-            temp = s[i];
-            s[i] = s[n - 1 - i];
-            s[n - 1 - i] = temp;
+            temp = s[left];
+            s[left] = s[right];
+            s[right] = temp;
+            left++;
+            right--;
         }
     }
 }

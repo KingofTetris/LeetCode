@@ -39,6 +39,7 @@ public class 反转字符串II {
             // 判断尾数够不够k个来取决end指针的位置
             //start + k - 1就是结束的位置。
             int end = Math.min(ch.length - 1, start + k - 1);
+            //如果star已经大于数组末尾了，就结束了。
             while (start < end) {
                 char temp = ch[start];
                 ch[start] = ch[end];

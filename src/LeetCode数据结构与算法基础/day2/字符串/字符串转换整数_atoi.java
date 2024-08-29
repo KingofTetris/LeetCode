@@ -8,10 +8,10 @@ import org.junit.Test;
  */
 public class 字符串转换整数_atoi {
 
-
     @Test
     public void test() {
         String s = "  000000000000-123213";
+//        String b = " 0000-123213";
         int i = myAtoi(s);
         System.out.println(i);
     }
