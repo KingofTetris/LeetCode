@@ -8,6 +8,12 @@ import org.junit.Test;
  */
 
 
+//这种根据中后序，中前序还原二叉树的题目
+    //核心都是每次先取出根节点
+    //然后循环遍历中序，再次分出左右子树
+    //递归去遍历inorder,postorder
+    //或者inorder,preorder.
+    //两个左右子树的下标，自己拿笔在纸上算，光靠想是想不出来的
 public class 根据中后遍历还原二叉树 {
 
     @Test

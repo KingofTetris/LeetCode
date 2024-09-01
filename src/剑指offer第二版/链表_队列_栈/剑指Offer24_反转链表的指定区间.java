@@ -63,7 +63,7 @@ public class 剑指Offer24_反转链表的指定区间 {
         //小心这里有坑，因为temp.next这句话会导致node2被修改了。已经不是原来的方向了。
 //        所以不要使用node2.next，直接用tail代替
         while (node1 != null && node1 != tail) {
-            ListNode temp = node1;
+            ListNode temp = node1; //取得当前节点
             node1 = node1.next;
 
             temp.next = dummyHead.next;

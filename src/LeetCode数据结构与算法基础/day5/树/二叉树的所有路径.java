@@ -13,7 +13,7 @@ public class 二叉树的所有路径 {
 
     @Test
     public void test(){
-        TreeNode tree = TreeUtils.createTree(new Integer[]{1,3,5,3,1});
+        TreeNode tree = TreeUtils.createTree(new Integer[]{1,2,3,null,5});
         TreeUtils.show(tree);
         List<String> stringList = binaryTreePaths(tree);
         for (String s : stringList) {
@@ -21,33 +21,42 @@ public class 二叉树的所有路径 {
         }
     }
 
+
+    //经典回溯。
     List<String> res = new LinkedList<>();
+    List<Integer> path = new LinkedList<>();
     public List<String> binaryTreePaths(TreeNode root) {
         if (root == null) return res;
-        String s = "" + root.val;
-        if (root.left != null)
-        helperGenerate(root.left,s);
-        if (root.right != null)
-        helperGenerate(root.right,s);
-        //如果是单节点，直接添加s
-        if (res.size() == 0){
-            res.add(s);
-        }
-        return res;
+         backTracking(root);
+         return res;
     }
 
-    private void helperGenerate(TreeNode root, String s) {
-        s += "->" + root.val;
+    private void backTracking(TreeNode root) {
+        //停止条件，遇到叶子就停下记录路径,如果直接null，不用管他。
+        if (root == null) return;
         if (root.left == null && root.right == null){
-            res.add(s);
+            path.add(root.val);
+            StringBuilder sb = new StringBuilder();
+            int n = path.size();
+            for (int i = 0; i < n; i++) {
+                if (i != n - 1){
+                    sb.append(path.get(i)).append("->");
+                }
+                else{
+                    sb.append(path.get(i));
+                }
+            }
+            res.add(sb.toString());
+            path.remove(path.size() - 1);
+            //记得return
             return;
         }
-        if (root.left != null){
-            helperGenerate(root.left,s);
-        }
-        if (root.right != null){
-            helperGenerate(root.right,s);
-        }
+
+        //就把root.val拉进来
+        path.add(root.val);
+        backTracking(root.left);
+        backTracking(root.right);
+        path.remove(path.size() - 1);
     }
 
 

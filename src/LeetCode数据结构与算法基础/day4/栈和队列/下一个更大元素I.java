@@ -10,7 +10,7 @@ public class 下一个更大元素I {
 
     public int[] nextGreaterElement(int[] nums1, int[] nums2) {
 
-        //单调栈，
+        //单调栈
         /**
          * 找到右边第一个比自己小的数的下标
          * 那就需要维护一个从栈顶到栈底 单调递增的序列
@@ -22,16 +22,16 @@ public class 下一个更大元素I {
         //结果，用-1保存初始值
         int[] res = new int[nums1.length];
         for (int i = 0; i < nums1.length; i++) {
-            res[0] = -1;
+            res[i] = -1;
         }
-        //用map来存储子数组出现的数字和下标
+        //用map来存储数组1出现的数字和下标 建立映射关系
         //因为nums1是无重复数组
         HashMap<Integer, Integer> hashMap = new HashMap<>();
         for (int i = 0 ; i< nums1.length ; i++){
             hashMap.put(nums1[i],i);
         }
 
-        //先把首元素压栈
+        //先把首元素下标压栈
         stack.push(0);
         for (int i = 1; i < nums2.length; i++) {
             //当前元素 小于等于 栈顶元素
@@ -42,14 +42,16 @@ public class 下一个更大元素I {
             //当前元素 大于 栈顶元素
             //开始记录
             else {
-                while (!stack.isEmpty() && nums2[stack.peek()] < nums2[i]) {
+                while (!stack.isEmpty() && nums2[i] > nums2[stack.peek()]) {
                     //如果hashMap有这个栈顶元素，就可以去取他的下标了。
                     if (hashMap.containsKey(nums2[stack.peek()])){
+                        //取出栈顶值对应在nums1中的下标
                         Integer index = hashMap.get(nums2[stack.peek()]);
-                        //然后把对应的下标修改为 对应的数字即可
+                        //然后把res中对应的位置修改为nums2[i]
+                        //就是第一个比nums1[index]更大的元素了。
                         res[index] = nums2[i];
                     }
-                    //每次都要把这个数字弹出去
+                    //别忘了把栈顶pop出去，维护单调栈的单增性，才能找到最大。
                     stack.pop();
                 }
                 //别忘了把i push进去。

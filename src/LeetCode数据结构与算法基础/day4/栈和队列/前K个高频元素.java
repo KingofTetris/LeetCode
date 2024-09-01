@@ -27,7 +27,7 @@ import java.util.*;
  */
 public class 前K个高频元素 {
     public static void main(String[] args) {
-        int[] nums = {1,1,1,2,2,3};
+        int[] nums = {1,1,1,2,2,3,3};
         int[] topKFrequent = topKFrequent(nums, 2);
         for (int i : topKFrequent) {
             System.out.println(i);
@@ -36,30 +36,31 @@ public class 前K个高频元素 {
 
     //复杂度至少要O(nlogn),其实就是堆
     public static int[] topKFrequent(int[] nums, int k) {
-        // 优先级队列，为了避免复杂 api 操作，pq 存储数组
-        // 按o[1]从大到小排序。
+
+        // 使用K-V存储每个数字出现的次数。
+        // 如果是只招最大的那用一个max就够了
+        // 但是要找前K个，就需要一个PriorityQueue 最大堆来选前K大的了。
+
+        // 按o[1]从大到小排序。int[] K-V 每个数字都对应一个数组，[0]为key [1]为value
         PriorityQueue<int[]> pq = new PriorityQueue<>(Comparator.comparingInt(o -> -o[1]));
-//        PriorityQueue<int[][]> pq2 = new PriorityQueue<>(Comparator.comparingInt(o -> o[0][1]));
-        //二维数组排序不建议用上面的，改用Arrays
-//        int[][] intervals = new int[2][2];
-        //按照每个一维数组的o[1]进行从小到大排序。
-//        Arrays.sort(intervals,Comparator.comparingInt(o->o[1]));
+
         int[] res = new int[k]; // 答案数组为 k 个元素
-        Map<Integer, Integer> map = new HashMap<>(); // 记录元素出现次数
+
+        // 记录元素出现次数
+        Map<Integer, Integer> map = new HashMap<>();
         for(int num : nums) map.put(num, map.getOrDefault(num, 0) + 1);
-        //JDK8是不能用var的，老实用Entry
+
+        //遍历map
         for(Map.Entry<Integer,Integer> x : map.entrySet()) { // entrySet 获取 k-v Set 集合
             // 将 kv 转化成数组
             int[] tmp = new int[2];
             tmp[0] = x.getKey();
             tmp[1] = x.getValue();
             pq.offer(tmp);
-//            if(pq.size() > k) {
-//                pq.poll();
-//            }
         }
+        // 获取前K频率的元素
         for(int i = 0; i < k; i ++) {
-            res[i] = pq.poll()[0]; // 获取优先队列里的元素
+            res[i] = pq.poll()[0];
         }
         return res;
     }

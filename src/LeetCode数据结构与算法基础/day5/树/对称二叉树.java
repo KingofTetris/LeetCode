@@ -21,6 +21,37 @@ public class 对称二叉树 {
     }
 
 
+    public boolean isSymmetric(TreeNode root) {
+        if(root == null) return true;
+        return helpSym(root.left,root.right);
+    }
+
+    private boolean helpSym(TreeNode left,TreeNode right){
+        //两边有一个是空，一个不是空 就不可能对称
+        if((left == null && right != null) ||
+           (left != null && right == null)){
+            return false;
+        }
+
+        //两边如果都不为空，就要判断值是否相等。
+        if(left != null && right != null){
+            if(left.val != right.val){
+                return false;
+            }
+        }
+
+        //如果left和right都不为空，再递归判断他的左右子树是否镜像。
+        if(left != null && right != null){
+            boolean res1 = helpSym(left.left,right.right);
+            boolean res2 = helpSym(left.right,right.left);
+            //返回两边是否对称，有一个不对称就是false
+            return res1 && res2;
+        }
+
+        //这里其实就是left和right都为空的情况，他们一定是镜像。
+        return true;
+    }
+
     //难以理解递归。只好写迭代
     //迭代比较容易理解
     //比较左右孩子
@@ -63,27 +94,4 @@ public class 对称二叉树 {
         return true;
     }
 
-    public boolean isSymmetric(TreeNode root) {
-        if (root == null) return true;
-        return helperSymmetric(root.left, root.right);
-    }
-
-    private boolean helperSymmetric(TreeNode r1, TreeNode r2) {
-        if (r1 != null && r2 != null) {
-            if (r1.val == r2.val) {
-                boolean b1 = helperSymmetric(r1.left, r2.right);
-                boolean b2 = helperSymmetric(r1.right, r2.left);
-                if (!b1 || !b2) return false;//如果两个子树有一个不一样的返回false。
-            } else {
-                return false;
-            }
-        } else if (r1 == null && r2 != null) {
-            return false;
-        } else if (r1 != null && r2 == null) {
-            return false;
-        }
-
-        //所有情况都符合了，那么他就是一颗对称二叉树
-        return true;
-    }
 }

@@ -17,13 +17,12 @@ public class 合并二叉树 {
     }
 
     public TreeNode mergeTrees(TreeNode root1, TreeNode root2) {
+        //如果其中一个树为空，就直接返回另一个就行了。
         if (root1 == null) return root2;
         if (root2 == null) return root1;
-        //为什么每次new一个新节点，为什么最后能连接到一起？？
+        //两个都不为空，返回两者之和。
         TreeNode merge = new TreeNode(root1.val + root2.val);
-        //哦！！TMD，连接逻辑在这里!!!
-        //merge.left = xx(left,left)
-        //merge.right = xx(right,right)。。。= =|||
+        //递归构建左右子树即可
         merge.left = mergeTrees(root1.left,root2.left);
         merge.right = mergeTrees(root1.right,root2.right);
         return merge;

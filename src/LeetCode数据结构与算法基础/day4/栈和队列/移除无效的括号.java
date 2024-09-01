@@ -70,7 +70,8 @@ public class 移除无效的括号 {
                     count--;
                 }
                 //如果没有正括号，说明 ")" 不合法， 什么也不做
-            }else sb.append(c); //字母正常输出
+            }
+            else sb.append(c); //字母正常添加
 
         }
         //如果没有多余的正括号，返回结果
@@ -82,6 +83,8 @@ public class 移除无效的括号 {
         for (int i = sb.length() - 1; i >= 0; i--) {
             if (count == 0) break;
             if (sb.charAt(i) == '(') {
+                //sb的删除API deleteCharAt(int i)
+                //删除下标为i的元素
                 sb.deleteCharAt(i);
                 count--;
             }

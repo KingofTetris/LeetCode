@@ -52,12 +52,6 @@ public class 验证二叉搜索树 {
         if (root == null) {
             return true;
         }
-        /**
-         * 中序遍历模板
-         * xx(left)
-         * xxxx
-         * xx(right)
-         */
         // 左
         boolean left = isValidBST(root.left);
         // 根
@@ -71,38 +65,8 @@ public class 验证二叉搜索树 {
         // 右
         boolean right = isValidBST(root.right);
 
+        //两棵都要升序才能成立
         return left && right;
     }
-
-    //迭代写法 还是左根右 属于是时间换空间。
-    //通过栈的先进后出特点存放
-   /* public boolean isValidBST(TreeNode root){
-        Deque<TreeNode> stack = new LinkedList<TreeNode>();
-        double pre = -Double.MAX_VALUE;
-        //结束条件是栈为空 或者 遍历完所有节点
-        while (!stack.isEmpty() || root != null) {
-            //节点未遍历完 注空节点不压栈
-            //当遍历到叶子节点时 再去找root.right为空，但是栈里还有父节点 栈不为空
-            //直接弹出父节点，再找root.right就能实现遍历左右子树了。
-            while (root != null) {
-                //把根和左结点全部压入栈中
-                stack.push(root);
-                root = root.left;
-            }
-            //取出最左节点
-            root = stack.pop();
-            //pre初始化取了一个最小值 比这个还小就超出范围 return false
-            //大于的话就把pre设为当前值和下一个值比较就行了
-            // 如果中序遍历得到的节点的值小于等于前一个 pre，说明不是二叉搜索树
-            if (root.val <= pre) {
-                return false;
-            }
-            pre = root.val;
-
-            //遍历右节点
-            root = root.right;
-        }
-        return true;
-    }*/
 
 }

@@ -59,7 +59,7 @@ public class 手写KMP {
                 //如果不相等，告诉算法要跳到哪个位置
                 //也就是next[j-1]的位置，直到s[j] = s[i]
                 j = next[j - 1];
-            //相等就简单了
+            //相等就j后移
             if (t.charAt(j) == s.charAt(i))
                 j++;
             //如果找到了完整的t
@@ -74,24 +74,47 @@ public class 手写KMP {
 
     /**
      * 计算next数组
-     * 也就是 最长前后缀长度 数组
-     * 前缀：不包含最后一个字符的所有以第一个字符开头的连续子串。
-     * 后缀：不包含第一个字符的所有以最后一个字符结尾的连续子串。
+     * 也就是 最长相等前后缀长度 数组
+     *
+     * a a b a a f
+     * 前缀：不包含尾字符的所有以第一个字符开头的所有连续子串。
+     * a
+     * a a
+     * a a b
+     * a a b a a
+     * 后缀：不包含首字符的所有以最后一个字符结尾的所有连续子串。
+     * f
+     * a f
+     * a a f
+     * b a a f
+     * a b a a f
+     *
+     * next其实就是以s[i]的最长相等前后缀长度
+     * 比较特殊的s[0] 他既然是首字母又是尾字母
+     * 相当于没有前后缀。next[0]就是0。
      *          j  i
      * 例如     a  a  b  a  a  f
      * next:   0  1  0  1  2  0
+     * 在匹配的时候，比如f不匹配，他会跳到前一个字符的next值，也就是2，从b开始匹配
+     * 跳过前缀"aa"，这是因为f前面的next为2，说明0-1这个前缀和后缀相等，那么相当于已经扫描过一遍，就没必要从头扫描了
+     * 直接从b开始。
      * https://www.bilibili.com/video/BV18k4y1m7Ar/?spm_id_from=333.337.search-card.all.click&vd_source=299caa32bd4dc5f5ad17129611289250
      * @param next
      * @param s
      */
     private void getNext(int[] next, String s) {
         int j = 0;
-        next[0] = 0;//第一个字母为什么都是初始化从0开始，阿三那个视频也没讲，也是直接给0。
+
+       /** next其实就是以s[i]的最长相等前后缀长度
+                * 比较特殊的s[0] 他既然是首字母又是尾字母
+                * 相当于没有前后缀。next[0]就是0。
+        * **/
+        next[0] = 0;
         for (int i = 1; i < s.length(); i++) {
             //如果s[i] ,s[j] 不相等，就把j一直往前跳到next[j-1]，直到s[i] = s[j]
             while (j > 0 && s.charAt(j) != s.charAt(i))
                 j = next[j - 1];
-            //如果s[i],s[j]相等，i,j一起往后走，加长最大相同前后缀的长度。
+            //直到s[i],s[j]相等，i,j一起往后走，加长最大相同前后缀的长度。
             if (s.charAt(j) == s.charAt(i))
                 j++;
             next[i] = j;

@@ -25,6 +25,7 @@ class MyStack{
     /** Push element x onto stack. */
     public void push(int x) {
         queue2.offer(x); // 先放在辅助队列中
+        //把q1的元素全部放入q2。
         while (!queue1.isEmpty()){
             queue2.offer(queue1.poll());
         }
@@ -34,6 +35,8 @@ class MyStack{
         queue2 = queueTemp; // 最后交换queue1和queue2，将元素都放到queue1中
     }
 
+
+    //除了push 其他都是从queue1进行操作
     /** Removes the element on top of the stack and returns that element. */
     public int pop() {
         return queue1.poll(); // 因为queue1中的元素和栈中的保持一致，所以这个和下面两个的操作只看queue1即可

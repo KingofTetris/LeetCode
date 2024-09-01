@@ -28,7 +28,6 @@ package LeetCode数据结构与算法基础.day5.树;
     //注意已经指定了一定是从根到叶子的路径。
 public class 路径之和 {
     //DFS 也就是递归 是反过来用Sum减去节点值
-    //又快又省，就是难想。
     public boolean hasPathSum(TreeNode root, int sum) {
         if (root == null) {
             return false;
@@ -37,7 +36,10 @@ public class 路径之和 {
         if (root.left == null && root.right == null) {
             return sum == root.val;
         }
-        return hasPathSum(root.left, sum - root.val)
-                || hasPathSum(root.right, sum - root.val);
+        //每次减去上一个节点的val
+        boolean res1 = hasPathSum(root.left, sum - root.val);
+        boolean res2 = hasPathSum(root.right, sum - root.val);
+        //只要有一条就行了。
+        return res1 || res2;
     }
 }

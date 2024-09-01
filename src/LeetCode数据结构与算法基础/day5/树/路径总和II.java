@@ -31,6 +31,8 @@ public class 路径总和II {
     }
 
 
+
+    //还是这种找出所有方案的还是回溯
     List<List<Integer>> ret = new LinkedList<>();
     LinkedList<Integer> path = new LinkedList<>();
 
@@ -48,9 +50,14 @@ public class 路径总和II {
         if (root.left == null && root.right == null && targetSum == 0) {
             ret.add(new LinkedList<>(path));
             return;
-        } else if (root.left == null && root.right == null && targetSum != 0){
+        }
+        else if (root.left == null && root.right == null && targetSum != 0){
             return;
         }
+
+        /**
+         * 看到没，这里回溯了两次。
+         */
         backtracking(root.left, targetSum);
         //回溯重置条件。
         path.remove(path.size() - 1);

@@ -27,6 +27,15 @@ package LeetCode数据结构与算法基础.day5.树;
  *     - [0,5] 中的最大值是 5 ，左边部分是 [0] ，右边部分是 [] 。
  *         - 只有一个元素，所以子节点是一个值为 0 的节点。
  *         - 空数组，无子节点。
+ *
+ *         一种结果就是
+ *            6
+ *          /  \
+ *          3  5
+ *          \  /
+ *          2  0
+ *           \
+ *            1
  * 示例 2：
  *
  *
@@ -54,6 +63,7 @@ public class 最大二叉树_2022_08_30 {
      * @return
      */
     public TreeNode constructMaximumBinaryTree(int[] nums) {
+
         return construct(nums, 0, nums.length - 1);
     }
 

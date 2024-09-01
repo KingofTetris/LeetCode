@@ -12,9 +12,9 @@ public class 普通二叉树的最近公共祖先 {
     public static void main(String[] args) {
         TreeNode tree = TreeUtils.createTree(new Integer[]{3,5,1,6,2,0,8,null,null,7,4});
         TreeUtils.show(tree);
-        TreeNode p = TreeUtils.findTreeNode(tree, 8);
-        TreeNode q = TreeUtils.findTreeNode(tree, 0);
-        TreeNode lca = LCA(tree, p, q);
+        TreeNode p = TreeUtils.findTreeNode(tree, 7);
+        TreeNode q = TreeUtils.findTreeNode(tree, 1);
+        TreeNode lca = lowestCommonAncestor(tree, p, q);
         System.out.println("LCA:");
         TreeUtils.show(lca);
     }
@@ -45,64 +45,37 @@ public class 普通二叉树的最近公共祖先 {
      * @return
      */
 
-    //因为我们的Node是孩子双亲表示法，不记录parent，那么就不能直接从p出发向上走
-    //需要从root反过来向下记录路径，那么为了达到向上的目的。
-    //我们用栈来记录，然后用栈的先进先压栈特性实现 向上爬的效果
-    public static TreeNode LCA(TreeNode root, TreeNode p, TreeNode q) {
-        LinkedList<TreeNode> pStack = new LinkedList<>();
-        LinkedList<TreeNode> qStack = new LinkedList<>();
-        //如果p或者q根本就不存在于root里面,那么都不用谈LCA了。
-        boolean f1 = getPath(root, p, pStack);
-        boolean f2 = getPath(root, q, qStack);
-        if (!f1){
-            System.out.println("树中不存在p节点");
-            return null;//返回null
-        }
-        if (!f2){
-            System.out.println("树中不存在q节点");
-            return null;//返回null
-        }
-        //然后我们开始寻找p,q的LCA
-        //pStack就是从p出发向上到root的路径
-
-        //我们开始遍历qStack
-        while (!qStack.isEmpty()){
-            TreeNode pop = qStack.pop();
-            if (pStack.contains(pop)){
-                return pop;//pop就是lca
-            }
-        }
-        //如果没有LCA，那么返回一个空节点
-        return new TreeNode();
-    }
-
-
     /**
-     * 本题的关键在这里。
+     * 求最小公共祖先，需要从底向上遍历，那么二叉树，只能通过后序遍历（即：回溯）实现从底向上的遍历方式。
+     *
+     * 在回溯的过程中，必然要遍历整棵二叉树，即使已经找到结果了，依然要把其他节点遍历完，
+     * 因为要使用递归函数的返回值（也就是代码中的left和right）做逻辑判断。
+     *
+     * 要理解如果返回值left为空，right不为空为什么要返回right，为什么可以用返回right传给上一层结果。
      * @param root
-     * @param node
-     * @param stack
+     * @param p
+     * @param q
      * @return
      */
-    //寻找从node -> root的路径
-    //root根结点，node:指定的节点，stack:存放根节点到指定节点的路径
-    public static boolean getPath(TreeNode root, TreeNode node, LinkedList<TreeNode> stack) {
-        if (root == null || node == null) return false;
-        stack.push(root);
-        //如果root就是node，就不用再找了。
-        if (node == root) return true;
-        //否则继续left,right
-//        getPath(root.left, node, stack);
-//        getPath(root.right, node, stack);
-        boolean flg1 = getPath(root.left, node, stack);
-        if (flg1) return true;//找到啦
-        boolean flg2 = getPath(root.right, node, stack);
-        if (flg2) return true;//找到啦
-        //如果没找到，就回溯把之前push进来的pop出去。
-        stack.pop();
-        return false;
+    public static TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        //https://www.bilibili.com/video/BV1jd4y1B7E2/?spm_id_from=333.1007.top_right_bar_window_custom_collection.content.click&vd_source=299caa32bd4dc5f5ad17129611289250
+        //终止条件，如果遇到了空节点，返回null
+        if(root == null) return null;
+        //如果遇到了p,q，就把p,q返回到上一层
+        if(root == p || root == q) return root;
+
+        //然后后序遍历先找左右孩子，再返回到根节点
+        TreeNode left = lowestCommonAncestor(root.left, p, q);
+        TreeNode right = lowestCommonAncestor(root.right, p, q);
+        //两边都不为空的话，那么root其实就是LCA
+        if (left != null && right != null) return root;
+        //或者哪边不为空就说明在哪个子树里面
+        if (left == null && right != null) return right;
+        else if (left != null && right == null) return left;
+        //如果两边都为null 那就不在这棵子树里面。
+        else if (left == null && right == null) return null;
+
+        //这个条件其实只是作为返回结果为了编译通过，其实永远也不可能到达。
+        return null;
     }
-/*————————————————
-    版权声明：本文为CSDN博主「sqyaa.」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
-    原文链接：https://blog.csdn.net/m0_74106420/article/details/129491164*/
 }

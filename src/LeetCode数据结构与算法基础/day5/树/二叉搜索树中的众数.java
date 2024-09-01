@@ -69,7 +69,9 @@ public class 二叉搜索树中的众数 {
             resList.clear();//清空
             resList.add(rootValue);
             maxCount = count;
-        } else if (count == maxCount) {
+        }
+        //又出现一个众数
+        else if (count == maxCount) {
             resList.add(rootValue);
         }
         //记得把pre = root.这一步很关键。

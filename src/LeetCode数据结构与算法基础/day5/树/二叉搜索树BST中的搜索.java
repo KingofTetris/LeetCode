@@ -24,22 +24,26 @@ public class 二叉搜索树BST中的搜索 {
         TreeUtils.show(children);
     }
 
-    //递归
+    //递归，这个递归没用到BST的性质啊。
     public TreeNode searchBST(TreeNode root, int val) {
         if (root == null)
             return null;
         if (root.val == val)
             return root;
+        //左右子树里面找到一个就行了。
         TreeNode root_left = searchBST(root.left, val);
         TreeNode root_right = searchBST(root.right, val);
         return root_left == null ? root_right : root_left;
     }
 
-    //非递归
+    //利用BST的性质，非递归
     public TreeNode searchBST2(TreeNode root, int val) {
         while (root != null) {
+            //找到就返回
             if (root.val == val) return root;
+            //如果当前root.val小于val，说明要去右子树找
             else if (val > root.val) root = root.right;
+            //反过来就去左子树找
             else if (val < root.val) root = root.left;
         }
         return null;
