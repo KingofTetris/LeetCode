@@ -22,8 +22,10 @@ public class 二叉搜索树中的插入操作 {
 //        CreateTree ct = new CreateTree();
         Integer[] num = {4, 2, 7, 1, 3};
         TreeNode tree = TreeUtils.createTree(num);
-        TreeNode new_node = insertIntoBST(tree, 5);
-        TreeUtils.show(new_node);
+        TreeNode new_node1 = insertIntoBST(tree, 5);
+        TreeUtils.show(new_node1);
+        TreeNode new_node2 = insertIntoBST(tree, 6);
+        TreeUtils.show(new_node2);
     }
 
     public TreeNode insertIntoBST(TreeNode root, int val) {
@@ -32,6 +34,7 @@ public class 二叉搜索树中的插入操作 {
         if (root == null) {
             return new TreeNode(val);
         }
+        //比root小就往左边放，比root大就往右边放。
         if (val < root.val) {
             root.left = insertIntoBST(root.left, val);
         } else {

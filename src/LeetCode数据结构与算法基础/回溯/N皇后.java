@@ -25,7 +25,7 @@ public class N皇后 {
 
     @Test
     public void test() {
-        List<List<String>> lists = solveNQueens(4);
+        List<List<String>> lists = solveNQueens(5);
         int i = 1;
         for (List<String> l : lists) {
             System.out.println("第" + i + "种方案:如下");
@@ -52,21 +52,21 @@ public class N皇后 {
     }
 
     private void backtracking(char[][] chessboard, int n, int row) {
-        //终止条件row == n
+        //终止条件row == n 说明0到N-1行都放完了，找到一个合法方案。
         if (row == n) {
             //把当前的二维字符数组转化成List<String>放入到结果中。
             res.add(Arrays2List(chessboard));
             return;
         }
 
-        //每行一列一列去放
+        //一行一行去放
         for (int col = 0; col < n; col++) {
             //如果有效 置为Q
             if (isValid(chessboard, n, row, col)) {
                 chessboard[row][col] = 'Q';
                 //回溯，其实就是递归到下一层。
                 backtracking(chessboard, n, row + 1);
-                //修改重置
+                //回溯重置
                 chessboard[row][col] = '.';
             }
         }

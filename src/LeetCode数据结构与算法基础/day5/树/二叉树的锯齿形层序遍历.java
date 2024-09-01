@@ -18,7 +18,7 @@ import java.util.Queue;
         例如：
         给定二叉树 [3,9,20,null,null,15,7],
 
-        3
+         3
         / \
         9  20
         /  \

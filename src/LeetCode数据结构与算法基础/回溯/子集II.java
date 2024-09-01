@@ -39,6 +39,7 @@ public class 子集II {
     List<List<Integer>> result = new ArrayList<>();
     List<Integer> subset = new ArrayList<>();
     boolean[] used;//去重数组
+
     public List<List<Integer>> subsetsWithDup(int[] nums) {
         Arrays.sort(nums);//去重先排序，让相邻元素挨在一起。
         used = new boolean[nums.length];

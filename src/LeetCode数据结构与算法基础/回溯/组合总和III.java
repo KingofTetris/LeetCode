@@ -52,14 +52,9 @@ public class 组合总和III {
             return;//别忘了return;
         }
 
-        //这个题如果要剪枝应该怎么做呢?
-        //这题有两个地方可以剪枝，一个是sum,一个是集合个数k
-        //集合个数k和前一题一样，为了保证集合一定要有K个元素
-        //那么我们必须要让 i <= 9-(k-path.size()) + 1
-        //再往后的i是凑不齐k个数的
-//        for (int i = startIndex; i <= 9; i++) {
-        //剪枝2：9 - (k - path.size()) + 1
+        //剪枝2：n - (k - path.size()) + 1
         //对集合个数有限制的通用公式就是 n - (k-path.size()) + 1;
+        //这里n就是9
         for (int i = startIndex; i <= 9 - (k - path.size()) + 1; i++) {
             path.add(i);
             backtracking(n, k, i + 1);

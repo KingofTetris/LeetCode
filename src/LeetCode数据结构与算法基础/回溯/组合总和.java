@@ -48,10 +48,7 @@ public class 组合总和 {
     //但是他本质还是要用组合来看待，那么
     //这个startIndex就最大作用就是去重求组和，如果你要排列，就没必要加上startIndex了
     private void backtracking(int[] candidates, int target,int sum,int startIndex) {
-      /*  //终止条件
-        if (sum > target){
-            return;
-        }*/
+       //终止条件
         if (sum == target){
             res.add(new LinkedList<>(path));
             return;

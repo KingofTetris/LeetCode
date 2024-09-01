@@ -29,6 +29,7 @@ public class 分割回文串 {
     }
 
     private void backTracking(String s, int startIndex) {
+        //停止条件
         //如果起始位置大于s的大小，说明找到了一组分割方案
         if (startIndex >= s.length()) {
             //每次把当前满足条件的path放到结果中，不能直接add(path)，不然只有最后一个。因为path指向的永远是
@@ -43,7 +44,7 @@ public class 分割回文串 {
                 String str = s.substring(startIndex, i + 1);
                 path.add(str);
             } else {
-                //如果不是回文子串，就跳过这条分支。
+                //如果不是回文子串，就直接剪枝，跳过这条分支。
                 //直接i++
                 continue;
             }

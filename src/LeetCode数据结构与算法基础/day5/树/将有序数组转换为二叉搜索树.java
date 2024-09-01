@@ -15,6 +15,7 @@ public class 将有序数组转换为二叉搜索树 {
         TreeUtils.show(treeNode);
     }
     public TreeNode sortedArrayToBST(int[] nums) {
+
         return helper(nums, 0, nums.length - 1);
     }
 
@@ -49,7 +50,6 @@ public class 将有序数组转换为二叉搜索树 {
 
     int maxDepth(TreeNode root) {
         //下面这句话求树深非常重要，无论如何都要记住。
-//        return root == null ? 0 : Math.max(maxDepth(root.left) + 1, maxDepth(root.left) + 1)
         return root == null ? 0 : Math.max(maxDepth(root.left) + 1, maxDepth(root.right) + 1);
     }
 }

@@ -1,5 +1,7 @@
 package LeetCode数据结构与算法基础.day5.树;
 
+import org.junit.Test;
+
 /**
  * @author KingofTetris
  * @File 二叉搜索树的公共祖先
@@ -21,11 +23,19 @@ p、q 为不同节点且均存在于给定的二叉搜索树中。
         */
 public class 二叉搜索树的最近公共祖先 {
 
-    //因为这是棵BST可以直接利用BST的性质来定位p,q的最近公共祖先
-    // 直接递归
+    @Test
+    public void test() {
+        Integer[] nums = new Integer[]{2, 1, 3};
+        TreeNode tree = TreeUtils.createTree(nums);
+        TreeNode p = TreeUtils.findTreeNode(tree, 1);
+        TreeNode q = TreeUtils.findTreeNode(tree, 3);
+        TreeNode res = lowestCommonAncestor(tree, p, q);
+        System.out.println(res);
+    }
 
     /**
      * 如果只是普通的二叉树就没有这种性质了，那么对于普通二叉树P,Q的LCA看下一题
+     *
      * @param root
      * @param p
      * @param q
@@ -33,8 +43,8 @@ public class 二叉搜索树的最近公共祖先 {
      */
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         //如果在同一边 那么继续下一层
-        if(root.val < p.val && root.val < q.val) return lowestCommonAncestor(root.right, p, q);
-        if(root.val > p.val && root.val > q.val) return lowestCommonAncestor(root.left, p, q);
+        if (root.val < p.val && root.val < q.val) return lowestCommonAncestor(root.right, p, q);
+        if (root.val > p.val && root.val > q.val) return lowestCommonAncestor(root.left, p, q);
         //如果和ROOT比 一大一小 root就是P,Q的最近公共祖先LCA
         return root;
     }

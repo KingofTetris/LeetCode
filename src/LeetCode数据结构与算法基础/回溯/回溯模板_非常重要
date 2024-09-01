@@ -10,3 +10,26 @@ void backtracking(参数) {
         回溯，撤销处理结果
     }
 }
+
+//当有重复元素时，使用set是更通用的去重操作，不管你是否要保持相对顺序
+//比起used数组更加灵活，判断条件也更简单
+//used数组需要 if(i > 0 && nums[i] != nums[i - 1] && used[i] == false)
+//三个条件同时成立才continue
+//set直接判断set.contains(nums[i])即可，如果使用过了直接continue。
+//而且要注意，set是每次回溯都new一个新的出来，不能拿到外面去当成员变量。只能是局部变量。
+
+void backtracking(参数) {
+    if (终止条件) {
+        存放结果;
+        return;
+    }
+    //set去重
+    set = new set //每次回溯都要new一个新的
+    for (选择：本层集合中元素（树中节点孩子的数量就是集合的大小）) {
+        if(set.contains(nums[i]) continue;// 去重
+        处理节点;
+        set.add(nums[i]);//要注意不用回溯，因为每回合都是新new出来的set。
+        backtracking(路径，选择列表); // 递归
+        回溯，撤销处理结果
+    }
+}

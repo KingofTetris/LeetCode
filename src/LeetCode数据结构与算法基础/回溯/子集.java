@@ -12,32 +12,33 @@ import java.util.List;
 public class 子集 {
 
     @Test
-    public void test(){
-        int[] nums = {1,2,3};
+    public void test() {
+        int[] nums = {1, 2, 3};
         List<List<Integer>> subsets = subsets(nums);
         System.out.println(subsets);
     }
 
     List<List<Integer>> res = new ArrayList<>();
     ArrayList<Integer> path = new ArrayList<>();
+
     public List<List<Integer>> subsets(int[] nums) {
-        backTracking(nums,0);
+        backTracking(nums, 0);
         return res;
     }
 
 
-    //求子集是不用剪枝的，因为你必须遍历完整棵树才知道结果。
+    //求子集是不用剪枝的，因为你必须遍历完整棵树才知道完整的子集结果。
     private void backTracking(int[] nums, int startIndex) {
         //只要有path就添加到res中。
         res.add(new ArrayList<>(path));//把当前path添加到结果中。
         //终止条件,其实这道题可以不加
-        if (startIndex >= nums.length){
+        if (startIndex >= nums.length) {
             return;
         }
-        for (int i = startIndex;i < nums.length; i++) {
+        for (int i = startIndex; i < nums.length; i++) {
             path.add(nums[i]);
             //i+1 不能重复使用.
-            backTracking(nums,i + 1);
+            backTracking(nums, i + 1);
             path.remove(path.size() - 1);
         }
     }

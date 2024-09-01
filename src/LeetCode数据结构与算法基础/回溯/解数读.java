@@ -33,9 +33,22 @@ public class 解数读 {
 
     public void solveSudoku(char[][] board) {
         solveSudokuHelper(board);
-       /* for (char[] chars : board) {
-            System.out.println(chars);
-        }*/
+        int n = board[0].length;
+        for (char[] chars : board) {
+            int j = 0;
+            for (char aChar : chars) {
+                j++;
+                if (j % 3 != 0) {
+                    System.out.print(aChar + " ");
+                } else if (j != n){
+                    System.out.print(aChar + "|||");
+                }
+                else {
+                    System.out.print(aChar);
+                }
+            }
+            System.out.println();
+        }
     }
 
     private boolean solveSudokuHelper(char[][] board){
@@ -52,6 +65,7 @@ public class 解数读 {
                         if (solveSudokuHelper(board)){ // 如果找到合适一组立刻返回
                             return true;
                         }
+                        //回溯
                         board[i][j] = '.';
                     }
                 }

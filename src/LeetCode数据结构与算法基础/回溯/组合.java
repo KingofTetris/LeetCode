@@ -74,14 +74,25 @@ public class 组合 {
             return;//结束
         }
         //https://www.bilibili.com/video/BV1wi4y157er/?spm_id_from=333.788&vd_source=299caa32bd4dc5f5ad17129611289250
-        // 怎么剪枝?
-        // 其实就是修改 i的终止条件
-        // 假设现在需要k个数
-        //那么现在还需要选择 k - path.size()个数
-        //你让path.size()取0，那么就可以得到至多只能从哪开始
-        // n - ( k - path.size()) + 1;
-        //回溯的剪枝 通常都是修改遍历的范围。
-        // + 1是因为 我们是从startIndex开始的。
+        /**
+         * 1.已经选择的元素个数：path.size();
+         *
+         * 2.所需需要的元素个数为: k - path.size();
+         *
+         * 3.列表中剩余元素（n-i） >= 所需需要的元素个数(k - path.size())
+         *
+         * 4.在集合n中至多要从该起始位置 : i <= n - (k - path.size()) + 1，开始遍历
+         *
+         * 为什么有个+1呢，因为包括起始位置，我们要是一个左闭的集合。
+         *
+         * 举个例子，n = 4，k = 3， 目前已经选取的元素为0（path.size为0），
+         *
+         * n - (k - 0) + 1 即 4 - ( 3 - 0) + 1 = 2。
+         *
+         * 从2开始搜索都是合理的，可以是组合[2, 3, 4]。
+         *
+         * 这里大家想不通的话，建议也举一个例子，就知道是不是要+1了。
+         */
         for (int i = startIndex; i <= n - (k - path.size()) + 1; i++) {
             path.add(i);
             backtrackingCut(n,k,i+1);
