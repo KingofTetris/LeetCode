@@ -23,15 +23,18 @@ public class 打家劫舍III_简单递归 {
 
         // 偷父节点
         int val1 = root.val;
+
+        // 跳过 root->left，相当于不考虑左孩子了
         if (root.left != null)
-            // 跳过 root->left，相当于不考虑左孩子了
             val1 += rob(root.left.left) + rob(root.left.right);
+
+        // 跳过 root->right，相当于不考虑右孩子了
         if (root.right != null)
-            // 跳过 root->right，相当于不考虑右孩子了
             val1 += rob(root.right.left) + rob(root.right.right);
 
         // 不偷父节点
-        int val2 = rob(root.left) + rob(root.right); // 考虑 root 的左右孩子
+        // 考虑 root 的左右孩子
+        int val2 = rob(root.left) + rob(root.right);
 
         return Math.max(val1, val2);
     }

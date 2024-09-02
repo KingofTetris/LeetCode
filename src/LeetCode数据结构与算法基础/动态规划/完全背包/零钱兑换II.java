@@ -34,8 +34,11 @@ public class 零钱兑换II {
         dp1[0] = 1;
         dp2[0] = 1;
 
-        //遍历顺序 这题是求组合数
-        //物品
+        //遍历顺序
+        /**
+        这题是求组合数 要先遍历物品再遍历背包。这样才不会重复使用。
+        */
+         //物品
         for (int i = 0; i < coins.length; i++) {
             //背包
             for (int j = coins[i]; j <= amount; j++) {

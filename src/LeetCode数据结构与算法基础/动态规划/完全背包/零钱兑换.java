@@ -12,7 +12,7 @@ public class 零钱兑换 {
 
 
     @Test
-    public void test(){
+    public void test() {
         /*int[] coins = {1, 2, 5};
         int amount = 11;*/
         int[] coins = {2};
@@ -31,14 +31,16 @@ public class 零钱兑换 {
         int max = Integer.MAX_VALUE;
         int[] dp = new int[amount + 1];
         //初始值 因为是求Min 那么初始值都赋为最大
-        Arrays.fill(dp,max);
+        Arrays.fill(dp, max);
         dp[0] = 0;
 
-        //for循环，求组合数，先物品再背包
+        /**
+         * 这题本质不是求组合或者排列，是求使用硬币的最少个数，
+         * 那么其实是组合还是排列都无所谓。
+         */
+        //物品
         for (int i = 0; i < coins.length; i++) {
-            //注意是从物品的最小值开始往包里面塞,其实是保证j - coins[i] 不会 < 0
-            //从0开始
-            //相当于只用硬币1去塞需要多少，再
+            //背包
             for (int j = coins[i]; j <= amount; j++) {
                 //只有dp[j-coins[i]]不是初始最大值时，该位才有选择的必要
                 //非则他+1 就溢出变成MIN_VALUE了
@@ -49,6 +51,6 @@ public class 零钱兑换 {
             }
         }
         System.out.println(Arrays.toString(dp));
-        return dp[amount] == max ?  -1 : dp[amount];
+        return dp[amount] == max ? -1 : dp[amount];
     }
 }

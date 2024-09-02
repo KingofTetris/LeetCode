@@ -44,6 +44,8 @@ public class 完全平方数 {
         }
 
         //因为有1，dp[n]不可能等于max 一定有解的
+        //所以不需要再判断 dp[n] == max ? -1 : dp[n]
+        //直接返回dp[n]就行了
         return dp[n];
     }
 }

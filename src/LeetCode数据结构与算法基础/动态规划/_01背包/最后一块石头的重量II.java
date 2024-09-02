@@ -36,8 +36,8 @@ public class 最后一块石头的重量II {
             }
         }
 
-        //因为这个target是由sum/2来的，
-        //sum - dp[target] 一定大于 dp[target]
+        //因为这个target是由sum/2来的，由于Java语言的特性向下取整
+        //那么sum - dp[target] 一定大于等于 dp[target]
         //当然你直接返回两者差的绝对值也是一样
         return (sum - dp[target] )- dp[target];
     }
