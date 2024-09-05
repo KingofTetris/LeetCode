@@ -1,5 +1,7 @@
 package LeetCode数据结构与算法基础.动态规划;
 
+import org.junit.Test;
+
 import java.util.Arrays;
 
 /**
@@ -8,6 +10,14 @@ import java.util.Arrays;
  */
 public class 最长递增子序列 {
 
+
+
+    @Test
+    public void test(){
+        int[] nums = {10,9,2,5,3,7,101,18};
+        int lengthOfLIS = lengthOfLIS(nums);
+        System.out.println(lengthOfLIS);
+    }
     public int lengthOfLIS(int[] nums) {
         //先确定DP的下标和含义
         /**
@@ -39,7 +49,11 @@ public class 最长递增子序列 {
                 }
             }
         }
+
+        //最后的结果不是dp[n]
+        //而是遍历整个数组，查看最长的递增子序列
         int max = 0;
+        System.out.println(Arrays.toString(dp));
         for (int i : dp) {
             max = Math.max(max, i);
         }

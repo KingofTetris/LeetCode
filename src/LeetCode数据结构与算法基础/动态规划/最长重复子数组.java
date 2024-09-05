@@ -15,7 +15,7 @@ public class 最长重复子数组 {
      */
     public int findLength(int[] nums1, int[] nums2) {
         //dp的下标和含义
-        //dp[i][j] 代表以为nums[i-1]的子数组A 和nums[j-1]为结尾的子数组B
+        //dp[i][j] 代表以nums[i-1]为结尾的的子数组A 和nums[j-1]为结尾的子数组B
         //他们的最长重复子数组为dp[i][j]
 
         //递推公式

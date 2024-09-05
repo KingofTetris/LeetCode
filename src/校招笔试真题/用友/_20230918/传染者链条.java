@@ -11,63 +11,81 @@ import java.util.*;
 public class 传染者链条 {
 
     @Test
-    public void test(){
+    public void test() {
         //5,[[3,4,2],[1,2,1],[2,3,1]],1
-        //6,[[1,2,5],[2,3,8],[1,5,10]],1
-//        int[][] meetings = {{3,4,2},{1,2,1},{2,3,1}};
-        int[][] meetings = {{2,4,5},{1,2,5},{2,3,8},{1,5,10}};
+//        6,[[1,2,5],[2,3,8],[1,5,10]],1
+        int[][] meetings = {{3, 4, 2}, {1, 2, 1}, {2, 3, 1},
+                {4, 5, 0}, {3, 5, 5}, {5, 6, 5}, {6, 7, 11}};
+
+        //给定一个下标从0开始的二维数组 meetings，
+        // 其中 meetings[i]=[xi,yi,ti] 表示人员xi和yi在时刻ti有过接触；
+        // 在 meetings 代表的所有接触发生期间，感染者会一直处于感染状态；
+
+        //在meetings代表的所有接触都发生之后，请返回感染病毒V的所有感染者的编号列表，
+        // 并按照从小到大的顺序记录人员编号
+//        int[][] meetings = {{2,4,5},{1,2,5},{2,3,8},{1,5,10}};
+        //给定一个正整数n，代表n 个人，这些人的编号从0到n-1；
         int n = 6;
-        ArrayList<Integer> allPerson = findAllPerson(n, meetings, 1);
+        //firstPerson 第一个感染者
+        int firstPerson = 5;
+        ArrayList<Integer> allPerson = findAllPerson(n, meetings, firstPerson);
         System.out.println(allPerson);
     }
+
     /**
      * 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
      *
-     *
-     * @param n int整型 人员总数
-     * @param meetings int整型二维数组 人员接触信息
+     * @param n           int整型 人员总数
+     * @param meetings    int整型二维数组 人员接触信息
      * @param firstPerson int整型 人员 0 在时刻 0 第一个接触到的人员编号
      * @return int整型ArrayList
      */
-    public ArrayList<Integer> findAllPerson (int n, int[][] meetings, int firstPerson) {
-        // write code here
-        ArrayList<Integer> res = new ArrayList<>();
-        res.add(0); //0是第一个感染的
-        res.add(firstPerson);//firstPerson是第二个
-        //按照感染时刻从小到大排序
-        Arrays.sort(meetings, Comparator.comparingInt(o -> o[2]));
+    public ArrayList<Integer> findAllPerson(int n, int[][] meetings, int firstPerson) {
+        //按照时刻从小到大排序
+        Arrays.sort(meetings, (o1, o2) -> o1[2] - o2[2]);
+        System.out.println(Arrays.deepToString(meetings));
+        HashSet<Integer> people = new HashSet<>();
+
+        HashSet<Integer> grz = new HashSet<>();
+        grz.add(firstPerson);
+
         for (int i = 0; i < meetings.length; i++) {
-            //不能一个一个取，要把同一个时刻的都拿出来。
-            Set<Integer> set = new HashSet<>();
             int[] meeting = meetings[i];
-            set.add(meeting[0]);
-            set.add(meeting[1]);
-            for (int j = i + 1; j < meetings.length; j++) {
-                //如果是同一个时刻
-                if (meetings[j][2] == meeting[2]){
-                   set.add(meetings[j][0]);
-                   set.add(meetings[j][1]);
-                }else {
-                    //因为已经排序了，如果不是就没必要继续遍历了。
+            int timeNow = meeting[2];
+            people.add(meeting[0]);
+            people.add(meeting[1]);
+            for (int j = i + 1; j < meeting.length; j++) {
+                int[] nextMeeting = meetings[j];
+                if (nextMeeting[2] == timeNow) {
+                    people.add(nextMeeting[0]);
+                    people.add(nextMeeting[1]);
+                }
+                //如果不一样就没必要往下走了。
+                else {
                     break;
                 }
             }
-            //然后判断同一时刻里面有没用感染者
-            for (Integer grz : res) {
-                //如果包含一个感染者，所有人都要感染。
-                if (set.contains(grz)){
-                    for (Integer other : set) {
-                        if (!res.contains(other)){
-                            res.add(other);
-                        }
-                    }
-                    //添加完成就可以break了。
+            //处理完同一时刻的所有people以后，查看people里面有没有firstPerson
+            //如果没有，就全部清除
+            //有就保留
+            int flag = 0;
+            for (Integer temp : grz) {
+                if (people.contains(temp)) {
+                    flag = 1;
                     break;
                 }
             }
+            if (flag == 1) {
+                //找出所有感染者，添加到结果中
+                grz.addAll(people);
+            }
+            //不管怎么样当前people都要清空。
+            people.clear();
         }
-        //从小到大排序。这么坑啊。不按顺序不对，差点少了60%
-        res.sort(null);
+
+        //最后给grz排序即可
+        ArrayList<Integer> res = new ArrayList<>(grz);
+        Collections.sort(res);
         return res;
     }
 }

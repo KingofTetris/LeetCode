@@ -20,139 +20,89 @@ import java.util.*;
  * cnt为偶数，Xiaoyo无法删除该点，Pyrmont获胜。
  * cnt为奇数，Xiaoyo获胜。
  */
+import java.util.*;
+
 public class 基环树游戏 {
-    static class Skt {
-        static final int N = 100005;
-        static List<Integer>[] adj = new ArrayList[N];
-        static boolean[] vis = new boolean[N];
-        static int[] past = new int[N];
-        static boolean[] isCircle = new boolean[N];
-        static int[] d = new int[N];
 
-        public static void work() {
-            Scanner scanner = new Scanner(System.in);
-            int n = scanner.nextInt();
-            int x = scanner.nextInt();
-
-            for (int i = 1; i <= n; i++) {
-                adj[i] = new ArrayList<>();
-                vis[i] = false;
-                past[i] = -1;
-                isCircle[i] = false;
-                d[i] = 0;
-            }
-
-            for (int i = 1; i <= n; i++) {
-                int a = scanner.nextInt();
-                int b = scanner.nextInt();
-                adj[a].add(b);
-                adj[b].add(a);
-                d[a]++;
-                d[b]++;
-            }
-
-            Queue<Integer> q = new LinkedList<>();
-            q.add(1);
-            vis[1] = true;
-            past[1] = 0;
-            boolean flag = false;
-            List<Integer> t1 = new ArrayList<>();
-            List<Integer> t2 = new ArrayList();
-
-            while (!q.isEmpty() && !flag) {
-                int u = q.poll();
-                for (int v : adj[u]) {
-                    if (v == past[u]) continue;
-                    if (vis[v]) {
-                        int s1 = u, s2 = v;
-                        while (s1 != 0) {
-                            t1.add(s1);
-                            s1 = past[s1];
-                        }
-                        while (s2 != 0) {
-                            t2.add(s2);
-                            s2 = past[s2];
-                        }
-                        flag = true;
-                        break;
-                    } else {
-                        vis[v] = true;
-                        past[v] = u;
-                        q.add(v);
-                    }
-                }
-            }
-
-            Set<Integer> mp = new HashSet<>();
-            int ex = -1;
-            for (int i : t1) {
-                mp.add(i);
-            }
-            for (int i : t2) {
-                if (mp.contains(i)) {
-                    ex = i;
-                    break;
-                }
-            }
-            for (int i : t1) {
-                isCircle[i] = true;
-                if (i == ex) {
-                    break;
-                }
-            }
-            for (int i : t2) {
-                isCircle[i] = true;
-                if (i == ex) {
-                    break;
-                }
-            }
-
-            //如果x在环里面，一定是平局
-            if (isCircle[x]) {
-                System.out.println("Draw");
-                return;
-            }
-
-            while (!q.isEmpty()) {
-                q.poll();
-            }
-
-            for (int i = 1; i <= n; i++) {
-                vis[i] = false;
-                if (d[i] == 1) {
-                    vis[i] = true;
-                    q.add(i);
-                }
-            }
-
-            int ans = 0;
-            while (!q.isEmpty()) {
-                int u = q.poll();
-                ans++;
-                for (int v : adj[u]) {
-                    if (!vis[v] && !isCircle[v] && v != x) {
-                        d[v]--;
-                        if (d[v] == 1) {
-                            vis[v] = true;
-                            q.add(v);
-                        }
-                    }
-                }
-            }
-
-            if (ans % 2 == 0 || d[x] == 1) {
-                System.out.println("Xiaoyo");
-            } else {
-                System.out.println("Pyrmont");
-            }
-        }
-    }
-
+    // 主函数，用于处理多个测试用例
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int T = scanner.nextInt();
-        while (T-- > 0) {
-            Skt.work();
+        Scanner sc = new Scanner(System.in);
+        int T = sc.nextInt();  // 读取测试组数 T
+        while (T-- > 0) {  // 逐组处理测试数据
+            solve(sc);  // 调用 solve 函数处理每组数据
+        }
+        sc.close();  // 关闭输入流
+    }
+
+    // 处理每组测试数据的函数
+    public static void solve(Scanner sc) {
+        int n = sc.nextInt();  // 读取节点数 n
+        int x = sc.nextInt();  // 读取目标节点 x
+
+        // 创建邻接表来表示树的结构
+        List<List<Integer>> adjList = new ArrayList<>();
+        for (int i = 0; i <= n; i++) {
+            adjList.add(new ArrayList<>());  // 初始化每个节点的邻接列表
+        }
+
+        // 度数数组，用来存储每个节点的度数
+        /**
+         * 度数数组，经常用来拓扑排序。
+         * 当一个节点的度为1的时候 就把他删去
+         */
+        int[] degree = new int[n + 1];
+
+        // 读取树的边，并构建邻接表
+        for (int i = 0; i < n; i++) {
+            int u = sc.nextInt();  // 读取一条边的一个节点 u
+            int v = sc.nextInt();  // 读取这条边的另一个节点 v
+            adjList.get(u).add(v);  // 在 u 的邻接列表中添加 v
+            adjList.get(v).add(u);  // 在 v 的邻接列表中添加 u
+            degree[u]++;  // 增加 u 的度数
+            degree[v]++;  // 增加 v 的度数
+        }
+
+        // 使用双端队列（deque）来模拟叶子节点的队列
+        Deque<Integer> queue = new ArrayDeque<>();
+        for (int i = 1; i <= n; i++) {
+            if (degree[i] == 1) {  // 如果节点 i 是叶子节点
+                if (i == x) {  // 如果这个叶子节点正好是目标节点 x
+                    System.out.println("Xiaoyo");  // Xiaoyo 直接胜利
+                    return;  // 直接结束这次测试
+                }
+                queue.addLast(i);  // 将叶子节点添加到队列末尾
+            }
+        }
+
+        int removedCount = 0;  // 记录被移除的节点数
+        boolean targetFound = false;  // 标记是否找到目标节点 x
+
+        // 处理队列中的节点，模拟移除叶子节点的过程
+        while (!queue.isEmpty()) {
+            int current = queue.pollFirst();  // 从队列前端取出一个节点
+            removedCount++;  // 增加被移除的节点计数
+            if (current == x) {  // 如果当前节点是目标节点 x
+                targetFound = true;  // 标记已找到目标节点
+                continue;  // 继续处理其他节点
+            }
+            // 对当前节点的每个邻居节点进行处理
+            for (int neighbor : adjList.get(current)) {
+                degree[neighbor]--;  // 当前节点被移除后，邻居节点的度数减 1
+                if (degree[neighbor] == 1) {  // 如果邻居节点变成了叶子节点
+                    queue.addLast(neighbor);  // 将它添加到队列末尾
+                }
+            }
+        }
+
+        // 根据是否找到目标节点以及被移除的节点数判断结果
+        if (!targetFound) {
+            System.out.println("Draw");  // 如果没有找到目标节点，结果是平局
+        } else if (removedCount % 2 == 0) {
+            System.out.println("Pyrmont");  // 如果移除的节点数为偶数，Pyrmont 胜利
+        } else {
+            System.out.println("Xiaoyo");  // 如果移除的节点数为奇数，Xiaoyo 胜利
         }
     }
+
+
 }

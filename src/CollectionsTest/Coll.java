@@ -10,7 +10,7 @@ import java.util.*;
  * @File Coll
  * @Time 2021/10/30  19:53
  * 实际上没什么好说的。只有一个要求
- * 当你向collection添加自定义的obj时，要重写equals方法，不然collection的很多方法都和预计不同。
+ * 当你向collection添加自定义的对象时，要重写equals方法，不然collection的很多方法都和预计不同。
  * 比如contains,containsAll,remove,removeAll.
  * 还有就是Arrays.asList后面加new int[]{11,11,22} 都只会当作一个元素对待
  */

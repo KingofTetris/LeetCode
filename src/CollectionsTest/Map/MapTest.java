@@ -19,7 +19,7 @@ import java.util.Properties;
  *
  *  因此又涉及到HashSet的比较，所以Map中存储对象也要重写hashCode()和equals()方法。
  *  先比较hashCode()然后比较equals() 如果hashcode都不一致，肯定不一样，如果hashcode一样再通过equals方法比较
- *      /---{@link java.util.HashMap}:现在的主要实现类，线程不安全，key-value都可以存储null
+ *  *      /---{@link java.util.HashMap}:现在的主要实现类，线程不安全，key-value都可以存储null
  *          /---{@link java.util.LinkedHashMap}:保证遍历map数据时，按照输入顺序输出，
  *          原因和LinkedHashSet一样， 是在底层添加了两个引用，频繁遍历可以用LinkedHashMap
  *
@@ -29,7 +29,8 @@ import java.util.Properties;
  *
  *
  *      HashMap的底层：数组+链表 jdk7 1.7底层结构是一个存储 Entry<K,V>[] table的数组
- *                    数组+链表+红黑树 jdk8 1.8则是 Node<K,V>[] table。 存储的结构从Entry变成了Node 就是为了变化到红黑树
+ *                    数组+链表+红黑树 jdk8 1.8则是 Node<K,V>[] table。
+ *                    存储的结构从Entry变成了Node 就是为了变化到红黑树
  *                    而且 static class Node<K,V> implements Map.Entry<K,V>  是实现关系
  *      底层实现原理，以jdk7为例:
  *      HashMap map = new HashMap();
@@ -42,7 +43,7 @@ import java.util.Properties;
  *      如果index上已有元素，(存在一个或多个元素以链表形式相连)，比较key1的hashCode和已经存在元素key的hashCode
  *          如果key1的哈希值与其他已经存在的元素的key的哈希值都不相同，添加成功 --情况2
  *          如果key1的哈希值和已经存在的某个元素(key2-value2)的哈希值相同。调用key1所在类的equals()方法
- *              //其实真要说的话，还不是equals 而是先对比 key1 和 key2的地址 地址一样还对比个毛的equals。
+ *              //其实真要说的话，还不是equals 而是先对比 key1和 key2的地址 地址一样还对比个毛的equals。
  *              如果key1.getClass().equals(key2)返回false,插入成功--情况3
  *              如果key1.getClass().equals(key2)返回true:使用value1覆盖value2。
  *                因为我们说过map是映射关系，单值函数。不可能让一个key对应多个value

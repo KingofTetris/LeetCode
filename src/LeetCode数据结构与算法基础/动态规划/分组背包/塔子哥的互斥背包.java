@@ -1,9 +1,6 @@
 package LeetCode数据结构与算法基础.动态规划.分组背包;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * @author by KingOfTetris
