@@ -27,10 +27,12 @@ class multi_pack{
         for (int i = 0; i < n; i++) {
             //再遍历背包，防止物品重复拿去。
             for (int j = bagWeight; j >= weight[i]; j--) {
+                /** 下面就是多重背包和01背包的区别，多了一层循环，去拆分物品
                 //遍历每种物品的个数 每次拿一个。
                 // 注意这里的状态公式就变成了
-                // max(dp[j],dp[j - k * w] + k * w)
+                // max(dp[j],dp[j - k * w] + k * v)
                 //并且要保证 j >= k*w 不然会越界。
+                 **/
                 for (int k = 1; k <= nums[i]; k++) {
                     if ((j - k * weight[i]) >= 0){
                         dp[j] = Math.max(dp[j], dp[j - k * weight[i]] + k * value[i]);

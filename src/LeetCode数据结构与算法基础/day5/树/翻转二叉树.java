@@ -24,7 +24,7 @@ public class 翻转二叉树 {
     //和对称二叉树其实是一个套路。但是这个得重建，对称二叉直接判断是否相等和可以了。
     //递归重建容易一点
     public TreeNode invertTree(TreeNode root) {
-        //递归里面的return只是结束了本次方法，回自动回溯到上次调用的下一步
+        //递归里面的return只是结束了本次方法，会自动回溯到上次调用的下一步
         if (root == null)
             return root;
         //直接左右交换，注意树这个结构交换的是**整颗子树** 而不是一个值 一个节点。

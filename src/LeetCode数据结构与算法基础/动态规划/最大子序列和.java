@@ -54,7 +54,6 @@ public class 最大子序列和 {
         int maxSum = nums[0];
         for (int x : nums) {
             //pre_sum记录前缀最大和，如果preSum+x 小于 x 那么就抛弃preSum，从x开始
-            //如果加上x反而变小了，那么抛弃preSum,从x重新开始。
             pre_sum = Math.max(pre_sum + x, x);
             //maxSum是为了记录上一个最大和
             maxSum = Math.max(maxSum, pre_sum);
@@ -72,7 +71,7 @@ public class 最大子序列和 {
             dp[i] = Math.max(dp[i - 1] + nums[i], nums[i]);
         }
         //要注意阿！！以nums[n - 1]结尾的最大子数组并不一定是最大的！！！
-        // 注意是以他结尾的子数组，并不是所有子数组
+        // 注意是以他结尾的子序列，并不是所有子序列
         //所以你还得遍历一次dp来取最大值
         int ans = Integer.MIN_VALUE;
         for (int i : dp) {

@@ -50,7 +50,7 @@ public class 判断子序列 {
                 max = Math.max(max,dp[i][j]);
             }
         }
-        //最好判断max和n是否一致即可
+        //最后判断max和n是否一致即可
         return max == n;
     }
 }

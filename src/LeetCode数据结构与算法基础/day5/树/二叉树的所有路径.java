@@ -52,7 +52,7 @@ public class 二叉树的所有路径 {
             return;
         }
 
-        //就把root.val拉进来
+        //如果不是叶子，就把root.val拉进来
         path.add(root.val);
         backTracking(root.left);
         backTracking(root.right);

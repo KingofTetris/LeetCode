@@ -8,8 +8,9 @@ public class 二叉树的直径 {
 
 
     /**
-     * TODO 还没搞懂这题。
      * 二叉树的 直径 是指树中任意两个节点之间最长路径的 长度 。这条路径可能经过也可能不经过根节点 root
+     * 其实就是非常简单的递归，遇到空节点路径就结束了。
+     * 只需要递归地去找左右子树的深度，然后两者相加即可。
      *
      * @param root
      * @return
@@ -21,6 +22,8 @@ public class 二叉树的直径 {
         return ans;
     }
 
+
+    //求当前node左右子树的最大深度。
     private int dfs(TreeNode node) {
         if (node == null) {
             return -1; // 下面 +1 后，对于叶子节点就刚好是 0

@@ -4,6 +4,12 @@ import java.util.Scanner;
 
 // 注意类名必须为 Main, 不要有任何 package xxx 信息
 //https://www.nowcoder.com/practice/5b80ab166efa4551844657603227caeb
+
+/**
+ * 表面上是求A,B的LCA，但其实因为他是一颗完全二叉树，还是从1-N。
+ * 没有必要真的用LCA算法去构建二叉树，再求LCA。
+ *
+ */
 public class 完全二叉树数组存储的LCA {
     public static void main(String[] args) {
         //根据题意这是棵完全二叉树
@@ -24,6 +30,7 @@ public class 完全二叉树数组存储的LCA {
                         b /= 2;
                     }
                 }
+                //除到a==b 就是a b的LCA
                 System.out.println(a);
             }
             scanner.close();

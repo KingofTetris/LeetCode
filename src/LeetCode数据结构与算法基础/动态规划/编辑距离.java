@@ -12,21 +12,22 @@ public class 编辑距离 {
 
 
     @Test
-    public void test(){
+    public void test() {
         String s = "horse";
         String t = "rse";
         int minDistance = minDistance(s, t);
         System.out.println(minDistance);
     }
+
     /**
      * 给你两个单词 word1 和 word2， 请返回将 word1 转换成 word2 所使用的最少操作数  。
-     *
+     * <p>
      * 你可以对一个单词进行如下三种操作：
-     *
+     * <p>
      * 插入一个字符
      * 删除一个字符
      * 替换一个字符
-     *
+     * <p>
      * 搞了那么多，就是为了做这道题
      *
      * @param word1
@@ -58,7 +59,7 @@ public class 编辑距离 {
         int[][] dp = new int[m + 1][n + 1];
         // 初始化
         for (int i = 1; i <= m; i++) {
-            dp[i][0] =  i;
+            dp[i][0] = i;
         }
         for (int j = 1; j <= n; j++) {
             dp[0][j] = j;
@@ -69,8 +70,10 @@ public class 编辑距离 {
                 if (word1.charAt(i - 1) == word2.charAt(j - 1)) {
                     dp[i][j] = dp[i - 1][j - 1];
                 } else {
-                    dp[i][j] = Math.min(Math.min(dp[i - 1][j - 1], dp[i][j - 1]),
-                            dp[i - 1][j]) + 1;
+                    //因为增删改其实全部都要+1，所以把+1放在最后了
+                    //但是其实直接放到里面比较也是一样。无所谓你怎么写。
+                    dp[i][j] = Math.min(Math.min(dp[i - 1][j] + 1, dp[i][j - 1] + 1),
+                            dp[i - 1][j - 1] + 1);
                 }
             }
         }

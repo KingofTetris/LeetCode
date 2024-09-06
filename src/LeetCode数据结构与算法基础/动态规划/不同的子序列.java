@@ -1,11 +1,22 @@
 package LeetCode数据结构与算法基础.动态规划;
 
+import org.junit.Test;
+
+import java.util.Arrays;
+
 /**
  * @author by KingOfTetris
  * @date 2024/8/22
  */
 public class 不同的子序列 {
 
+    @Test
+    public void test(){
+        String s = "babgbag";
+        String t = "bag";
+        int numDistinct = numDistinct(s, t);
+        System.out.println(numDistinct);
+    }
     //s字符串中有多少个不同的子序列等于t?
     public int numDistinct(String s, String t) {
         //dp[i][j]：以i-1为结尾的s子序列中出现以j-1为结尾的t的个数为dp[i][j]。
@@ -19,13 +30,14 @@ public class 不同的子序列 {
          * 1.当s[i - 1] 与 t[j - 1]相等时，dp[i][j]可以有两部分组成。
          *
          * 一部分是用s[i - 1]来匹配，那么个数为dp[i - 1][j - 1]。
-         * 即不需要考虑当前s子串和t子串的最后一位字母，所以只需要 dp[i-1][j-1]。
+         * 即因为末尾都相同，那么不需要考虑当前s子串和t子串的最后一位字母，所以只需要 dp[i-1][j-1]。
          *
-         * 一部分是不用s[i - 1]来匹配，个数为dp[i - 1][j]。
+         * 另外一部分是不用s[i - 1]来匹配，个数为dp[i - 1][j]。
          *
          * 这里可能有录友不明白了，为什么还要考虑 不用s[i - 1]来匹配，都相同了指定要匹配啊。
          *
-         * 例如： s：bagg 和 t：bag ，s[3] 和 t[2]是相同的，但是字符串s也可以不用s[3]来匹配，即用s[0]s[1]s[2]组成的bag。
+         * 例如： s：bagg 和 t：bag ，s[3] 和 t[2]是相同的，
+         * 但是字符串s也可以不用s[3]来匹配，即用s[0]s[1]s[2]组成的bag。
          *
          * 当然也可以用s[3]来匹配，即：s[0]s[1]s[3]组成的bag。
          *
@@ -81,6 +93,10 @@ public class 不同的子序列 {
                     dp[i][j] = dp[i - 1][j];
                 }
             }
+        }
+
+        for (int[] row : dp) {
+            System.out.println(Arrays.toString(row));
         }
 
         return dp[s.length()][t.length()];

@@ -1,11 +1,23 @@
 package LeetCode数据结构与算法基础.动态规划;
 
+import org.junit.Test;
+
+import java.util.Arrays;
+
 /**
  * @author by KingOfTetris
  * @date 2024/8/22
  */
 public class 最长重复子数组 {
 
+
+    @Test
+    public void test(){
+        int[] nums1 = {1,2,3,2,1,5};
+        int[] nums2 = {3,2,1,5,4,7};
+        int length = findLength(nums1, nums2);
+        System.out.println(length);
+    }
 
     /**
      * 如果暴力就需要O(n^3) 必定超时
@@ -48,7 +60,9 @@ public class 最长重复子数组 {
                 }
             }
         }
-
+        for (int[] row : dp) {
+            System.out.println(Arrays.toString(row));
+        }
         return result;
     }
 }

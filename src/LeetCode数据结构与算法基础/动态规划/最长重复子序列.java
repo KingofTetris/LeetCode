@@ -40,15 +40,28 @@ public class 最长重复子序列 {
                 }
                 //如果不同，那么就要取 Math.max(dp[i - 1][j], dp[i][j - 1]);
                 /**
+                 * 因为是求子序列，不要求连续
+                 *
                  * 举例子看看
                  * 比如
-                 * abc
-                 * ace
+                 * abc|de
+                 * ace|
+                 * 我们假设这两个字符串是
+                 * nums1 : abc
+                 * nums2 : ace
+                 * 那么这两个字符串的最长公共子序列应该是 ac对吧
+                 * 那么其实就可以不考虑nums2 j
+                 * 那么就是dp[i][j - 1]
                  *
-                 * 显然结尾 'c' 和 'e'不同
+                 * 反过来还是这两个字符串
+                 * nums1 : abc
+                 * nums2 : ace
+                 * 这两个字符串的最长公共子序列也有可能是dp[i][j]的结果
+                 * 如果我们不考虑num1 i
+                 * 那么就是dp[i-1][j]
                  */
                 else {
-                    dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
+                    dp[i][j] = Math.max(dp[i][j - 1], dp[i - 1][j]);
                 }
             }
         }
