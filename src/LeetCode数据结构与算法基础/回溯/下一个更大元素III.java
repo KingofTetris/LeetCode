@@ -35,7 +35,8 @@ public class 下一个更大元素III {
 
     @Test
     public void test() {
-        int n = Integer.MAX_VALUE;
+//        int n = Integer.MAX_VALUE;
+        int n = 31;
         int element = nextGreaterElement(n);
         System.out.println(element);
     }
@@ -50,7 +51,7 @@ public class 下一个更大元素III {
     public int nextGreaterElement(int n) {
         int[] nums = numToArray(n);
         permute(nums);
-        if (flag == 1) return -1;
+        if (flag == 1) return -1;//flag==1 说明N已经是最大了，没有更大的排列了。
         long res = 0;
         int base = 1;
         for (int i = nums.length - 1; i >= 0; i--) {
@@ -74,7 +75,6 @@ public class 下一个更大元素III {
             }
         }
         flag = 1;
-        Arrays.sort(nums);
     }
 
     private void swap(int[] nums, int i, int j) {

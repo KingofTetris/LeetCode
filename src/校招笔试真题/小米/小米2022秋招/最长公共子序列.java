@@ -1,5 +1,6 @@
 package 校招笔试真题.小米.小米2022秋招;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -11,12 +12,12 @@ import java.util.Scanner;
  * 问题描述:
  * 给定两个字符串str1和str2，输出两个字符串的最长公共子序列的长度。
  * 如果最长公共子序列为空，则返回"0"。目前给出的数据，仅仅会存在 一个最长的公共子序列
- *
+ * <p>
  * 输入样例: 1A2C3D4E56  A1B2345C6D
- *
+ * <p>
  * 子序列不要求是连续子串，但是要保证相对顺序
  * 输出 6 就是123456
- *
+ * <p>
  * 这种送分题你都不会做，当初不刷代码随想录。蠢啊！
  */
 public class 最长公共子序列 {
@@ -35,28 +36,54 @@ public class 最长公共子序列 {
         }
         char[] s1 = text1.toCharArray();
         char[] s2 = text2.toCharArray();
-        int M = text1.length();
-        int N = text2.length();
-        int[][] dp = new int[M][N];
-        dp[0][0] = s1[0] == s2[0] ? 1 : 0;
-        for (int j = 1; j < N; j++) {
-            dp[0][j] = s1[0] == s2[j] ? 1 : dp[0][j - 1];
+        int n = s1.length;
+        int m = s2.length;
+
+        //求s1和s2的最长公共子序列
+        //定义dp[i][j] 为以s1[i-1]为结尾和以s2[j-1]为结尾的字符串的最长公共子序列
+
+        int[][] dp = new int[n + 1][m + 1];
+
+        //递推公式其实都是老调重弹了
+        //分两种情况
+        /**
+         * 1.s1[i-1] == s2[j-1]
+         *  那么就直接dp[i][j] = dp[i-1][j-1] + 1;
+         *
+         * 2.s1[i-1] != s2[j-1]
+         * dp[i][j] = Math.max(dp[i-1][j],dp[i][j-1]);
+         */
+        //初始化
+        //dp[i][j] 的递推方向是从第一行第一列推过来的，那么就要初始化第一行第一列
+        //dp[0][j] 的含义就是 s1为空字符串，那么以s2[j-1]为结尾的字符串和空字符串的最长公共子序列长度应该是0
+        //反过来dp[i][0] 也是一样 那么其实无需显示赋值了，为了方便，我还是写出来给你看
+        for (int j = 0; j <= m; j++) {
+            dp[0][j] = 0;
         }
-        for (int i = 1; i < M; i++) {
-            dp[i][0] = s1[i] == s2[0] ? 1 : dp[i - 1][0];
+
+        for (int i = 0; i <= n; i++) {
+            dp[i][0] = 0;
         }
-        for (int i = 1; i < M; i++) {
-            for (int j = 1; j < N; j++) {
-                int p1 = dp[i][j - 1];
-                int p2 = dp[i - 1][j];
-                int p3 = s1[i] == s2[j] ? (1 + dp[i - 1][j - 1]) : 0;
-                dp[i][j] = Math.max(p1, Math.max(p2, p3));
+
+        int max = -1;
+        //开始递推
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= m; j++) {
+                //要注意这里，s1和s2是没有+1的
+                //需要下标-1 才是0->n 0->m
+                if (s1[i - 1] == s2[j - 1]){
+                    dp[i][j] = dp[i - 1][j - 1] + 1;
+                }
+                else{
+                    dp[i][j] = Math.max(dp[i][j - 1],dp[i - 1][j]);
+                }
+                max = Math.max(max,dp[i][j]);
             }
         }
-        return dp[M - 1][N - 1];
+        for (int[] row : dp) {
+            System.out.println(Arrays.toString(row));
+        }
+        return max;
     }
 
-  /*  作者：shawnwb
-    链接：https://www.nowcoder.com/exam/test/72970517/submission?examPageSource=Company&pid=39932559&testCallback=https%3A%2F%2Fwww.nowcoder.com%2Fexam%2Fcompany%3FcurrentTab%3Drecommand%26jobId%3D100%26keyword%3D%E5%B0%8F%E7%B1%B3%26selectStatus%3D0&testclass=%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91
-    来源：牛客网*/
 }
