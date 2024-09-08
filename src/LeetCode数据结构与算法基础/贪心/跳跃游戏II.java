@@ -49,10 +49,19 @@ public class 跳跃游戏II {
     public int jumpDP(int[] nums) {
         int[] dp = new int[nums.length];
         Arrays.fill(dp, Integer.MAX_VALUE);
+        //dp表示跳到i至少有几步
         dp[0] = 0;
         for (int i = 0; i < nums.length; i++) {
             for (int j = 1; j <= nums[i]; j++) {
                 if (i + j < nums.length) {
+                    /**
+                     * 递推公式
+                     * 如果能从i直接跳到 i + j
+                     * 那么dp[i + j] = dp[i] + 1
+                     * 因为会有多重跳法
+                     * 每次取小的。
+                     * 那么dp[i + j] = Math.min(dp[i + j], dp[i] + 1);
+                     */
                     dp[i + j] = Math.min(dp[i + j], dp[i] + 1);
                 }
             }
