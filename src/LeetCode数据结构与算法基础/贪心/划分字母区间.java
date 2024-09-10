@@ -1,4 +1,4 @@
-package LeetCode数据结构与算法基础.day2.字符串;
+package LeetCode数据结构与算法基础.贪心;
 
 import org.junit.Test;
 
@@ -16,10 +16,10 @@ import java.util.List;
         同一字母最多出现在一个片段中。返回一个表示每个字符串片段的长度的列表。
 
         说人话就是把字符串分段，每个段里面的字母都是自己特有的，其他段都没有。
-        把这个字符串分的尽量多。
+        把这个字符串分段得的尽量多。
 
         示例：
-        输入：S = "ababcbacadefegdehijhklij"
+        输入：S = "ababcbaca defegde hijhklij"
         输出：[9,7,8]
         解释：
 
@@ -44,14 +44,14 @@ public class 划分字母区间 {
 
     //说是贪心算法，我也看不出来哪贪心
     public List<Integer> partitionLabels(String s) {
-        List<Integer> list = new ArrayList<Integer>();
+        List<Integer> list = new ArrayList<>();
 
         //记录每个字母出现的最后位置
         int[] map = new int[26];
         //初始化全为-1 表示字符串中不存在这个字母
         Arrays.fill(map,-1);
 
-        //找到最后位置
+        //找到每个字符的最后出现位置
         for (int i = 0; i < s.length(); i++) {
             map[s.charAt(i) - 'a'] = i;
         }
@@ -66,11 +66,17 @@ public class 划分字母区间 {
             //比如abc...........abc
             //a最远可以去len-3 b去len-2 c到len-1 实际上就只能分一段。
 
+
+            //每次记录当前字符子串中字母出现的最远位置。
             //比如abc...........abcdfe...
-            //像这个就可以截取abc...abc这一段
+            //像这个就可以截取abc...abc
+            //记录的就是c这个字母的最远位置。
             end = Math.max(end,currentCharMaxPos);// 更新「已扫描的字符中最远的位置」
 
-
+            //当i到达这个最远位置以后，就可以切割一段下来了。
+            //这一段的长度就是 i - start + 1
+            //然后把start移动到c以后，也就是start + 1
+            //重复这个过程即可
             if (i == end){ // 正好扫描到「已扫描的字符的最远位置」，到达切割点
                 list.add(i - start + 1);
                 start = i + 1; // 更新，下一个待切割的字符串的起始位置

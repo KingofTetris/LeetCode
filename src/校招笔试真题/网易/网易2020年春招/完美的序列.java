@@ -19,7 +19,7 @@ public class 完美的序列 {
 
     // 直接用滑动窗口计算窗口内的元素之和来判断
 
-    //不要暴力，双指针加滑动窗口就能解决。
+    //不要暴力，滑动窗口就能解决。
     private static int solve(int[] nums) {
         int left = 0, right = 1;
         long sum = nums[0];
