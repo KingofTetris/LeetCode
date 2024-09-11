@@ -17,8 +17,11 @@ public class 岛屿数量BFS1 {
 
     static boolean[][] visited;
 
+    //BFS就不是递归了，而是用队列去取代递归。
+    //只要还能向外BFS，那么queue就不为空，如果queue为空了，那么说明已经找到一块单独的大陆了。
     public static void bfs(int[][] grid, int x, int y) {
         Queue<int[]> queue = new ArrayDeque<>();
+        //将x,y入队
         queue.offer(new int[]{x, y});
         visited[x][y] = true; // 只要加入队列，立刻标记
         while (!queue.isEmpty()) {
@@ -49,6 +52,7 @@ public class 岛屿数量BFS1 {
             }
         }
         //只要是DFS,BFS就离不开这个visited数组
+        //其实也不是离不开，最大人工岛不就没有吗，其实只要你能标记哪些走过了就行了。
         visited = new boolean[n][m];
 
         int result = 0;

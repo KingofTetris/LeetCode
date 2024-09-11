@@ -54,6 +54,9 @@ public class 合并二叉树 {
 
     //非递归实现就要用BFS
     //逻辑也还算简单，就是要三个队列辅助，代码量繁杂。
+    /**
+     * 其实层序遍历就是一个BFS。下面的写法其实和层序遍历都差不多。
+     */
     public TreeNode mergeTrees(TreeNode t1, TreeNode t2) {
                 if (t1 == null) {
                     return t2;

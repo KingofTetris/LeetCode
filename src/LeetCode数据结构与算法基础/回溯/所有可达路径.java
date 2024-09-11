@@ -1,4 +1,4 @@
-package LeetCode数据结构与算法基础.DFS与BFS;
+package LeetCode数据结构与算法基础.回溯;
 
 /**
  * @author by KingOfTetris
@@ -7,6 +7,7 @@ package LeetCode数据结构与算法基础.DFS与BFS;
 
 import java.util.*;
 
+//找到图中，从1到N的所有路径
 public class 所有可达路径 {
     private static List<List<Integer>> res = new ArrayList<>();
     private static List<Integer> path = new ArrayList<>();

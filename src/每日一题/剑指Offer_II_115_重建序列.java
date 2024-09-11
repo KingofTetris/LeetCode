@@ -108,7 +108,7 @@ public class 剑指Offer_II_115_重建序列 {
             }
         }
 
-        //这样邻接表和入读表就建立好了
+        //这样邻接表和入度表就建立好了
         Queue<Integer> queue = new LinkedList<>();//建立队列
         for (int i = 1; i < inDegrees.length; i++) { //按顺序入队，如果Sequences里面包含单个顺序[1]，那它虽然没进入上面的循环，但也由于数组的初始化而为0
             if (inDegrees[i] == 0){

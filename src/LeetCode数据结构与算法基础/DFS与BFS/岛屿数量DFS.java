@@ -15,27 +15,6 @@ public class 岛屿数量DFS {
     static int[] dy = {1, -1, 0, 0};
     static boolean[][] visited;
 
-    public static void dfs(int[][] grid, int x, int y) {
-        //从(x,y)开始向外深搜。
-        for (int i = 0; i < 4; i++) {
-            //四个方向向外探索
-            int nextx = x + dx[i];
-            int nexty = y + dy[i];
-            if (nextx < 0
-                    || nextx >= grid.length
-                    || nexty < 0
-                    || nexty >= grid[0].length) continue;  // 越界了，直接跳过
-
-            // 没有访问过的 同时 陆地的
-            // 说明是同一块陆地
-            if (!visited[nextx][nexty] && grid[nextx][nexty] == 1) {
-                visited[nextx][nexty] = true;
-                //继续
-                dfs(grid, nextx, nexty);
-            }
-        }
-    }
-
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         int n = in.nextInt(), m = in.nextInt();
@@ -63,5 +42,28 @@ public class 岛屿数量DFS {
         }
         System.out.println(result);
     }
+
+
+    public static void dfs(int[][] grid, int x, int y) {
+        //从(x,y)开始向外深搜。
+        for (int i = 0; i < 4; i++) {
+            //四个方向向外探索
+            int nextx = x + dx[i];
+            int nexty = y + dy[i];
+            if (nextx < 0
+                    || nextx >= grid.length
+                    || nexty < 0
+                    || nexty >= grid[0].length) continue;  // 越界了，直接跳过
+
+            // 没有访问过的 同时 陆地的
+            // 说明是同一块陆地
+            if (!visited[nextx][nexty] && grid[nextx][nexty] == 1) {
+                visited[nextx][nexty] = true;
+                //继续
+                dfs(grid, nextx, nexty);
+            }
+        }
+    }
+
 
 }

@@ -12,8 +12,6 @@ import java.util.List;
  * @date 2024/8/24
  */
 public class 被围绕的区域 {
-
-
     @Test
     public void test() {
       /*  char[][] grid = {
