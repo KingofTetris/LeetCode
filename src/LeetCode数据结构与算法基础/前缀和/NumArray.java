@@ -36,6 +36,9 @@ public class NumArray {
         // 注意这是从1开始的情况，如果从0开始，就要注意一下边界条件
         // 从0开始 就是 preSum[right] - preSum[left - 1]
 //        return preSum[right + 1] - preSum[left];
+        //总之不是right + 1    - left
+//        就是right -  left -1
+        //自己试一下就知道了。
         return preSum[right + 1] - preSum[left];
     }
 }

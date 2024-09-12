@@ -19,6 +19,8 @@ public class 矩阵中的蛇 {
     }
     public int finalPositionOfSnake(int n, List<String> commands) {
         int x = 0, y = 0;
+        //生成的测评数据确保蛇不会移动到矩阵的边界外。
+        //才能这么走 不然还得加判断。
         for (String c : commands) {
             if (c.equals("LEFT")) {
                 y -= 1;
@@ -30,7 +32,8 @@ public class 矩阵中的蛇 {
                 x += 1;
             }
         }
-        //计算方法就是x*n + y 没必要去画矩阵
+        //计算方法就是x在第几行，y在第几列
+        //最终位置就是 x * n + y
         return x * n + y;
     }
 }

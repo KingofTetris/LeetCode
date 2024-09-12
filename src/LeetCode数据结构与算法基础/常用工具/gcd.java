@@ -46,6 +46,13 @@ public class gcd {
 
 
     //辗转求余法求最大公约数 递归就这一行 直接背下来。
+
+    /**
+     * 有个条件是必须大数放在a,小数放在b
+     * @param a
+     * @param b
+     * @return
+     */
     static public int gcd(int a, int b) {
         return b != 0 ? gcd(b, a % b) : a;
     }

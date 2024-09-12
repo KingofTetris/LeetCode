@@ -63,7 +63,6 @@ public class 小欧喝水 {
     public static double find(int i, int n) { //n个杯子i杯水，喝到第一杯的期望轮次
         if (i == n) {
             return 1;
-
         }
         int round = 1;
         double select = (double) i / n;
