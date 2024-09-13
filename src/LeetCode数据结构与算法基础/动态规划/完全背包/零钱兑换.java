@@ -30,8 +30,12 @@ public class 零钱兑换 {
         //那么再加个coins[i]就凑齐j了，也就是再加一个硬币
         int max = Integer.MAX_VALUE;
         int[] dp = new int[amount + 1];
+
+
         //初始值 因为是求Min 那么初始值都赋为最大
         Arrays.fill(dp, max);
+        //但是dp[0]一定要赋值为0，不然递推公式就走不动了。
+        //dp[0]表示用coins去凑出0 有0 种方案。
         dp[0] = 0;
 
         /**
