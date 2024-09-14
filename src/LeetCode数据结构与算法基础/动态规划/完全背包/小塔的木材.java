@@ -9,6 +9,7 @@ import java.util.Scanner;
  */
 public class 小塔的木材 {
 
+
     public static void main(String[] args){
         //就是凑硬币。
         Scanner sc = new Scanner(System.in);
