@@ -5,7 +5,8 @@ import org.junit.Test;
 /**
  * @Author KingofTetris
  * @Date 2022/9/2 9:34
- * 给定一个数字，我们按照如下规则把它翻译为字符串：0 翻译成 “a” ，1 翻译成 “b”，……，11 翻译成 “l”，……，25 翻译成 “z”。
+ * 给定一个数字，我们按照如下规则把它翻译为字符串：0
+ * 翻译成 “a” ，1 翻译成 “b”，……，11 翻译成 “l”，……，25 翻译成 “z”。
  * 一个数字可能有多个翻译。请编程实现一个函数，用来计算一个数字有多少种不同的翻译方法。
  * 示例 1:
  * 输入: 12258
@@ -16,6 +17,11 @@ import org.junit.Test;
  * 来源：力扣（LeetCode）
  * 链接：https://leetcode.cn/problems/ba-shu-zi-fan-yi-cheng-zi-fu-chuan-lcof
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+ */
+
+
+/**
+ * 他只是问你有多少种方案，没问你具体的方案就没必要回溯。
  */
 public class 剑指Offer46_把数字翻译成字符串 {
 
@@ -44,40 +50,25 @@ public class 剑指Offer46_把数字翻译成字符串 {
         //大于1的才去DP
         int[] dp = new int[len + 1];
         //初始状态，无数字和一个数字都是1种翻译
-        //dp[0] = 1是从 10-25 这种情况也就是 dp[2] = dp[1] + dp[0] = 2,显然dp[1] = 1,那么dp[0] = 1;
         dp[0] = 1;
         dp[1] = 1;
 
-        //有BUG 长度为2的，不会进入这个循环 所以给DP len+1
         for (int i = 2; i < len + 1; i++) {
             String tmp = s.substring(i - 2,i);//substring左闭右开 每次取下后两位判断是否落在10-25内
-            dp[i] = tmp.compareTo("10") >= 0 && tmp.compareTo("25") <= 0 ? dp[i - 1] + dp[i - 2] : dp[i - 1];
+            //字符串比较方法，compareTo，学到一招。
+            //递推公式:dp[i] = dp[i - 1] + dp[i - 2] 如果这两位数字 >= 10 ,<= 25
+            //如果在这个范围外面，也就是01,02..26,27..这种情况，就不符合
+            //那么就只能一个一个翻译，那么dp[i] = dp[i - 1]
+            dp[i] = tmp.compareTo("10") >= 0
+                    && tmp.compareTo("25") <= 0 ? dp[i - 1] + dp[i - 2] : dp[i - 1];
         }
 
         return dp[len];//最后返回dp[end]即可
     }
 
-
-    /**
-     * 因为DP[i]只和DP[i-1]有关，还可以用临时变量省区数组，也就不用那么多判断条件
-     * 使用a,b记录DP[i]和DP[i-1]，交替前进
-     * @param num
-     * @return
-     */
-    public int translateNum2(int num) {
-        String s = String.valueOf(num);
-        int a = 1, b = 1;
-        for(int i = 2; i <= s.length(); i++) {
-            String tmp = s.substring(i - 2, i);
-            int c = tmp.compareTo("10") >= 0 && tmp.compareTo("25") <= 0 ? a + b : a;
-            b = a;
-            a = c;
-        }
-        return a;
-    }
     @Test
     public void test(){
-        int num = 26;
+        int num = 2311236;
         System.out.println(translateNum(num));
     }
 }

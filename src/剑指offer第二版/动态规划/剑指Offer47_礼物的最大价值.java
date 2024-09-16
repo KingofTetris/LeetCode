@@ -30,7 +30,8 @@ import java.util.Arrays;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 
-//用友SP 第二题! 哎。做了等于白做。！早点复习算法啊！
+//用友SP 第二题! 哎。做了等于白做。！早点复习算法啊！ 20230911?
+    //这么简单当初都不会做吗?有点搞笑。 20240916，今天再看，根本是送分。。
 public class 剑指Offer47_礼物的最大价值 {
 
     public static void main(String[] args) {
@@ -64,8 +65,8 @@ public class 剑指Offer47_礼物的最大价值 {
          */
         for (int i = 1; i <= row; i++) {
             for (int j = 1; j <= column; j++) {
-                dp[i][j] = Math.max(dp[i - 1][j],//上面来的
-                        dp[i][j - 1]) //左边来的)
+                //比较两个方向哪个更大，加上自身的值就行了。
+                dp[i][j] = Math.max(dp[i - 1][j],dp[i][j - 1])
                         + grid[i - 1][j - 1];//加grid[i - 1][j - 1]的值
             }
         }

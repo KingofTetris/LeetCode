@@ -123,14 +123,14 @@ public class 剑指Offer48_最长不含重复字符的子字符串 {
         int l = 0, r = 0;
         for(; r < s.length(); r++) {
             char c = s.charAt(r);
-            while(set.contains(c)) { //重复就删除前面的字串
+            //如果某个重复就删除这个字符以及它前面的字串
+            while(set.contains(c)) {
                 set.remove(s.charAt(l));
-                l++; //l留在r的起点，直到r遇到重复元素了，l开始动。直到l再次走到r的位置重新开始下一轮。
+                l++;
             }
             set.add(c); //第一次遇到就添加进Set
             res = Math.max(res, r - l + 1);//每次添加计算res的最大值也就是r - l + 1。
         }
-
         return res;
     }
 }
