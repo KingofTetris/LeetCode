@@ -1,5 +1,7 @@
 package 剑指offer第二版.位运算;
 
+import org.junit.Test;
+
 /**
  * @Author KingofTetris
  * @Date 2022/9/16 16:52
@@ -33,7 +35,13 @@ public class 剑指Offer65_不用加减乘除做加法 {
      * @param b
      * @return
      */
-
+    @Test
+    public void test(){
+        int a = -30;
+        int b = 50;
+        int add = add(a, b);
+        System.out.println(add);
+    }
     //那么s = a + b 就等于 无进位和 n  +  进位 c = n + c
     //然后重复这个相加的过程直到无进位。就可以结束了
     public int add(int a, int b) {
@@ -52,9 +60,16 @@ public class 剑指Offer65_不用加减乘除做加法 {
              *     00111111111111111111111111111011
              *
              */
-            int c = (a & b) << 1; //与完记得左移一位，因为进位在下一位。不是当前位。
+            System.out.println("a=" + Integer.toBinaryString(a));
+            System.out.println("b=" + Integer.toBinaryString(b));
+            int aAndb = a & b;
+            System.out.println("a与b为" + Integer.toBinaryString(aAndb));
+            int c = aAndb << 1; //与完记得左移一位，因为进位在下一位。不是当前位。
+            System.out.println("a与b << 1即c为" + Integer.toBinaryString(c));
             a ^= b; // a继承非进位。a ^ b
+            System.out.println("a^=b为" + Integer.toBinaryString(a));
             b = c; // b继承进位  (a&b) << 1
+            System.out.println("b=c后b为" + Integer.toBinaryString(a));
         }
 
         return a;
