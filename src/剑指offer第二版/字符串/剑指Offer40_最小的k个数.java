@@ -9,7 +9,8 @@ import java.util.PriorityQueue;
 /**
  * @Author KingofTetris
  * @Date 2022/8/30 15:33
- * 输入整数数组 arr ，找出其中最小的 k 个数。例如，输入4、5、1、6、2、7、3、8这8个数字，则最小的4个数字是1、2、3、4。
+ * 输入整数数组 arr ，找出其中最小的 k 个数。
+ * 例如，输入4、5、1、6、2、7、3、8这8个数字，则最小的4个数字是1、2、3、4。
  * 示例 1：
  * 输入：arr = [3,2,1], k = 2
  * 输出：[1,2] 或者 [2,1]
@@ -68,11 +69,7 @@ public class 剑指Offer40_最小的k个数 {
         //因为排序后的结果还是存放在堆中(没错，PriorityQueue就是堆)。先排好的数字会放在末尾。
         //而且默认是小根堆。所以要修改为大根堆。
         //大根堆排序是正序的，小根堆逆序。
-        PriorityQueue<Integer> queue = new PriorityQueue<>(new Comparator<Integer>() {
-            public int compare(Integer num1, Integer num2) {
-                return -(num1 - num2);//加上负号就是从大到小排序，也就是大根堆
-            }
-        });
+        PriorityQueue<Integer> queue = new PriorityQueue<>((o1, o2) -> o2 - o1);
         for (int i = 0; i < k; ++i) {
             queue.offer(arr[i]); //首先将前 k 个数插入大根堆中
         }
@@ -88,6 +85,8 @@ public class 剑指Offer40_最小的k个数 {
                 queue.offer(arr[i]);//JDK8为上滤操作。
             }
         }
+
+        //最后取出最小的K个数即可。
         for (int i = 0; i < k; ++i) {
             vec[i] = queue.poll();
         }
@@ -110,7 +109,8 @@ public class 剑指Offer40_最小的k个数 {
             while (i < j && arr[j] >= arr[start]) j--; //先从右往左找比基准小的
             while (i < j && arr[i] <= arr[start]) i++; //然后从左往右找比基准大的
             /**
-             * 找到以后交换两个位置的数,使得比基准大的在基准右边，小的在基准左边。
+             * 找到满足条件的，交换两个位置的数,使得比基准大的在基准右边，小的在基准左边。
+             * 也就是比基准大的出现在左边，或者比基准小的出现在右边，那么就要交换。
              */
             swap(arr, i, j);
         }

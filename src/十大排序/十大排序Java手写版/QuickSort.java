@@ -29,16 +29,12 @@ public class QuickSort {
         int pivot = nums[low];
         while (low < high){
             //找到第一个比pivot小的
-            while (nums[high] >= pivot && high > low){
-                high--;
-            }
+            while (nums[high] >= pivot && high > low) high--;
             //然后交换位置
             swap(nums,low,high);
             //现在high保持不动，low移动
             //找到第一个比pivot大的
-            while (nums[low] <= pivot && low < high){
-                low++;
-            }
+            while (nums[low] <= pivot && low < high) low++;
             swap(nums,low,high);
         }
         //最后返回pivot的最终地址，low high都一样。

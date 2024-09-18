@@ -1,5 +1,7 @@
 package 剑指offer第二版.字符串;
 
+import org.junit.Test;
+
 /**
  * @Author KingofTetris
  * @Date 2022/9/1 14:15
@@ -20,15 +22,30 @@ package 剑指offer第二版.字符串;
  */
 public class 剑指Offer44_数字序列中某一位的数字 {
 
+
+    @Test
+    public void test(){
+        int n = 1923;
+        int nthDigit = findNthDigit(n);
+        System.out.println(nthDigit);
+    }
     /**
      * 画表格找规律
      * https://leetcode.cn/problems/shu-zi-xu-lie-zhong-mou-yi-wei-de-shu-zi-lcof/solution/mian-shi-ti-44-shu-zi-xu-lie-zhong-mou-yi-wei-de-6/
-     * 1.确定在哪个区间 2.确定是哪个数 3.确定是哪一位
-     * 确定区间，n - count 直到 n > count
-     * 确定是区间内的哪个数 记为num 因为 0 不算入内 所以要 n -1
-     * num = start + ( n - 1 ) / i
-     * 确定是这个数的哪一位
-     * index = ( n - 1 ) % i + 1
+     *
+     *
+     * 第一步，我们得找到 n 属于哪个数位里的索引。比如 n = 5，那 n 就是个位这个数位里的索引；
+     * 或者 n = 11，那 n 就是十位这个数位里的索引。
+     *
+     * 第二步，确定了 n 属于哪个数位，我们需要进一步定位到 n 具体属于哪个数。比如 n = 11，指的就是 10 这个数。
+     *
+     * 第三步，确定了 n 属于哪个数，我们就需要算出 n 是这个数的第几位，从而得到最终答案。比如 n = 11，
+     * 指的是 10 这个数的第 1 位（索引从 0 开始），从而最终答案就是 0。
+     *
+     * 作者：superkakayong
+     * 链接：https://leetcode.cn/problems/shu-zi-xu-lie-zhong-mou-yi-wei-de-shu-zi-lcof/solutions/473940/zi-jie-ti-ku-jian-44-zhong-deng-shu-zi-xu-lie-zhon/
+     * 来源：力扣（LeetCode）
+     * 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
      * @param n
      * @return
      */
@@ -36,9 +53,11 @@ public class 剑指Offer44_数字序列中某一位的数字 {
 
         if (n == 0) return 0; //先判断边界情况
 
-        long start = 1;//个十百千.......位 1,10,100,1000........相当于每1,2,3,4,...位数的起点
-        int i = 1; //个位1个字符，百位2个字符,....,xx位xx个字符
-        long count = 9; //表示某个区间有多少个字符，一开始在个位数 就是9个
+        long start = 1;//个十百千.......位 start就是1,10,100,1000........相当于每1,2,3,4,...位数的起点
+        int digits = 1; //个位(1-9),1个字符，十位(10-99),2个字符,百位(100-999),3个字符....,xx位xx个字符
+        long count = 9; //表示某个区间有多少个字符，例如1-9就是9个，10-99则有180个，100-999则有2700个
+        //个位是9，十位则是180个，百位900个，千位2700个
+        //规律就出来了 count = start * 9 * digits
 
         /**
          * 求出n是哪个区间
@@ -47,30 +66,31 @@ public class 剑指Offer44_数字序列中某一位的数字 {
             n = (int) (n - count);
             //位数增加，起点*10,位数++
             start = start * 10;
-            i++;
+            digits++;
 
-            count = start * 9 * i ; //数位长度为i的数字范围中所有数字的字符总和，也就是下个区间长度
+            count = start * 9 * digits ; //数位长度为i的数字范围中所有数字的字符总和，也就是下个区间长度
         }
 
-        /**
-         * 求出是哪个数num
-         */
-        int num = (int) (start + (n - 1) / i);
+        // 上面的循环结束后：
+        // digit 等于原始的 n 所属的数位；start 等于原始的 n 所属数位的数的起始点
+        // count 等于原始的 n 所属数位的索引总个数（不重要了，下面不用）
+        // n 等于在当前数位里的第 n - 1 个索引（索引从 0 开始算起）
+
+        int num = (int) (start + (n - 1) / digits); // 算出原始的 n 到底对应哪个数字
         /**
          * 求出是num的哪一位
          */
-//        int index = (n - 1) % i  + 1; //如果去取余就需要 +1,从1开始。因为数字的第几位是从1开始。
-        int index = (n - 1) % i  ; //如果用charAt的方法就不要+1,因为字符串从0开始
+        int remainder = (n - 1) % digits; // 余数就是原始的 n 是这个数字中的第几位
 
         // 除10取十位，除100取百位，余10取个位。
-        //因为哪一位是从左往右算。所以用 i - index
-        //比较特殊的是如果index = i 也就是最后一位
+        //因为哪一位是从左往右算。所以用 digits - index
+        //比较特殊的是如果index = digits 也就是最后一位
         // 那么就相当于/1 那就相当于没变，所以还要对10取余求出最后一位
-//        return (num / (int) Math.pow(10,i - index) ) % 10;
+//        return (num / (int) Math.pow(10,digits - index) ) % 10;
 
         /**
          * 当然也可以转化成字符串返回
          */
-        return String.valueOf(num).charAt(index) - '0';//不减去'0'就变成纯ASCII码了
+        return String.valueOf(num).charAt(remainder) - '0';//不减去'0'就变成纯ASCII码了
     }
 }

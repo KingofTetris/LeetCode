@@ -1,5 +1,9 @@
 package 剑指offer第二版.数组_矩阵;
 
+import org.junit.Test;
+
+import java.util.ArrayList;
+
 /**
  * @Author KingofTetris
  * @Date 2022/7/15 14:44
@@ -20,57 +24,77 @@ package 剑指offer第二版.数组_矩阵;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class 剑指Offer12_矩阵中的路径 {
-    public boolean exist(char[][] board, String word) {
-        /**
-         * 从某个元素出发深度遍历矩阵
-         */
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[0].length; j++) {
-                /**
-                 * 从左上角开始搜索
-                 */
-                if (dfs(board,word,i,j,0)) //搜索成功返回true
-                    return true;
-            }
-        }
-        return false; //全部遍历完了都没有
-    }
+
 
     /**
-     * 每个元素向四周去深度搜索
-     * 输入的参数是每个元素的下标索引和数组
-     * @param i
-     * @param j
-     * @return
+     * 最后两个用例超时，TMD还能怎么剪?
      */
-    public boolean dfs(char[][] board,String word,int i,int j,int k){
-        if(i >= board.length || i < 0 || j >= board[0].length || j < 0 || board[i][j] != word.charAt(k)) return false; //如果超出边界，或者不匹配就返回false，回溯
-        if(k == word.length() - 1) return true;//字符匹配而且是最后一位了，就是匹配成功
-        board[i][j] = '\0'; //写成"\0"就是个标记符号，这样使得board[i][j] != word.charAt(k) 一定成立
-        //当然也可以拿个visited数组来表示走没走过 比如int[][] visited，走过就标记为1 不过有用到O(mn)的空间。
-      /*  int[] dx = {-1,0,1,0},dy = {0,1,0,-1}; //四个方向。{-1,0},{0,1},{1,0},{0,-1} 左上下右
-        for (int q = 0; q < 4; q++) {
-            int m = i + dx[q]; //
-            int n = j + dy[q]; //
-            if (dfs(board,word,m,n,k+1)) return true;
-        }
-        */
-        //这个方向数组和for循环就是为了替代下面这个特别长的表达式，但是我感觉不如直接写下面这个清晰
-        //直接就是左右上下
-        boolean res = dfs(board, word, i + 1, j, k + 1) || dfs(board, word, i - 1, j, k + 1) ||
-                dfs(board, word, i, j + 1, k + 1) || dfs(board, word, i , j - 1, k + 1);
-                //四个方向都去探索，只要有一个不是false就会往那个方向一直深度搜索下去。
-        board[i][j] = word.charAt(k); //因为上面改了[i][j] 最后把他还原回去，也是重点。有了这句话才能实现回溯
-        return res;
+    @Test
+    public void test(){
+        char[][] board = {
+                {'b','a','a','b','a','b'},
+                {'a','b','a','a','a','a'},
+                {'a','b','a','a','a','b'},
+                {'a','b','a','b','b','a'},
+                {'a','a','b','b','a','b'},
+                {'a','a','b','b','b','a'},
+                {'a','a','b','a','a','b'}
+        };
+        String s = "aabbbbabbaababaaaabababbaaba";
+        boolean exist = exist(board, s);
+        System.out.println(exist);
     }
 
-    public boolean dfs2(char[][] board,String word,int i,int j,int k){
-        if (i < 0 || i >= board.length || j < 0 || j >= board[0].length || board[i][j] != word.charAt(k)) return false;
-        if (k == word.length() - 1) return true;
-        board[i][j] = '\0';
-        boolean res = dfs2(board,word,i + 1,j,k+1) || dfs2(board,word,i - 1,j,k+1) ||
-                dfs2(board,word,i ,j + 1,k+1) || dfs2(board,word,i ,j - 1,k+1);
-        board[i][j] = word.charAt(k);
-        return res;
+    boolean[][] visited;
+    int[] dx = {0,0,1,-1};
+    int[] dy = {1,-1,0,0};
+    ArrayList<String> resList = new ArrayList<>();
+
+    public boolean exist(char[][] board, String word) {
+        int n = board.length;
+        int m = board[0].length;
+        visited = new boolean[n][m];
+        //DFS搜索罢了。
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                StringBuffer sb = new StringBuffer();
+                sb.append(board[i][j]);
+                visited[i][j] = true;
+                dfs(board,word,i,j,sb,0); //找到了一条路径等于word就返回true
+                visited[i][j] = false;
+            }
+        }
+        return !resList.isEmpty();
+    }
+
+    //index是用来判断word的下标
+    private void dfs(char[][] board, String word, int i, int j,StringBuffer sb,int index) {
+//        System.out.println(sb);
+        //剪枝，如果字符对应不上也没必要DFS了
+        if (word.charAt(index) != board[i][j]){
+            return;
+        }
+        if (index == word.length() - 1){
+            //找到长度一致的，就可以直接剪枝结束了。
+            //再往后更长的，也不可能匹配了。
+            resList.add("1");
+            return;
+        }
+        int n = board.length;
+        int m = board[0].length;
+        //否则就去DFS
+        for (int k = 0; k < 4; k++) {
+            int x = i + dx[k];
+            int y = j + dy[k];
+            if (x >= 0 && x < n && y >= 0 && y < m && !visited[x][y]){
+                visited[x][y] = true;
+                sb.append(board[x][y]);
+                index++;
+                dfs(board,word,x,y,sb,index);
+                index--;
+                sb.deleteCharAt(sb.length() - 1);
+                visited[x][y] = false;
+            }
+        }
     }
 }

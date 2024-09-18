@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -34,14 +35,14 @@ public class 剑指Offer03_数组中重复的数字 {
     @Test
     public void test(){
         int[] nums = {2,3,3,2,3,5,5,6,7,7,5,5,8,8,11,33,22};
-        LinkedList repeatNumber = findRepeatNumberArray(nums);
+        List<Integer> repeatNumber = findRepeatNumberArray(nums);
         System.out.println(repeatNumber);
     }
     /**
      * 最简单就直接暴力发一个一个找咯。O(n^2)
      * 搞错了，这个是找出所有重复元素
      */
-    public LinkedList findRepeatNumberArray(int[] nums) {
+    public List<Integer> findRepeatNumberArray(int[] nums) {
         int[] flag = new int[nums.length];
         for (int i = 0; i < nums.length; i++) {
             for (int j = i + 1;j < nums.length;j++){
@@ -51,7 +52,7 @@ public class 剑指Offer03_数组中重复的数字 {
                 }
             }
         }
-        LinkedList list = new LinkedList();
+        LinkedList<Integer>  list = new  LinkedList<> ();
         for (int i = 0; i < flag.length; i++) {
             if (flag[i] == 1 && !list.contains(nums[i]) ){ //添加，去重。
                     list.add(nums[i]);

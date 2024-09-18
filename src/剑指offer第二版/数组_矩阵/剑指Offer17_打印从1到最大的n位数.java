@@ -58,35 +58,34 @@ public class 剑指Offer17_打印从1到最大的n位数 {
  *
  * 因为生成的列表无非就是n个位置上0-9的全排列
  * 所以我们避开进位操作，递归生成数字String列表
- * 基于分治算法的思想，先固定高位，向低位递归，当个位已被固定时，添加数字的字符串。例如当 n = 2 时（数字范围 1 - 99)
+ * 基于分治算法的思想，先固定高位，向低位递归，当个位已被固定时，
+ * 添加数字的字符串。例如当 n = 2 时（数字范围 1 - 99)
  * 固定十位为 0 - 9 ，按顺序依次开启递归，固定个位 0 - 9 ，终止递归并添加数字字符串。
  *
  * */
 class Solution {
-    StringBuilder res;
-    int nine = 0, count = 0, start, n;
-    char[] num, loop = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
+
+    char[] loop = {'0','1','2','3','4','5','6','7','8','9'};
+    char[] num;
+    int n;
+    StringBuilder res = new StringBuilder();
+
     public String printNumbers(int n) {
         this.n = n;
-        res = new StringBuilder();
         num = new char[n];
-        start = n - 1;
         dfs(0);
         res.deleteCharAt(res.length() - 1);
         return res.toString();
     }
-    void dfs(int x) {
+    //该方法的作用是固定当前位
+    public void dfs(int x) {
         if(x == n) {
-            String s = String.valueOf(num).substring(start);
-            if(!s.equals("0")) res.append(s + ",");
-            if(n - start == nine) start--;
+            res.append(num).append(",");
             return;
         }
         for(char i : loop) {
-            if(i == '9') nine++;
             num[x] = i;
             dfs(x + 1);
         }
-        nine--;
     }
 }

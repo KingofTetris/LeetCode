@@ -23,30 +23,7 @@ import org.junit.Test;
 public class 剑指Offer43_1到n整数中1出现的次数 {
     @Test
     public void test() {
-        System.out.println(countDigitOne2(1231232134));
-    }
-
-    /**
-     *
-     * 暴力法，把数字转化成字符串
-     * 比较每个字符是不是'1'
-     * 如果是'1',sum++
-     * 824883294就TLE了。O(MN) M为数字长度
-     * @param n
-     * @return
-     */
-    public int countDigitOne(int n) {
-        int count = 0;
-        for (int i = 1; i <= n; i++) {
-            String s = String.valueOf(i);
-            char[] chars = s.toCharArray();
-            for (char aChar : chars) {
-                if (aChar - '1' == 0) {
-                    count++;
-                }
-            }
-        }
-        return count;
+        System.out.println(countDigitOne(1231232134));
     }
 
     /**
@@ -62,16 +39,29 @@ public class 剑指Offer43_1到n整数中1出现的次数 {
      * cur > 1    count = (high + 1) * bit
      * cur = 1    count = (high * bit) + (low + 1)
      * cur = 0    count = high * bit
-     *
+     * <p>
      * O(lgN) 快了都不知道多少
+     *
      * @param n
      * @return
      */
-    public int countDigitOne2(int n) {
+    public int countDigitOne(int n) {
         //几个变量的计算: cur = n/bit%10, low = n % bit ,high = n / bit / 10;
         //几个情况
+        // 拿501222举例子
+        //百位上的2 high就是前面的501 low就是后面的22那么
+        //固定百位为1，则有(000-501) * (00-99) 种情况百位为1，也就是(high+1) * (bit)
         // cur >1  => count = (high + 1) * bit
+
+        //如果这个位数上本来就是1，例如千位上的1，那么 high =50,low=222
+        //这个时候则有(00-49) * (000-999)
+        //[50]不变 * (000-222)种情况
+        //也就是 high * bit + low + 1
         // cur == 1 ==> count = (high * bit) + (low + 1)
+
+        //最后如果位数上是0，例如万位上的0，high = 5,low = 1222
+        //(0-4) * (000 - 999) 也就是high * bit
+
         // cur = 0  ==> count = high * bit
         long bit = 1; //当数字很大时，int可能会溢出
         int oneCount = 0;
@@ -81,17 +71,18 @@ public class 剑指Offer43_1到n整数中1出现的次数 {
             int high = (int) (n / bit / 10);
             //如果你忘了就去看上面的视频链接
             //对每一位分类讨论 current =1?>1?=0?
-            if (cur > 1){
+            if (cur > 1) {
                 //current >1 1的情况就是 (high+1)*bit
                 oneCount += (high + 1) * bit;
             }
-            if (cur == 1){
+            if (cur == 1) {
                 //current = 1
                 oneCount += (high * bit) + (low + 1);
             }
-            if (cur == 0){
+            if (cur == 0) {
                 oneCount += high * bit;
             }
+            //每次计算完cur,bit * 10
             bit = bit * 10;
         }
         return oneCount;

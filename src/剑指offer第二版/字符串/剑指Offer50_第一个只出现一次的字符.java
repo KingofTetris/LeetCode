@@ -21,8 +21,6 @@ import org.junit.Test;
  */
 public class 剑指Offer50_第一个只出现一次的字符 {
 
-
-
     @Test
     public void test(){
         String s = "";

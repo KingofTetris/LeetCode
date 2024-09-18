@@ -68,7 +68,8 @@ public class 剑指Offer67_把字符串转换成整数 {
 
             //其实下面这个条件是隐含了对Integer.MIN_VALUE -2147483648 的判断的
             //如果c[j] >= '8' 那他要么刚好是MIN_VALUE 要么越界，也是MIN_VALUE
-            if(res > bndry || res == bndry && c[j] > '7') return sign == 1 ? Integer.MAX_VALUE : Integer.MIN_VALUE;
+            if(res > bndry || res == bndry && c[j] > '7') return sign == 1 ?
+                    Integer.MAX_VALUE : Integer.MIN_VALUE;
             res = res * 10 + (c[j] - '0'); //这个计算字符为数字的方法 好好看
             //res * 10 + (c[j] - '0') 每次往后移动相当于原来的数字乘以10，再加上新的个位数
         }

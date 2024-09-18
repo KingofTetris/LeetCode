@@ -77,7 +77,7 @@ public class 剑指Offer57_II_和为s的连续正数序列 {
      * @return
      */
     public int[][] findContinuousSequence3(int target) {
-            List<int[]> vec = new ArrayList<int[]>();
+            List<int[]> vec = new ArrayList<>();
             for (int l = 1, r = 2; l < r;) {
                 int sum = (l + r) * (r - l + 1) / 2;
                 if (sum == target) {

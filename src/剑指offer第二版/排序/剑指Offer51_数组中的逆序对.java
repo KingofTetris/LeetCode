@@ -46,7 +46,7 @@ public class 剑指Offer51_数组中的逆序对 {
      */
     int count;
     public int reversePairs2(int[] nums) {
-        this.count = 0;
+        count = 0;
         merge(nums, 0, nums.length - 1);
         return count;
     }
@@ -63,7 +63,6 @@ public class 剑指Offer51_数组中的逆序对 {
         if (left < right) { //left > right中止。
             merge(nums, left, mid);
             merge(nums, mid + 1, right);
-
             mergeSort(nums, left, mid, right);
         }
     }
@@ -74,9 +73,13 @@ public class 剑指Offer51_数组中的逆序对 {
         int temp1 = left, temp2 = mid + 1;
 
         while (temp1 <= mid && temp2 <= right) {
+
+            //如果前面小于等于后面就是正序
             if (nums[temp1] <= nums[temp2]) {
                 temparr[index++] = nums[temp1++];
-            } else {
+            }
+            //反过来就是逆序
+            else {
                 //用来统计逆序对的个数
                 count += (mid - temp1 + 1);
                 temparr[index++] = nums[temp2++];

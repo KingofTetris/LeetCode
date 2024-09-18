@@ -27,7 +27,7 @@ public class 剑指Offer45_把数组排成最小的数 {
 
     @Test
     public void test(){
-        int[] nums = {11,12,13};
+        int[] nums = {11,0,12,13};
         String s = minNumber(nums);
         System.out.println(s);
     }
@@ -42,14 +42,15 @@ public class 剑指Offer45_把数组排成最小的数 {
         for (int i = 0; i < nums.length; i++) {
             strs[i] = String.valueOf(nums[i]);
         }
-//        quickSort(strs,0,strs.length - 1);//手写定制的字符串数组快速排序
         //或者使用JDK API
+        //直接比较两个字符串拼接的大小，把小的放前面即可。
+        //真是神奇的API操作。
         Arrays.sort(strs,(x,y) -> (x+y).compareTo(y+x) );//比较x+y和y+x的大小，小的排前面。JDK8的新特性 就不用再手写半天。
-        String res = "";
+        StringBuilder res = new StringBuilder();
         for (int i = 0; i < nums.length; i++) {
-            res = res + strs[i];
+            res.append(strs[i]);
         }
-        return res;
+        return res.toString();
     }
 
     private void quickSort(String[] strs, int start , int end) {
