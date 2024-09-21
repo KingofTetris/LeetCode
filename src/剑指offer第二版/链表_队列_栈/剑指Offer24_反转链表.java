@@ -64,14 +64,12 @@ public class 剑指Offer24_反转链表 {
          * 前后顺序一定不能错。
          */
         ListNode dummy = new ListNode(-1);
-
         //终止条件head == null
         while(head != null){
             //一开始使用temp接住这个要插入的节点
             ListNode temp = head;
             //head后移
             head = head.next;
-
             //temp断链，指向dummy.next
             temp.next = dummy.next;
             dummy.next = temp;//接在dummy后面

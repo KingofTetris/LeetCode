@@ -11,6 +11,8 @@ import java.util.Scanner;
  */
 public class 删除数字 {
 
+
+    //排序从小到大遍历看最小的数能不能被消掉就行
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 

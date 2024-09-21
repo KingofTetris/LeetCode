@@ -16,6 +16,28 @@ package Lambda表达式使用;
  * @FunctionalInterface
  * 在接口上直接加上注解，如果这个接口是一个函数式接口则不报错，否则编译报错
  */
+
+/**
+ * 一开始我们写个接口，要写实现类，然后调用实现类的唯一方法
+ */
+@FunctionalInterface
+interface IloveLambda{
+    void love(int a);
+}
+
+@FunctionalInterface
+interface IloveLambdaTwo{
+    void love(int a,int b);
+}
+
+class LoveLambda implements IloveLambda{
+    @Override
+    public void love(int a) {
+        System.out.println("i love lambda \t" + a);
+    }
+}
+
+
 public class LambdaDemo {
 
     //静态内部类
@@ -63,22 +85,3 @@ public class LambdaDemo {
     }
 }
 
-/**
- * 一开始我们写个接口，要写实现类，然后调用实现类的唯一方法
- */
-@FunctionalInterface
-interface IloveLambda{
-    void love(int a);
-}
-
-@FunctionalInterface
-interface IloveLambdaTwo{
-    void love(int a,int b);
-}
-
-class LoveLambda implements IloveLambda{
-    @Override
-    public void love(int a) {
-        System.out.println("i love lambda \t" + a);
-    }
-}

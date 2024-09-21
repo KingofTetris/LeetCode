@@ -10,7 +10,7 @@ import java.util.function.Consumer;
  * @File Lambda表达式的使用
  * @Time 2021/10/21  16:42
  *
- * 不要求一定要使用，但要看得懂
+ * JDK8以后的必备技能，必须要学会。
  * 使用场景 用匿名内部类的现在都可以换成lambda实现
  * Lambda表达式的使用
  * 0.要求只能是  函数式接口：接口里面只有一个抽象方法 无歧义
