@@ -96,7 +96,6 @@ public class 字符串轮转 {
      * 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
      */
     public boolean isFlipedString2(String s1, String s2) {
-
         //JDK8的 String.contains 底层并没有用到KMP
         //反而是最被人唾弃的暴力法O(nm)，在 m 长的字符串里 匹配 n 长的子串。
         //同样是先找到 子串的开头字符，然后比较后面的部分是否一样
