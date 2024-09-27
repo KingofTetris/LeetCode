@@ -27,7 +27,6 @@ public class 找出特殊用户 {
                 return i;
             }
         }
-
         return -1;
     }
 }

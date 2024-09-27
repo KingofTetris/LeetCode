@@ -59,18 +59,13 @@ public class 颜色分类 {
 
     //最简单就是直接调用sort那就没意义了。
     //本质就是排个序
-
     //双指针
     public void sortColors(int[] nums) {
         int n = nums.length;
-
         //经典一头一尾
         int p0 = 0, p2 = n - 1;
         for (int i = 0; i <= p2; ++i) {
-
             //结束条件i>p2 或者 nums[i] != 2
-
-
             //把前面的2都换到后面去 然后p2-- 换过的2就不动了
             while (i <= p2 && nums[i] == 2) {
                 int temp = nums[i];
@@ -78,7 +73,6 @@ public class 颜色分类 {
                 nums[p2] = temp;
                 --p2;
             }
-
             //如果为0都换到前面来 然后p0++，中间剩下的自然是1
             if (nums[i] == 0) {
                 int temp = nums[i];

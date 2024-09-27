@@ -21,8 +21,6 @@ public class 约瑟夫环 {
         for (int i = 1; i <= n; i++) {
             list.add(i);
         }
-
-
         /**
          * 基本思路，每3个一组计数 删除第三个数
          * m
