@@ -33,7 +33,7 @@ import org.junit.Test;
         来源：力扣（LeetCode）
         链接：https://leetcode-cn.com/problems/first-bad-version
         著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。*/
-public class 第一个错误版本 extends VersionControl{
+public class 第一个错误版本 {
     /*
     注意到一个性质：当一个版本为正确版本，
     则该版本之前的所有版本均为正确版本；当一个版本为错误版本，
@@ -44,29 +44,25 @@ public class 第一个错误版本 extends VersionControl{
     我们缩紧左边界；否则第一个错误的版本必然位于该版本及该版本的左侧，我们缩紧右边界。
 
     注isBadVersion是父类VersionControl中的方法
+    具体的实现不用你操心，下面的方法只是随便写的。
 
      */
     @Test
-    public int firstBadVersion(int n){
-        int left = 1,right = n;
-        while(left < right){
-            int mid = left + (right - left)/2;
-
-            if(isBadVersion(mid)){
+    public int firstBadVersion(int n) {
+        int left = 1, right = n;
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+            if (isBadVersion(mid)) {
                 right = mid;
-            }
-            else {
+            } else {
                 left = mid + 1;
             }
         }
         return left;
     }
 
-}
-
-class VersionControl{
-    boolean isBadVersion(int n){
-        if(n%2 == 0)
+    public boolean isBadVersion(int n) {
+        if (n % 2 == 0)
             return false;
         return true;
     }

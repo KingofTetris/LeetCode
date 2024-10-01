@@ -6,9 +6,10 @@ import java.util.Scanner;
  * @author by KingOfTetris
  * @date 2024/9/14
  */
-public class 盘古开山 {
 
-    //最长连续区间
+//盘古可以依靠神力修改数组中的任意一个数一次。
+//求这个数组的最长连续区间
+public class 盘古开山 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int t = sc.nextInt();
