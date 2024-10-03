@@ -7,49 +7,13 @@ import java.util.*;
  * @Date 2022/9/16 9:53
  */
 public class 矩形面积II_2022_09_16 {
-
-    /**
-     * 先看个简单版本，单纯两个矩形的。求两个矩形的覆盖面积
-     * @param ax1
-     * @param ay1
-     * @param ax2
-     * @param ay2
-     * @param bx1
-     * @param by1
-     * @param bx2
-     * @param by2
-     * @return
-     */
-    public int computeArea(int ax1, int ay1, int ax2, int ay2, int bx1, int by1, int bx2, int by2) {
-        /**
-         * 其实根本没必要考虑那么复杂
-         * 反正你不重叠就让squre返回0
-         * 重叠去算就行了
-         */
-        //画个四个点不重叠的 看着图求就行了
-        int lx = Math.max(ax1, bx1);
-        int ly = Math.max(ay1, by1);
-        int rx = Math.min(ax2, bx2);
-        int ry = Math.min(ay2, by2);
-
-        int s1 = square(ax1,ay1,ax2,ay2);
-        int s2 = square(bx1,by1,bx2,by2);
-        int s3 = square(lx,ly,rx,ry);
-
-        return s1 + s2 - s3;
-    }
-
-    private int square(int x1, int y1, int x2, int y2) {
-        if (x1 >= x2 || y1 >= y2) return 0;//非法坐标。
-        return (y2 - y1) *(x2 - x1);
-    }
-
     /**
      * 现在难度加大，我们来看看
-     * 多个矩形如何求覆盖面积
+     * n个矩形如何求覆盖面积
      * 离散化 + 扫描线 + 使用简单数组实时维护
      * 链接：
      * https://leetcode.cn/problems/rectangle-area-ii/solution/ju-xing-mian-ji-ii-by-leetcode-solution-ulqz/
+     *
      * @param rectangles
      * @return
      */
