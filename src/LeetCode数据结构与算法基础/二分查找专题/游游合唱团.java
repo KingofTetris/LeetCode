@@ -1,6 +1,9 @@
-package 校招笔试真题.携程._20240919;
+package LeetCode数据结构与算法基础.二分查找专题;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Scanner;
 
 
 /**

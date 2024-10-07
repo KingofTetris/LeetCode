@@ -1,8 +1,6 @@
-package 校招笔试真题.携程._20240919;
+package LeetCode数据结构与算法基础.双指针与滑动窗口;
 
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.LinkedList;
 import java.util.Scanner;
 
 /**

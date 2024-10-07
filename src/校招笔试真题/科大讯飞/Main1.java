@@ -1,4 +1,4 @@
-package 校招笔试真题.携程.科大讯飞;
+package 校招笔试真题.科大讯飞;
 
 import java.util.Scanner;
 
