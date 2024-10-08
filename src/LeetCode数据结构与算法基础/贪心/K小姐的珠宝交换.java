@@ -1,4 +1,4 @@
-package 校招笔试真题.得物._20240924;
+package LeetCode数据结构与算法基础.贪心;
 
 import java.io.BufferedReader;
 import java.io.IOException;

@@ -1,6 +1,7 @@
-package 校招笔试真题.华为.华为秋招1115;
+package LeetCode数据结构与算法基础.数学;
 
 import java.util.Scanner;
+
 /**
  * @author by KingOfTetris
  * @date 2023/11/30
@@ -42,13 +43,41 @@ public class 求解二元一次方程组的解 {
         int a1 = eq1Nums[0],b1 = eq1Nums[1],c1 = eq1Nums[2];
         int a2 = eq2Nums[0],b2 = eq2Nums[1],c2 = eq2Nums[2];
 
-        //公式算子
+        //公式算子 其实就是系数矩阵的行列式的值
+        //为0 无解
+        //不为0 有唯一解
         int denominator = a1 * b2 - a2 * b1;
 
         if (denominator == 0){
             System.out.println("方程无解或者有无穷多解");
         }
         else {
+            //公式法
+            /**
+             * 就是
+             * x =  | c1   b1 |
+             *      | c2   b2 |
+             *      -----------
+             *      denominator
+             * y = |a1    c1|
+             *     |a2    c2|
+             *     -----------
+             *     denominator
+             *
+             * 怎么来的，你让两行，先乘以一个b1,b2就可以消去x了
+             * a1x + b1y = c1
+             * a2x + b2y = c2
+             * -->
+             * a1b2x + b1b2y = c1b2
+             * a2b1x + b1b2y = c2b1
+             *
+             * 那么 (a1b2 - a2b1)x = c1b2 - c2b1;
+             * x = c1b2 - c2b1
+             *     -----------
+             *     a1b2 - a2b1
+             * 也就是上面的行列式表达式了
+             * 同理可以得到y。
+             */
             int x = (b2 * c1 - b1 * c2) / denominator;
             int y = (a1 * c2 - a2 * c1) / denominator;
             System.out.println("方程有唯一解");

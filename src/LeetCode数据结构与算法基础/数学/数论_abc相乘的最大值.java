@@ -1,4 +1,4 @@
-package 校招笔试真题.美团._20240824;
+package LeetCode数据结构与算法基础.数学;
 
 import java.util.Scanner;
 

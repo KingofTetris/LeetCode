@@ -1,4 +1,4 @@
-package 校招笔试真题.TME.腾讯音乐娱乐集团2023技术类;
+package LeetCode数据结构与算法基础.数学;
 
 import java.util.ArrayList;
 

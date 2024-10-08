@@ -1,4 +1,4 @@
-package 校招笔试真题.兴业银行.金融科技岗;
+package LeetCode数据结构与算法基础.双指针与滑动窗口;
 
 /**
  * @author by KingOfTetris

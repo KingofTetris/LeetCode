@@ -76,17 +76,3 @@ public class 腾讯笔试20230910_权值优势路径计数 {
     }
 
 }
-
-//自己写笔试的时候要自己去写这个TreeNode外部类
-/*
-class TreeNode{
-    TreeNode left;
-    TreeNode right;
-    int val;
-    public TreeNode() {
-    }
-    public TreeNode(int val) {
-        this.val = val;
-    }
-}
-*/

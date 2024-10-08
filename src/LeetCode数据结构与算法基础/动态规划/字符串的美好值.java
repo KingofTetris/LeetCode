@@ -1,4 +1,4 @@
-package 校招笔试真题.字节跳动.字节跳动2023秋招0820;
+package LeetCode数据结构与算法基础.动态规划;
 
 import java.util.Scanner;
 
@@ -10,6 +10,7 @@ import java.util.Scanner;
 //连续子串，最后是相同。
 
 //
+
 /**
  * 样例
  * 输入
