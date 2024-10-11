@@ -46,11 +46,11 @@ public class 程序员的战斗力 {
             //质量之和
             sumSpeed += programmer.quality;
             //如果堆中元素数量 > k
-            //
-            if (minHeap.size() > k && !minHeap.isEmpty()){
+            if (minHeap.size() > k){
                 sumSpeed -= minHeap.poll();
             }
-
+            //因为是按照效率从大到小排序
+            //没加入一个新的程序员，则他的效率最小，乘以这个最小的效率
             int performance = (sumSpeed * programmer.efficiecy) % MOD; //本轮战斗力
             maxPerformance = Math.max(performance,maxPerformance);
         }

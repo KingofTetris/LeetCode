@@ -34,7 +34,8 @@ public class gcd {
      * @param n
      * @return
      */
-    static public boolean isPrime(int n) {
+    //这个有问题啊,4会直接跳过，sqrt(2)=2, 就return true了
+   /* static public boolean isPrime(int n) {
         for (int i = 2; i < Math.sqrt(n); i++) {
             if (n % i == 0) {
                 return false;
@@ -43,7 +44,18 @@ public class gcd {
         //说明只有1和他自己。就是素数
         return true;
     }
-
+*/
+    //这个是对的
+    public static boolean isPrime(int val) {
+        if (val <= 1) {
+            return false;
+        }
+        for (int i = 2; i * i <= val; i++) {
+            if (val % i == 0)
+                return false;
+        }
+        return true;
+    }
 
     //辗转求余法求最大公约数 递归就这一行 直接背下来。
     static public int gcd(int a, int b) {
