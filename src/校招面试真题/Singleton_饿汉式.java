@@ -8,7 +8,8 @@ package 校招面试真题;
 public class Singleton_饿汉式 {
 
     //饿汉式直接new出来，注意和构造方法一样都是private
-    private static Singleton_饿汉式 instance = new Singleton_饿汉式();
+    //static final直接等于一个常量，不能再次修改。
+    private static final Singleton_饿汉式 instance = new Singleton_饿汉式();
 
     // 私有构造函数，防止外部实例化
     private Singleton_饿汉式() {

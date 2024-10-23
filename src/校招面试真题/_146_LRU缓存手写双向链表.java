@@ -16,11 +16,13 @@ import java.util.Map;
 
  为了达到上面get 和 put 能够实现O(1)的复杂度，那么应该要能实现以下三点。
 
- 1、显然 cache 中的元素必须有时序，以区分最近使用的和久未使用的数据，当容量满了之后要删除最久未使用的那个元素腾位置。
+ 1、显然 cache 中的元素必须有时序，以区分最近使用的和久未使用的数据，
+ 当容量满了之后要删除最久未使用的那个元素腾位置。
 
  2、我们要在 cache 中 在O(1)时间内 找某个 key 是否已存在并得到对应的 val；
 
- 3、每次访问 cache 中的某个 key，需要将这个元素变为最近使用的，也就是说 cache 要支持在任意位置快速插入和删除元素。
+ 3、每次访问 cache 中的某个 key，需要将这个元素变为最近使用的，
+ 也就是说 cache 要支持在任意位置快速插入和删除元素。
 
  那么，什么数据结构同时符合上述条件呢？
 
@@ -60,7 +62,7 @@ class Node{
         this.val = v;
     }
 }
-//双链表
+//循环双链表
 class DoubleList{
     //头尾虚节点
     private Node head,tail;
@@ -96,6 +98,7 @@ class DoubleList{
     }
 
     //删除链表中最旧的x节点
+    //我们把第一个节点设置为最老节点，末尾节点设置为最新节点。
     public Node removeFirst(){
         if (head.next == tail){
             return null;
@@ -126,11 +129,6 @@ public class _146_LRU缓存手写双向链表 {
      * ok 我们开始实现get put
      */
     public int get(int key){
-        //这里有问题,为什么get出来的是一个新地址的节点而不是双向链表中的节点？？
-       /* Node x = map.getOrDefault(key,null);
-        if (x == null){
-            return -1;
-        }*/
         if (!map.containsKey(key)){
             return -1;
         }
@@ -142,8 +140,6 @@ public class _146_LRU缓存手写双向链表 {
     }
 
     public void put(int key,int val){
-        //这里也不能直接new，否则同样KEY的节点，会有不同的地址，就会在cache.remove的时候出错
-//        Node x = new Node(key, val);
         //判断是更新还是新建
         //如果是更新，那么更新以后放表尾。
         if (map.containsKey(key)){

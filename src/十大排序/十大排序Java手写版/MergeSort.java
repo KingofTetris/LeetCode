@@ -8,7 +8,7 @@ import org.junit.Test;
  */
 public class MergeSort {
     @Test
-    public void test(){
+    public void test() {
         int[] nums = {5, 2, 9, 1, 3, 6};
         mergeSort(nums);
         for (int num : nums) {
@@ -26,7 +26,7 @@ public class MergeSort {
     //mergeSort本质就是递归。
     private static void mergeSort(int[] nums, int left, int right) {
         //递归结束的条件left == right 就不用再排序了
-        if (left == right ) return;
+        if (left == right) return;
         //分两半去合并。
         int mid = (left + right) / 2;
         mergeSort(nums, left, mid); // 左半边归并排序
@@ -58,7 +58,6 @@ public class MergeSort {
         while (j <= right) {
             temp[k++] = nums[j++];
         }
-
         // 别忘了将临时数组的元素拷贝回原数组中
         for (int m = 0; m < temp.length; m++) {
             nums[left + m] = temp[m];

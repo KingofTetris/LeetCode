@@ -9,7 +9,6 @@ import java.util.Scanner;
  * @date 2022/10/17
  */
 public class 在排序数组中查找元素的第一个和最后一个位置 {
-
     public static void main(String[] args) {
 //        Scanner sc = new Scanner(System.in);
         Random random = new Random();
@@ -38,6 +37,8 @@ public class 在排序数组中查找元素的第一个和最后一个位置 {
         //说明数组中根本不存在target.
         if (l == nums.length || nums[l] != target)
             return new int[]{-1, -1};
+        //其实这里还有种变体
+        // 如果不存在则插入到它应该在的位置。
         return new int[]{l, r - 1};
     }
 
@@ -60,11 +61,10 @@ public class 在排序数组中查找元素的第一个和最后一个位置 {
      * @return
      */
     public static int search(int[] nums, int target) {
-        int l = 0, r = nums.length; //左开右闭区间,条件就不是l <= r 而是l < r
+        int l = 0, r = nums.length; //左闭右开区间,条件就不是l <= r 而是l < r
         while (l < r) {
             int mid = (r + l) / 2; //简单写法，以前可能会有加法溢出的问题，python其实无所谓。
 //            int mid = l + (r - l) / 2 ;//防溢出的写法，c/c++/java还是要这样写
-
             //当【mid大于或者等于target】时，target必在mid的左侧或mid位置，将high移动至mid
             if (nums[mid] >= target)
                 r = mid;

@@ -37,7 +37,7 @@ public class 合并K个升序链表 {
         //默认就是小根堆,比较节点的值。
         //因为ListNode这个是自定义类型，你必须要指定比较方式。
         //按照节点的大小形成小根堆
-        PriorityQueue<ListNode> pq = new PriorityQueue<>(Comparator.comparingInt(o -> o.val));
+        PriorityQueue<ListNode> pq = new PriorityQueue<>((o1,o2) -> o1.val - o2.val);
 //        PriorityQueue<ListNode> pq = new PriorityQueue<>((node1,node2) -> (node1.val - node2.val));
         //所有链表入堆
         for (ListNode node : lists) {
@@ -63,6 +63,7 @@ public class 合并K个升序链表 {
             //这样你每次poll出来都能保证最小。
             if (cur.next != null) {
                 //cur后移，重新入队
+                //重复从pq中取出最小元素即可
                 pq.offer(cur.next);
             }
         }

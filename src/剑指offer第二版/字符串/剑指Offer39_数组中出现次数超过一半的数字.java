@@ -72,7 +72,6 @@ public class 剑指Offer39_数组中出现次数超过一半的数字 {
      */
     public int majorityElement3(int[] nums) {
         int candidate = -1;//初始值无所谓，反正看到会被nums[0]取代。
-
         int count = 0;
         for (int i = 0; i < nums.length; i++) {
             if (count == 0){ //每次count清零才更换擂主
@@ -80,7 +79,6 @@ public class 剑指Offer39_数组中出现次数超过一半的数字 {
             }
             count = count + ((nums[i] == candidate) ? 1 : -1);//如果重复就+1，不重复就-1;
         }
-
         return candidate;
     }
 }

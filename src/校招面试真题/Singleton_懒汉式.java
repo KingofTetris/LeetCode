@@ -2,7 +2,8 @@ package 校招面试真题;
 
 public class Singleton_懒汉式 {
 
-    private static Singleton_懒汉式 instance;
+    //初始为null，需要的时候才进行实例化
+    private static Singleton_懒汉式 instance = null;
 
     // 私有构造函数，防止外部实例化
     private Singleton_懒汉式() {

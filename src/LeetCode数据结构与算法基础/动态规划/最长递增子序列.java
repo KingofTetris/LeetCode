@@ -10,8 +10,6 @@ import java.util.Arrays;
  */
 public class 最长递增子序列 {
 
-
-
     @Test
     public void test(){
         int[] nums = {10,9,2,5,3,7,101,18};

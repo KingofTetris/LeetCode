@@ -1,8 +1,6 @@
 package 校招面试真题;
 
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
 
 public class 异步案例_服务器处理多个请求 {
     private ExecutorService executorService;
@@ -10,6 +8,12 @@ public class 异步案例_服务器处理多个请求 {
     public 异步案例_服务器处理多个请求() {
         // 创建一个线程池
         executorService = Executors.newFixedThreadPool(10);
+        executorService = new ThreadPoolExecutor(3,
+                10,
+                3, TimeUnit.SECONDS,
+                new LinkedBlockingQueue<>(),
+                Executors.defaultThreadFactory(),
+                new ThreadPoolExecutor.DiscardOldestPolicy());
     }
 
     public void processRequest(int clientId) {

@@ -7,8 +7,6 @@ import org.junit.Test;
  * @date 2023/9/22
  */
 public class MergeSort {
-
-
     @Test
     public void test(){
         int[] nums = {5, 2, 9, 1, 3, 6};

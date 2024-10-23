@@ -44,7 +44,7 @@ class DynamicProxy{
         /**
          * 1.类加载器，保持和目标对象一致
          * 2.目标对象的接口 和被代理类实现一致的接口
-         * 3.
+         * 3.handler
          **/
         MyInvocationHandler handler = new MyInvocationHandler();
         handler.bind(obj);//绑定被代理对象
@@ -65,6 +65,12 @@ class MyInvocationHandler implements InvocationHandler{
     public void bind(Object obj){
         this.obj = obj;
     }
+
+
+    /**
+     * 只要是代理，一定会走invocationHandler的invoke方法。
+     * 只有在这里才能对目标方法进行增强。
+     */
     /**
      * proxy就是代理对象，method就是要调用的方法，args是参数列表
      * 所以你需要传入一个目标对象进来
@@ -76,7 +82,6 @@ class MyInvocationHandler implements InvocationHandler{
      */
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-
         //那么显然，在这个方法的前后你可以做一些通用的操作，进行方法增强，比如记录日志，访问量+1之列
         System.out.println("记录日志1");
         System.out.println(method + "方法被调用次数 + 1");
@@ -118,7 +123,8 @@ public class DynamicProxyTest {
          * 当然实际上你是并不知道他实现了GameFactory接口的，这个obj属于哪个类型也是可以通过反射获取的。
          */
         for (Object obj : objs) {
-            GameFactory gameFactory = (GameFactory) DynamicProxy.getProxyInstance(obj);//创建被代理类对象
+            GameFactory gameFactory =
+                    (GameFactory) DynamicProxy.getProxyInstance(obj);//创建被代理类对象
             gameFactory.produceGame();
             System.out.println();
         }

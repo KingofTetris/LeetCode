@@ -47,7 +47,7 @@ package LeetCode数据结构与算法基础.day3.链表;
 
 public class K个一组翻转链表 {
     public ListNode reverseKGroup(ListNode head, int k) {
-        // 假设的dummy节点，接在头节点之前
+        // 假设的dummy节点，接在每一段头节点之前
         ListNode dummy = new ListNode(Integer.MIN_VALUE);
         dummy.next = head;
         // 用于记录头节点返回
