@@ -24,7 +24,6 @@ public class 接雨水 {
     /**
      * 左右最大高度数组进行对比。
      * 这个是用列来求雨水面积
-     *
      * 单调栈是反过来 用横来求雨水面积
      * @param height
      * @return
@@ -32,7 +31,7 @@ public class 接雨水 {
     //计算每一列能够接住的雨水
     //实际上就是 min(lHeight,rHeight) - height[i]
     //左右两边最大的高度的较小值减去当前列的高度，因为宽度都是1 就没必要*1了
-    //并且要注意第一个柱子和最后一个柱子不接雨水
+    //并且要注意第一个柱子和最后一个柱子不接雨水 因为他们旁边最多只有一根柱子，一定会全部洒到地上。
     public int trap(int[] height) {
         //如果柱子的数量如果小于2 那没得玩了
         if (height.length < 2) return 0;
@@ -45,6 +44,7 @@ public class 接雨水 {
 
         //记录当前柱子的左边柱子的最大高度
         maxLeft[0] = height[0];
+
         for (int i = 1; i < N; i++) {
             //比较当前高度，和左边max的高度
             maxLeft[i] = Math.max(height[i], maxLeft[i - 1]);
@@ -75,7 +75,6 @@ public class 接雨水 {
         //就要找左右第一个比他大的值 - height[i] 就是能储水的高
         //i - stack.poll() - 1 就是储水的宽度
         //右边第一个比他大的元素其实就是peek(),左边第一个比他大的其实就是pop()以后的peek
-
         Deque<Integer> stack = new LinkedList<>();
         stack.push(0);
         int sum = 0;

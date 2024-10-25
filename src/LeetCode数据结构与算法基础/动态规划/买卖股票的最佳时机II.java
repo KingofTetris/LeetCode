@@ -9,7 +9,7 @@ import org.junit.Test;
  */
 
 //II就是可以多次买，多次卖。
-    //这个解法就是遍历，遇到有利润的卖就完事了。
+//这个解法就是遍历，遇到有利润的卖就完事了。
 /*122. 买卖股票的最佳时机 II
         给定一个数组 prices ，其中 prices[i] 是一支给定股票第 i 天的价格。
 
@@ -42,21 +42,21 @@ import org.junit.Test;
         0 <= prices[i] <= 104
 
  */
-    //简单讲就是可以对一支股票 多次买入再卖掉
-    //与i相比，i只能卖一次，选最大的那次
+//简单讲II就是可以多次买入卖出。
+//与I相比，I只能卖一次，选最大的那次
 public class 买卖股票的最佳时机II {
 
     @Test
-    public void test(){
+    public void test() {
 
     }
 
     //这题就是简单贪心就行了。
     public int maxProfit(int[] prices) {
         int maxProfit = 0;
-        for(int i = 1; i < prices.length; ++i){
-            if(prices[i] > prices[i-1]) //如果后面的股价高于前面的股价，就卖出
-                maxProfit += prices[i] - prices[i-1];
+        for (int i = 1; i < prices.length; ++i) {
+            if (prices[i] > prices[i - 1]) //如果后面的股价高于前面的股价，就卖出
+                maxProfit += prices[i] - prices[i - 1];
         }
         return maxProfit;
     }

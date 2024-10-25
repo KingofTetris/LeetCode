@@ -19,7 +19,7 @@ public class 买卖股票的最佳时机带手续费 {
     }
 
     //和II其实一样，区别就是价格手续费
-    //那么其实需要比较的价格就要加上手续费
+    //那么其实需要 在卖出的时候就要加上手续费
     public int maxProfit(int[] prices, int fee) {
         //算了本来想贪心，贪不动，直接套DP模板吧
         int n = prices.length;

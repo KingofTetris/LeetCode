@@ -88,6 +88,8 @@ public class 滑动窗口_无重复字符的最长子串 {
         int maxLen = 0;//用于记录最大不重复子串的长度
         int left = 0;//滑动窗口左指针
         int right = 0;//右指针
+
+        //外层控制right，内层控制left,中间去进行check。
         while (right < s.length()) {
             //移动右指针，检测是否重复
             if (map.containsKey(s.charAt(right))) {
@@ -100,7 +102,6 @@ public class 滑动窗口_无重复字符的最长子串 {
             maxLen = Math.max(maxLen, right - left + 1);
             right++;
         }
-
         return maxLen;
     }
 }

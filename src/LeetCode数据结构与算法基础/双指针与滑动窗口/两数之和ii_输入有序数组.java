@@ -61,14 +61,14 @@ public class 两数之和ii_输入有序数组 {
     //法一：最简单就是暴力破解，两重循环。但是没利用到有序这个特征 不写出来了
     //法二：哈希表法，用target - nums[i] 找对应的数 是否在表中 比暴力破解快很多 但也没考虑有序
     public int[] twoSum(int[] numbers,int target){
-        //前面指定了类型Integer 后面可以不显式写出来，但建议写
-        Map<Integer,Integer> hashTable = new HashMap<Integer,Integer>();
+        Map<Integer,Integer> hashTable = new HashMap<>();
         for (int i = 0; i < numbers.length; i++) {
             if (hashTable.containsKey(target - numbers[i])){
                 //map的get(key)方法会返回对应的value，我们把value设为数组下标i
                 //实际上就是把数组map化
                 return new int[]{hashTable.get(target - numbers[i]),i + 1};
             }
+            //不包含就把当前元素和下标保存起来。
             hashTable.put(numbers[i],i + 1);
         }
         return new int[0];//没有就返回空数组
@@ -76,8 +76,7 @@ public class 两数之和ii_输入有序数组 {
 
     //法三：利用有序这个特征，实际上我们是要找 target - nums[i] 对应的数，所以可以用二分查找提高效率
     //实际上和法二比也没有提高多少。
-//    public int[] twoSum(int[] numbers,int target){
-/*
+    public int[] twoSum2(int[] numbers,int target){
         //fori相当于先固定一个numbers[i],然后去右边找对应的数字
         for (int i = 0; i < numbers.length; i++) {
             int low = i + 1,high = numbers.length - 1;
@@ -99,14 +98,13 @@ public class 两数之和ii_输入有序数组 {
             }
         }
         return new int[0];//失败返回空数组
-    }*/
+    }
 
     //法四，双指针 直接一个头指针，一个尾指针
     //两数相加，如果小了就把前面的调大
     //如果大了就把后面的调小。其实比较好想吧。。。
     //而且最快。这就是利用有序可以做出的操作。
-    //这个方法其实是和BST配合的。因为BST的中序遍历是一个升序数组
-   /* public int[] twoSum(int[] numbers,int target){
+    public int[] twoSum3(int[] numbers,int target){
         int low = 0, high = numbers.length - 1;
         while (low < high) {
             int sum = numbers[low] + numbers[high];
@@ -119,5 +117,5 @@ public class 两数之和ii_输入有序数组 {
             }
         }
         return new int[]{-1, -1};
-    }*/
+    }
 }

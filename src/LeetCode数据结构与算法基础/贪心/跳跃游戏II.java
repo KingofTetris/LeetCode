@@ -27,6 +27,8 @@ public class 跳跃游戏II {
         int curDistance = 0;
         //最大的覆盖区域
         int maxDistance = 0;
+
+        //这里的循环条件就有点不一样了，不再是maxRange了。
         for (int i = 0; i < nums.length; i++) {
             //在可覆盖区域内更新最大的覆盖区域
             maxDistance = Math.max(maxDistance, i + nums[i]);
@@ -47,12 +49,15 @@ public class 跳跃游戏II {
 
     //DP好像简单多了
     public int jumpDP(int[] nums) {
+        //dp的含义就是到大i最少需要几步
         int[] dp = new int[nums.length];
         Arrays.fill(dp, Integer.MAX_VALUE);
         //dp表示跳到i至少有几步
         dp[0] = 0;
+
+
         for (int i = 0; i < nums.length; i++) {
-            for (int j = 1; j <= nums[i]; j++) {
+            for (int j = 0; j <= nums[i]; j++) {
                 if (i + j < nums.length) {
                     /**
                      * 递推公式
@@ -60,7 +65,7 @@ public class 跳跃游戏II {
                      * 那么dp[i + j] = dp[i] + 1
                      * 因为会有多重跳法
                      * 每次取小的。
-                     * 那么dp[i + j] = Math.min(dp[i + j], dp[i] + 1);
+                     * 那么dp[i + j] = Math.min(dp[i + j], dp[i] + 1);选一个最小的。
                      */
                     dp[i + j] = Math.min(dp[i + j], dp[i] + 1);
                 }

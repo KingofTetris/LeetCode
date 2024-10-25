@@ -11,8 +11,6 @@ import org.junit.Test;
 
 //已经限制n>1 非空
 其中 n > 1，返回输出数组 output ，其中 output[i] 等于 nums 中除 nums[i] 之外其余各元素的乘积。
-
-
         示例:
 
         输入: [1,2,3,4]
@@ -24,12 +22,11 @@ import org.junit.Test;
 
 public class 除自身以外数组的乘积 {
 
-
     @Test
-    public void test(){
-        int[] num = {1,2,3,4};
+    public void test() {
+        int[] num = {1, 2, 3, 4};
         int[] product = productExceptSelf(num);
-        for(int i:product){
+        for (int i : product) {
             System.out.print(i + "\t");
         }
     }
@@ -64,15 +61,16 @@ public class 除自身以外数组的乘积 {
         //第一个数左侧没有数，乘积设为1,直接等于1*后缀之积
         pre_product[0] = 1;
         //反过来最后一个数右侧没有数，直接1*前缀之积
-        post_product[n-1] = 1;
+        post_product[n - 1] = 1;
 
         //pre_product[i] 实际上就是每个数的前缀之积
         for (int i = 1; i < n; i++) {
-            pre_product[i] = nums[i-1] * pre_product[i-1];
+            pre_product[i] = nums[i - 1] * pre_product[i - 1];
         }
 
-        //小细节i>=0,不然第一个数没被赋值到，就为0
-        for (int i = n-2; i >= 0; i--) {
+        //post_product[i] 就是每个数的后缀之积
+        // 小细节i>=0,不然第一个数没被赋值到，就为0
+        for (int i = n - 2; i >= 0; i--) {
             post_product[i] = nums[i + 1] * post_product[i + 1];
         }
 

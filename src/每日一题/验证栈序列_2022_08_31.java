@@ -37,6 +37,8 @@ public class 验证栈序列_2022_08_31 {
      * @return
      */
     //模拟栈的入栈，出栈。
+    //pushed = [1,2,3,4,5], popped = [4,5,3,2,1] true
+    //pushed = [1,2,3,4,5], popped = [4,3,5,1,2] false
     public boolean validateStackSequences(int[] pushed, int[] popped) {
         Deque<Integer> stack = new ArrayDeque<>();
         int n = pushed.length;

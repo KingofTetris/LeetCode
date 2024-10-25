@@ -39,21 +39,19 @@ public class 长度最小的子数组 {
         //重复这个过程直到right再加一就大于数组长度就结束。
         int left = 0,right = 0;
         int n = nums.length;
-        int res = Integer.MAX_VALUE;
+        int res = Integer.MAX_VALUE; //等于target的滑动窗口的最小长度
         int sum = nums[0];//初值为nums[0]
         while(right < n){
-            //没有必要重复去计算sum
-           /* for (int i = left; i <= right; i++) {
-                sum += nums[i];
-            }*/
             //只要sum大于等于target了就需要更新res的值
+            //题目要求就是>= 不是等于。
             if (sum >= target){
-                //更新res的最小值
+                //更新此时res的最小值
                 res = Math.min(res,right - left + 1);
-                //sum先减去left再左移
+                //等于了以后， right就不要在动了，right越动越大，整个值只会更大
+                //窗口长度也会更大，没有意义。
                 sum -= nums[left];
                 left++;
-            }else {
+            }else if(sum < target){
                 //right右移，sum加上right
                 right++;
                 //先移动就需要判断边界。

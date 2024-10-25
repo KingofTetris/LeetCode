@@ -12,11 +12,17 @@ public class 判断子序列 {
         int n = s.length(), m = t.length();
         int i = 0, j = 0;
         while (i < n && j < m) {
+            //如果s和t字符相同，则一起向后移动
             if (s.charAt(i) == t.charAt(j)) {
                 i++;
+                j++;
             }
-            j++;
+            //否则j++; t移动
+            else {
+                j++;
+            }
         }
+        //最后查看i == n 就完事了。
         return i == n;
 /*
         作者：力扣官方题解
