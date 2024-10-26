@@ -67,7 +67,7 @@ class DoubleList{
     //头尾虚节点
     private Node head,tail;
 
-    private int size;
+    private int size;//List的容量
 
     //初始化
     public DoubleList(){
@@ -133,7 +133,7 @@ public class _146_LRU缓存手写双向链表 {
             return -1;
         }
         Node x = map.get(key);
-        //如果包含这个key，那么就把这个key对应的Node放到末尾
+        //如果包含这个key，那么就把这个key对应的Node删掉，然后放到末尾
         cache.remove(x);
         cache.addLast(x);
         return x.val;

@@ -52,6 +52,7 @@ public class 合并区间 {
     public int[][] merge(int[][] intervals) {
         Arrays.sort(intervals, (p, q) -> p[0] - q[0] ); // 按照左端点从小到大排序
         LinkedList<int[]> ans = new LinkedList<>();
+
         ans.add(intervals[0]);
         for (int i = 1; i < intervals.length; i++) {
             //如果重叠，左端点不用变，右端点变成更大的那个

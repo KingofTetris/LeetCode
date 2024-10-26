@@ -38,7 +38,6 @@ import org.junit.Test;
         题目数据保证列表表示的数字不含前导零*/
 public class 两数相加 {
 
-
     @Test
     public void test() {
         int[] num1 = {2, 4, 3};
@@ -67,7 +66,7 @@ public class 两数相加 {
             sum = (l1 == null ? 0 : l1.val) + (l2 == null ? 0 : l2.val) + carry;
             // 计算该位的进位
             carry = sum / 10;
-            // 该位的值等于sum与10取余
+            // 该位的值等于sum对10取余
             p.next = new ListNode(sum % 10);
             p = p.next;
             //链表往后移
@@ -90,12 +89,10 @@ public class 两数相加 {
             //计算该位的值
             p.next = new ListNode(sum % 10);
             p = p.next;//后移
-
             //l1,l2后移
             l1 = (l1 == null ? null : l1.next);
             l2 = (l2 == null ? null : l2.next);
         }
-
         //最后返回dummy.next
         return dummy.next;
     }

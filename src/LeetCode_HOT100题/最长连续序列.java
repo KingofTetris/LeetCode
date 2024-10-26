@@ -40,7 +40,6 @@ public class 最长连续序列 {
     //如果不存在，当前长度为1.每次更新最大长度即可
     //但是题目要求O(n) 用上面的朴素思路，是O(nlogn)
 
-
     //这就需要动下脑经，才能达到O(n)了
     public int longestConsecutive(int[] nums) {
         // 建立一个存储所有数的哈希表，同时起到去重功能
@@ -54,7 +53,9 @@ public class 最长连续序列 {
             int cur = num;
             int count = 1;//至少是1，因为自己就是一个连续数字
             //寻找这个数是不是开头，即cur - 1 存不存在，不存在就可以是连续序列的开头
+            //如果他不是开头，那就下一个数。
             if (!set.contains(cur - 1)) {
+                //他是开头就去循环遍历存不存在cur + 1
                 while (set.contains(cur + 1)) {
                     cur++;//当前数字自增。
                     count++;

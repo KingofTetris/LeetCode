@@ -25,7 +25,6 @@ public class 矩阵置零 {
                       {2,3,0},
                       {3,1,0}};
         setZeroes(matrix);
-
         int n = matrix.length;
         int m = matrix[0].length;
         for (int i = 0; i < n; i++) {
@@ -36,8 +35,6 @@ public class 矩阵置零 {
         }
 
     }
-
-
 
     //用两个标记数组来标记每一行每一列是否有零出现
     //然后把出现0的行列置为0即可

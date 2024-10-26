@@ -33,10 +33,10 @@ import java.util.HashMap;
         进阶：你可以想出一个时间复杂度小于 O(n2) 的算法吗？*/
 public class 两数之和 {
     @Test
-    public void test(){
-        int[] numbers = {2,7,11,15,22,311};
+    public void test() {
+        int[] numbers = {2, 7, 11, 15, 22, 311};
         int target = 13;
-        int[] result = twoSum(numbers,target);
+        int[] result = twoSum(numbers, target);
         for (int i : result) {
             System.out.println(i);
         }
@@ -44,20 +44,19 @@ public class 两数之和 {
 
     //没有排序的数组 暴力O(n2)或者哈希表法O(n)
     public int[] twoSum(int[] nums, int target) {
-        HashMap<Integer,Integer> map = new HashMap<>();
+        HashMap<Integer, Integer> map = new HashMap<>();
         for (int i = 0; i < nums.length; i++) {
             //注意不能先把数组元素和下标放进map里面，否则如果target刚好是n[0]的两倍
             //那下面的containsKey会直接返回1 1
 //            map.put(nums[i],i + 1);
             //map.containsKey可不是去遍历，他是拿着key去hash，复杂度是O(1)。
             //containsValue才需要遍历每个Node的每条链表，这个可就麻烦了
-
-            if(map.containsKey(target - nums[i])){
-                //注意返回的是get(key)就是对应的另一个加数的下标 和 i + 1 两个下标
-                return new int[]{map.get(target - nums[i]),i + 1};
+            if (map.containsKey(target - nums[i])) {
+                //注意返回的是get(key)就是对应的另一个加数的下标 和当前元素下标，两个下标
+                return new int[]{map.get(target - nums[i]), i};
             }
             //处理这个bug的方法就是先判断,再Put 可以避开上面的 1 1bug
-            map.put(nums[i],i + 1);
+            map.put(nums[i], i);
         }
         return new int[0]; //没有就返回空数组
     }

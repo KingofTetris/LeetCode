@@ -67,14 +67,12 @@ public class 行星碰撞_2022_07_13 {
      * 你有没有想过如果正负只是反方向，那么一定只留下那个绝对值最大的，还有什么意义。。。
      * 有点像大鱼吃小鱼
      * 找到相邻的正负数 判断大小，不断重复这个过程,直至没有碰撞
-     *
      * 淦啊！！卡在272 / 275 了！
-     *
      * 操。。耗时2小时，终于解决了。。。这个数据emm.........
      * 执行用时：44 ms, 在所有 Java 提交中击败了5.76%的用户
      * 内存消耗：42.9 MB, 在所有 Java 提交中击败了5.03%的用户
      */
-    public int[] collisionAsteroids(int []asteroids){
+    public int[] collisionAsteroids(int[] asteroids){
         boolean flag = false; //碰撞标志，初始判定为false
         LinkedList<Integer> aster_List = new LinkedList<>();
         for (int i = 0; i < asteroids.length;i++) {

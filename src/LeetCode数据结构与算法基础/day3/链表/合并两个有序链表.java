@@ -24,8 +24,9 @@ public class 合并两个有序链表 {
 
     public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
         ListNode prehead = new ListNode(-1);
-        ListNode pre = prehead;
+        ListNode pre = prehead; //用preHead记录链表开头。
         while (l1 != null && l2 != null) {
+            //谁小就先插入谁。
             if (l1.val <= l2.val) {
                 pre.next = l1;
                 l1 = l1.next;
@@ -35,6 +36,7 @@ public class 合并两个有序链表 {
             }
             pre = pre.next;
         }
+        //最后直接插入另外一个不为空的list就行了。
         pre.next = (l1 == null) ? l2 : l1;
         return prehead.next;
     }

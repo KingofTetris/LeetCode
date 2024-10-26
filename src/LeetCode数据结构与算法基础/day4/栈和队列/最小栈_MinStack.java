@@ -20,7 +20,7 @@ import java.util.LinkedList;
  * int param_3 = obj.top();
  * int param_4 = obj.getMin();
  */
-public class MinStack {
+public class 最小栈_MinStack {
 
 
     //整体思路就是一个普通stack正常出入栈。然后min_stack只保存最小值。
@@ -29,14 +29,14 @@ public class MinStack {
 
     @Test
     public void test(){
-        MinStack ms = new MinStack();
+        最小栈_MinStack ms = new 最小栈_MinStack();
         ms.push(-2);
         ms.push(0);
         ms.push(-3);
         System.out.println(ms.getMin());
 //        System.out.println(ms.getMin());
     }
-    public MinStack() {
+    public 最小栈_MinStack() {
         stack = new LinkedList<>();
         min_stack = new LinkedList<>();
         //初值值设为最大值，保证所有val都比它小。

@@ -26,7 +26,7 @@ import java.util.ArrayList;
  * 链接：https://leetcode.cn/problems/fan-zhuan-lian-biao-lcof
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
-public class 剑指Offer24_反转链表 {
+public class 剑指Offer24_反转链表_四种写法_头插法迭代递归栈 {
 
     @Test
     public void test() {
@@ -69,6 +69,11 @@ public class 剑指Offer24_反转链表 {
             //一开始使用temp接住这个要插入的节点
             ListNode temp = head;
             //head后移
+            //为什么这句 不能动，一定要在temp = head后面?
+            //注意注意！
+            //这个head一定要跟着temp = head后面
+            //因为head一直指向当前节点，而我们后面把temp.next修改了。
+            //会导致head.next 直接变成null !
             head = head.next;
             //temp断链，指向dummy.next
             temp.next = dummy.next;
@@ -129,12 +134,11 @@ public class 剑指Offer24_反转链表 {
             return head;
         }
         //这里的cur就是最后一个节点
-        ListNode cur = reverseList(head.next); //cur没变，一直是5
+        ListNode cur = reverseList3(head.next); //cur没变，一直是5
         //这里请配合动画演示理解
         //如果链表是 1->2->3->4->5，那么此时的cur就是5
         //而head是4，head的下一个是5，下下一个是空
         //所以head.next.next 就是5->4
-
         //看不懂这里的去看下面的网站图例。
         // https://leetcode.cn/problems/fan-zhuan-lian-biao-lcof/solution/dong-hua-yan-shi-duo-chong-jie-fa-206-fan-zhuan-li/
         head.next.next = head;

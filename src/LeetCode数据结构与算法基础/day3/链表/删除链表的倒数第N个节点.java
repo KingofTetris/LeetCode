@@ -15,6 +15,7 @@ public class 删除链表的倒数第N个节点 {
         ListNode res = removeNthFromEnd(node, 1);
         ListNode.printLinkedList(res);
     }
+
     //双指针，要删除倒数第N个元素，那你应该先找到倒数第N+1个元素，让他指向N-1，就完成了删除
     public ListNode removeNthFromEnd(ListNode head, int n) {
         // 由于可能会删除链表头部，用哨兵节点简化代码
@@ -28,8 +29,10 @@ public class 删除链表的倒数第N个节点 {
 
         while (right.next != null) {
             left = left.next;
-            right = right.next; // 左右指针一起走
+            right = right.next; // 左右指针一起走，right走到表尾,left就走到倒数n+1个节点。
         }
+
+        //把left 指向next.next 就删除了倒数第n个节点。
         left.next = left.next.next; // 左指针的下一个节点就是倒数第 n 个节点
         return dummy.next;
     }

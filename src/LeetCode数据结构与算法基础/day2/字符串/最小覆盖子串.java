@@ -1,5 +1,7 @@
 package LeetCode数据结构与算法基础.day2.字符串;
 
+import org.junit.Test;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -54,9 +56,27 @@ public class 最小覆盖子串 {
      * @return
      */
 
+    /**
+     * 滑动窗口模板
+     * 外层控制r 内层控制l
+     * (r < n,r++){
+     * //内层check,满足l++
+     * //不满足r++
+     * }
+     */
+
+
+    @Test
+    public void test() {
+        String s = "neichegncheck";
+        String t = "ink";
+        String window = minWindow(s, t);
+        System.out.println(window);
+    }
+
     //need是需要的字符数量，win是窗口目前字符的统计数量
-    Map<Character, Integer> need = new HashMap<>();
-    Map<Character, Integer> win = new HashMap<>();
+    Map<Character, Integer> need = new HashMap<>(); //需要的字符数量
+    Map<Character, Integer> win = new HashMap<>(); //窗口当前的字符数量
 
     public String minWindow(String s, String t) {
         int tLen = t.length();
@@ -67,9 +87,10 @@ public class 最小覆盖子串 {
 
         //左右指针
         int l = 0, r = -1;
-        int len = Integer.MAX_VALUE, ansL = -1, ansR = -1;
+        int len = Integer.MAX_VALUE, ansL = -1, ansR = -1; //最小窗口的长度，和L,R
         int sLen = s.length();
         while (r < sLen) {
+            //出现在外层就是窗口不满足条件，那么r只要是需要的就put进去。
             ++r;
             // 如果 r < sLen并且r这个字符包含在t中。
             if (r < sLen && need.containsKey(s.charAt(r))) {
@@ -79,14 +100,22 @@ public class 最小覆盖子串 {
 
             //如果已经覆盖了，并且l <= r 那就要开始考虑最小
             //也就是开始移动left 缩小窗口
+            /**
+             * 因为现在窗口已经满足need了，那么你right单向还是满足而且窗口会更大，没有意义
+             * 所以应该是去移动left，尽量满足且窗口最小，不满足的时候再去移动right
+             * 重复这个过程，直到 l > r && r < len
+             */
             while (check() && l <= r) {
                 //r - l + 1就是滑动窗口字符串的长度
-                if (r - l + 1 < len) {
+                if (r - l + 1 < len) { //假设l = 2，r = 5 则len = r - l + 1 = 4
                     len = r - l + 1;
                     ansL = l;
+                    //ansR = 6??为什么不是直接等于right,因为最后要使用substring[L,R)
+                    //所以ansR是开区间。
                     ansR = l + len;
                 }
                 //如果left是需要的字符，那么cnt就需要-1
+                //left移动
                 if (need.containsKey(s.charAt(l))) {
                     win.put(s.charAt(l), win.getOrDefault(s.charAt(l), 0) - 1);
                 }
@@ -106,7 +135,7 @@ public class 最小覆盖子串 {
             Character key = entry.getKey();
             Integer value = entry.getValue();
             //只要还有key没覆盖完就是false
-            if (win.getOrDefault(key,0) < value){
+            if (win.getOrDefault(key, 0) < value) {
                 return false;
             }
         }

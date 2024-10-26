@@ -53,9 +53,10 @@ public class 用最少数量的箭引爆气球 {
         //实际上并不需要真的去删除区间，只需要更新重叠区间的右端点就行了。
         int count = 1;  // points 不为空至少需要一支箭
         for (int i = 1; i < points.length; i++) {
+            //[1,6],[2,8],[7,12],[10,16]
             //如果当前区间的左端点>上一个区间的右端点，则不重叠
             if (points[i][0] > points[i - 1][1]) {  // 气球i和气球i-1不挨着，注意这里不是>=
-                count++; // 需要一支箭
+                count++; // 不重叠区间，不重叠就要加1根箭
             }
             //如果重叠
             else {
@@ -65,31 +66,34 @@ public class 用最少数量的箭引爆气球 {
         }
         return count;
 
-      /*  LinkedList<int[]> list = new LinkedList<>();
-        for (int[] point : points) {
-            list.add(point);
-        }
-        int index = 1;
-        while (index < list.size()) {
-            //可以合并
-            int left1 = list.get(index - 1)[0];
-            int right1 = list.get(index - 1)[1];
-            int left2 = list.get(index)[0];
-            int right2 = list.get(index)[1];
-            if (left2 <= right1) {
-                int[] overlap = {Math.max(left1, left2), Math.min(right1, right2)};
-                //删掉两个区间
-                list.remove(index);
-                list.remove(index - 1);
-                //在index - 1上插入一个重叠区间
-                list.add(index - 1, overlap);
-                //不能重头遍历，会超时。
-                //发生了合并，index不用动，还是保持在原位
-            } else {
-                index++;
-            }
-        }
-        //返回重叠区间的个数即可。
-        return list.size();*/
+
+        /**
+         * 真的去合并重叠区间，效率就很低。
+         *   LinkedList<int[]> list = new LinkedList<>();
+         *         for (int[] point : points) {
+         *             list.add(point);
+         *         }
+         *         int index = 1;
+         *         while(index < list.size()){
+         *             //可以合并
+         *             int left1 = list.get(index - 1)[0];
+         *             int right1 = list.get(index - 1)[1];
+         *             int left2 = list.get(index )[0];
+         *             int right2 = list.get(index)[1];
+         *             if (left2 <= right1){
+         *                 int[] overlap = {Math.max(left1,left2),Math.min(right1,right2)};
+         *                 //删掉两个区间
+         *                 list.remove(index);
+         *                 list.remove(index - 1);
+         *                 //在index - 1上插入一个重叠区间
+         *                 list.add(index - 1,overlap);
+         *             }
+         *             else {
+         *                 index++;
+         *             }
+         *         }
+         *           //返回不重叠区间的个数即可。
+         *         return list.size();
+         */
     }
 }

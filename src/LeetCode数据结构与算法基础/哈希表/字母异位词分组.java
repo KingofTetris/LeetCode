@@ -35,7 +35,8 @@ public class 字母异位词分组 {
     List<List<String>> list = new LinkedList<>();
     @Test
     public void test(){
-        String[] strs = {"eat", "tea", "tan", "ate", "nat", "bat","fish","perish","cherish","science","erishch","ihfs"};
+        String[] strs = {"eat", "tea", "tan", "ate", "nat", "bat",
+                "fish","perish","cherish","science","erishch","ihfs"};
 //          String[] strs = {};
 //        String[] strs = {"a"};
 //        System.out.println(isAnagrams(strs[0], strs[5]));
@@ -62,21 +63,19 @@ public class 字母异位词分组 {
             char[] chars = strs[i].toCharArray();
             Arrays.sort(chars); //给字母排序
             String key = String.valueOf(chars);//然后作为key
-
             //不包含这个key就put,否则直接get，然后add进去即可
             if (!map.containsKey(key)) {
                 map.put(key, new ArrayList<>());
             }
             map.get(key).add(strs[i]);
         }
-
-        //ArrayList<>(ArrayList<String>)
+        //可以直接使用构造方法ArrayList<>(ArrayList<String>)
         //直接用map中的values 生成List 就这样写 List<>(map.values)
-        /**
-         * 最后我们只需要map中的value
-         * 可以直接List<>(放个集合进来)
-         */
-
-        return new ArrayList<>(map.values());
+        //但是我就是喜欢old school
+        List<List<String>> res = new ArrayList<>();
+        for (ArrayList<String> value : map.values()) {
+            res.add(value);
+        }
+        return res;
     }
 }

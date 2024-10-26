@@ -31,10 +31,10 @@ public class 逆波兰表达式求值 {
             else if (tokens[i].equals("-")) {
                 int v1 = stack.pop();
                 int v2 = stack.pop();
-                // s:[13 5 /]
-                // v1 = 5
-                // v2 = 13
-                // v2 / v1 减号也是一样
+                // eg:[13 5 /]
+                // v1 = 5 先pop的是5
+                // v2 = 13 //再pop的是13
+                // 所以是v2 / v1 减号也是一样
                 stack.push(v2 - v1);
             }
             else if (tokens[i].equals("*")) {

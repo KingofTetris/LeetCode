@@ -43,12 +43,54 @@ public class 有效的数独 {
 
     }
 
+
     /**
-     * 这个也没什么好说的，还是遍历，处理行处理列。
+     * 下面那种先遍历列，再遍历行，同时遍历小九宫格的方法太麻烦了。
+     * 直接用官解这种一次遍历的方法，同时判断3个容器，只要有一个出现2,返回false
+     * 最简单易懂，而且效率最快。
      * @param board
      * @return
      */
     public boolean isValidSudoku(char[][] board) {
+        int[][] rows = new int[9][9];
+        int[][] columns = new int[9][9];
+        int[][][] subboxes = new int[3][3][9];
+        //遍历board
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                char c = board[i][j];
+                if (c != '.') {
+                    //index就是记录1-9出现的次数
+                    //因为下标0-9，所以多减个1。
+                    int index = c - '0' - 1;
+
+                    rows[i][index]++; //第i行
+                    columns[j][index]++; //第j列
+                    subboxes[i / 3][j / 3][index]++; //第 i/3,j/3个小九宫格。
+
+                    if (rows[i][index] > 1
+                            || columns[j][index] > 1
+                            || subboxes[i / 3][j / 3][index] > 1) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+    /*作者：力扣官方题解
+    链接：https://leetcode.cn/problems/valid-sudoku/solutions/
+    来源：力扣（LeetCode）
+    著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。*/
+
+    /**
+     * 这个也没什么好说的，还是遍历，处理行处理列。
+     *
+     * @param board
+     * @return
+     */
+    public boolean isValidSudoku2(char[][] board) {
         ArrayList<Character> row = new ArrayList<>();
         ArrayList<Character> col = new ArrayList<>();
 
@@ -61,18 +103,19 @@ public class 有效的数独 {
             //遍历列 0,0 1,0 2,0 ... 8,0
             col.clear();//每列前清空。
             for (int j = 0; j < board.length; j++) {
-                if (board[j][i] != '.' ){ //如果不是.
-                   if (col.contains(board[j][i])){
-                       return false;
-                   }else {
-                       col.add(board[j][i]);  //添加到col
-                   }
+                if (board[j][i] != '.') { //如果不是. 是数字，就判断列上有没有重复
+                    if (col.contains(board[j][i])) {
+                        return false;
+                    } else {
+                        col.add(board[j][i]);  //添加到col
+                    }
                 }
             }
             //遍历行
             //每个新行情况row
             row.clear();
-            //然后我们还要遍历每个9宫格。这个也是从左到右。遍历行的顺序。
+            //但有个非常大的问题
+            // 我们还要遍历每个9宫格。这个也是从左到右。遍历行的顺序。
             //问题是我们怎么确定这个小格子属于哪一个九宫格。
             //其实这个你得画个图看一下，假设格子的坐标是 [x,y]
             //那么他所属的九宫格应该是多少呢？我们假设9宫格的顺序是从左到右，从上到下。
@@ -95,21 +138,21 @@ public class 有效的数独 {
             for (int j = 0; j < board[0].length; j++) {
                 //行
                 char rowTemp = board[i][j];
-                if (rowTemp != '.' ){ //如果不是.
-                    if (row.contains(rowTemp)){ //如果row重复
+                if (rowTemp != '.') { //如果不是.
+                    if (row.contains(rowTemp)) { //如果row重复
                         return false;
-                    }else {
+                    } else {
                         row.add(rowTemp);  //添加到row
                     }
                 }
                 //格子
-                int coordination = i / 3 * 3 + j /3;
+                int coordination = i / 3 * 3 + j / 3; //本题的最难点，计算坐标对应的格子。
                 ArrayList<Character> box = boxs.get(coordination);//对应的九宫格
-                if (rowTemp != '.'){
-                    if (box.contains(rowTemp)){
+                if (rowTemp != '.') {
+                    if (box.contains(rowTemp)) {
                         return false;//重复
-                    }else {
-                       box.add(rowTemp);//不重复就加进去
+                    } else {
+                        box.add(rowTemp);//不重复就加进去
                     }
                 }
             }

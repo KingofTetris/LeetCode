@@ -6,7 +6,7 @@ import java.util.Arrays;
  * @Author KingofTetris
  * @Date 2022/10/25 14:27
  */
-public class 最接近的三树之和 {
+public class 最接近的三数之和 {
 
 
     /**

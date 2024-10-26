@@ -4,9 +4,22 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Queue;
 
-class 随机链表的复制 {
-    public Node copyRandomList(Node head) {
 
+// Definition for a Node.
+//注意这题的node 要多一个random引用。
+/*class Node {
+    int val;
+    Node next, random;
+    public Node(int val) {
+        this.val = val;
+        this.next = null;
+        this.random = null;
+    }
+}*/
+
+class 随机链表的复制 {
+
+    public Node copyRandomList(Node head) {
         if(head == null) return null;
         Node cur = head;
         Map<Node, Node> map = new HashMap<>();
