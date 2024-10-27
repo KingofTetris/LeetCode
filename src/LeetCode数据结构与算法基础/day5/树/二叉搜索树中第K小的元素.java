@@ -25,8 +25,8 @@ import java.util.*;
         0 <= Node.val <= 104
         进阶：如果二叉搜索树经常被修改（插入/删除操作）并且你需要频繁地查找第 k 小的值，你将如何优化算法？*/
 
-public class BST中第K小的元素 {
-    List<Integer> list = new LinkedList<>();
+public class 二叉搜索树中第K小的元素 {
+
     @Test
     public void test(){
         Integer[] nums = {5,3,6,2,4,null,null,1};
@@ -35,7 +35,9 @@ public class BST中第K小的元素 {
         System.out.println(kthSmallest(node,3));
     }
 
+
     //BST的中序遍历实际上是个升序数组，找第K小就直接变成了找数组中的第K个元素
+    List<Integer> list = new LinkedList<>();
     public int kthSmallest(TreeNode root, int k) {
         inorderTraversal(root);
         //最后返回下标k-1的元素就是第k小的元素
@@ -67,21 +69,16 @@ public class BST中第K小的元素 {
         traverse(root,k);
         return val;
     }
-
     int order = 0;
     int val = -1;
-
     public void traverse(TreeNode root,int k){
         if(root == null) return;
-
         traverse(root.left,k);
-
         order++;
         if(order == k){ //找到order == k的时候就可以return了
             val = root.val;
             return;
         }
-
         traverse(root.right,k);
     }
 

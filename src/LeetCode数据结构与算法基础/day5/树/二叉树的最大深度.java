@@ -51,9 +51,8 @@ public class 二叉树的最大深度 {
      */
     public int maxDepth2(TreeNode root) {
         if (root == null) return 0;
-        List<TreeNode> queue = new LinkedList<>() {{
-            add(root);
-        }}, tmp;//匿名内部类直接添加root的话，后面的TreeNode不能省略
+        List<TreeNode> queue = new LinkedList<>(), tmp;//tmp用来记录每层的节点。
+        queue.add(root);
         int res = 0;
         while (!queue.isEmpty()) {
             tmp = new LinkedList<>();

@@ -16,6 +16,7 @@ public class 二叉搜索树的最小绝对差 {
         int minimumDifference = getMinimumDifference(tree);
         System.out.println("minimumDifference = " + minimumDifference);
     }
+
     int min = Integer.MAX_VALUE;
     LinkedList<Integer> nums = new LinkedList<>();
     public int getMinimumDifference(TreeNode root) {
@@ -31,6 +32,7 @@ public class 二叉搜索树的最小绝对差 {
         }
         inorder(root.left);
         nums.add(root.val);
+        //每次计算最新两个数的差值，因为是bst，中序遍历cur一定是大于pre的。
         if (nums.size() >= 2){
             int cur = nums.get(nums.size() - 1);
             int pre = nums.get(nums.size() - 1 - 1);

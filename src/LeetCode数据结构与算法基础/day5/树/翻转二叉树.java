@@ -41,7 +41,7 @@ public class 翻转二叉树 {
         return root;
     }
 
-    //当然迭代实现 用层序遍历，DFS，BFS反转
+    //当然也可以迭代实现 用层序遍历，DFS，BFS反转
     public TreeNode invertTree2(TreeNode root){
         if (root == null)
             return root;

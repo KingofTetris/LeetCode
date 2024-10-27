@@ -48,6 +48,8 @@ public class 二叉树的最近公共祖先 {
 
 
 
+    //https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-tree/solutions/240096/236-er-cha-shu-de-zui-jin-gong-gong-zu-xian-hou-xu/?envType=study-plan-v2&envId=top-interview-150
+    //忘了就去看K神的图解。
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
 
         //这里是思考难点。定义规则：比如在某一棵子树上先找到了p，

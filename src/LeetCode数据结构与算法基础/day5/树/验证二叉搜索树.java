@@ -43,7 +43,7 @@ public class 验证二叉搜索树 {
     /**
      * 最优解，遍历的同时判断。
      */
-    long maxVal = Long.MIN_VALUE;
+    long maxVal = Long.MIN_VALUE; //注意这题又来恶心人了，记得开long
 
     //验证是否是BST，其实就是中序遍历看他是否是一个升序序列。
     //不是升序就不是。
@@ -64,7 +64,6 @@ public class 验证二叉搜索树 {
         }
         // 右
         boolean right = isValidBST(root.right);
-
         //两棵都要升序才能成立
         return left && right;
     }

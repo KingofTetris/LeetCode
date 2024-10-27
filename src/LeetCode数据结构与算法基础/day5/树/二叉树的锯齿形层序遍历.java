@@ -13,27 +13,29 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-/**给定一个二叉树，返回其节点值的锯齿形层序遍历。（即先从左往右，再从右往左进行下一层遍历，以此类推，层与层之间交替进行）。
-
-        例如：
-        给定二叉树 [3,9,20,null,null,15,7],
-
-         3
-        / \
-        9  20
-        /  \
-        15   7
-        返回锯齿形层序遍历如下：
-
-        [
-        [3],
-        [20,9],
-        [15,7]
-        ]*/
+/**
+ * 给定一个二叉树，返回其节点值的锯齿形层序遍历。（即先从左往右，再从右往左进行下一层遍历，以此类推，层与层之间交替进行）。
+ * <p>
+ * 例如：
+ * 给定二叉树 [3,9,20,null,null,15,7],
+ * <p>
+ * 3
+ * / \
+ * 9  20
+ * /  \
+ * 15   7
+ * 返回锯齿形层序遍历如下：
+ * <p>
+ * [
+ * [3],
+ * [20,9],
+ * [15,7]
+ * ]
+ */
 public class 二叉树的锯齿形层序遍历 {
 
     @Test
-    public void tese(){
+    public void tese() {
 
         TreeNode root = new TreeNode(3);
         TreeNode node1 = new TreeNode(9);
@@ -51,13 +53,14 @@ public class 二叉树的锯齿形层序遍历 {
         node2.right = node6;
         List<List<Integer>> res = zigzagLevelOrder(root);
 
-        for (List<Integer> item:res) {
-            for (Integer i:item) {
+        for (List<Integer> item : res) {
+            for (Integer i : item) {
                 System.out.print(i + "\t");
             }
             System.out.println();
         }
     }
+
     public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
 
         //层序遍历固定的四行
@@ -68,17 +71,17 @@ public class 二叉树的锯齿形层序遍历 {
 
         int count = 0;
 
-        while (!queue.isEmpty()){
+        while (!queue.isEmpty()) {
             int size = queue.size();
             LinkedList<Integer> path = new LinkedList<>();
             for (int i = 0; i < size; i++) {
                 TreeNode temp = queue.poll();
-                if (temp.left!=null) queue.add(temp.left);
-                if (temp.right!=null) queue.add(temp.right);
-                //奇数
-                if (count%2 == 1){
+                if (temp.left != null) queue.add(temp.left);
+                if (temp.right != null) queue.add(temp.right);
+                //奇数正向放
+                if (count % 2 == 1) {
                     path.addFirst(temp.val);
-                }//偶数
+                }//偶数逆向放
                 else {
                     path.addLast(temp.val);
                 }
