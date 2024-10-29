@@ -40,6 +40,25 @@ import java.util.Set;
  */
 public class 单词拆分_回溯加记忆化搜索版本 {
 
+
+    /**
+     * 其实这题只是问能不能，不是让你把方案全部列出来，没必要回溯。
+     * DP就行了。
+     */
+    @Test
+    public void test(){
+        String s = "catssanddog";
+        String[] words = {"cats", "dog", "sand", "and", "cat"};
+        //将单词都添加到set中
+        Set<String> wordDict = new HashSet<>();
+        for (String word : words) {
+            wordDict.add(word);
+        }
+        boolean[] memory = new boolean[words.length];
+        boolean backtracking = backtracking(s, wordDict, memory, 0);
+        System.out.println(backtracking);
+    }
+
     private boolean backtracking1(String s, Set<String> wordSet, int startIndex) {
         //结束条件
         if (startIndex >= s.length()) {
@@ -58,23 +77,6 @@ public class 单词拆分_回溯加记忆化搜索版本 {
         return false;
     }
 
-
-    /**
-     * 其实这题只是为了求能不能，不是让你把方案全部列出来，没必要回溯。
-     * DP就行了。
-     */
-    @Test
-    public void test(){
-        String s = "catsandog";
-        String[] strings = {"cats", "dog", "sand", "and", "cat"};
-        Set<String> wordDict = new HashSet<>();
-        for (String string : strings) {
-            wordDict.add(string);
-        }
-        boolean[] memory = new boolean[strings.length];
-        boolean backtracking = backtracking(s, wordDict, memory, 0);
-        System.out.println(backtracking);
-    }
     private boolean backtracking(String s, Set<String> wordSet,
                                  boolean[] memory, int startIndex) {
         //都搜到最后一位了，说明前面都符合。return true
@@ -82,9 +84,12 @@ public class 单词拆分_回溯加记忆化搜索版本 {
             return true;
         }
         // 如果 memory[startIndex] 不是初始值了，直接使用 memory[startIndex] 的结果
+        // 不用再重复计算了。
         if (!memory[startIndex]) return memory[startIndex];
+
         for (int i = startIndex; i < s.length(); i++) {
             String word = s.substring(startIndex, i + 1);
+            //如果set包含这个单词，并且继续往下回溯的结果也是true，返回true.
             if (wordSet.contains(word)
                     && backtracking(s, wordSet, memory, i + 1)) {
                 return true;

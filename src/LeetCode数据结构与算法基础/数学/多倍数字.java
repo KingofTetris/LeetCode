@@ -29,6 +29,7 @@ public class 多倍数字 {
             int c = a * 3;
             //然后我们去判断combine有没有重复元素
             String combined = String.valueOf(a) + String.valueOf(b) + String.valueOf(c);
+            //字符不存在重复元素，并且不包含0就可以添加进结果集了。
             if (isUnique(combined) && !combined.contains("0")) {
                 //如果符合要求就可以添加到结果了。
                 ArrayList<Integer> triplet = new ArrayList<>();
@@ -41,9 +42,7 @@ public class 多倍数字 {
     }
 
     private static boolean isUnique(String str) {
-        //str.chars()是JDK9的写法。
-//        return str.chars().distinct().count() == str.length();
-        //不使用8以上的特性，手动完成。是否有重复元素
+        //字符是否有重复元素
         Set<Character> set = new HashSet<>();
         for (int i = 0; i < str.length(); i++) {
             char c = str.charAt(i);

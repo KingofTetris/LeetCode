@@ -1,4 +1,4 @@
-package LeetCode_HOT100题;
+package LeetCode数据结构与算法基础.二分查找专题;
 
 /**
  * @Author KingofTetris

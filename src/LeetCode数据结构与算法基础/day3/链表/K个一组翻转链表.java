@@ -52,18 +52,18 @@ public class K个一组翻转链表 {
         dummy.next = head;
         // 用于记录头节点返回
         ListNode hair = dummy;
-
         // 初始化tail，代表每个小段链表的末尾
         ListNode tail = dummy;
         ListNode start, next;
-
         // 遍历链表
         while (tail.next != null) {
             // 移动tail到小段链表末尾
+            // k 个一组
             for (int i = 0; i < k && tail != null; i++) {
                 tail = tail.next;
             }
-            //最后一段不够反转的直接跳出即可
+            //最后一段不够反转的,不需要反转
+            // 直接跳出即可
             if (tail == null) {
                 break;
             }
@@ -71,7 +71,7 @@ public class K个一组翻转链表 {
             next = tail.next;
             // 设置start为起始
             start = dummy.next;
-            // 断开链表
+            // 断开链表 进行反转，就不用去管长度了。
             tail.next = null;
             // 反转链表（start，tail)
             dummy.next = reverseListNode(start);
@@ -79,7 +79,7 @@ public class K个一组翻转链表 {
             start.next = next;
             // 移动指针寻找下一段链表
             dummy = start;// 此时start已经是当前逆序链表的末尾
-            tail = dummy; // 移动末尾为dummy下一次继续根据k移动tail
+            tail = dummy; // 移动末尾为dummy相当于再次找到表头，下一次继续根据k移动tail
         }
 
         //最终返回整个链表

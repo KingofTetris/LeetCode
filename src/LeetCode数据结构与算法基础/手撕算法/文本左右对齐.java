@@ -11,7 +11,6 @@ public class 文本左右对齐 {
 
     //还真有的有可能手撕到，很无语。
     //有点恶心，代码量超大。
-
     public List<String> fullJustify(String[] words, int maxWidth) {
         List<String> ans = new ArrayList<>();
         int right = 0, n = words.length;

@@ -27,6 +27,7 @@ import java.util.Arrays;
  * inorder 保证为二叉树的中序遍历序列
  */
 public class 根据前中序遍历还原二叉树 {
+
     public TreeNode buildTree(int[] preorder, int[] inorder) {
         if (preorder.length == 0 || inorder.length == 0)
             return null;
@@ -34,21 +35,22 @@ public class 根据前中序遍历还原二叉树 {
         TreeNode root = new TreeNode(preorder[0]);
         for (int i = 0; i < inorder.length; i++) {
             if (inorder[i] == root.val) { //找到中序遍历里面 根在哪里，然后分左右子树
-
+                //copyOfRange[a,b)
                 //pre的左子树就是 [1,1 + i] i就是左子树的节点个数
                 int[] pre_left = Arrays.copyOfRange(preorder, 1, i + 1);
                 //pre的右子树就是 [i + 1 + 1,preorder.length - 1]
                 int[] pre_right = Arrays.copyOfRange(preorder, i + 1, preorder.length);
-
                 //中序左子树就是 [0,i - 1]
                 int[] in_left = Arrays.copyOfRange(inorder, 0, i + 1);
-
                 //右子树就是 [i + 1,inorder.length - 1]
                 int[] in_right = Arrays.copyOfRange(inorder, i + 1, inorder.length);
-
-
-                root.left = buildTree(pre_left, in_left);
-                root.right = buildTree(pre_right, in_right);
+                root.left = buildTree(pre_left, in_left);//左子树去构造左子树
+                root.right = buildTree(pre_right, in_right);//右子树去构造右子树
+                //这个break的作用是?
+                //因为找到根节点以后就可以结束了，后面的inorder就没必要继续遍历了。
+                //当然这种做法只适合用于不包含重复数字的二叉树
+                //如果重复了就需要其他东西来辨别，到底谁才是根节点。那就非常麻烦了
+                //所以实际上index B+树也是需要主键这个唯一字段来帮忙的
                 break;
             }
         }

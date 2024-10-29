@@ -17,10 +17,10 @@ public class 划分为k个相等的子集 {
 
     @Test
     public void test(){
-//        int[] nums = {4,3,2,3,5,2,1};
-//        int k = 4;
-        int[] nums = {1,1,1,1,2,2,2,2};
-        int k = 2;
+        int[] nums = {4,3,2,3,5,2,1};
+        int k = 4;
+//        int[] nums = {1,1,1,1,2,2,2,2};
+//        int k = 2;
         boolean b = canPartitionKSubsets(nums, k);
         System.out.println(b);
     }
@@ -28,7 +28,6 @@ public class 划分为k个相等的子集 {
 
     /**
      * 按照代码随想录的回溯的模板这题没法做
-     *
      * 正确的回溯看下面。
      * @param nums
      * @param k
@@ -44,9 +43,7 @@ public class 划分为k个相等的子集 {
         //k个桶 每个桶的容量是target
         int arr[] = new int[k];
         Arrays.fill(arr, target);
-
         Arrays.sort(nums);
-
         //cur是尝试把当前数字放到桶里面
         //从大到小 放入
         return backtracking(nums, nums.length - 1, arr, k);

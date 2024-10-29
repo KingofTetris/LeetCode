@@ -9,7 +9,6 @@ import java.util.Scanner;
  */
 public class 正多边形求pai {
 
-
     /**
      * 题目要求是不能用sin和cos，但没办法就用。
      * @param args

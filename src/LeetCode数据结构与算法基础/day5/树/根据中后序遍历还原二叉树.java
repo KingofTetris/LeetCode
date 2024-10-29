@@ -2,6 +2,8 @@ package LeetCode数据结构与算法基础.day5.树;
 
 import org.junit.Test;
 
+import java.util.Arrays;
+
 /**
  * @author by KingOfTetris
  * @date 2023/9/26
@@ -14,7 +16,7 @@ import org.junit.Test;
     //递归去遍历inorder,postorder
     //或者inorder,preorder.
     //两个左右子树的下标，自己拿笔在纸上算，光靠想是想不出来的
-public class 根据中后遍历还原二叉树 {
+public class 根据中后序遍历还原二叉树 {
 
     @Test
     public void test() {
@@ -24,7 +26,8 @@ public class 根据中后遍历还原二叉树 {
         TreeUtils.show(root);
     }
 
-    //本质还是回溯
+    //中后序不要用Arrays.copy这种半闭半开的，比较难写区间，
+    //自己写一个copyRange函数，左闭右闭的好写点。
     public TreeNode buildTree(int[] inorder, int[] postorder) {
         if (postorder.length == 0 || inorder.length == 0)
             return null;
@@ -36,8 +39,9 @@ public class 根据中后遍历还原二叉树 {
                 //中序找到根分左右就很简单
                 //自己写左闭右闭的复制
                 //中序左子树[0,i-1] 右子树[i+1,len - 1]
-                int[] in_left = copyRange(inorder,0,i - 1);
+                int[] in_left = copyRange(inorder, 0, i - 1);
                 int[] in_right = copyRange(inorder,i + 1, inorder.length - 1);
+                //比前中序难一点的地方在于，他需要算出后序的左右子树长度才能确定左右
                 int leftLen = i; //左子树长度
                 int rightLen = inorder.length - (i + 1); //右子树长度
                 //后序左子树[0,i-1] 右子树[i,i + rightLen - 1]

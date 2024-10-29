@@ -16,7 +16,7 @@ public class 权重随机 {
 
     //其实所有权重的值累加起来就是一个区间。
     //例如权重为[4,3,5]
-    //0__3 __6 ____11
+    //0__3 4_6 7___11
     //就可以分成这样3个区间 0-3,4-6,7-11
     //那你随机生成一个0到11之间的数字
     //根据区间就能知道他落在哪一段上。
@@ -26,7 +26,6 @@ public class 权重随机 {
         int weightSum = ServerIps.WEIGHT_LIST.values().stream().mapToInt(Integer::intValue).sum();
         Random random = new Random();
         int pos = random.nextInt(weightSum);
-
         for (String ip : ServerIps.WEIGHT_LIST.keySet()) {
             Integer weight = ServerIps.WEIGHT_LIST.get(ip);
             //如果随机数已经小于权重了，说明已经落在了这个ip上

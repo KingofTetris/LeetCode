@@ -18,7 +18,6 @@ import java.util.List;
  */
 public class 单词拆分_DP版本 {
 
-
     /**
      * 时间复杂度：O(n^3)，因为substr返回子串的副本是O(n)的复杂度（这里的n是substring的长度）
      * @param s
@@ -30,11 +29,11 @@ public class 单词拆分_DP版本 {
         int n = s.length();
         boolean[] dp = new boolean[n + 1];
         //2.确定DP递推公式
-        //dp[i]能否由字典组成就看 dp[j] 是否为true
-        // sub(i,j)是否包含在dict中。都成立dp[i] = true 否则为false
+        //dp[i]能否由字典组成就看 i前面的 dp[j] 是否为true
+        // 并且 sub(i,j)是否包含在dict中。都成立dp[i] = true 否则为false
 
         //3.确定初始值
-        //dp[0] 为什么？ dp[0]一定要为true，不然递推公式就没用了。
+        //dp[0] 应该是什么？ dp[0]一定要为true，不然递推公式就没用了。
         dp[0] = true;
 
         //4.确定遍历顺序

@@ -21,7 +21,7 @@ public class 米小游和往事乐土 {
 
     // 主函数
     public static void main(String[] args) {
-        input();
+        input();//处理输入
         System.out.println(dfs(0));
     }
 
