@@ -3,9 +3,13 @@ package LeetCode数据结构与算法基础.动态规划;
 /**
  * @author by KingOfTetris
  * @date 2024/8/22
+ * <p>
+ * <p>
+ * 给定两个单词 word1 和 word2 ，返回使得 word1 和  word2 相同所需的最小步数。
+ * <p>
+ * 每步 可以删除任意一个字符串中的一个字符。
  */
 public class 两个字符串的删除操作 {
-
 
     /**
      * 法一：我们直接用DP来解这道题，为了编辑距离做铺垫
@@ -68,7 +72,7 @@ public class 两个字符串的删除操作 {
                 } else {
                     //三者的最小值
                     //Java不能直接min(a,b,c) 看着麻烦点
-                    dp[i][j] = Math.min( Math.min(dp[i - 1][j] + 1, dp[i][j - 1] + 1),
+                    dp[i][j] = Math.min(Math.min(dp[i - 1][j] + 1, dp[i][j - 1] + 1),
                             dp[i - 1][j - 1] + 2);
                 }
             }
@@ -81,8 +85,7 @@ public class 两个字符串的删除操作 {
     /**
      * 法二:简单的思路是求出两个字符串的最长公共子序列的长度l
      * 然后word1.length - l + word2.length - l 就是最少操作次数
-     *
-     * 即去掉公共的部门，剩下不同的部分就是需要删去的字符。
+     * 即去掉公共的部分，剩下不同的部分就是需要删去的字符。
      *
      * @param word1
      * @param word2
@@ -97,8 +100,7 @@ public class 两个字符串的删除操作 {
     private int longestCommonsubSequence(String word1, String word2) {
         //dp含义
         /**
-         * dp[i][j]：长度为[0, i - 1]的字符串text1
-         * 与长度为[0, j - 1]的字符串text2的最长公共子序列为dp[i][j]
+         * dp[i][j]：长度为[0, i - 1]的字符串text1 与长度为[0, j - 1]的字符串text2的最长公共子序列为dp[i][j]
          * 这种公共子序列，子串都是这样定义，避免DP初始化麻烦
          */
         int n = word1.length();
@@ -107,7 +109,7 @@ public class 两个字符串的删除操作 {
         //递推公式
         /**
          *  如果结尾字符相同 dp[i - 1][j - 1] + 1;
-         *         if (char1[i - 1] == char2[j - 1]) { // 开始列出状态转移方程
+         *         if (char1[i - 1] == char2[j - 1]) { // 相同，公共子序列长度+1
          *             dp[i][j] = dp[i - 1][j - 1] + 1;
          *         }
          * 如果不同，那么就要取 Math.max(dp[i - 1][j], dp[i][j - 1]);
@@ -131,7 +133,6 @@ public class 两个字符串的删除操作 {
          * 那么(i,j)
          * 就会由下层和右边推过来，那么你就要初始化第一行，第一列
          */
-
 
         /**
          * dp[i][j]：长度为[0, i - 1]的字符串text1

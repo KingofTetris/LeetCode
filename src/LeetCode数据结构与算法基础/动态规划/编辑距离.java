@@ -9,8 +9,6 @@ import java.util.Arrays;
  * @date 2024/8/22
  */
 public class 编辑距离 {
-
-
     @Test
     public void test() {
         String s = "horse";
@@ -39,7 +37,7 @@ public class 编辑距离 {
         int n = word2.length();
 
         //dp[i][j] 含义和 两个字符串的删除操作相同
-        //dp[i][j] 表示以为word1[i-1]结尾的字符串最少要dp[i][j]次操作得到word2[j-1]
+        //dp[i][j] 表示以word1[i-1]为结尾的字符串最少要dp[i][j]次操作得到word2[j-1]
 
         /**
          * if(word1[i-1] == word2[j-1]) dp[i][j] = dp[i-1][j-1]
@@ -57,7 +55,8 @@ public class 编辑距离 {
          */
 
         int[][] dp = new int[m + 1][n + 1];
-        // 初始化
+        // 初始化 初始状态就是问
+        //就是把字符串化成空字符串要多少次操作
         for (int i = 1; i <= m; i++) {
             dp[i][0] = i;
         }
@@ -65,11 +64,15 @@ public class 编辑距离 {
             dp[0][j] = j;
         }
 
+        //开始递推
         for (int i = 1; i <= m; i++) {
             for (int j = 1; j <= n; j++) {
+                //如果两个字符相等 就不需要动
                 if (word1.charAt(i - 1) == word2.charAt(j - 1)) {
                     dp[i][j] = dp[i - 1][j - 1];
-                } else {
+                }
+                //否则就去DP
+                else {
                     //因为增删改其实全部都要+1，所以把+1放在最后了
                     //但是其实直接放到里面比较也是一样。无所谓你怎么写。
                     dp[i][j] = Math.min(Math.min(dp[i - 1][j] + 1, dp[i][j - 1] + 1),
