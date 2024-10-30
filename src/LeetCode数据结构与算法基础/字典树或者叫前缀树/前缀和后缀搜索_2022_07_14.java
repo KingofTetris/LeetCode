@@ -1,4 +1,4 @@
-package LeetCode数据结构与算法基础.字典树;
+package LeetCode数据结构与算法基础.字典树或者叫前缀树;
 
 import java.util.ArrayList;
 import java.util.List;

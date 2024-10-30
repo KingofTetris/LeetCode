@@ -66,7 +66,6 @@ public class 不相交的线 {
                 } else {
                     dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
                 }
-
                 //记录最大值
                 max = Math.max(max,dp[i][j]);
             }
