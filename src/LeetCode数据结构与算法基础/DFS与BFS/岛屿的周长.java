@@ -31,10 +31,14 @@ public class 岛屿的周长 {
                 grid[i][j] = sc.nextInt();
             }
         }
+        System.out.println(islandPerimeter(grid));
+    }
 
 
+    public static int islandPerimeter(int[][] grid) {
         int sum = 0;    // 陆地数量
         int cover = 0;  // 陆地相邻数量
+        int n = grid.length, m = grid[0].length;
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
                 if (grid[i][j] == 1) {
@@ -49,7 +53,6 @@ public class 岛屿的周长 {
                 }
             }
         }
-
-        System.out.println(sum * 4 - 2 * cover);
+        return sum * 4 - 2 * cover;
     }
 }
