@@ -10,8 +10,6 @@ import java.util.Arrays;
  * @date 2023/9/24
  */
 public class 链表排序 {
-
-
     @Test
     public void test(){
         ListNode q = ListNode.createListNode(new int[]{3,-1,8,5,1});

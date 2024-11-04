@@ -52,8 +52,9 @@ import java.util.Map;
  */
 
 //我们自己造一下轮子 加深理解
-
-    //节点 k v
+    //先写双链表的节点
+    //key val
+    //next pre
 class Node{
     public int key, val;
     public Node next, prev;
@@ -100,6 +101,7 @@ class DoubleList{
     //删除链表中最旧的x节点
     //我们把第一个节点设置为最老节点，末尾节点设置为最新节点。
     public Node removeFirst(){
+        //如果是空链表，返回null
         if (head.next == tail){
             return null;
         }

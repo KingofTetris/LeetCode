@@ -81,4 +81,39 @@ public class 剑指Offer39_数组中出现次数超过一半的数字 {
         }
         return candidate;
     }
+
+    /**
+     * 这题的变种，不使用额外空间，统计众数出现的次数。
+     * 那么就需要先用摩尔投票法找出众数，
+     * 然后遍历数组统计次数。
+     *
+     * @param nums
+     * @return
+     */
+    public static int findMostRepeatedNumberCount(int[] nums) {
+        int candidate = nums[0];
+        int count = 1;
+
+        // 找到可能的重复次数最多的数字
+        for (int i = 1; i < nums.length; i++) {
+            if (count == 0) {
+                candidate = nums[i];
+                count = 1;
+            } else if (nums[i] == candidate) {
+                count++;
+            } else {
+                count--;
+            }
+        }
+
+        // 统计候选数字出现的次数
+        count = 0;
+        for (int num : nums) {
+            if (num == candidate) {
+                count++;
+            }
+        }
+
+        return count;
+    }
 }

@@ -22,13 +22,10 @@ public class 找到字符串中所有字母异位词 {
     public List<Integer> findAnagrams(String s, String p) {
         List<Integer> ans = new ArrayList<>();
         int n = s.length(), m = p.length();
-
         //其实c1和c2就相当于2个map
         int[] c1 = new int[26], c2 = new int[26];
-
         //记录p所需的字母
         for (int i = 0; i < m; i++) c2[p.charAt(i) - 'a']++;
-
         //滑动窗口，l,r都等于0，始终是r移动
         for (int l = 0, r = 0; r < n; r++) {
             //c1先记录字符数量

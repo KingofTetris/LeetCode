@@ -32,23 +32,4 @@ public class 将有序数组转换为二叉搜索树 {
         return root;
     }
 
-    /**
-     * 判断是不是平衡二叉树
-     *
-     * @param root
-     * @return
-     */
-    public boolean isBalanced(TreeNode root) {
-        if (root == null) return true;
-        //先判断自己是不是平衡
-        if (Math.abs(maxDepth(root.left) - maxDepth(root.right)) > 1)
-            return false;
-        //然后递归判断左右子树。 有一个不为true 就不平衡。
-        return isBalanced(root.left) && isBalanced(root.right);
-    }
-
-    int maxDepth(TreeNode root) {
-        //下面这句话求树深非常重要，无论如何都要记住。
-        return root == null ? 0 : Math.max(maxDepth(root.left) + 1, maxDepth(root.right) + 1);
-    }
 }

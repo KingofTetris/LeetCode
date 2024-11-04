@@ -32,22 +32,19 @@ public class 对称二叉树 {
            (left != null && right == null)){
             return false;
         }
-
         //两边如果都不为空，就要判断值是否相等。
         if(left != null && right != null){
             if(left.val != right.val){
                 return false;
             }
         }
-
-        //如果left和right都不为空，再递归判断他的左右子树是否镜像。
+        //如果left和right都不为空，且值相等，再递归判断他的左右子树是否镜像。
         if(left != null && right != null){
             boolean res1 = helpSym(left.left,right.right);
             boolean res2 = helpSym(left.right,right.left);
             //返回两边是否对称，有一个不对称就是false
             return res1 && res2;
         }
-
         //这里其实就是left和right都为空的情况，他们一定是镜像。
         return true;
     }
@@ -64,15 +61,15 @@ public class 对称二叉树 {
             return true;
         }
         //用队列保存节点 实际上队列的实现就是LinkedList
-        LinkedList<TreeNode> queue = new LinkedList<TreeNode>();
+        LinkedList<TreeNode> queue = new LinkedList<>();
         //将根节点的左右孩子放到队列中
         queue.add(root.left);
         queue.add(root.right);
         while (queue.size() > 0) {
             //从队列中取出两个节点，再比较这两个节点
             //LinkedList的removeFirst方法可以将队头元素出队 返回值是List中的类型
-            TreeNode left = queue.removeFirst();
-            TreeNode right = queue.removeFirst();
+            TreeNode left = queue.pollFirst();
+            TreeNode right = queue.pollLast();
             //如果两个节点都为空就继续循环
             // 两者有一个为空或者两者值不相当就返回false
             if (left == null && right == null) {
