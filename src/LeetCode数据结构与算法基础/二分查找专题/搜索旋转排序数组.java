@@ -46,6 +46,7 @@ import org.junit.Test;
  */
 public class 搜索旋转排序数组 {
 
+    //最简单就是遍历一遍数组去找target的下标，但是面试官肯定不可能让你这样做的。
     @Test
     public void test() {
         int[] nums = {4, 5, 6, 7, 0, 1, 2};
@@ -92,36 +93,47 @@ public class 搜索旋转排序数组 {
     }
 
     /**
-     * nums已经从小到大排好序了，但是在传递target时，
-     * nums发生了未知的旋转。
-     * 现在要你找出target的下标
      * 要求复杂度在O(logN) //想都不用想  一定是二分
      * @param nums
      * @param target
      * @return
      */
 
-
     // 因为是有序数组发生了左移
     // 那么一定存在一个分界线把数组分成有序的两段。
+
+    /**
+     * 那么整体的思路就是
+     *
+     * 1.将数组一分为二。（其中有一个一定是有序的；另一个则是有序或部分有序的）
+     * 2.此时如果target在有序部分里，则用二分法查找。
+     * 3.否则进入无序部分查找，返回1。
+     *
+     * @param nums
+     * @param target
+     * @return
+     */
     public int search(int[] nums, int target) {
         int n = nums.length;
         if (n == 0) return -1;
         if (n == 1) return target == nums[0] ? 0 : -1;
-
         //先看作是原来的有序数组
         int low = 0, high = n - 1;
-
         //还是经典的二分。
         while (low <= high) {
             int mid = (low + high) / 2;
+            //如果nums[mid] == target
+            //直接返回mid
             if (nums[mid] == target) {
                 return mid;
             }
             //如果nums[0] 小于 nums[mid]
             //那么 [0,mid]是一组 [mid + 1,n-1]是另外一组
+            //比如 4,5,6,7,0,1,2
+            //4 <= 7 那么[0,mid],[mid+1,n-1]自然分成两组有序
+            //对有序的继续二分即可。
             if (nums[0] <= nums[mid]) { //等号的原因在于mid可以等于0
-                //继续判断target是不是在[low,mid]之间
+                //判断target是不是在0到mid之间。
                 if (nums[0] <= target && target < nums[mid]) {
                     //如果在。我们在这个范围里面找
                     high = mid - 1;
@@ -129,10 +141,11 @@ public class 搜索旋转排序数组 {
                     low = mid + 1;
                 }
             }
-
-            //另外一组
+            //如果nums[0] > nums[mid]
+            //比如 6 7 8 9 1 2 3 4 5
+            //6 > 1 那么[0,mid - 1],[mid,n-1]为一组
             else {
-                //继续判断target在不在这个范围里面
+                //判断targe是不是在mid到n-1之间
                 if (nums[mid] < target && target <= nums[n - 1]) {
                     //如果在，那么
                     low = mid + 1;
@@ -141,7 +154,6 @@ public class 搜索旋转排序数组 {
                 }
             }
         }
-
         //如果low > high，那么说明target根本不在数组中。
         return -1;
     }

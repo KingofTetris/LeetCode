@@ -7,8 +7,6 @@ import org.junit.Test;
 
         请必须使用时间复杂度为 O(log n) 的算法。
 
-
-
         示例 1:
 
         输入: nums = [1,3,5,6], target = 5
@@ -50,7 +48,6 @@ public class 搜索插入位置 {
     }
 
     public int searchInsert(int nums[], int target) {
-
         int high = nums.length - 1;
         int low = 0;
         int mid = 0;
