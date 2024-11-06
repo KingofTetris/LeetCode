@@ -69,6 +69,7 @@ public class 接雨水 {
     }
 
 
+    //单调栈，横着接
     public int trapByMonotonousStack(int[] height){
         if (height.length < 2) return 0;
         //用单调栈的思路，横着求接雨水的面积

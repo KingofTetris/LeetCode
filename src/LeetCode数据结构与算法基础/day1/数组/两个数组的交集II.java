@@ -65,7 +65,7 @@ public class 两个数组的交集II {
          * 交集 set1.retainAll(set2)；
          * 并集 set1.addAll(set2)；
          * 差集 or 补集 set1.removeAll(set2)。
-         *       温馨提示，它们都是把结果集记录在set1中，使用的时候需要留意。
+         * 温馨提示，它们都是把结果集记录在set1中，使用的时候需要留意。
          */
          set1.retainAll(set2);
          System.out.println(set1);

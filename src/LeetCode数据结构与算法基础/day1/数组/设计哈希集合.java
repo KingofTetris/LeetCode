@@ -55,57 +55,39 @@ import java.util.LinkedList;
 //缺点：使用了非常大的空间，当元素范围很大时，无法使用该方法；当存储的元素个数较少时，
 //        性价比极低；需要预知数据的取值范围。
 
-/*public class 设计哈希映射 {
-    int N = 10000009;
-
-    int[] map;
-    public 设计哈希映射() {
-        map = new int[N];
-        //全部初值为-1表示空
-        Arrays.fill(map,-1);
-    }
-
-    public void put(int key, int value) {
-        map[key] =value;
-    }
-
-    public int get(int key) {
-        return map[key];
-    }
-
-    public void remove(int key) {
-        //把这一行设置长null就行了
-        map[key] = -1;
-    }
-}*/
-
 //思路2：拉链法
-//
 public class 设计哈希集合 {
+
     class MyHashSet {
-        private static final int BASE = 769;
+        private static final int BASE = 769;//基本大小 为什么是769,因为我们的hash函数很简单就是对base取模
+        //一个质数可以让发生哈希冲突的概率减小。
+
         private LinkedList[] data;
 
         /** Initialize your data structure here. */
         public MyHashSet() {
             data = new LinkedList[BASE];
             for (int i = 0; i < BASE; ++i) {
-                data[i] = new LinkedList<Integer>();
+                data[i] = new LinkedList<Integer>();//初始化链表数组
             }
         }
 
         public void add(int key) {
             int h = hash(key);
             Iterator<Integer> iterator = data[h].iterator();
+            //遍历链表，如果element等于key，就无法再次添加了
             while (iterator.hasNext()) {
                 Integer element = iterator.next();
                 if (element == key) {
                     return;
                 }
             }
+            //如果没有这个key 就放到最后。尾插法，头插法有可能死锁。
             data[h].offerLast(key);
         }
 
+
+        //删除还是去遍历链表。
         public void remove(int key) {
             int h = hash(key);
             Iterator<Integer> iterator = data[h].iterator();
@@ -131,6 +113,7 @@ public class 设计哈希集合 {
             return false;
         }
 
+        //简单的hash方法
         private int hash(int key) {
             return key % BASE;
         }

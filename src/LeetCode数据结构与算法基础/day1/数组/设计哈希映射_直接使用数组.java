@@ -1,14 +1,12 @@
 package LeetCode数据结构与算法基础.day1.数组;
 
 import java.util.Arrays;
-import java.util.Iterator;
-import java.util.LinkedList;
 
 /**
  * @Author KingofTetris
  * @Date 2022/10/27 15:25
  */
-public class 设计哈希映射 {
+public class 设计哈希映射_直接使用数组 {
 
     /**
      * 不使用任何内建的哈希表库设计一个哈希映射（HashMap）。
@@ -45,7 +43,7 @@ public class 设计哈希映射 {
     //思路用一个超大一维数组模拟哈希表 一个index对应一个Key
     int[] map;
 
-    public 设计哈希映射() {
+    public 设计哈希映射_直接使用数组() {
         map = new int[N];
         //全部初值为-1表示空
         Arrays.fill(map, -1);

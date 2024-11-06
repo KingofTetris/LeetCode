@@ -61,13 +61,11 @@ public class 递增的三元子序列 {
 
     public boolean increasingTriplet(int[] nums) {
         if(nums.length < 3) return false;
-
         int min = Integer.MAX_VALUE, mid = Integer.MAX_VALUE;
-
 //        {3,0,4,1,3,4,5};
         //实际上找到了0，1，3
         for(int i : nums){
-            if(i > mid) return true;
+            if(i > mid) return true; //找到比min,mid都大的数就组成了一个三元组
             if(i <= min) min = i;
             else mid = i;
         }

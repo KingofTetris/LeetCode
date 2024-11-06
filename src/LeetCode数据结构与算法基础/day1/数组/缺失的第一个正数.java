@@ -10,8 +10,6 @@ import java.util.Set;
  * @date 2024/8/15
  */
 public class 缺失的第一个正数 {
-
-
     //最简单的方法是使用一个hash表存储数字1-N+1是否出现过
     //第一个没出现的正数就是要找的那个数 O(N) O(N)
     public int firstMissingPositive2(int[] nums) {
