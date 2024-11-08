@@ -9,7 +9,6 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  */
 public class 读写锁 {
 
-
     //读读并发
     public static void main(String[] args) {
         ReentrantReadWriteLock rw = new ReentrantReadWriteLock();
