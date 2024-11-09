@@ -8,7 +8,6 @@ import java.util.Arrays;
  */
 public class K次取反后最大化的数组和 {
 
-
     public int largestSumAfterKNegations(int[] nums, int k) {
         if (nums.length == 1) return nums[0];
         // 排序：先把负数处理了

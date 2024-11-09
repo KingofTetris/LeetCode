@@ -26,6 +26,7 @@ public class 爬楼梯 {
     //则dp[i] = dp[i - 1] + dp[i - 2]
     //也就是到i-1台阶和i-2台阶方法之和
     public int climbStairs(int n) {
+        if(n <= 1) return 1;
         int[] dp = new int[n + 1];
         //初始值
         dp[0] = 1;

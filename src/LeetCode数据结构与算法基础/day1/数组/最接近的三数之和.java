@@ -23,10 +23,8 @@ public class 最接近的三数之和 {
         Arrays.sort(nums);//先升序
 
         for (int i = 0; i < nums.length; i++) {
-
             //固定第一个数去找后两个
             int left = i + 1,right = nums.length - 1;
-
             while (left < right){
                 int temp = nums[i] + nums[left] + nums[right]; //三数之和
                 //如果更接近target
