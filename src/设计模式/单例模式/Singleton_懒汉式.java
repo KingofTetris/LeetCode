@@ -1,4 +1,4 @@
-package 校招面试真题;
+package 设计模式.单例模式;
 
 public class Singleton_懒汉式 {
 
