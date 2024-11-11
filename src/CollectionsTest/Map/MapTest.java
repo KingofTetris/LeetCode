@@ -76,12 +76,9 @@ public class MapTest {
     public void test(){
         HashMap<Object, Object> hashMap = new HashMap<>();
         hashMap.put(null,null);
-
-
         //编译不报错，运行时空指针异常
 //        Hashtable hashtable = new Hashtable();
 //        hashtable.put(null,null);
-
     }
 
 
