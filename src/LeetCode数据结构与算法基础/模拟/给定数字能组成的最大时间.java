@@ -1,7 +1,18 @@
 package LeetCode数据结构与算法基础.模拟;
 
+import org.junit.Test;
+
 // Solution inspired by @rock
 public class 给定数字能组成的最大时间 {
+
+    @Test
+    public void test(){
+        //四个数字最大的时间。
+        int[] A = {0,0,9,9};
+        //首先要合法，然后要最大。
+        String s = largestTimeFromDigits(A);
+        System.out.println(s);
+    }
     /**暴力
      思路
      遍历所有可能的时间，找到最大的那个。

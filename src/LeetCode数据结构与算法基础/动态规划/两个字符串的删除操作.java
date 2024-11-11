@@ -1,5 +1,7 @@
 package LeetCode数据结构与算法基础.动态规划;
 
+import org.junit.Test;
+
 /**
  * @author by KingOfTetris
  * @date 2024/8/22
@@ -11,6 +13,14 @@ package LeetCode数据结构与算法基础.动态规划;
  */
 public class 两个字符串的删除操作 {
 
+
+    @Test
+    public void test(){
+        String s1 = "abcde";
+        String s2 = "abc";
+        int distance = minDistance(s1, s2);
+        System.out.println(distance);
+    }
     /**
      * 法一：我们直接用DP来解这道题，为了编辑距离做铺垫
      *

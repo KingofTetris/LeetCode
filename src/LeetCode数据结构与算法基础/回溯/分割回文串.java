@@ -9,6 +9,8 @@ import java.util.List;
  * @date 2023/9/9
  */
 public class 分割回文串 {
+
+    //分割字符串ss使得所有子串都是回文串，有多少种方案。
     public static void main(String[] args) {
         分割回文串 ss = new 分割回文串();
         String s = "aabasdsd";
@@ -17,8 +19,6 @@ public class 分割回文串 {
             System.out.println(stringList);
         }
     }
-
-
 
     List<List<String>> res = new ArrayList<>();
     List<String> path = new LinkedList<>();

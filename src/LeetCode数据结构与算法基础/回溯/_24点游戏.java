@@ -40,7 +40,7 @@ import org.junit.Test;
  * cards.length == 4
  * 1 <= cards[i] <= 9
  */
-public class 扩展版24点 {
+public class _24点游戏 {
 
 
     @Test
