@@ -1,4 +1,4 @@
-package LeetCode_HOT100题;
+package LeetCode数据结构与算法基础.动态规划;
 
 import org.junit.Test;
 

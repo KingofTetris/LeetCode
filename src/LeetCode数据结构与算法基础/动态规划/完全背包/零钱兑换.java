@@ -13,15 +13,15 @@ public class 零钱兑换 {
 
     @Test
     public void test() {
-        /*int[] coins = {1, 2, 5};
-        int amount = 11;*/
-        int[] coins = {2};
-        int amount = 3;
+        int[] coins = {1, 2, 5};
+        int amount = 11;
+//        int[] coins = {2};
+//        int amount = 3;
         int change = coinChange(coins, amount);
         System.out.println(change);
     }
 
-    //求方案中的最小值
+    //求方案中使用硬币最少的数量
     public int coinChange(int[] coins, int amount) {
         //首先确定dp的含义
         //dp[j] 代表凑齐j 需要的最少硬币数
@@ -30,7 +30,6 @@ public class 零钱兑换 {
         //那么再加个coins[i]就凑齐j了，也就是再加一个硬币
         int max = Integer.MAX_VALUE;
         int[] dp = new int[amount + 1];
-
 
         //初始值 因为是求Min 那么初始值都赋为最大
         Arrays.fill(dp, max);

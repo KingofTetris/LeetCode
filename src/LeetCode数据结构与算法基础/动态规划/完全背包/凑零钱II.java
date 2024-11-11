@@ -1,4 +1,4 @@
-package 校招笔试真题.完美世界;
+package LeetCode数据结构与算法基础.动态规划.完全背包;
 
 /**
  * @author by KingOfTetris

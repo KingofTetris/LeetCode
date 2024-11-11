@@ -146,6 +146,7 @@ public class 有效的数独 {
                     }
                 }
                 //格子
+                //x / gridLen * n + y / gridLen + 1 (从0开始，+1改为从1开始)
                 int coordination = i / 3 * 3 + j / 3; //本题的最难点，计算坐标对应的格子。
                 ArrayList<Character> box = boxs.get(coordination);//对应的九宫格
                 if (rowTemp != '.') {
